@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+FN:BlueLink Consults
+ORG:BlueLink Consults
+TEL;TYPE=WORK,VOICE:+14014402434
+EMAIL:info@bluelinkconsults.com
+URL:https://www.bluelinkconsults.com
+ADR;TYPE=WORK:;;Providence;RI;02909;USA
+NOTE:Website Development, App Modernization, IT Consultation
+END:VCARD

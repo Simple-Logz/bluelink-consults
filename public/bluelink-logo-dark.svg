@@ -1,0 +1,23 @@
+<svg width="220" height="56" viewBox="0 0 220 56" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@500&display=swap');
+    </style>
+  </defs>
+
+  <!-- Square B mark — outlined on dark -->
+  <rect x="0" y="0" width="50" height="50" rx="5" fill="rgba(255,255,255,0.07)" stroke="#c9a84c" stroke-width="1.2"/>
+  <text x="25" y="38" font-family="'Playfair Display', Georgia, serif" font-size="30" font-weight="700" fill="white" text-anchor="middle">B</text>
+  <!-- Gold underline bar -->
+  <rect x="0" y="46" width="50" height="4" rx="2" fill="#c9a84c"/>
+
+  <!-- Vertical separator -->
+  <line x1="62" y1="8" x2="62" y2="44" stroke="white" stroke-width="0.8" opacity="0.15"/>
+
+  <!-- Wordmark -->
+  <text x="72" y="26" font-family="'Playfair Display', Georgia, serif" font-size="18" font-weight="700" fill="white" letter-spacing="0.3">BlueLink</text>
+  <!-- Thin rule -->
+  <line x1="72" y1="31" x2="218" y2="31" stroke="white" stroke-width="0.5" opacity="0.12"/>
+  <!-- Tagline -->
+  <text x="72" y="43" font-family="'DM Sans', Arial, sans-serif" font-size="10.5" font-weight="500" fill="#c9a84c" letter-spacing="3.5">CONSULT</text>
+</svg>
