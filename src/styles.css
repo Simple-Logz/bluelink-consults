@@ -275,28 +275,28 @@ h1, h2, h3, h4 { margin: 0; }
 
 /* Nav buttons */
 .login-btn {
-  border: 1px solid var(--bronze) !important;
-  color: var(--bronze) !important;
+  border: 1px solid var(--navy) !important;
+  color: var(--navy) !important;
   padding: 11px 18px;
   background: white !important;
   border-radius: 0;
 }
 
 .login-btn:hover {
-  background: var(--bronze) !important;
+  background: var(--navy) !important;
   color: white !important;
 }
 
 .contact-btn {
-  background: var(--bronze) !important;
+  background: var(--navy) !important;
   color: white !important;
-  border: 1px solid var(--bronze) !important;
+  border: 1px solid var(--navy) !important;
   padding: 13px 22px;
 }
 
 .contact-btn:hover {
-  background: var(--bronze-dark) !important;
-  border-color: var(--bronze-dark) !important;
+  background: var(--navy-light) !important;
+  border-color: var(--navy-light) !important;
 }
 
 /* ─── SEARCH ──────────────────────────────────────────────── */
