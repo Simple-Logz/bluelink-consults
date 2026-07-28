@@ -1025,7 +1025,7 @@ function Hero() {
           font-size: clamp(1.9rem, 3.2vw, 3.4rem);
           line-height: 1.06;
           letter-spacing: -0.03em;
-          color: var(--bronze);
+          color: var(--navy);
           margin: 0 0 18px;
         }
         .hero-message-v2 p {
