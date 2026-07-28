@@ -66,16 +66,23 @@ h1, h2, h3, h4 { margin: 0; }
 .site-header {
   height: 88px;
   padding: 0 6vw;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 9000;
+}
+
+.header-spacer {
+  height: 88px;
+  width: 100%;
 }
 
 /* Logo */
@@ -827,6 +834,37 @@ h1, h2, h3, h4 { margin: 0; }
 }
 
 .detail-list svg { color: var(--green); flex-shrink: 0; margin-top: 2px; }
+
+.sub-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 16px;
+}
+
+.sub-service-card {
+  border: 1px solid var(--line);
+  background: var(--cream);
+  padding: 20px;
+}
+
+.sub-service-card strong {
+  display: block;
+  color: var(--navy);
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.sub-service-card p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (max-width: 720px) {
+  .sub-services-grid { grid-template-columns: 1fr; }
+}
 
 .blue-help-panel { background: var(--cream); margin-top: 0; }
 

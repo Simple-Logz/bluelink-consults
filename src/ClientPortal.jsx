@@ -376,10 +376,24 @@ export default function ClientPortal() {
   const [activeTab, setActiveTab] = useState("dashboard");
 
   useEffect(() => {
+    if (!supabase) { setAuthLoading(false); return; }
     supabase.auth.getSession().then(({ data }) => { setSession(data?.session || null); setAuthLoading(false); });
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_e, s) => setSession(s));
     return () => subscription.unsubscribe();
   }, []);
+
+  if (!supabase) return (
+    <div className="portal-root" style={{ display:"flex", alignItems:"center", justifyContent:"center", minHeight:"80vh", padding:24 }}>
+      <style>{css}</style>
+      <div style={{ maxWidth:440, textAlign:"center", color:T.white }}>
+        <div style={{ width:52, height:52, borderRadius:"50%", background:T.goldDim, border:`1px solid ${T.goldLine}`, display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 18px" }}>
+          <Shield size={22} style={{ color:T.gold }} />
+        </div>
+        <h2 style={{ fontFamily:"'Playfair Display', serif", fontSize:"1.4rem", marginBottom:10 }}>Client Portal is temporarily unavailable</h2>
+        <p style={{ color:T.textLight, lineHeight:1.6 }}>We're unable to connect right now. Please try again shortly, or reach out and we'll help you sign in directly.</p>
+      </div>
+    </div>
+  );
 
   if (authLoading) return (
     <div className="portal-root" style={{ display:"flex", alignItems:"center", justifyContent:"center", minHeight:"80vh" }}>

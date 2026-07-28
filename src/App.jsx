@@ -37,6 +37,8 @@ import {
   Linkedin,
   Download,
   UserPlus,
+  Code2,
+  FlaskConical,
 } from "lucide-react";
 import "./styles.css";
 import { supabase } from "./supabaseClient";
@@ -46,6 +48,37 @@ import ClientPortal from "./ClientPortal";
    DATA
 ───────────────────────────────────────────────────────────── */
 const services = [
+  {
+    slug: "web-development",
+    title: "Web Development",
+    icon: Code2,
+    summary: "Fast, professional websites and web applications that represent your business the way it deserves.",
+    image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=2000&auto=format&fit=crop",
+    body: "Your website is often the first impression a prospective client has of your business — and an outdated, slow, or clunky site undermines the credibility you've worked hard to build. BlueLink Consult designs and builds modern, responsive websites and web applications: marketing sites, client portals, booking and intake tools, and custom internal platforms. We focus on speed, clarity, and conversion, backed by clean, maintainable code that your team can build on for years.",
+    tools: [
+      "React, Next.js, and modern frontend frameworks",
+      "Responsive, mobile-first design systems",
+      "Headless CMS and content workflows",
+      "Node.js / API-driven backends",
+      "Performance optimization and SEO fundamentals",
+      "Hosting on Vercel, Netlify, Azure, or AWS",
+    ],
+    outcomes: [
+      "A fast, professional site that builds trust instantly",
+      "Mobile-friendly, accessible design",
+      "Clear calls to action that drive real leads",
+      "Clean codebase your team can extend",
+      "Improved search visibility",
+      "A site that scales as your business grows",
+    ],
+    blueLinkHelp: [
+      "Understand your business goals, audience, and brand.",
+      "Design and build a modern, responsive site or web app.",
+      "Optimize for speed, accessibility, and search engines.",
+      "Connect the site to the tools and data your business runs on.",
+      "Hand over a maintainable, well-documented codebase.",
+    ],
+  },
   {
     slug: "application-modernization",
     title: "Application Modernization",
@@ -82,45 +115,22 @@ const services = [
     slug: "cloud-infrastructure",
     title: "Cloud Infrastructure",
     icon: Cloud,
-    summary: "Design reliable Azure, AWS, hybrid, and container-based environments.",
+    summary: "Reliable Azure, AWS, hybrid, and container-based environments — plus the DevOps automation that keeps them shipping safely.",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop",
-    body: "We design cloud environments that help businesses move away from unreliable infrastructure and toward secure, governed, scalable hosting foundations.",
-    tools: ["Azure, AWS, hybrid cloud", "Landing zones and network design", "Terraform and Infrastructure as Code", "Containers, AKS, EKS, ECS, App Service", "Cloud cost governance and tagging", "Backup, recovery, and monitoring"],
-    outcomes: ["Reliable cloud hosting", "Improved scalability", "Better cost visibility", "Stronger governance", "More secure infrastructure", "Clear migration roadmap"],
-    blueLinkHelp: ["Review your current infrastructure and cloud readiness.", "Design secure and scalable target architecture.", "Create a phased migration plan.", "Implement automation, monitoring, and governance."],
-  },
-  {
-    slug: "devops-automation",
-    title: "DevOps Automation",
-    icon: Workflow,
-    summary: "Improve delivery speed with pipelines, IaC, automation, and release governance.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop",
-    body: "We help organizations replace manual deployment processes with repeatable, secure, automated delivery workflows.",
-    tools: ["Azure DevOps", "GitHub Actions", "GitLab CI/CD", "Terraform", "Docker and container registries", "Deployment gates and rollback planning"],
-    outcomes: ["Faster releases", "Lower deployment risk", "Repeatable environments", "Better rollback process", "Improved engineering confidence", "Clear release governance"],
-    blueLinkHelp: ["Review current release process.", "Build CI/CD pipelines.", "Automate infrastructure deployment.", "Introduce approval gates and rollback plans."],
-  },
-  {
-    slug: "security-identity",
-    title: "Security & Identity",
-    icon: ShieldCheck,
-    summary: "Strengthen IAM, SSO, RBAC, Zero Trust, and audit readiness.",
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2000&auto=format&fit=crop",
-    body: "We help businesses modernize identity, access, and security controls across applications and infrastructure.",
-    tools: ["Microsoft Entra ID", "SSO and OAuth/OIDC", "RBAC and access reviews", "Conditional Access", "Customer identity patterns", "Audit and compliance controls"],
-    outcomes: ["Stronger access control", "Reduced identity risk", "Improved SSO experience", "Better audit readiness", "Cleaner role governance", "Security-first architecture"],
-    blueLinkHelp: ["Review identity and access model.", "Design SSO and RBAC improvements.", "Support Entra ID and external identity planning.", "Improve governance and security controls."],
-  },
-  {
-    slug: "platform-reliability",
-    title: "Platform Reliability",
-    icon: Activity,
-    summary: "Improve monitoring, logging, incident response, and operational visibility.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2000&auto=format&fit=crop",
-    body: "We help teams understand system health, reduce incident confusion, and improve operational reliability.",
-    tools: ["Application Insights", "Azure Monitor", "CloudWatch", "Datadog", "Log Analytics", "Dashboards and alerting"],
-    outcomes: ["Clear operational visibility", "Faster troubleshooting", "Better alert quality", "Reduced downtime", "Documented support process", "Improved incident readiness"],
-    blueLinkHelp: ["Assess monitoring gaps.", "Design dashboards and alerts.", "Improve log collection.", "Build incident response workflows."],
+    body: "We design cloud environments that help businesses move away from unreliable infrastructure and toward secure, governed, scalable hosting foundations. Cloud infrastructure and delivery automation go hand in hand, so this service also covers the DevOps side: replacing manual deployment processes with repeatable, secure, automated delivery pipelines — from infrastructure design through to the CI/CD workflows that ship changes reliably.",
+    tools: ["Azure, AWS, hybrid cloud", "Landing zones and network design", "Terraform and Infrastructure as Code", "Containers, AKS, EKS, ECS, App Service", "Azure DevOps, GitHub Actions, GitLab CI/CD", "Cloud cost governance, backup, and monitoring"],
+    outcomes: ["Reliable, scalable cloud hosting", "Faster, lower-risk releases", "Repeatable environments and rollback plans", "Better cost visibility and governance", "More secure infrastructure", "Clear migration and delivery roadmap"],
+    blueLinkHelp: ["Review your current infrastructure and cloud readiness.", "Design secure and scalable target architecture.", "Create a phased migration plan.", "Build CI/CD pipelines and automate infrastructure deployment.", "Implement monitoring, governance, and release approval gates."],
+    subServices: [
+      {
+        title: "Cloud Infrastructure Design",
+        desc: "Landing zones, network design, Infrastructure as Code, and container platforms built for security and scale.",
+      },
+      {
+        title: "DevOps Automation & Delivery",
+        desc: "CI/CD pipelines, automated deployments, and release governance so changes ship faster with less risk.",
+      },
+    ],
   },
   {
     slug: "data-integration",
@@ -132,6 +142,36 @@ const services = [
     tools: ["SQL and cloud databases", "REST APIs", "Azure Data Factory", "Logic Apps", "Power Automate", "Reporting and dashboards"],
     outcomes: ["Connected systems", "Reduced manual work", "Cleaner data movement", "Better reporting", "Improved workflow visibility", "More reliable integrations"],
     blueLinkHelp: ["Review data and workflow pain points.", "Design integration patterns.", "Modernize APIs and reporting flows.", "Automate repetitive business processes."],
+  },
+  {
+    slug: "predeployment-validation",
+    title: "Predeployment Validation",
+    icon: FlaskConical,
+    summary: "Catch issues before they reach production with automated predeployment checks — powered by our own validation tooling.",
+    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop",
+    body: "Most production incidents are preventable — they're caught too late because there's no consistent way to validate a release before it ships. BlueLink Consult offers predeployment validation as a standalone service, built around our own in-house validation tooling. Before code reaches production, we run automated checks across configuration, environment parity, dependencies, and core workflows, giving your team a clear go/no-go signal instead of a guess.",
+    tools: [
+      "BlueLink predeployment validation engine",
+      "Automated smoke and regression checks",
+      "Environment parity and configuration diffing",
+      "Secret and config validation",
+      "Rollback safety checks",
+      "Integration with GitHub Actions, Azure DevOps, or GitLab CI/CD",
+    ],
+    outcomes: [
+      "Fewer production incidents",
+      "Clear go/no-go confidence before release",
+      "Faster detection of configuration drift",
+      "Safer, more predictable rollbacks",
+      "Less manual pre-release checking",
+      "Stronger release governance",
+    ],
+    blueLinkHelp: [
+      "Map the checks that matter most before your releases ship.",
+      "Set up automated predeployment validation in your pipeline.",
+      "Catch environment and configuration drift before it causes an outage.",
+      "Give your team a clear, repeatable go/no-go gate for every release.",
+    ],
   },
 ];
 
@@ -585,12 +625,13 @@ function Footer() {
     <footer className="footer">
       <div>
         <strong>BlueLink Consults</strong>
-        <p>We fix old and slow applications — cloud advisory, DevOps automation, security, identity, and operational reliability for growing organizations.</p>
+        <p>We fix old and slow applications — web development, cloud infrastructure, DevOps automation, data integration, and predeployment validation for growing organizations.</p>
       </div>
       <div>
+        <Link to="/services/web-development">Web Development</Link>
         <Link to="/services/application-modernization">Application Modernization</Link>
         <Link to="/services/cloud-infrastructure">Cloud Infrastructure</Link>
-        <Link to="/services/security-identity">Security &amp; Identity</Link>
+        <Link to="/services/predeployment-validation">Predeployment Validation</Link>
         <Link to="/insights">Insights</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
@@ -1101,19 +1142,18 @@ function Hero() {
 
 function HomeValueProps() {
   const props = [
+    { icon: Code2, title: "Web Development", text: "Fast, professional websites and web applications that represent your business the way it deserves." },
     { icon: ServerCog, title: "Application Modernization", text: "Move legacy systems to modern, secure, scalable platforms without disrupting your business." },
-    { icon: Cloud, title: "Cloud Infrastructure", text: "Design reliable, governed, cost-controlled environments on Azure, AWS, or hybrid cloud." },
-    { icon: Workflow, title: "DevOps Automation", text: "Replace fragile manual deployments with automated, repeatable, auditable delivery pipelines." },
-    { icon: ShieldCheck, title: "Security & Identity", text: "Strengthen access controls, SSO, RBAC, and audit posture across your entire environment." },
-    { icon: Activity, title: "Platform Reliability", text: "Build observability, alerting, and incident response so your team can operate with confidence." },
+    { icon: Cloud, title: "Cloud Infrastructure", text: "Reliable, governed cloud environments on Azure, AWS, or hybrid cloud — plus the DevOps automation that keeps releases safe." },
     { icon: Database, title: "Data & Integration", text: "Connect systems, modernize APIs, and automate the workflows that power your operations." },
+    { icon: FlaskConical, title: "Predeployment Validation", text: "Catch issues before they reach production with automated checks, powered by our own validation tooling." },
   ];
   return (
     <section className="section white-section">
       <div className="section-heading narrow">
         <p className="eyebrow">What We Do</p>
         <h2>End-to-end modernization for growing organizations</h2>
-        <p>From aging applications to cloud infrastructure, DevOps, security, and data — BlueLink Consult helps you build a technology foundation that supports long-term growth.</p>
+        <p>From new websites to aging applications, cloud infrastructure, DevOps, data, and predeployment validation — BlueLink Consult helps you build a technology foundation that supports long-term growth.</p>
         <Link to="/services" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"var(--bronze)", color:"white", padding:"12px 22px", fontWeight:800, marginTop:16, textDecoration:"none" }}>
           Explore All Services <ArrowRight size={17} />
         </Link>
@@ -1280,7 +1320,7 @@ function ServicesPage() {
   usePageTitle("Services");
   return (
     <>
-      <PageHero label="Services" title="Explore BlueLink Consult services." text="We help organizations improve the full technical foundation: applications, infrastructure, security, DevOps, data, and operations." />
+      <PageHero label="Services" title="Explore BlueLink Consult services." text="We help organizations improve the full technical foundation: websites, applications, cloud infrastructure, DevOps, data, and predeployment validation." />
       <ServicesPreview />
     </>
   );
@@ -1324,6 +1364,19 @@ function ServiceDetail() {
               </div>
             </div>
           </div>
+          {service.subServices && (
+            <div className="detail-card" style={{ marginBottom: 32 }}>
+              <h3>What's included:</h3>
+              <div className="sub-services-grid">
+                {service.subServices.map((sub) => (
+                  <div key={sub.title} className="sub-service-card">
+                    <strong>{sub.title}</strong>
+                    <p>{sub.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
           <div className="blue-help-panel">
             <h2>How BlueLink Consult can help</h2>
             <p>We do not only make systems look better. We help redesign the technical foundation so the application becomes easier to operate, secure, scale, and improve over time.</p>
@@ -2647,6 +2700,7 @@ function AppInner() {
   return (
     <>
       {!isPortal && !isConnectPage && <Header />}
+      {!isPortal && !isConnectPage && <div className="header-spacer" aria-hidden="true" />}
       <ScrollToHash />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
