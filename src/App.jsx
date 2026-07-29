@@ -957,11 +957,12 @@ function ClientLogos() {
     { name: "Skills to Hired", src: "/logos/client-skillstohired.png" },
     { name: "Acceleration Hub", src: "/logos/client-accelerationhub.png" },
     { name: "Vector", src: "/logos/client-vector.png" },
+    { name: "National Association Inc.", src: "/logos/client-nationalassoc.png" },
   ];
   return (
     <section style={{
       background: "var(--cream)",
-      padding: "44px 7vw 52px",
+      padding: "48px 7vw 56px",
       borderBottom: "1px solid var(--line)",
     }}>
       <style>{`
@@ -970,17 +971,17 @@ function ClientLogos() {
           flex-wrap: wrap;
           align-items: center;
           justify-content: center;
-          gap: clamp(32px, 6vw, 72px);
-          max-width: 1060px;
-          margin: 28px auto 0;
+          gap: clamp(36px, 6vw, 76px);
+          max-width: 1100px;
+          margin: 30px auto 0;
         }
         .client-logo-row img {
-          height: 44px;
+          height: 62px;
           width: auto;
-          max-width: 150px;
+          max-width: 170px;
           object-fit: contain;
           filter: grayscale(100%);
-          opacity: 0.55;
+          opacity: 0.6;
           transition: filter 0.2s ease, opacity 0.2s ease;
         }
         .client-logo-row img:hover {
@@ -988,8 +989,8 @@ function ClientLogos() {
           opacity: 1;
         }
         @media (max-width: 600px) {
-          .client-logo-row { gap: 28px; }
-          .client-logo-row img { height: 34px; max-width: 110px; }
+          .client-logo-row { gap: 30px; }
+          .client-logo-row img { height: 50px; max-width: 130px; }
         }
       `}</style>
       <div style={{ textAlign: "center" }}>
