@@ -53,7 +53,7 @@ const services = [
     title: "Web Development",
     icon: Code2,
     summary: "Fast, professional websites and web applications that represent your business the way it deserves.",
-    image: "/graphics/web-development-hero.svg",
+    image: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2000&auto=format&fit=crop",
     body: "Your website is often the first impression a prospective client has of your business — and an outdated, slow, or clunky site undermines the credibility you've worked hard to build. BlueLink Consult designs and builds modern, responsive websites and web applications: marketing sites, client portals, booking and intake tools, and custom internal platforms. We focus on speed, clarity, and conversion, backed by clean, maintainable code that your team can build on for years.",
     tools: [
       "React, Next.js, and modern frontend frameworks",
@@ -148,7 +148,7 @@ const services = [
     title: "Predeployment Validation",
     icon: FlaskConical,
     summary: "LytHouse, our own release-validation product, catches issues before they reach production — built by BlueLink Consult and used on every engagement we deliver.",
-    image: "/graphics/predeployment-validation-hero.svg",
+    image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000&auto=format&fit=crop",
     body: "LytHouse is a predeployment validation product built by BlueLink Consult from the ground up. We built it because we needed it: on every consulting engagement we deliver, LytHouse is the tool our own team uses to validate a release before it ships — checking configuration, environment parity, dependencies, and core workflows, and giving a clear go/no-go signal instead of a guess. We now offer LytHouse directly to the market as a standalone product, so your team can get the same release confidence we build into our own delivery work.",
     tools: [
       "LytHouse — BlueLink's own predeployment validation engine",
