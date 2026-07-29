@@ -1568,6 +1568,9 @@ h1, h2, h3, h4 { margin: 0; }
   .about-section,
   .contact-section { grid-template-columns: 1fr; }
 
+  .service-hero { min-height: auto; }
+  .service-hero-image { min-height: 220px; }
+
   .service-detail-aside { position: static; }
 
   .split-copy, .service-hero-copy { padding: 60px 5vw; }

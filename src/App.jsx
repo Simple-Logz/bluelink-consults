@@ -53,7 +53,7 @@ const services = [
     title: "Web Development",
     icon: Code2,
     summary: "Fast, professional websites and web applications that represent your business the way it deserves.",
-    image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?q=80&w=2000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1547119957-637f8679db1e?q=80&w=2000&auto=format&fit=crop",
     body: "Your website is often the first impression a prospective client has of your business — and an outdated, slow, or clunky site undermines the credibility you've worked hard to build. BlueLink Consult designs and builds modern, responsive websites and web applications: marketing sites, client portals, booking and intake tools, and custom internal platforms. We focus on speed, clarity, and conversion, backed by clean, maintainable code that your team can build on for years.",
     tools: [
       "React, Next.js, and modern frontend frameworks",
@@ -954,10 +954,10 @@ function WhoWeServeStrip() {
 
 function ClientLogos() {
   const clients = [
-    { name: "Skills to Hired", src: "/logos/client-skillstohired.png" },
-    { name: "Acceleration Hub", src: "/logos/client-accelerationhub.png" },
-    { name: "Vector", src: "/logos/client-vector.png" },
-    { name: "National Association Inc.", src: "/logos/client-nationalassoc.png" },
+    { name: "Skills to Hired", src: "/logos/client-skillstohired.png", scale: 1 },
+    { name: "Acceleration Hub", src: "/logos/client-accelerationhub.png", scale: 1.3 },
+    { name: "Vector", src: "/logos/client-vector.png", scale: 1 },
+    { name: "National Association Inc.", src: "/logos/client-nationalassoc.png", scale: 1.55 },
   ];
   return (
     <section style={{
@@ -967,6 +967,7 @@ function ClientLogos() {
     }}>
       <style>{`
         .client-logo-row {
+          --logo-h: 58px;
           display: flex;
           flex-wrap: wrap;
           align-items: center;
@@ -976,9 +977,9 @@ function ClientLogos() {
           margin: 30px auto 0;
         }
         .client-logo-row img {
-          height: 62px;
+          height: calc(var(--logo-h) * var(--scale, 1));
           width: auto;
-          max-width: 170px;
+          max-width: 190px;
           object-fit: contain;
           filter: grayscale(100%);
           opacity: 0.6;
@@ -989,8 +990,8 @@ function ClientLogos() {
           opacity: 1;
         }
         @media (max-width: 600px) {
-          .client-logo-row { gap: 30px; }
-          .client-logo-row img { height: 50px; max-width: 130px; }
+          .client-logo-row { gap: 30px; --logo-h: 46px; }
+          .client-logo-row img { max-width: 145px; }
         }
       `}</style>
       <div style={{ textAlign: "center" }}>
@@ -998,7 +999,7 @@ function ClientLogos() {
       </div>
       <div className="client-logo-row">
         {clients.map((c) => (
-          <img key={c.name} src={c.src} alt={c.name} title={c.name} loading="lazy" />
+          <img key={c.name} src={c.src} alt={c.name} title={c.name} loading="lazy" style={{ "--scale": c.scale }} />
         ))}
       </div>
     </section>
@@ -1731,26 +1732,15 @@ function AboutPage() {
               Our approach is straightforward. We come in, take the time to properly understand your environment, and work with your team to modernize what matters most — in a way that is practical, sustainable, and built to last long after our engagement ends.
             </p>
           </div>
-          {/* Stats column */}
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-            {[
-              { n: "10+",   l: "Years of combined technology experience" },
-              { n: "12+",   l: "Industries served across the US and internationally" },
-              { n: "98%",   l: "Client satisfaction rate across all engagements" },
-              { n: "6",     l: "Core practice areas covering the full technology stack" },
-            ].map(({ n, l }) => (
-              <div key={n} style={{
-                background: "var(--cream)",
-                border: "1px solid var(--line)",
-                borderRadius: 12,
-                padding: "28px 22px",
-                textAlign: "center",
-              }}>
-                <p style={{ fontFamily: "Libre Baskerville, serif", fontSize: "2.6rem", fontWeight: 700, color: "var(--bronze)", lineHeight: 1, marginBottom: 10 }}>{n}</p>
-                <p style={{ fontSize: "0.82rem", color: "var(--muted)", lineHeight: 1.55 }}>{l}</p>
-              </div>
-            ))}
-          </div>
+          {/* Story image */}
+          <div style={{
+            borderRadius: 14,
+            overflow: "hidden",
+            minHeight: 420,
+            backgroundImage: "linear-gradient(rgba(5,11,45,0.08), rgba(5,11,45,0.08)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1600&auto=format&fit=crop')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }} />
         </div>
       </section>
 
