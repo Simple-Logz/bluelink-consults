@@ -53,7 +53,7 @@ const services = [
     title: "Web Development",
     icon: Code2,
     summary: "Fast, professional websites and web applications that represent your business the way it deserves.",
-    image: "https://images.unsplash.com/photo-1547119957-637f8679db1e?q=80&w=2000&auto=format&fit=crop",
+    image: "/graphics/web-development-hero.svg",
     body: "Your website is often the first impression a prospective client has of your business — and an outdated, slow, or clunky site undermines the credibility you've worked hard to build. BlueLink Consult designs and builds modern, responsive websites and web applications: marketing sites, client portals, booking and intake tools, and custom internal platforms. We focus on speed, clarity, and conversion, backed by clean, maintainable code that your team can build on for years.",
     tools: [
       "React, Next.js, and modern frontend frameworks",
@@ -147,11 +147,11 @@ const services = [
     slug: "predeployment-validation",
     title: "Predeployment Validation",
     icon: FlaskConical,
-    summary: "Catch issues before they reach production with automated predeployment checks — powered by our own validation tooling.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2000&auto=format&fit=crop",
-    body: "Most production incidents are preventable — they're caught too late because there's no consistent way to validate a release before it ships. BlueLink Consult offers predeployment validation as a standalone service, built around our own in-house validation tooling. Before code reaches production, we run automated checks across configuration, environment parity, dependencies, and core workflows, giving your team a clear go/no-go signal instead of a guess.",
+    summary: "LytHouse, our own release-validation product, catches issues before they reach production — built by BlueLink Consult and used on every engagement we deliver.",
+    image: "/graphics/predeployment-validation-hero.svg",
+    body: "LytHouse is a predeployment validation product built by BlueLink Consult from the ground up. We built it because we needed it: on every consulting engagement we deliver, LytHouse is the tool our own team uses to validate a release before it ships — checking configuration, environment parity, dependencies, and core workflows, and giving a clear go/no-go signal instead of a guess. We now offer LytHouse directly to the market as a standalone product, so your team can get the same release confidence we build into our own delivery work.",
     tools: [
-      "BlueLink predeployment validation engine",
+      "LytHouse — BlueLink's own predeployment validation engine",
       "Automated smoke and regression checks",
       "Environment parity and configuration diffing",
       "Secret and config validation",
@@ -168,9 +168,30 @@ const services = [
     ],
     blueLinkHelp: [
       "Map the checks that matter most before your releases ship.",
-      "Set up automated predeployment validation in your pipeline.",
+      "Set up LytHouse in your pipeline for automated predeployment validation.",
       "Catch environment and configuration drift before it causes an outage.",
       "Give your team a clear, repeatable go/no-go gate for every release.",
+    ],
+    plans: [
+      {
+        name: "Starter",
+        price: "Contact us",
+        tagline: "For small teams shipping their first automated release gate.",
+        features: ["Core predeployment checks", "1 CI/CD pipeline integration", "Config & secret validation", "Email support"],
+      },
+      {
+        name: "Team",
+        price: "Contact us",
+        tagline: "For growing engineering teams shipping frequently.",
+        features: ["Everything in Starter", "Unlimited pipeline integrations", "Environment parity diffing", "Rollback safety checks", "Priority support"],
+        highlight: true,
+      },
+      {
+        name: "Enterprise",
+        price: "Contact us",
+        tagline: "For organizations with complex, multi-environment release processes.",
+        features: ["Everything in Team", "Custom validation rules", "Dedicated onboarding", "SLA-backed support", "Delivered as part of a BlueLink engagement"],
+      },
     ],
   },
 ];
@@ -990,8 +1011,16 @@ function ClientLogos() {
           opacity: 1;
         }
         @media (max-width: 600px) {
-          .client-logo-row { gap: 30px; --logo-h: 46px; }
-          .client-logo-row img { max-width: 145px; }
+          .client-logo-row {
+            --logo-h: 50px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 36px;
+            column-gap: 16px;
+            justify-items: center;
+            align-items: center;
+          }
+          .client-logo-row img { max-width: 130px; }
         }
       `}</style>
       <div style={{ textAlign: "center" }}>
@@ -1451,11 +1480,51 @@ function ServiceDetail() {
           <Link to="/contact#consultation">Request Review <ArrowRight size={17} /></Link>
         </aside>
       </section>
+      {service.plans && (
+        <section className="section" style={{ background: "var(--cream)" }}>
+          <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto 40px" }}>
+            <p className="eyebrow">Plans</p>
+            <h2 style={{ fontFamily: "Libre Baskerville, serif", fontSize: "clamp(1.8rem, 2.8vw, 2.6rem)", color: "var(--navy)", marginBottom: 10 }}>
+              What we're offering with {service.title === "Predeployment Validation" ? "LytHouse" : service.title}
+            </h2>
+            <p style={{ color: "var(--muted)" }}>Simple plans that scale with your release volume. Contact us for pricing tailored to your team.</p>
+          </div>
+          <div className="card-grid" style={{ maxWidth: 1040, margin: "0 auto" }}>
+            {service.plans.map((plan) => (
+              <article
+                key={plan.name}
+                className="solution-card"
+                style={plan.highlight ? { border: "2px solid var(--navy)", position: "relative" } : undefined}
+              >
+                {plan.highlight && (
+                  <span style={{
+                    position: "absolute", top: -14, left: 24,
+                    background: "var(--navy)", color: "white",
+                    fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.06em",
+                    padding: "4px 12px", borderRadius: 20, textTransform: "uppercase",
+                  }}>Most popular</span>
+                )}
+                <h3>{plan.name}</h3>
+                <p style={{ fontFamily: "Libre Baskerville, serif", fontSize: "1.5rem", color: "var(--bronze)", margin: "6px 0 4px" }}>{plan.price}</p>
+                <div className="rule" />
+                <p>{plan.tagline}</p>
+                <ul style={{ listStyle: "none", padding: 0, margin: "16px 0 22px", display: "grid", gap: 10 }}>
+                  {plan.features.map((f) => (
+                    <li key={f} style={{ display: "flex", gap: 8, fontSize: "0.92rem", color: "var(--text-dark)", alignItems: "flex-start" }}>
+                      <CheckCircle2 size={16} style={{ color: "var(--green)", flexShrink: 0, marginTop: 3 }} />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
+                <Link to="/contact#consultation">Talk to us <ArrowRight size={18} /></Link>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
     </>
   );
 }
-
-/* ─── SOLUTIONS ──────────────────────────────────────────── */
 function SolutionsPage() {
   usePageTitle("Solutions");
   return (

@@ -1,0 +1,92 @@
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101a3d"/>
+      <stop offset="1" stop-color="#050b2d"/>
+    </linearGradient>
+    <linearGradient id="heroBar" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#a95e21"/>
+      <stop offset="1" stop-color="#c9782f"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="26" flood-color="#000018" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect x="0" y="0" width="1200" height="900" fill="url(#bg)"/>
+
+  <!-- soft decorative circles -->
+  <circle cx="1050" cy="120" r="180" fill="#ffffff" opacity="0.04"/>
+  <circle cx="90" cy="800" r="220" fill="#a95e21" opacity="0.08"/>
+
+  <!-- main browser window -->
+  <g filter="url(#softShadow)">
+    <rect x="130" y="140" width="820" height="560" rx="14" fill="#fbfaf8"/>
+    <rect x="130" y="140" width="820" height="52" rx="14" fill="#eef0f4"/>
+    <rect x="130" y="176" width="820" height="16" fill="#eef0f4"/>
+    <circle cx="164" cy="166" r="7" fill="#e2665a"/>
+    <circle cx="188" cy="166" r="7" fill="#e6b95c"/>
+    <circle cx="212" cy="166" r="7" fill="#63b672"/>
+    <rect x="250" y="155" width="500" height="22" rx="11" fill="#ffffff"/>
+    <rect x="270" y="163" width="230" height="7" rx="3.5" fill="#aab2c0"/>
+
+    <!-- nav row -->
+    <rect x="170" y="222" width="90" height="16" rx="4" fill="#050b2d"/>
+    <rect x="620" y="224" width="60" height="12" rx="4" fill="#8b93a3"/>
+    <rect x="700" y="224" width="60" height="12" rx="4" fill="#8b93a3"/>
+    <rect x="780" y="224" width="60" height="12" rx="4" fill="#8b93a3"/>
+
+    <!-- hero content block -->
+    <rect x="170" y="270" width="380" height="26" rx="6" fill="#050b2d"/>
+    <rect x="170" y="306" width="300" height="26" rx="6" fill="#050b2d"/>
+    <rect x="170" y="352" width="340" height="12" rx="6" fill="#aab2c0"/>
+    <rect x="170" y="374" width="260" height="12" rx="6" fill="#aab2c0"/>
+    <rect x="170" y="406" width="150" height="38" rx="19" fill="url(#heroBar)"/>
+
+    <!-- hero image placeholder -->
+    <rect x="560" y="260" width="330" height="200" rx="10" fill="#eaf0ff"/>
+    <circle cx="650" cy="330" r="26" fill="#c9d9ff"/>
+    <path d="M600 430 L680 360 L740 410 L800 350 L860 430 Z" fill="#c9d9ff"/>
+
+    <!-- three cards row -->
+    <g>
+      <rect x="170" y="480" width="220" height="180" rx="10" fill="#f4f0eb"/>
+      <rect x="192" y="502" width="176" height="90" rx="6" fill="#dfe6f3"/>
+      <rect x="192" y="606" width="140" height="12" rx="6" fill="#050b2d"/>
+      <rect x="192" y="628" width="110" height="10" rx="5" fill="#aab2c0"/>
+    </g>
+    <g>
+      <rect x="410" y="480" width="220" height="180" rx="10" fill="#f4f0eb"/>
+      <rect x="432" y="502" width="176" height="90" rx="6" fill="#f0e2d3"/>
+      <rect x="432" y="606" width="140" height="12" rx="6" fill="#050b2d"/>
+      <rect x="432" y="628" width="110" height="10" rx="5" fill="#aab2c0"/>
+    </g>
+    <g>
+      <rect x="650" y="480" width="220" height="180" rx="10" fill="#f4f0eb"/>
+      <rect x="672" y="502" width="176" height="90" rx="6" fill="#dcefe0"/>
+      <rect x="672" y="606" width="140" height="12" rx="6" fill="#050b2d"/>
+      <rect x="672" y="628" width="110" height="10" rx="5" fill="#aab2c0"/>
+    </g>
+  </g>
+
+  <!-- floating phone mockup showing responsive layout -->
+  <g filter="url(#softShadow)">
+    <rect x="860" y="470" width="230" height="380" rx="28" fill="#050b2d"/>
+    <rect x="874" y="500" width="202" height="320" rx="6" fill="#fbfaf8"/>
+    <rect x="890" y="518" width="70" height="14" rx="4" fill="#050b2d"/>
+    <rect x="890" y="548" width="170" height="70" rx="8" fill="#eaf0ff"/>
+    <rect x="890" y="632" width="170" height="16" rx="4" fill="#050b2d"/>
+    <rect x="890" y="656" width="140" height="10" rx="5" fill="#aab2c0"/>
+    <rect x="890" y="676" width="140" height="10" rx="5" fill="#aab2c0"/>
+    <rect x="890" y="706" width="100" height="28" rx="14" fill="url(#heroBar)"/>
+    <rect x="890" y="752" width="170" height="56" rx="8" fill="#f4f0eb"/>
+  </g>
+
+  <!-- small floating status chip -->
+  <g filter="url(#softShadow)">
+    <rect x="760" y="150" width="150" height="46" rx="23" fill="#ffffff"/>
+    <circle cx="788" cy="173" r="9" fill="#17834a"/>
+    <path d="M783 173 l4 4 l8 -9" stroke="#ffffff" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="806" y="165" width="86" height="16" rx="4" fill="#050b2d" opacity="0.75"/>
+  </g>
+</svg>
