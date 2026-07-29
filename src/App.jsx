@@ -53,7 +53,7 @@ const services = [
     title: "Web Development",
     icon: Code2,
     summary: "Fast, professional websites and web applications that represent your business the way it deserves.",
-    image: "https://images.unsplash.com/photo-1522542550221-31fd19575a2d?q=80&w=2000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?q=80&w=2000&auto=format&fit=crop",
     body: "Your website is often the first impression a prospective client has of your business — and an outdated, slow, or clunky site undermines the credibility you've worked hard to build. BlueLink Consult designs and builds modern, responsive websites and web applications: marketing sites, client portals, booking and intake tools, and custom internal platforms. We focus on speed, clarity, and conversion, backed by clean, maintainable code that your team can build on for years.",
     tools: [
       "React, Next.js, and modern frontend frameworks",
@@ -952,6 +952,58 @@ function WhoWeServeStrip() {
   );
 }
 
+function ClientLogos() {
+  const clients = [
+    { name: "Skills to Hired", src: "/logos/client-skillstohired.png" },
+    { name: "Acceleration Hub", src: "/logos/client-accelerationhub.png" },
+    { name: "Vector", src: "/logos/client-vector.png" },
+  ];
+  return (
+    <section style={{
+      background: "var(--cream)",
+      padding: "44px 7vw 52px",
+      borderBottom: "1px solid var(--line)",
+    }}>
+      <style>{`
+        .client-logo-row {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          gap: clamp(32px, 6vw, 72px);
+          max-width: 1060px;
+          margin: 28px auto 0;
+        }
+        .client-logo-row img {
+          height: 44px;
+          width: auto;
+          max-width: 150px;
+          object-fit: contain;
+          filter: grayscale(100%);
+          opacity: 0.55;
+          transition: filter 0.2s ease, opacity 0.2s ease;
+        }
+        .client-logo-row img:hover {
+          filter: grayscale(0%);
+          opacity: 1;
+        }
+        @media (max-width: 600px) {
+          .client-logo-row { gap: 28px; }
+          .client-logo-row img { height: 34px; max-width: 110px; }
+        }
+      `}</style>
+      <div style={{ textAlign: "center" }}>
+        <p className="eyebrow">Our Clients</p>
+      </div>
+      <div className="client-logo-row">
+        {clients.map((c) => (
+          <img key={c.name} src={c.src} alt={c.name} title={c.name} loading="lazy" />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 function SimulatorTeaser() {
   return (
     <section style={{
@@ -1021,6 +1073,7 @@ function Home() {
       <Hero />
       <CTABanner />
       <WhoWeServeStrip />
+      <ClientLogos />
       <Process />
       <SimulatorTeaser />
       {/* <TestimonialsSection /> */}{/* TESTIMONIALS — uncomment when ready */}
