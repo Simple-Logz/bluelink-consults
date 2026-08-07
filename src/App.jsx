@@ -2525,7 +2525,7 @@ function SimulatorPage() {
     const lc=(t)=>t==="k"?"sim-lk":t==="r"?"sim-lr":t==="w"?"sim-lw":"sim-ll";
 
     function opt(id,label,sub,on,prefix){
-      const cbStyle=on?"background:#378add;border-color:#378add":"background:#ffffff;border:1.5px solid #cbd5e1";
+      const cbStyle=on?"background:#378add;border-color:#378add":"background:#ffffff;border:1.5px solid #a9cdf0";
       return `<div class="sim-opt${on?" on":""}" id="${prefix}_${id}">
         <div class="sim-cb" style="${cbStyle}">${on?"<span style='font-size:10px;color:#fff;line-height:1'>&#10003;</span>":""}</div>
         <div class="sim-ot"><div class="sim-ol">${label}</div><div class="sim-os">${sub}</div></div>
@@ -2869,12 +2869,12 @@ function SimulatorPage() {
   }, []);
 
   const css=[
-    ".sim-root{background:#ffffff;border-radius:20px;overflow:hidden;font-family:var(--font-sans);border:1px solid #eaeef3;box-shadow:0 24px 60px rgba(15,23,42,0.09)}",
-    ".sim-hdr{background:linear-gradient(180deg,#fbfcfe,#f6f8fb);border-bottom:1px solid #eaeef3;padding:22px 28px;display:flex;align-items:center;justify-content:space-between}",
-    ".sim-hdr-h{font-size:21px;font-weight:700;color:#0d1b2e;letter-spacing:-.01em;margin:0}",
-    ".sim-hdr-p{font-size:13px;color:#5a7090;margin-top:3px}",
+    ".sim-root{background:#ffffff;border-radius:20px;overflow:hidden;font-family:var(--font-sans);border:1.5px solid #cfe4f7;box-shadow:0 24px 60px rgba(55,138,221,0.13)}",
+    ".sim-hdr{background:linear-gradient(180deg,#f3f9ff,#e9f3fd);border-bottom:1.5px solid #cfe4f7;padding:22px 28px;display:flex;align-items:center;justify-content:space-between}",
+    ".sim-hdr-h{font-size:21px;font-weight:700;color:#1a6fc4;letter-spacing:-.01em;margin:0}",
+    ".sim-hdr-p{font-size:13px;color:#4a7ba8;margin-top:3px}",
     ".sim-dots{display:flex;gap:7px}",
-    ".sim-sd{width:22px;height:5px;border-radius:3px;background:#e2e8f0;transition:background .2s}",
+    ".sim-sd{width:22px;height:5px;border-radius:3px;background:#cfe4f7;transition:background .2s}",
     ".sim-done{background:#1d9e75}.sim-active{background:#378add}",
     ".sim-body{padding:30px}",
     ".sim-ey{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}",
@@ -2882,58 +2882,58 @@ function SimulatorPage() {
     ".sim-sub{font-size:13px;color:#4a6888;margin-bottom:18px}",
     ".sim-g2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:8px}",
     ".sim-g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:8px}",
-    ".sim-opt{background:#fbfcfe;border:1.5px solid #e7ecf2;border-radius:12px;padding:13px 15px;cursor:pointer;transition:all .18s;user-select:none;display:flex;align-items:flex-start;gap:10px}",
-    ".sim-opt:hover{border-color:#94c2ec;background:#eef6fd;transform:translateY(-1px);box-shadow:0 6px 14px rgba(55,138,221,0.1)}",
-    ".sim-opt.on{border-color:#378add;background:#eaf3fc;box-shadow:0 6px 14px rgba(55,138,221,0.14)}",
+    ".sim-opt{background:#f5faff;border:1.5px solid #bfdcf5;border-radius:12px;padding:13px 15px;cursor:pointer;transition:all .18s;user-select:none;display:flex;align-items:flex-start;gap:10px}",
+    ".sim-opt:hover{border-color:#378add;background:#e9f3fd;transform:translateY(-1px);box-shadow:0 6px 14px rgba(55,138,221,0.16)}",
+    ".sim-opt.on{border-color:#378add;background:#dcedfb;box-shadow:0 6px 14px rgba(55,138,221,0.22)}",
     ".sim-cb{width:18px;height:18px;border-radius:6px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;transition:all .18s}",
     ".sim-ot{flex:1}",
-    ".sim-ol{font-size:13px;font-weight:600;color:#3f5169;transition:color .18s}",
-    ".sim-opt.on .sim-ol{color:#1d6fc4}",
-    ".sim-os{font-size:11px;color:#6b7c93;margin-top:2px}",
-    ".sim-opt.on .sim-os{color:#2a5878}",
-    ".sim-hint{font-size:13px;color:#4a6888;margin-top:10px;line-height:1.55;padding:12px 15px;background:#f1f5f9;border-radius:10px;border-left:3px solid #94c2ec}",
+    ".sim-ol{font-size:13px;font-weight:600;color:#2f5a86;transition:color .18s}",
+    ".sim-opt.on .sim-ol{color:#155ea8}",
+    ".sim-os{font-size:11px;color:#6688ac;margin-top:2px}",
+    ".sim-opt.on .sim-os{color:#1d6fc4}",
+    ".sim-hint{font-size:13px;color:#3a6fa0;margin-top:10px;line-height:1.55;padding:12px 15px;background:#eaf3fc;border-radius:10px;border-left:3px solid #378add}",
     ".sim-nav{display:flex;justify-content:space-between;align-items:center;margin-top:24px}",
     ".sim-btn-b{font-size:13px;font-weight:600;color:#4a6888;background:none;border:none;cursor:pointer;padding:8px 0;font-family:var(--font-sans)}",
     ".sim-btn-b:hover{color:#0d1b2e}",
-    ".sim-btn-n{font-size:14px;font-weight:700;color:#ffffff;background:#378add;border:none;padding:12px 26px;border-radius:10px;cursor:pointer;font-family:var(--font-sans);box-shadow:0 10px 22px rgba(55,138,221,0.28);transition:background .18s,transform .15s,box-shadow .18s}",
-    ".sim-btn-n:hover{background:#4a9fe8;transform:translateY(-2px);box-shadow:0 14px 28px rgba(55,138,221,0.34)}",
-    ".sim-btn-n:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed;box-shadow:none;transform:none}",
+    ".sim-btn-n{font-size:14px;font-weight:700;color:#ffffff;background:#378add;border:none;padding:12px 26px;border-radius:10px;cursor:pointer;font-family:var(--font-sans);box-shadow:0 10px 22px rgba(55,138,221,0.32);transition:background .18s,transform .15s,box-shadow .18s}",
+    ".sim-btn-n:hover{background:#4a9fe8;transform:translateY(-2px);box-shadow:0 14px 28px rgba(55,138,221,0.4)}",
+    ".sim-btn-n:disabled{background:#dbe8f5;color:#8fadc9;cursor:not-allowed;box-shadow:none;transform:none}",
     ".sim-btn-r{font-size:14px;font-weight:700;color:#083d2b;background:#1d9e75;border:none;padding:12px 26px;border-radius:10px;cursor:pointer;font-family:var(--font-sans);box-shadow:0 10px 22px rgba(29,158,117,0.28);transition:background .18s,transform .15s,box-shadow .18s}",
     ".sim-btn-r:hover{background:#22b585;transform:translateY(-2px);box-shadow:0 14px 28px rgba(29,158,117,0.34)}",
-    ".sim-btn-r:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed;box-shadow:none;transform:none}",
+    ".sim-btn-r:disabled{background:#dbe8f5;color:#8fadc9;cursor:not-allowed;box-shadow:none;transform:none}",
     ".sim-srow{display:flex;align-items:center;gap:16px;margin-bottom:12px}",
     ".sim-srow input{flex:1;accent-color:#378add;height:5px}",
-    ".sim-sv{font-size:22px;font-weight:700;color:#1d6fc4;min-width:88px;text-align:right}",
-    ".sim-mc{background:#fbfcfe;border:1.5px solid #e7ecf2;border-radius:12px;padding:14px 16px}",
-    ".sim-mv{font-size:16px;font-weight:700;color:#1a2840}",
-    ".sim-ml{font-size:11px;color:#6b7c93;margin-top:3px}",
+    ".sim-sv{font-size:22px;font-weight:700;color:#1a6fc4;min-width:88px;text-align:right}",
+    ".sim-mc{background:#f5faff;border:1.5px solid #bfdcf5;border-radius:12px;padding:14px 16px}",
+    ".sim-mv{font-size:16px;font-weight:700;color:#0d3a63}",
+    ".sim-ml{font-size:11px;color:#6688ac;margin-top:3px}",
     ".sim-dl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}",
-    ".sim-prog{height:8px;background:#e9edf2;border-radius:5px;overflow:hidden;margin-bottom:16px}",
-    ".sim-pf{height:100%;border-radius:5px;background:linear-gradient(90deg,#378add,#4a9fe8);transition:width .2s}",
+    ".sim-prog{height:8px;background:#dbeafd;border-radius:5px;overflow:hidden;margin-bottom:16px}",
+    ".sim-pf{height:100%;border-radius:5px;background:linear-gradient(90deg,#378add,#5cb0f0);transition:width .2s}",
     ".sim-pf.ok{background:#1d9e75}",
-    ".sim-log{background:#0d1521;border:1px solid #1c2b40;border-radius:10px;padding:14px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.9;max-height:170px;overflow-y:auto}",
-    ".sim-lk{color:#4ce0a8}.sim-lr{color:#6fb4f2}.sim-lw{color:#e0a83f}.sim-ll{color:#7189a3}",
+    ".sim-log{background:#0d1e33;border:1.5px solid #1c3b5c;border-radius:10px;padding:14px 16px;font-family:var(--font-mono);font-size:12px;line-height:1.9;max-height:170px;overflow-y:auto}",
+    ".sim-lk{color:#4ce0a8}.sim-lr{color:#7bc0f5}.sim-lw{color:#e0a83f}.sim-ll{color:#7ba0c4}",
     ".sim-rh{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:12px}",
-    ".sim-sp{display:flex;align-items:center;gap:18px;background:#fbfcfe;border:1.5px solid #e7ecf2;border-radius:12px;padding:16px 22px}",
+    ".sim-sp{display:flex;align-items:center;gap:18px;background:#f5faff;border:1.5px solid #bfdcf5;border-radius:12px;padding:16px 22px}",
     ".sim-sb2{text-align:center}",
     ".sim-sn{font-size:34px;font-weight:700;color:#0d1b2e}",
-    ".sim-sl2{font-size:11px;color:#6b7c93;margin-top:2px}",
+    ".sim-sl2{font-size:11px;color:#6688ac;margin-top:2px}",
     ".sim-gps{display:flex;gap:8px;flex-wrap:wrap}",
     ".sim-gp{font-size:12px;font-weight:600;padding:6px 14px;border-radius:20px;background:#e8f8f0;color:#12805c;border:1px solid #bbf7d0}",
     ".sim-cmp{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}",
-    ".sim-cc{background:#fbfcfe;border-radius:12px;padding:17px 19px}",
+    ".sim-cc{background:#f5faff;border-radius:12px;padding:17px 19px}",
     ".sim-cc.bad{border:1.5px solid #fecaca;background:#fff8f8}.sim-cc.good{border:1.5px solid #bbf7d0;background:#f4fdf8}",
     ".sim-ch{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:13px}",
     ".sim-ch.bad{color:#d1332f}.sim-ch.good{color:#12805c}",
-    ".sim-cr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #eef1f5;font-size:13px}",
+    ".sim-cr{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #dcebf9;font-size:13px}",
     ".sim-cr:last-child{border:none}",
-    ".sim-ck{color:#6b7c93}.sim-cbad{color:#d1332f;font-weight:600}.sim-cgood{color:#12805c;font-weight:600}",
-    ".sim-ins{background:#fbfcfe;border:1.5px solid #e7ecf2;border-radius:12px;padding:17px 19px;font-size:14px;color:#334963;line-height:1.75;margin-bottom:20px;min-height:48px;border-left:4px solid #378add}",
+    ".sim-ck{color:#6688ac}.sim-cbad{color:#d1332f;font-weight:600}.sim-cgood{color:#12805c;font-weight:600}",
+    ".sim-ins{background:#f5faff;border:1.5px solid #bfdcf5;border-radius:12px;padding:17px 19px;font-size:14px;color:#22557f;line-height:1.75;margin-bottom:20px;min-height:48px;border-left:4px solid #378add}",
     ".sim-cur{display:inline-block;width:2px;height:14px;background:#378add;vertical-align:middle;margin-left:3px;animation:simBlink .7s step-end infinite}",
     "@keyframes simBlink{0%,100%{opacity:1}50%{opacity:0}}",
     ".sim-bn{display:flex;justify-content:space-between;align-items:center}",
-    ".sim-btn-rst{font-size:13px;font-weight:600;color:#4a6888;background:none;border:1.5px solid #e2e8f0;padding:9px 18px;border-radius:10px;cursor:pointer;font-family:var(--font-sans);transition:all .15s}",
-    ".sim-btn-rst:hover{border-color:#94c2ec;color:#0d1b2e;background:#f5f9fd}",
+    ".sim-btn-rst{font-size:13px;font-weight:600;color:#3a6fa0;background:none;border:1.5px solid #bfdcf5;padding:9px 18px;border-radius:10px;cursor:pointer;font-family:var(--font-sans);transition:all .15s}",
+    ".sim-btn-rst:hover{border-color:#378add;color:#155ea8;background:#eaf3fc}",
     "@media(max-width:600px){.sim-g2,.sim-cmp,.sim-g3{grid-template-columns:1fr}.sim-rh{flex-direction:column}}",
   ].join(" ");
 
@@ -2941,7 +2941,7 @@ function SimulatorPage() {
     <>
       <style>{css}</style>
       <PageHero label="Interactive Tool" title="App Modernization Simulator" text="Configure your application stack and run a deployment simulation. See exactly what modernization delivers — speed, uptime, security, cost, and developer velocity." />
-      <section style={{ padding:"48px 7vw", background:"var(--cream)" }}>
+      <section style={{ padding:"48px 7vw", background:"#ffffff" }}>
         <div className="sim-root" ref={simRef}>
           <div className="sim-hdr">
             <div>
