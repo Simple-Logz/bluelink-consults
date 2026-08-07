@@ -1889,14 +1889,53 @@ function ProposalViewer() {
             </div>
           </div>
 
+          <style>{`
+            .proposal-frame-desktop { display:block; }
+            .proposal-frame-mobile { display:none; }
+            @media (max-width:720px) {
+              .proposal-frame-desktop { display:none; }
+              .proposal-frame-mobile { display:flex; }
+            }
+          `}</style>
           <div style={{ background: "white", border: "1px solid var(--line)", borderRadius: 12, overflow: "hidden", boxShadow: "var(--shadow)" }}>
             <iframe
+              className="proposal-frame-desktop"
               src={proposal.file}
               title={proposal.title}
               style={{ width: "100%", height: "85vh", minHeight: 480, border: "none", display: "block" }}
             />
+            <div
+              className="proposal-frame-mobile"
+              style={{
+                flexDirection: "column", alignItems: "center", justifyContent: "center",
+                gap: 16, padding: "56px 28px", textAlign: "center",
+              }}
+            >
+              <div style={{
+                width: 62, height: 62, borderRadius: "50%", background: "var(--cream)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+              }}>
+                <FileText size={26} color="var(--bronze)" />
+              </div>
+              <div>
+                <p style={{ fontWeight: 800, color: "var(--text-dark)", fontSize: "1rem", marginBottom: 6 }}>{proposal.title}</p>
+                <p style={{ fontSize: "0.85rem", color: "var(--muted)", maxWidth: 280 }}>Tap below to open the full proposal document.</p>
+              </div>
+              <a
+                href={proposal.file}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8, background: "var(--bronze)",
+                  color: "#fff", padding: "13px 30px", borderRadius: 9, fontWeight: 700,
+                  textDecoration: "none", fontSize: "0.92rem",
+                }}
+              >
+                <FileText size={17} /> View Full Proposal
+              </a>
+            </div>
           </div>
-          <p style={{ fontSize: "0.82rem", color: "var(--muted)", textAlign: "center", marginTop: 14 }}>
+          <p className="proposal-frame-desktop" style={{ fontSize: "0.82rem", color: "var(--muted)", textAlign: "center", marginTop: 14 }}>
             Having trouble viewing the document above? <a href={proposal.file} download style={{ color: "var(--bronze)", fontWeight: 700 }}>Download the PDF directly</a>.
           </p>
         </div>
