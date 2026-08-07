@@ -981,9 +981,11 @@ h1, h2, h3, h4 { margin: 0; }
 .contact-form {
   background: white;
   border: 1px solid var(--line);
+  border-radius: 18px;
   padding: 40px;
   display: grid;
-  gap: 16px;
+  gap: 18px;
+  box-shadow: 0 24px 60px rgba(6,20,43,0.07);
 }
 
 .contact-form label,
@@ -998,18 +1000,34 @@ h1, h2, h3, h4 { margin: 0; }
 .contact-form select,
 .contact-form textarea,
 .login-card input {
-  border: 1px solid var(--line);
-  padding: 13px;
-  background: var(--paper);
+  border: 1.5px solid #e3e7ee;
+  border-radius: 10px;
+  padding: 13px 15px;
+  background: #ffffff;
   color: var(--text-dark);
   outline: none;
-  transition: border-color 0.15s ease;
+  font-size: 0.95rem;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235d687d' fill='none' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+  padding-right: 38px;
+  cursor: pointer;
 }
 
 .contact-form input:focus,
+.contact-form select:focus,
 .contact-form textarea:focus,
 .login-card input:focus {
   border-color: var(--bronze);
+  box-shadow: 0 0 0 4px rgba(169,94,33,0.12);
 }
 
 .contact-form input::placeholder,
@@ -1018,10 +1036,52 @@ h1, h2, h3, h4 { margin: 0; }
   color: var(--muted);
 }
 
+.contact-form button {
+  border-radius: 10px;
+  justify-content: center;
+  box-shadow: 0 10px 26px rgba(169,94,33,0.28);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.contact-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(169,94,33,0.34);
+}
+
 .contact-form small {
   color: var(--muted);
   font-size: 0.8rem;
   text-align: center;
+}
+
+.pain-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.85rem;
+  color: var(--text-dark);
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid #e3e7ee;
+  background: #fbfcfe;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.pain-chip:hover { border-color: #cdd6e3; }
+
+.pain-chip:has(input:checked) {
+  border-color: var(--bronze);
+  background: rgba(169,94,33,0.06);
+}
+
+.pain-chip input {
+  accent-color: var(--bronze);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
 /* ─── SUCCESS BOX ─────────────────────────────────────────── */
