@@ -1792,6 +1792,8 @@ const proposals = [
     priceNote: "based on system complexity",
     bestFor: "Small businesses needing a professional online presence.",
     file: "/proposals/package-1-starter.pdf",
+    imageBase: "/proposals/images/package-1-starter",
+    pages: 2,
   },
   {
     slug: "cloud-migration-devops",
@@ -1801,6 +1803,8 @@ const proposals = [
     priceNote: "based on system size and scope",
     bestFor: "Growing businesses that need bookings, payments, CRM and automation.",
     file: "/proposals/package-2-business.pdf",
+    imageBase: "/proposals/images/package-2-business",
+    pages: 3,
   },
   {
     slug: "full-architecture-modernization",
@@ -1810,6 +1814,8 @@ const proposals = [
     priceNote: "custom quote based on scope",
     bestFor: "Companies requiring custom systems, integrations, portals, and advanced functionality.",
     file: "/proposals/package-3-enterprise.pdf",
+    imageBase: "/proposals/images/package-3-enterprise",
+    pages: 4,
   },
 ];
 
@@ -1853,6 +1859,7 @@ function ProposalViewer() {
   const { slug } = useParams();
   const proposal = proposals.find((p) => p.slug === slug) || null;
   usePageTitle(proposal ? proposal.title : "Proposal");
+  const [page, setPage] = useState(1);
 
   if (!proposal) {
     return (
@@ -1865,11 +1872,15 @@ function ProposalViewer() {
     );
   }
 
+  const totalPages = proposal.pages;
+  const goPrev = () => setPage((p) => Math.max(1, p - 1));
+  const goNext = () => setPage((p) => Math.min(totalPages, p + 1));
+
   return (
     <>
       <PageHero label={proposal.packageLabel} title={proposal.title} text={proposal.bestFor} />
       <section style={{ background: "var(--cream)", padding: "48px 7vw 88px" }}>
-        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto" }}>
           <div style={{
             display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between",
             gap: 16, marginBottom: 24, background: "white", border: "1px solid var(--line)",
@@ -1904,54 +1915,52 @@ function ProposalViewer() {
             </div>
           </div>
 
-          <style>{`
-            .proposal-frame-desktop { display:block; }
-            .proposal-frame-mobile { display:none; }
-            @media (max-width:720px) {
-              .proposal-frame-desktop { display:none; }
-              .proposal-frame-mobile { display:flex; }
-            }
-          `}</style>
+          {/* Fixed page image — no pinch/zoom/pan viewer, just a static page that fits the screen */}
           <div style={{ background: "white", border: "1px solid var(--line)", borderRadius: 12, overflow: "hidden", boxShadow: "var(--shadow)" }}>
-            <iframe
-              className="proposal-frame-desktop"
-              src={proposal.file}
-              title={proposal.title}
-              style={{ width: "100%", height: "85vh", minHeight: 480, border: "none", display: "block" }}
+            <img
+              src={`${proposal.imageBase}-p${page}.png`}
+              alt={`${proposal.title} — page ${page} of ${totalPages}`}
+              style={{ width: "100%", height: "auto", display: "block", userSelect: "none", touchAction: "pan-y" }}
+              draggable={false}
             />
-            <div
-              className="proposal-frame-mobile"
-              style={{
-                flexDirection: "column", alignItems: "center", justifyContent: "center",
-                gap: 16, padding: "56px 28px", textAlign: "center",
-              }}
-            >
-              <div style={{
-                width: 62, height: 62, borderRadius: "50%", background: "var(--cream)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-              }}>
-                <FileText size={26} color="var(--bronze)" />
-              </div>
-              <div>
-                <p style={{ fontWeight: 800, color: "var(--text-dark)", fontSize: "1rem", marginBottom: 6 }}>{proposal.title}</p>
-                <p style={{ fontSize: "0.85rem", color: "var(--muted)", maxWidth: 280 }}>Tap below to open the full proposal document.</p>
-              </div>
-              <a
-                href={proposal.file}
-                target="_blank"
-                rel="noopener noreferrer"
+          </div>
+
+          {totalPages > 1 && (
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 18, marginTop: 18 }}>
+              <button
+                type="button"
+                onClick={goPrev}
+                disabled={page === 1}
                 style={{
-                  display: "inline-flex", alignItems: "center", gap: 8, background: "var(--bronze)",
-                  color: "#fff", padding: "13px 30px", borderRadius: 9, fontWeight: 700,
-                  textDecoration: "none", fontSize: "0.92rem",
+                  display: "inline-flex", alignItems: "center", gap: 6, background: "white",
+                  border: "1.5px solid var(--line)", borderRadius: 9, padding: "10px 18px",
+                  fontWeight: 700, fontSize: "0.88rem", color: page === 1 ? "var(--muted)" : "var(--text-dark)",
+                  cursor: page === 1 ? "not-allowed" : "pointer",
                 }}
               >
-                <FileText size={17} /> View Full Proposal
-              </a>
+                <ArrowRight size={15} style={{ transform: "rotate(180deg)" }} /> Previous
+              </button>
+              <span style={{ fontSize: "0.85rem", color: "var(--muted)", fontWeight: 600 }}>
+                Page {page} of {totalPages}
+              </span>
+              <button
+                type="button"
+                onClick={goNext}
+                disabled={page === totalPages}
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 6, background: "white",
+                  border: "1.5px solid var(--line)", borderRadius: 9, padding: "10px 18px",
+                  fontWeight: 700, fontSize: "0.88rem", color: page === totalPages ? "var(--muted)" : "var(--text-dark)",
+                  cursor: page === totalPages ? "not-allowed" : "pointer",
+                }}
+              >
+                Next <ArrowRight size={15} />
+              </button>
             </div>
-          </div>
-          <p className="proposal-frame-desktop" style={{ fontSize: "0.82rem", color: "var(--muted)", textAlign: "center", marginTop: 14 }}>
-            Having trouble viewing the document above? <a href={proposal.file} download style={{ color: "var(--bronze)", fontWeight: 700 }}>Download the PDF directly</a>.
+          )}
+
+          <p style={{ fontSize: "0.82rem", color: "var(--muted)", textAlign: "center", marginTop: 14 }}>
+            Prefer the original file? <a href={proposal.file} download style={{ color: "var(--bronze)", fontWeight: 700 }}>Download the PDF directly</a>.
           </p>
         </div>
       </section>
