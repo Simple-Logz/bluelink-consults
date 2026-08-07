@@ -1767,6 +1767,144 @@ function InsightDetail() {
   );
 }
 
+/* ─── PROPOSALS ──────────────────────────────────────────── */
+const proposals = [
+  {
+    slug: "foundation-modernization",
+    packageLabel: "Package 1",
+    title: "Foundation Modernization",
+    price: "From ₦250,000",
+    priceNote: "based on system complexity",
+    bestFor: "Small businesses with a single legacy application needing security patching, performance improvement, and technical debt cleanup.",
+    file: "/proposals/package-1-foundation-modernization.pdf",
+  },
+  {
+    slug: "cloud-migration-devops",
+    packageLabel: "Package 2",
+    title: "Cloud Migration & DevOps",
+    price: "From ₦500,000",
+    priceNote: "based on system size and cloud scope",
+    bestFor: "Growing businesses ready to move to modern cloud infrastructure with automated deployments, real-time monitoring, and containerized environments.",
+    file: "/proposals/package-2-cloud-migration-devops.pdf",
+  },
+  {
+    slug: "full-architecture-modernization",
+    packageLabel: "Package 3",
+    title: "Full Architecture Modernization",
+    price: "From ₦1,000,000",
+    priceNote: "custom quote based on scope",
+    bestFor: "Enterprises with complex legacy monolithic systems requiring a full rebuild into microservices, cloud-native architecture, and AI-powered operations.",
+    file: "/proposals/package-3-full-architecture-modernization.pdf",
+  },
+];
+
+function ProposalsPage() {
+  usePageTitle("Proposals");
+  return (
+    <>
+      <PageHero label="Service Packages" title="Proposal Documents." text="Detailed package breakdowns you can view online or download as a PDF." />
+      <section style={{ background: "white", padding: "64px 7vw 88px" }}>
+        <style>{`
+          .proposals-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; max-width:1100px; margin:0 auto; }
+          @media (max-width:900px) { .proposals-grid { grid-template-columns:1fr; } }
+        `}</style>
+        <div className="proposals-grid">
+          {proposals.map((p) => (
+            <Link
+              key={p.slug}
+              to={`/proposals/${p.slug}`}
+              style={{
+                textDecoration: "none", display: "block", background: "var(--cream)",
+                border: "1px solid var(--line)", borderRadius: 12, padding: 26,
+                transition: "border-color 0.15s, transform 0.15s",
+              }}
+            >
+              <p style={{ fontSize: "0.75rem", fontWeight: 800, letterSpacing: "0.08em", textTransform: "uppercase", color: "var(--bronze)", marginBottom: 8 }}>{p.packageLabel}</p>
+              <h3 style={{ fontFamily: "Libre Baskerville, serif", fontSize: "1.2rem", color: "var(--text-dark)", marginBottom: 10, lineHeight: 1.25 }}>{p.title}</h3>
+              <p style={{ fontSize: "0.88rem", color: "var(--muted)", lineHeight: 1.6, marginBottom: 16 }}>{p.bestFor}</p>
+              <p style={{ fontWeight: 800, color: "var(--text-dark)", marginBottom: 12 }}>{p.price}</p>
+              <span style={{ display: "inline-flex", alignItems: "center", gap: 6, color: "var(--bronze)", fontWeight: 700, fontSize: "0.86rem" }}>
+                View proposal <ArrowRight size={15} />
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+    </>
+  );
+}
+
+function ProposalViewer() {
+  const { slug } = useParams();
+  const proposal = proposals.find((p) => p.slug === slug) || null;
+  usePageTitle(proposal ? proposal.title : "Proposal");
+
+  if (!proposal) {
+    return (
+      <>
+        <PageHero label="Proposals" title="Proposal not found." text="The requested document could not be found." />
+        <div style={{ textAlign: "center", padding: "40px 7vw 80px" }}>
+          <Link className="article-cta" to="/proposals">Back to Proposals <ArrowRight size={17} /></Link>
+        </div>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <PageHero label={proposal.packageLabel} title={proposal.title} text={proposal.bestFor} />
+      <section style={{ background: "var(--cream)", padding: "48px 7vw 88px" }}>
+        <div style={{ maxWidth: 960, margin: "0 auto" }}>
+          <div style={{
+            display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between",
+            gap: 16, marginBottom: 24, background: "white", border: "1px solid var(--line)",
+            borderRadius: 12, padding: "20px 26px",
+          }}>
+            <div>
+              <p style={{ fontWeight: 800, fontSize: "1.15rem", color: "var(--text-dark)", margin: 0 }}>{proposal.price}</p>
+              <p style={{ fontSize: "0.85rem", color: "var(--muted)", margin: "2px 0 0" }}>{proposal.priceNote}</p>
+            </div>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+              <a
+                href={proposal.file}
+                download
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8, background: "var(--bronze)",
+                  color: "#fff", padding: "13px 26px", borderRadius: 9, fontWeight: 700,
+                  textDecoration: "none", fontSize: "0.92rem",
+                }}
+              >
+                <Download size={17} /> Download PDF
+              </a>
+              <Link
+                to="/contact#consultation"
+                style={{
+                  display: "inline-flex", alignItems: "center", gap: 8, background: "transparent",
+                  color: "var(--bronze)", border: "1.5px solid var(--bronze)", padding: "13px 26px",
+                  borderRadius: 9, fontWeight: 700, textDecoration: "none", fontSize: "0.92rem",
+                }}
+              >
+                Discuss This Package
+              </Link>
+            </div>
+          </div>
+
+          <div style={{ background: "white", border: "1px solid var(--line)", borderRadius: 12, overflow: "hidden", boxShadow: "var(--shadow)" }}>
+            <iframe
+              src={proposal.file}
+              title={proposal.title}
+              style={{ width: "100%", height: "85vh", minHeight: 480, border: "none", display: "block" }}
+            />
+          </div>
+          <p style={{ fontSize: "0.82rem", color: "var(--muted)", textAlign: "center", marginTop: 14 }}>
+            Having trouble viewing the document above? <a href={proposal.file} download style={{ color: "var(--bronze)", fontWeight: 700 }}>Download the PDF directly</a>.
+          </p>
+        </div>
+      </section>
+    </>
+  );
+}
+
 /* ─── ABOUT ──────────────────────────────────────────────── */
 function AboutPage() {
   usePageTitle("About");
@@ -2824,6 +2962,8 @@ function AppInner() {
           <Route path="/services/:slug"          element={<ServiceDetail />} />
           <Route path="/insights"                element={<InsightsPage />} />
           <Route path="/insights/:slug"          element={<InsightDetail />} />
+          <Route path="/proposals"               element={<ProposalsPage />} />
+          <Route path="/proposals/:slug"         element={<ProposalViewer />} />
           <Route path="/solutions"               element={<SolutionsPage />} />
           <Route path="/solutions/who-we-help"   element={<WhoWeHelpPage />} />
           <Route path="/solutions/eat-framework" element={<EATFrameworkPage />} />
