@@ -1208,13 +1208,18 @@ function Hero() {
         }
       `}</style>
 
-      <div className="hero-bg-v2" />
+      <motion.div
+        className="hero-bg-v2"
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+      />
 
       <motion.div
         className="hero-message-v2"
-        initial={{ opacity: 0, x: 26 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.65 }}
+        initial={{ opacity: 0, y: 26, x: 26 }}
+        animate={{ opacity: 1, y: 0, x: 0 }}
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
       >
         <h1>Modernize your applications. Accelerate your business performance.</h1>
         <p>Your website is slow. Your systems break. Your team wastes hours on things that should be automatic. We come in, find what's broken, and rebuild it properly — so your business runs the way it should.</p>
@@ -1475,9 +1480,19 @@ function ServiceDetail() {
           </div>
         </div>
         <aside className="service-detail-aside">
-          <h3>Start with a modernization review</h3>
-          <p>We can begin with a focused review of your current environment and provide a practical modernization roadmap.</p>
-          <Link to="/contact#consultation">Request Review <ArrowRight size={17} /></Link>
+          {service.slug === "web-development" ? (
+            <>
+              <h3>Start your website project</h3>
+              <p>Tell us a bit about your business and what you're hoping to launch, and we'll follow up with next steps.</p>
+              <Link to="/contact?type=web-development#consultation">Request A Quote <ArrowRight size={17} /></Link>
+            </>
+          ) : (
+            <>
+              <h3>Start with a modernization review</h3>
+              <p>We can begin with a focused review of your current environment and provide a practical modernization roadmap.</p>
+              <Link to="/contact#consultation">Request Review <ArrowRight size={17} /></Link>
+            </>
+          )}
         </aside>
       </section>
       {service.plans && (
@@ -2036,8 +2051,20 @@ function AboutPage() {
 }
 
 /* ─── CONTACT ────────────────────────────────────────────── */
+const businessTypes = [
+  "Laundry", "Restaurant", "Hospitality", "Entertainment", "Logistics",
+  "Administration", "Religious Organization", "Education", "Agriculture",
+  "Transportation", "E-commerce / Retail", "Other",
+];
+
+const customerVolumes = [
+  "0 – 100", "100 – 500", "500 – 5,000", "5,000 – 50,000", "50,000+",
+];
+
 function ContactPage() {
-  usePageTitle("Contact");
+  const location = useLocation();
+  const isWebDev = new URLSearchParams(location.search).get("type") === "web-development";
+  usePageTitle(isWebDev ? "Request A Quote" : "Contact");
   const [submitted, setSubmitted] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState("");
@@ -2072,11 +2099,15 @@ function ContactPage() {
 
   return (
     <>
-      <PageHero label="Contact" title="Let's discuss what is slowing your technology down." text="Share your application, infrastructure, cloud, security, DevOps, or reliability challenge." />
+      {isWebDev ? (
+        <PageHero label="Contact" title="Let's build your new website." text="Tell us a bit about your business and what you're hoping to launch." />
+      ) : (
+        <PageHero label="Contact" title="Let's discuss what is slowing your technology down." text="Share your application, infrastructure, cloud, security, DevOps, or reliability challenge." />
+      )}
       <section className="contact-section" id="consultation">
         <div className="contact-copy">
           <p className="eyebrow">Contact BlueLink Consult</p>
-          <h2>Start with a modernization conversation.</h2>
+          <h2>{isWebDev ? "Start your website project." : "Start with a modernization conversation."}</h2>
           <p>Submit your inquiry below. We will respond within one business day.</p>
           <div className="contact-details">
             <span><Mail size={17} /> info@bluelinkconsults.com</span>
@@ -2092,6 +2123,34 @@ function ContactPage() {
             <p>Thank you. Your message was successfully delivered to BlueLink Consult.</p>
             <button onClick={() => { setSubmitted(false); setFormError(""); }}>Submit another inquiry</button>
           </div>
+        ) : isWebDev ? (
+          <form className="contact-form" id="consultation-form" onSubmit={handleSubmit}>
+            {formError && <div className="auth-message">{formError}</div>}
+            <input type="hidden" name="_subject" value="New Web Development inquiry from bluelinkconsults.com" />
+            <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
+            <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
+            <label>Company Name<input name="company" type="text" placeholder="Company name" /></label>
+            <label>Phone Number<input required name="phone" type="tel" placeholder="+1 ..." /></label>
+            <label>
+              What type of business are you in?
+              <select required name="businessType" defaultValue="">
+                <option value="" disabled>Select business type</option>
+                {businessTypes.map((t) => <option key={t} value={t}>{t}</option>)}
+              </select>
+            </label>
+            <label>
+              How many customers do you hope to serve?
+              <select required name="customerVolume" defaultValue="">
+                <option value="" disabled>Select a range</option>
+                {customerVolumes.map((v) => <option key={v} value={v}>{v}</option>)}
+              </select>
+            </label>
+            <label>Tell us about your business<textarea required name="message" rows="4" placeholder="What does your business do, and what would you like your new website to do for you?" /></label>
+            <button type="submit" disabled={formLoading}>
+              {formLoading ? "Sending..." : "Submit Inquiry"} <Send size={18} />
+            </button>
+            <small>Your inquiry will be securely delivered to BlueLink Consult.</small>
+          </form>
         ) : (
           <form className="contact-form" id="consultation-form" onSubmit={handleSubmit}>
             {formError && <div className="auth-message">{formError}</div>}
@@ -2099,6 +2158,7 @@ function ContactPage() {
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
             <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
             <label>Company<input name="company" type="text" placeholder="Company name" /></label>
+            <label>Phone Number<input required name="phone" type="tel" placeholder="+1 ..." /></label>
             <div style={{ display: "grid", gap: 8 }}>
               <span style={{ fontWeight: 800, fontSize: "0.92rem" }}>What are your biggest pain points? <span style={{ color: "var(--bronze)" }}>(Check all that apply)</span></span>
               <p style={{ fontSize: "0.82rem", color: "var(--muted)", margin: 0 }}>This helps us come prepared with the right answers for your consultation.</p>
@@ -2470,7 +2530,7 @@ function SimulatorPage() {
     const lc=(t)=>t==="k"?"sim-lk":t==="r"?"sim-lr":t==="w"?"sim-lw":"sim-ll";
 
     function opt(id,label,sub,on,prefix){
-      const cbStyle=on?"background:#378add;border-color:#378add":"background:#0d1525;border:1.5px solid #2a3d56";
+      const cbStyle=on?"background:#378add;border-color:#378add":"background:#ffffff;border:1.5px solid #cbd5e1";
       return `<div class="sim-opt${on?" on":""}" id="${prefix}_${id}">
         <div class="sim-cb" style="${cbStyle}">${on?"<span style='font-size:10px;color:#fff;line-height:1'>&#10003;</span>":""}</div>
         <div class="sim-ot"><div class="sim-ol">${label}</div><div class="sim-os">${sub}</div></div>
@@ -2498,8 +2558,8 @@ function SimulatorPage() {
           h+=`<div class="sim-nav"><span></span><button class="sim-btn-n" id="sn1" ${S.langs.length===0?"disabled":""}>Continue &rarr;</button></div>`;
         }
         else if(S.step===1){
-          h+=`<div class="sim-ey" style="color:#ef9f27">Step 2 of 4</div>
-<div class="sim-st" style="color:#ef9f27">Which legacy services does your application use?</div>
+          h+=`<div class="sim-ey" style="color:#b8720f">Step 2 of 4</div>
+<div class="sim-st" style="color:#b8720f">Which legacy services does your application use?</div>
 <div class="sim-sub">Check all that apply &mdash; each adds complexity to the migration scope</div>
 <div class="sim-g2">`;
           SVCS.forEach(s=>{h+=opt(s.id,s.l,s.s,has(S.svcs,s.id),"ss");});
@@ -2535,7 +2595,7 @@ function SimulatorPage() {
       }
       else if(S.phase==="running"){
         h+=`<div class="sim-ey" style="color:#378add">Running simulation</div>
-<div class="sim-st" style="color:#c8d4e4">Deploying your modernized stack...</div>
+<div class="sim-st" style="color:#0d1b2e">Deploying your modernized stack...</div>
 <div class="sim-dl"><span style="color:#5a7090">Progress</span><span style="color:#378add;font-weight:500" id="spval">${S.pct}%</span></div>
 <div class="sim-prog"><div class="sim-pf${S.pct>=100?" ok":""}" id="spfill" style="width:${S.pct}%"></div></div>
 <div class="sim-log" id="slb">`;
@@ -2814,71 +2874,71 @@ function SimulatorPage() {
   }, []);
 
   const css=[
-    ".sim-root{background:#0f1623;border-radius:16px;overflow:hidden;font-family:var(--font-sans)}",
-    ".sim-hdr{background:#151e2e;border-bottom:1px solid #1f2d42;padding:18px 26px;display:flex;align-items:center;justify-content:space-between}",
+    ".sim-root{background:#ffffff;border-radius:16px;overflow:hidden;font-family:var(--font-sans);border:1px solid #e2e8f0;box-shadow:0 10px 30px rgba(15,23,42,0.06)}",
+    ".sim-hdr{background:#f8fafc;border-bottom:1px solid #e2e8f0;padding:18px 26px;display:flex;align-items:center;justify-content:space-between}",
     ".sim-hdr-h{font-size:20px;font-weight:600;color:#1d9e75;letter-spacing:-.01em;margin:0}",
     ".sim-hdr-p{font-size:13px;color:#5a7090;margin-top:3px}",
     ".sim-dots{display:flex;gap:6px}",
-    ".sim-sd{width:8px;height:8px;border-radius:50%;background:#1f2d42;transition:background .2s}",
+    ".sim-sd{width:8px;height:8px;border-radius:50%;background:#e2e8f0;transition:background .2s}",
     ".sim-done{background:#1d9e75}.sim-active{background:#378add}",
     ".sim-body{padding:26px}",
     ".sim-ey{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}",
-    ".sim-st{font-size:16px;font-weight:600;margin-bottom:4px}",
+    ".sim-st{font-size:16px;font-weight:600;margin-bottom:4px;color:#0d1b2e}",
     ".sim-sub{font-size:13px;color:#4a6888;margin-bottom:16px}",
     ".sim-g2{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}",
     ".sim-g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}",
-    ".sim-opt{background:#151e2e;border:1px solid #1f2d42;border-radius:10px;padding:11px 13px;cursor:pointer;transition:all .18s;user-select:none;display:flex;align-items:flex-start;gap:10px}",
-    ".sim-opt:hover{border-color:#2a4060;background:#1a2535}",
-    ".sim-opt.on{border-color:#378add;background:#0d1e35}",
+    ".sim-opt{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:11px 13px;cursor:pointer;transition:all .18s;user-select:none;display:flex;align-items:flex-start;gap:10px}",
+    ".sim-opt:hover{border-color:#94c2ec;background:#eef6fd}",
+    ".sim-opt.on{border-color:#378add;background:#eaf3fc}",
     ".sim-cb{width:16px;height:16px;border-radius:4px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;transition:all .18s}",
     ".sim-ot{flex:1}",
-    ".sim-ol{font-size:13px;font-weight:500;color:#8aa4c0;transition:color .18s}",
-    ".sim-opt.on .sim-ol{color:#7bbfed}",
-    ".sim-os{font-size:11px;color:#374d68;margin-top:2px}",
+    ".sim-ol{font-size:13px;font-weight:500;color:#475569;transition:color .18s}",
+    ".sim-opt.on .sim-ol{color:#1d6fc4}",
+    ".sim-os{font-size:11px;color:#6b7c93;margin-top:2px}",
     ".sim-opt.on .sim-os{color:#2a5878}",
-    ".sim-hint{font-size:13px;color:#4a6888;margin-top:8px;line-height:1.55;padding:10px 14px;background:#0d1421;border-radius:8px;border-left:2px solid #1f3050}",
+    ".sim-hint{font-size:13px;color:#4a6888;margin-top:8px;line-height:1.55;padding:10px 14px;background:#f1f5f9;border-radius:8px;border-left:2px solid #cbd8e8}",
     ".sim-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px}",
     ".sim-btn-b{font-size:13px;color:#4a6888;background:none;border:none;cursor:pointer;padding:8px 0;font-family:var(--font-sans)}",
-    ".sim-btn-b:hover{color:#8aa4c0}",
-    ".sim-btn-n{font-size:14px;font-weight:500;color:#0d1e35;background:#378add;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:var(--font-sans)}",
+    ".sim-btn-b:hover{color:#0d1b2e}",
+    ".sim-btn-n{font-size:14px;font-weight:500;color:#ffffff;background:#378add;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:var(--font-sans)}",
     ".sim-btn-n:hover{background:#4a9fe8}",
-    ".sim-btn-n:disabled{background:#1f2d42;color:#374d68;cursor:not-allowed}",
+    ".sim-btn-n:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}",
     ".sim-btn-r{font-size:14px;font-weight:500;color:#0a1e10;background:#1d9e75;border:none;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:var(--font-sans)}",
     ".sim-btn-r:hover{background:#22b585}",
-    ".sim-btn-r:disabled{background:#1f2d42;color:#374d68;cursor:not-allowed}",
+    ".sim-btn-r:disabled{background:#e2e8f0;color:#94a3b8;cursor:not-allowed}",
     ".sim-srow{display:flex;align-items:center;gap:16px;margin-bottom:10px}",
     ".sim-srow input{flex:1;accent-color:#378add;height:4px}",
-    ".sim-sv{font-size:22px;font-weight:500;color:#7bbfed;min-width:88px;text-align:right}",
-    ".sim-mc{background:#151e2e;border:1px solid #1f2d42;border-radius:10px;padding:12px 16px}",
-    ".sim-mv{font-size:15px;font-weight:500;color:#c8d4e4}",
-    ".sim-ml{font-size:11px;color:#374d68;margin-top:3px}",
+    ".sim-sv{font-size:22px;font-weight:500;color:#1d6fc4;min-width:88px;text-align:right}",
+    ".sim-mc{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:12px 16px}",
+    ".sim-mv{font-size:15px;font-weight:500;color:#1a2840}",
+    ".sim-ml{font-size:11px;color:#6b7c93;margin-top:3px}",
     ".sim-dl{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}",
-    ".sim-prog{height:6px;background:#1f2d42;border-radius:3px;overflow:hidden;margin-bottom:14px}",
+    ".sim-prog{height:6px;background:#e2e8f0;border-radius:3px;overflow:hidden;margin-bottom:14px}",
     ".sim-pf{height:100%;border-radius:3px;background:#378add;transition:width .2s}",
     ".sim-pf.ok{background:#1d9e75}",
-    ".sim-log{background:#0a1019;border-radius:8px;padding:13px 15px;font-family:var(--font-mono);font-size:12px;line-height:1.85;max-height:170px;overflow-y:auto}",
-    ".sim-lk{color:#1d9e75}.sim-lr{color:#378add}.sim-lw{color:#ba7517}.sim-ll{color:#374d68}",
+    ".sim-log{background:#f8fafc;border:1px solid #e2e8f0;border-radius:8px;padding:13px 15px;font-family:var(--font-mono);font-size:12px;line-height:1.85;max-height:170px;overflow-y:auto}",
+    ".sim-lk{color:#1d9e75}.sim-lr{color:#378add}.sim-lw{color:#9a5f10}.sim-ll{color:#6b7c93}",
     ".sim-rh{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:12px}",
-    ".sim-sp{display:flex;align-items:center;gap:16px;background:#151e2e;border:1px solid #1f2d42;border-radius:10px;padding:14px 20px}",
+    ".sim-sp{display:flex;align-items:center;gap:16px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:14px 20px}",
     ".sim-sb2{text-align:center}",
-    ".sim-sn{font-size:32px;font-weight:500}",
-    ".sim-sl2{font-size:11px;color:#374d68;margin-top:2px}",
+    ".sim-sn{font-size:32px;font-weight:500;color:#0d1b2e}",
+    ".sim-sl2{font-size:11px;color:#6b7c93;margin-top:2px}",
     ".sim-gps{display:flex;gap:8px;flex-wrap:wrap}",
-    ".sim-gp{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;background:#0a1e12;color:#1d9e75;border:1px solid #0f4028}",
+    ".sim-gp{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;background:#e8f8f0;color:#1d9e75;border:1px solid #bbf7d0}",
     ".sim-cmp{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}",
-    ".sim-cc{background:#151e2e;border-radius:10px;padding:15px 17px}",
-    ".sim-cc.bad{border:1px solid #3a1515}.sim-cc.good{border:1px solid #0f4028}",
+    ".sim-cc{background:#f8fafc;border-radius:10px;padding:15px 17px}",
+    ".sim-cc.bad{border:1px solid #fecaca;background:#fff5f5}.sim-cc.good{border:1px solid #bbf7d0;background:#f0fdf4}",
     ".sim-ch{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}",
     ".sim-ch.bad{color:#dc4545}.sim-ch.good{color:#1d9e75}",
-    ".sim-cr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #1a2535;font-size:13px}",
+    ".sim-cr{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid #e5eaf0;font-size:13px}",
     ".sim-cr:last-child{border:none}",
-    ".sim-ck{color:#374d68}.sim-cbad{color:#dc4545;font-weight:500}.sim-cgood{color:#1d9e75;font-weight:500}",
-    ".sim-ins{background:#0a1019;border-radius:10px;padding:15px 17px;font-size:14px;color:#7a9ab8;line-height:1.75;margin-bottom:18px;min-height:48px;border-left:3px solid #1d3a5f}",
+    ".sim-ck{color:#6b7c93}.sim-cbad{color:#dc4545;font-weight:500}.sim-cgood{color:#1d9e75;font-weight:500}",
+    ".sim-ins{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:15px 17px;font-size:14px;color:#3d5a78;line-height:1.75;margin-bottom:18px;min-height:48px;border-left:3px solid #a9cdf0}",
     ".sim-cur{display:inline-block;width:2px;height:14px;background:#378add;vertical-align:middle;margin-left:3px;animation:simBlink .7s step-end infinite}",
     "@keyframes simBlink{0%,100%{opacity:1}50%{opacity:0}}",
     ".sim-bn{display:flex;justify-content:space-between;align-items:center}",
-    ".sim-btn-rst{font-size:13px;color:#4a6888;background:none;border:1px solid #1f2d42;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:var(--font-sans)}",
-    ".sim-btn-rst:hover{border-color:#2a4060;color:#8aa4c0}",
+    ".sim-btn-rst{font-size:13px;color:#4a6888;background:none;border:1px solid #e2e8f0;padding:8px 16px;border-radius:8px;cursor:pointer;font-family:var(--font-sans)}",
+    ".sim-btn-rst:hover{border-color:#94c2ec;color:#0d1b2e}",
     "@media(max-width:600px){.sim-g2,.sim-cmp,.sim-g3{grid-template-columns:1fr}.sim-rh{flex-direction:column}}",
   ].join(" ");
 
@@ -2886,7 +2946,7 @@ function SimulatorPage() {
     <>
       <style>{css}</style>
       <PageHero label="Interactive Tool" title="App Modernization Simulator" text="Configure your application stack and run a deployment simulation. See exactly what modernization delivers — speed, uptime, security, cost, and developer velocity." />
-      <section style={{ padding:"48px 7vw", background:"#060b14" }}>
+      <section style={{ padding:"48px 7vw", background:"var(--cream)" }}>
         <div className="sim-root" ref={simRef}>
           <div className="sim-hdr">
             <div>
