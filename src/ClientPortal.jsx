@@ -17,10 +17,10 @@ const T = {
   bg4:      "#243552",
   card:     "#ffffff",
   cardBg:   "#f8fafc",
-  gold:     "#c9a84c",
-  gold2:    "#e8c56a",
-  goldDim:  "rgba(201,168,76,0.12)",
-  goldLine: "rgba(201,168,76,0.3)",
+  gold:     "#4f46e5",
+  gold2:    "#6366f1",
+  goldDim:  "rgba(79,70,229,0.12)",
+  goldLine: "rgba(79,70,229,0.3)",
   navy:     "#0d1b2e",
   text:     "#1a2840",
   textMid:  "#4a5e7a",
@@ -34,11 +34,11 @@ const T = {
   info:     "#2563eb",
   engage:   "#1e3a5f",
   assess:   "#1e3a5f",
-  transform:"#c9a84c",
+  transform:"#4f46e5",
 };
 
 const css = `
-  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap');
 
   .portal-root * { box-sizing: border-box; margin: 0; padding: 0; }
   .portal-root {
@@ -70,42 +70,42 @@ const css = `
 
   .card {
     background:${T.card}; border:1px solid ${T.border};
-    border-radius:14px; padding:24px;
-    box-shadow:0 2px 12px rgba(13,27,46,0.06);
-    transition:box-shadow 0.2s ease, transform 0.2s ease;
+    border-radius:10px; padding:22px;
+    box-shadow:0 1px 3px rgba(13,27,46,0.05);
+    transition:box-shadow 0.15s ease, border-color 0.15s ease;
   }
-  .card:hover { box-shadow:0 6px 24px rgba(13,27,46,0.1); }
+  .card:hover { box-shadow:0 2px 8px rgba(13,27,46,0.08); }
 
   /* card-click — fully clickable on desktop AND mobile touch */
   .card-click {
     background:${T.card}; border:1px solid ${T.border};
-    border-radius:14px; padding:24px;
-    box-shadow:0 2px 12px rgba(13,27,46,0.06);
-    transition:all 0.2s ease;
+    border-radius:10px; padding:22px;
+    box-shadow:0 1px 3px rgba(13,27,46,0.05);
+    transition:box-shadow 0.15s ease, border-color 0.15s ease;
     display:block; width:100%; text-align:left;
     cursor:pointer;
     touch-action:manipulation;
-    -webkit-tap-highlight-color:rgba(201,168,76,0.15);
+    -webkit-tap-highlight-color:rgba(79,70,229,0.15);
     user-select:none;
     position:relative;
   }
-  .card-click:hover { box-shadow:0 8px 28px rgba(13,27,46,0.12); transform:translateY(-2px); border-color:${T.goldLine}; }
-  .card-click:active { transform:scale(0.99); border-color:${T.goldLine}; box-shadow:0 2px 8px rgba(13,27,46,0.08); }
+  .card-click:hover { box-shadow:0 2px 8px rgba(13,27,46,0.08); border-color:${T.goldLine}; }
+  .card-click:active { box-shadow:0 1px 2px rgba(13,27,46,0.06); }
 
   .card-dark {
     background:${T.bg2}; border:1px solid ${T.borderDark};
-    border-radius:14px; padding:24px;
+    border-radius:10px; padding:22px;
   }
 
   .btn-gold {
     display:inline-flex; align-items:center; gap:8px;
-    background:linear-gradient(135deg,${T.gold},${T.gold2});
-    color:${T.navy}; border:none; padding:10px 20px;
-    font-weight:700; font-size:0.875rem; border-radius:8px;
-    cursor:pointer; font-family:inherit; transition:all 0.2s ease;
-    box-shadow:0 2px 8px rgba(201,168,76,0.25);
+    background:${T.gold};
+    color:#ffffff; border:none; padding:10px 20px;
+    font-weight:600; font-size:0.875rem; border-radius:8px;
+    cursor:pointer; font-family:inherit; transition:all 0.15s ease;
+    box-shadow:0 1px 2px rgba(79,70,229,0.25);
   }
-  .btn-gold:hover { transform:translateY(-1px); box-shadow:0 6px 20px rgba(201,168,76,0.35); }
+  .btn-gold:hover { background:#4338ca; box-shadow:0 1px 2px rgba(79,70,229,0.3); }
   .btn-gold:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
 
   .btn-outline {
@@ -140,7 +140,7 @@ const css = `
   .badge { display:inline-flex; align-items:center; gap:4px; padding:3px 10px; border-radius:20px; font-size:0.72rem; font-weight:700; }
 
   .prog-bg { height:6px; background:${T.cardBg}; border-radius:3px; overflow:hidden; border:1px solid ${T.border}; }
-  .prog-fill { height:100%; background:linear-gradient(90deg,${T.gold},${T.gold2}); border-radius:3px; transition:width 0.6s ease; }
+  .prog-fill { height:100%; background:${T.gold}; border-radius:3px; transition:width 0.6s ease; }
 
   .topbar {
     height:64px; background:${T.bg2};
@@ -158,26 +158,24 @@ const css = `
 
   .main-content { flex:1; padding:32px; background:${T.cardBg}; overflow-x:hidden; min-height:calc(100vh - 64px); }
 
-  .section-title { font-family:'Playfair Display',serif; font-size:clamp(1.6rem,2.5vw,2.2rem); color:${T.text}; font-weight:700; margin-bottom:4px; }
-  .gold-bar { width:36px; height:3px; background:linear-gradient(90deg,${T.gold},${T.gold2}); border-radius:2px; margin-bottom:22px; }
+  .section-title { font-size:clamp(1.35rem,2vw,1.7rem); color:${T.text}; font-weight:700; letter-spacing:-0.01em; margin-bottom:4px; }
+  .gold-bar { width:32px; height:3px; background:${T.gold}; border-radius:2px; margin-bottom:22px; }
   .eyebrow { font-size:0.72rem; font-weight:800; color:${T.gold}; text-transform:uppercase; letter-spacing:0.12em; margin-bottom:4px; }
 
   .eat-badge {
-    font-family:'Playfair Display',serif; font-size:1.1rem;
-    font-style:italic; font-weight:600;
-    background:linear-gradient(135deg,${T.gold},${T.gold2});
-    -webkit-background-clip:text; -webkit-text-fill-color:transparent;
-    animation:eatPulse 3s ease infinite;
+    font-size:0.95rem;
+    font-weight:700; letter-spacing:-0.01em;
+    color:${T.gold};
   }
-  .eat-phase-card { border-radius:14px; padding:24px; position:relative; overflow:hidden; }
+  .eat-phase-card { border-radius:10px; padding:24px; position:relative; overflow:hidden; }
   .eat-engage   { background:rgba(13,27,46,0.04); border:1.5px solid rgba(13,27,46,0.12); }
   .eat-assess   { background:rgba(13,27,46,0.04); border:1.5px solid rgba(13,27,46,0.12); }
-  .eat-transform{ background:rgba(201,168,76,0.06); border:1.5px solid rgba(201,168,76,0.2); }
+  .eat-transform{ background:rgba(79,70,229,0.06); border:1.5px solid rgba(79,70,229,0.2); }
 
-  .bubble-me   { max-width:72%; background:linear-gradient(135deg,${T.gold},${T.gold2}); color:${T.navy}; padding:10px 14px; border-radius:16px 16px 4px 16px; font-size:0.875rem; line-height:1.55; font-weight:500; }
-  .bubble-them { max-width:72%; background:${T.bg3}; border:1px solid ${T.borderDark}; color:#e8eaf0; padding:10px 14px; border-radius:16px 16px 16px 4px; font-size:0.875rem; line-height:1.55; }
+  .bubble-me   { max-width:72%; background:${T.gold}; color:#ffffff; padding:10px 14px; border-radius:10px 10px 2px 10px; font-size:0.875rem; line-height:1.55; font-weight:500; }
+  .bubble-them { max-width:72%; background:${T.bg3}; border:1px solid ${T.borderDark}; color:#e8eaf0; padding:10px 14px; border-radius:10px 10px 10px 2px; font-size:0.875rem; line-height:1.55; }
 
-  .ms-row { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:10px; border:1.5px solid ${T.border}; background:${T.card}; cursor:pointer; transition:all 0.18s ease; margin-bottom:8px; }
+  .ms-row { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:8px; border:1.5px solid ${T.border}; background:${T.card}; cursor:pointer; transition:all 0.18s ease; margin-bottom:8px; }
   .ms-row:hover { border-color:${T.goldLine}; background:${T.cardBg}; box-shadow:0 2px 10px rgba(13,27,46,0.08); }
   .ms-row.open { border-color:${T.gold}; }
 
@@ -205,7 +203,7 @@ const css = `
       justify-content:center; gap:3px; background:transparent; border:none;
       color:${T.textLight}; font-size:0.6rem; font-weight:600;
       cursor:pointer; padding:6px 2px; transition:all 0.15s ease;
-      font-family:inherit; -webkit-tap-highlight-color:rgba(201,168,76,0.2);
+      font-family:inherit; -webkit-tap-highlight-color:rgba(79,70,229,0.2);
     }
     .mobile-nav-btn.active { color:${T.gold}; }
     .mobile-nav-btn svg { flex-shrink:0; }
@@ -213,7 +211,7 @@ const css = `
     /* Make card-click work reliably on iOS/Android */
     .card-click {
       cursor:pointer !important;
-      -webkit-tap-highlight-color:rgba(201,168,76,0.15) !important;
+      -webkit-tap-highlight-color:rgba(79,70,229,0.15) !important;
       touch-action:manipulation !important;
     }
 
@@ -292,7 +290,7 @@ const EAT_DEFAULT = {
       outcome: "A clear, prioritized modernization roadmap with honest risk scores, cost projections, and recommended actions.",
     },
     {
-      key: "transform", label: "Transform", icon: "Zap", color: "#c9a84c",
+      key: "transform", label: "Transform", icon: "Zap", color: "#4f46e5",
       headline: "We execute with precision and speed.",
       description: "With alignment and clarity in place, we move to execution using cutting-edge tools, proven architectures, and agile delivery practices.",
       steps: ["Phased implementation with milestone-based delivery","CI/CD pipeline setup for fast, reliable deployments","Cloud migration, containerization, and infrastructure automation","Security hardening and identity modernization","Monitoring, observability, and incident response setup","Knowledge transfer and team enablement"],
@@ -389,7 +387,7 @@ export default function ClientPortal() {
         <div style={{ width:52, height:52, borderRadius:"50%", background:T.goldDim, border:`1px solid ${T.goldLine}`, display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 18px" }}>
           <Shield size={22} style={{ color:T.gold }} />
         </div>
-        <h2 style={{ fontFamily:"'Playfair Display', serif", fontSize:"1.4rem", marginBottom:10 }}>Client Portal is temporarily unavailable</h2>
+        <h2 style={{ fontSize:"1.4rem", marginBottom:10 }}>Client Portal is temporarily unavailable</h2>
         <p style={{ color:T.textLight, lineHeight:1.6 }}>We're unable to connect right now. Please try again shortly, or reach out and we'll help you sign in directly.</p>
       </div>
     </div>
@@ -452,11 +450,11 @@ function PortalAuth({ setSession }) {
           <div style={{ width:52, height:52, borderRadius:"50%", background:T.goldDim, border:`1px solid ${T.goldLine}`, display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 14px" }}>
             <Shield size={22} style={{ color:T.gold }} />
           </div>
-          <h1 style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.9rem", color:T.white, marginBottom:6 }}>BlueLink Portal</h1>
+          <h1 style={{ fontSize:"1.9rem", color:T.white, marginBottom:6 }}>BlueLink Portal</h1>
           <p style={{ color:T.textLight, fontSize:"0.875rem" }}>{mode==="login" ? "Sign in to your workspace" : "Create your account"}</p>
           <p className="eat-badge" style={{ marginTop:8, display:"block" }}>Let's EAT!</p>
         </div>
-        <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:16, padding:32 }}>
+        <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:10, padding:32 }}>
           {error && <div style={{ background:"rgba(220,38,38,0.1)", border:"1px solid rgba(220,38,38,0.3)", borderRadius:8, padding:"10px 14px", marginBottom:16, fontSize:"0.84rem", color:"#fca5a5" }}>{error}</div>}
           {msg   && <div style={{ background:"rgba(22,163,74,0.1)",  border:"1px solid rgba(22,163,74,0.3)",  borderRadius:8, padding:"10px 14px", marginBottom:16, fontSize:"0.84rem", color:"#86efac" }}>{msg}</div>}
           <form onSubmit={handleSubmit} style={{ display:"grid", gap:14 }}>
@@ -523,7 +521,7 @@ function PortalShell({ activeTab, setActiveTab }) {
         <div style={{ display:"flex", alignItems:"center", gap:10 }}>
           <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ height:34, width:"auto" }}
             onError={e => { e.currentTarget.style.display="none"; e.currentTarget.nextSibling.style.display="block"; }} />
-          <span style={{ display:"none", fontFamily:"'Playfair Display',serif", fontSize:"1.1rem", fontWeight:700, color:T.white }}>BlueLink</span>
+          <span style={{ display:"none", fontSize:"1.1rem", fontWeight:700, color:T.white }}>BlueLink</span>
           <span style={{ color:T.textLight, fontSize:"0.72rem", borderLeft:`1px solid ${T.borderDark}`, paddingLeft:10 }}>Portal</span>
           {isAdmin && <span className="badge" style={{ background:T.goldDim, color:T.gold, border:`1px solid ${T.goldLine}` }}>ADMIN</span>}
         </div>
@@ -634,14 +632,14 @@ function AdminDashboard({ setActiveTab }) {
       <h1 className="section-title">Command Center</h1>
       <div className="gold-bar" />
 
-      <div style={{ background:`linear-gradient(135deg,${T.bg3},${T.bg4})`, border:`1px solid ${T.goldLine}`, borderRadius:14, padding:"20px 28px", marginBottom:28, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
+      <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:10, padding:"20px 28px", marginBottom:28, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <div>
-          <p className="eat-badge" style={{ fontSize:"1.4rem", display:"block", marginBottom:4 }}>Let's EAT!</p>
-          <p style={{ color:"rgba(255,255,255,0.6)", fontSize:"0.84rem" }}>Engage · Assess · Transform — your clients' technology journey starts here.</p>
+          <p className="eat-badge" style={{ fontSize:"1.05rem", display:"block", marginBottom:4 }}>Let's EAT</p>
+          <p style={{ color:"rgba(255,255,255,0.55)", fontSize:"0.84rem" }}>Engage · Assess · Transform — your clients' technology journey starts here.</p>
         </div>
-        <div style={{ display:"flex", gap:16 }}>
+        <div style={{ display:"flex", gap:10 }}>
           {["E","A","T"].map((l,i) => (
-            <div key={l} style={{ width:44, height:44, borderRadius:"50%", background:"rgba(201,168,76,0.1)", border:`1.5px solid ${T.goldLine}`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"'Playfair Display',serif", fontWeight:700, color:T.gold, fontSize:"1.1rem" }}>{l}</div>
+            <div key={l} style={{ width:36, height:36, borderRadius:8, background:"rgba(79,70,229,0.12)", border:`1px solid ${T.goldLine}`, display:"flex", alignItems:"center", justifyContent:"center", fontWeight:700, color:T.gold, fontSize:"0.9rem" }}>{l}</div>
           ))}
         </div>
       </div>
@@ -655,7 +653,7 @@ function AdminDashboard({ setActiveTab }) {
         ].map(s => { const Icon=s.icon; return (
           <div key={s.label} className="card-click" onClick={s.action}>
             <Icon size={20} style={{ color:T.gold, marginBottom:12 }} />
-            <p style={{ fontFamily:"'Playfair Display',serif", fontSize:"2rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
+            <p style={{ fontSize:"2rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
             <p style={{ fontSize:"0.78rem", color:T.textMid, marginTop:4, fontWeight:600 }}>{s.label}</p>
           </div>
         );})}
@@ -719,7 +717,7 @@ function ClientDashboard({ setActiveTab }) {
       <div className="gold-bar" />
 
       {/* EAT banner */}
-      <div style={{ background:`linear-gradient(135deg,rgba(201,168,76,0.08),rgba(201,168,76,0.03))`, border:`1px solid ${T.goldLine}`, borderRadius:14, padding:"18px 24px", marginBottom:28, cursor:"pointer" }} onClick={()=>setActiveTab("eat")}>
+      <div style={{ background:"rgba(79,70,229,0.05)", border:`1px solid ${T.goldLine}`, borderRadius:10, padding:"18px 24px", marginBottom:28, cursor:"pointer" }} onClick={()=>setActiveTab("eat")}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <div>
             <p className="eat-badge" style={{ fontSize:"1.1rem", display:"block", marginBottom:3 }}>{eatContent.catchphrase}</p>
@@ -738,7 +736,7 @@ function ClientDashboard({ setActiveTab }) {
         ].map(s => { const Icon=s.icon; return (
           <div key={s.label} className="card-click" onClick={s.action}>
             <Icon size={18} style={{ color:T.gold, marginBottom:10 }} />
-            <p style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.8rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
+            <p style={{ fontSize:"1.8rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
             <p style={{ fontSize:"0.76rem", color:T.textMid, marginTop:4 }}>{s.label}</p>
           </div>
         );})}
@@ -821,7 +819,7 @@ function EATPage() {
                 </div>
                 <div>
                   <span style={{ fontSize:"0.68rem", fontWeight:800, color:phase.color, textTransform:"uppercase", letterSpacing:"0.1em" }}>{String(idx+1).padStart(2,"0")} · {phase.label}</span>
-                  <h3 style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.2rem", color:T.text, fontWeight:600 }}>{phase.headline}</h3>
+                  <h3 style={{ fontSize:"1.2rem", color:T.text, fontWeight:600 }}>{phase.headline}</h3>
                 </div>
               </div>
               <p style={{ color:T.textMid, fontSize:"0.875rem", lineHeight:1.75, marginBottom:16 }}>{phase.description}</p>
@@ -843,7 +841,7 @@ function EATPage() {
       </div>
       <div style={{ marginBottom:16 }}>
         <p className="eyebrow">Service Breakdowns</p>
-        <h2 style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.5rem", color:T.text, marginBottom:6 }}>How We Apply EAT to Each Service</h2>
+        <h2 style={{ fontSize:"1.5rem", color:T.text, marginBottom:6 }}>How We Apply EAT to Each Service</h2>
         <p style={{ color:T.textMid, fontSize:"0.875rem", marginBottom:20 }}>Click any service to see how Engage, Assess, and Transform plays out in that context.</p>
       </div>
       <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(260px,1fr))", gap:14 }}>
@@ -1528,7 +1526,7 @@ function AdminInbox() {
         <button className="btn-ghost" onClick={()=>setSelected(null)} style={{ marginBottom:20 }}>← Back to inbox</button>
         <div className="card">
           <span className="badge" style={{ background:c.bg, color:c.color, marginBottom:14, display:"inline-flex" }}>{labels[item.form_type]}</span>
-          <h2 style={{ fontFamily:"'Playfair Display',serif", color:T.gold, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||"Unknown"}</h2>
+          <h2 style={{ color:T.gold, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||"Unknown"}</h2>
           <p style={{ color:T.textMid, fontSize:"0.8rem", marginBottom:20 }}>{item.profiles?.company} · {item.profiles?.email} · {new Date(item.submitted_at).toLocaleString()}</p>
           <div style={{ borderTop:`1px solid ${T.border}`, paddingTop:18, display:"grid", gap:14 }}>
             {Object.entries(item.data||{}).map(([key,val])=>(
@@ -1551,7 +1549,7 @@ function AdminInbox() {
       <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:10, marginBottom:22 }}>
         {[{label:"All",type:"all",value:items.length},{label:"Onboarding",type:"onboarding",value:items.filter(i=>i.form_type==="onboarding").length},{label:"Discovery",type:"discovery",value:items.filter(i=>i.form_type==="discovery").length},{label:"Sign-Off",type:"milestone_signoff",value:items.filter(i=>i.form_type==="milestone_signoff").length},{label:"Support",type:"support_request",value:items.filter(i=>i.form_type==="support_request").length}].map(s=>(
           <div key={s.label} className="card-click" onClick={()=>setFilter(s.type)} style={{ padding:"12px 14px", border:filter===s.type?`1.5px solid ${T.goldLine}`:`1px solid ${T.border}`, background:filter===s.type?T.goldDim:T.card }}>
-            <p style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.4rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
+            <p style={{ fontSize:"1.4rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
             <p style={{ fontSize:"0.7rem", color:T.textMid, marginTop:3 }}>{s.label}</p>
           </div>
         ))}
@@ -1667,7 +1665,7 @@ function FormView({ formId, onBack, projects, session }) {
   if (done) return (
     <div style={{ maxWidth:500, textAlign:"center", padding:"56px 20px" }}>
       <CheckCircle2 size={48} style={{ color:T.success, margin:"0 auto 16px", display:"block" }} />
-      <h2 style={{ fontFamily:"'Playfair Display',serif", color:T.text, marginBottom:10, fontSize:"1.6rem" }}>Submitted successfully</h2>
+      <h2 style={{ color:T.text, marginBottom:10, fontSize:"1.6rem" }}>Submitted successfully</h2>
       <p style={{ color:T.textMid, marginBottom:24 }}>BlueLink Consult will review and follow up within one business day.</p>
       <button onClick={onBack} className="btn-gold">Back to forms</button>
     </div>
@@ -1790,13 +1788,13 @@ function Invoices() {
         ].map(s=>(
           <div key={s.label} className="card">
             <p style={{ fontSize:"0.7rem", color:T.textMid, fontWeight:700, marginBottom:6, textTransform:"uppercase", letterSpacing:"0.08em" }}>{s.label}</p>
-            <p style={{ fontFamily:"'Playfair Display',serif", fontSize:"1.6rem", fontWeight:700, color:s.color }}>{s.value}</p>
+            <p style={{ fontSize:"1.6rem", fontWeight:700, color:s.color }}>{s.value}</p>
           </div>
         ))}
       </div>
 
       {/* How payment works */}
-      <div style={{ background:"rgba(201,168,76,0.06)", border:`1px solid ${T.goldLine}`, borderRadius:10, padding:"14px 18px", marginBottom:20, fontSize:"0.84rem", color:T.textMid, display:"flex", gap:10, alignItems:"flex-start" }}>
+      <div style={{ background:"rgba(79,70,229,0.06)", border:`1px solid ${T.goldLine}`, borderRadius:10, padding:"14px 18px", marginBottom:20, fontSize:"0.84rem", color:T.textMid, display:"flex", gap:10, alignItems:"flex-start" }}>
         <span style={{ fontSize:"1.2rem" }}>💳</span>
         <div>
           <strong style={{ color:T.text }}>How to pay:</strong> Click <strong style={{ color:T.gold }}>Pay Now</strong> on any pending invoice, or add multiple invoices to your cart and request a single payment link. We use <strong style={{ color:T.text }}>Stripe</strong> for secure online payments. You will receive a payment link by email within one business hour.
@@ -1877,8 +1875,8 @@ function Invoices() {
        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;">
          <h2 style="color:#0d1b2e;">BlueLink Consults Portal</h2>
          <p><strong>${senderName}</strong> sent you a ${type === "message" ? "message" : "comment"}:</p>
-         <blockquote style="border-left:3px solid #c9a84c;padding-left:14px;color:#444;">${messagePreview}</blockquote>
-         <a href="https://www.bluelinkconsults.com/client-login" style="display:inline-block;background:#c9a84c;color:#0d1b2e;padding:12px 24px;text-decoration:none;font-weight:700;border-radius:6px;margin-top:16px;">Open Portal</a>
+         <blockquote style="border-left:3px solid #4f46e5;padding-left:14px;color:#444;">${messagePreview}</blockquote>
+         <a href="https://www.bluelinkconsults.com/client-login" style="display:inline-block;background:#4f46e5;color:#0d1b2e;padding:12px 24px;text-decoration:none;font-weight:700;border-radius:6px;margin-top:16px;">Open Portal</a>
        </div>`;
 
      await fetch("https://api.resend.com/emails", {
