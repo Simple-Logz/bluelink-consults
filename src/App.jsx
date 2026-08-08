@@ -1003,6 +1003,8 @@ function ClientLogos() {
     { name: "Acceleration Hub", src: "/logos/client-accelerationhub.png", scale: 1.3 },
     { name: "Vector", src: "/logos/client-vector.png", scale: 1 },
     { name: "National Association Inc.", src: "/logos/client-nationalassoc.png", scale: 1.55 },
+    { name: "RedHotDealz.com", src: "/logos/client-redhotdealz.png", scale: 0.85 },
+    { name: "MegaProz Consult", src: "/logos/client-megaproz.png", scale: 1.15 },
   ];
   return (
     <section style={{
