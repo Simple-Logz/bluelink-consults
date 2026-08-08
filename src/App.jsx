@@ -39,6 +39,8 @@ import {
   UserPlus,
   Code2,
   FlaskConical,
+  Sun,
+  Moon,
 } from "lucide-react";
 import "./styles.css";
 import { supabase } from "./supabaseClient";
@@ -360,6 +362,18 @@ function Header() {
   const { insights: cmsInsights } = useInsights();
   const siteSearchIndex = buildSiteSearchIndex(cmsInsights);
 
+  const [theme, setTheme] = useState(() => {
+    if (typeof window === "undefined") return "light";
+    return localStorage.getItem("bluelink-theme") || "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("bluelink-theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
+
   const close = () => {
     setOpen(false);
     setServicesOpen(false);
@@ -587,6 +601,16 @@ function Header() {
         <NavLink to="/client-login" className="login-btn" onClick={close}>Client Login</NavLink>
         <NavLink to="/contact#consultation" className="contact-btn" onClick={close}>Contact Us</NavLink>
       </nav>
+
+      <button
+        type="button"
+        className="theme-toggle-btn"
+        onClick={toggleTheme}
+        aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+        title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
+      >
+        {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+      </button>
 
       <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">
         {open ? <X size={22} /> : <Menu size={22} />}
@@ -869,7 +893,7 @@ function CTABanner() {
 /* ─── HOME ───────────────────────────────────────────────── */
 function WhoWeServeStrip() {
   return (
-    <section style={{
+    <section className="who-serve-strip" style={{
       background: "white",
       padding: "52px 7vw 48px",
       borderBottom: "1px solid var(--line)",
@@ -2692,6 +2716,7 @@ function SimulatorPage() {
       const keys=["load","up","dep","sec","cost","vel"];
       const knames=["Load time","Uptime","Deployments","Security score","Infra cost","Dev velocity"];
       const date=new Date().toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});
+      const logoUrl=`${window.location.origin}/bluelink-logo-mark.png`;
 
       // Build HTML for the report and use print window
       const html=`<!DOCTYPE html>
@@ -2764,9 +2789,7 @@ function SimulatorPage() {
 
   <div class="header">
     <div style="display:flex;align-items:center;gap:16px">
-      <div style="width:48px;height:48px;background:#0d1b2e;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0">
-        <span style="font-size:18px;font-weight:900;color:#1d9e75;letter-spacing:-.04em">BL</span>
-      </div>
+      <img src="${logoUrl}" alt="BlueLink Consults" style="width:48px;height:48px;object-fit:contain;flex-shrink:0" />
       <div>
         <div class="brand">Blue<span>Link</span> Consults</div>
         <div class="report-title">Application Modernization &amp; Cloud Advisory</div>
@@ -2868,7 +2891,10 @@ function SimulatorPage() {
       if(!win){alert("Please allow popups to download the report.");return;}
       win.document.write(html);
       win.document.close();
-      setTimeout(()=>win.print(),600);
+      let printed=false;
+      const doPrint=()=>{if(printed)return;printed=true;win.print();};
+      win.addEventListener("load",doPrint);
+      setTimeout(doPrint,1200);
     }
 
     window.bluelinkDownloadReport=downloadReport;
@@ -2878,7 +2904,9 @@ function SimulatorPage() {
   }, []);
 
   const css=[
-    ".sim-root{background:#ffffff;border-radius:20px;overflow:hidden;font-family:var(--font-sans);border:1.5px solid #cfe4f7;box-shadow:0 24px 60px rgba(55,138,221,0.13)}",
+    ".sim-root{background:#ffffff;border-radius:20px;overflow:hidden;font-family:var(--font-sans);border:1.5px solid #cfe4f7;box-shadow:0 24px 60px rgba(55,138,221,0.13);position:relative}",
+    ".sim-root::before{content:'';display:block;height:5px;background:linear-gradient(90deg,#378add,#1d9e75,#378add);background-size:200% 100%;animation:simGradient 6s ease infinite}",
+    "@keyframes simGradient{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}",
     ".sim-hdr{background:linear-gradient(180deg,#f3f9ff,#e9f3fd);border-bottom:1.5px solid #cfe4f7;padding:22px 28px;display:flex;align-items:center;justify-content:space-between}",
     ".sim-hdr-h{font-size:21px;font-weight:700;color:#1a6fc4;letter-spacing:-.01em;margin:0}",
     ".sim-hdr-p{font-size:13px;color:#4a7ba8;margin-top:3px}",
@@ -2950,12 +2978,22 @@ function SimulatorPage() {
     <>
       <style>{css}</style>
       <PageHero label="Interactive Tool" title="App Modernization Simulator" text="Configure your application stack and run a deployment simulation. See exactly what modernization delivers — speed, uptime, security, cost, and developer velocity." />
-      <section style={{ padding:"48px 7vw", background:"#ffffff" }}>
+      <section style={{ padding:"56px 7vw", background:"radial-gradient(1100px 480px at 18% 0%, #eaf5ff 0%, #ffffff 55%), radial-gradient(900px 420px at 100% 100%, #eafbf3 0%, #ffffff 60%)" }}>
         <div className="sim-root" ref={simRef}>
           <div className="sim-hdr">
-            <div>
-              <p className="sim-hdr-h">Modernization Simulator</p>
-              <p className="sim-hdr-p">Configure your application — see your before and after</p>
+            <div style={{ display:"flex", alignItems:"center", gap:14 }}>
+              <div style={{
+                width:44, height:44, borderRadius:12, flexShrink:0,
+                background:"linear-gradient(135deg,#378add,#1d9e75)",
+                display:"flex", alignItems:"center", justifyContent:"center",
+                boxShadow:"0 8px 18px rgba(55,138,221,0.32)",
+              }}>
+                <Zap size={22} color="#fff" />
+              </div>
+              <div>
+                <p className="sim-hdr-h">Modernization Simulator</p>
+                <p className="sim-hdr-p">Configure your application — see your before and after</p>
+              </div>
             </div>
             <div className="sim-dots" id="sim-dots"></div>
           </div>
