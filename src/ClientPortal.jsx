@@ -513,17 +513,16 @@ function PortalShell({ activeTab, setActiveTab }) {
 
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", isolation:"isolate" }}>
-      {/* Gold accent bar */}
-      <div style={{ background:T.gold, height:3, width:"100%", flexShrink:0 }} />
-
       {/* ── TOPBAR ── */}
       <div className="topbar">
         <div style={{ display:"flex", alignItems:"center", gap:10 }}>
-          <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ height:34, width:"auto" }}
-            onError={e => { e.currentTarget.style.display="none"; e.currentTarget.nextSibling.style.display="block"; }} />
-          <span style={{ display:"none", fontSize:"1.1rem", fontWeight:700, color:T.white }}>BlueLink</span>
+          <div style={{ background:"#ffffff", borderRadius:7, padding:"4px 6px", display:"flex", alignItems:"center", flexShrink:0 }}>
+            <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ height:24, width:"auto", display:"block" }}
+              onError={e => { e.currentTarget.style.display="none"; e.currentTarget.nextSibling.style.display="block"; }} />
+            <span style={{ display:"none", fontSize:"1.1rem", fontWeight:700, color:T.text }}>BlueLink</span>
+          </div>
           <span style={{ color:T.textLight, fontSize:"0.72rem", borderLeft:`1px solid ${T.borderDark}`, paddingLeft:10 }}>Portal</span>
-          {isAdmin && <span className="badge" style={{ background:T.goldDim, color:T.gold, border:`1px solid ${T.goldLine}` }}>ADMIN</span>}
+          {isAdmin && <span className="badge" style={{ background:"rgba(255,255,255,0.08)", color:T.textLight, border:`1px solid ${T.borderDark}` }}>ADMIN</span>}
         </div>
         <div style={{ display:"flex", alignItems:"center", gap:8 }}>
           <div style={{ textAlign:"right" }}>
@@ -554,9 +553,9 @@ function PortalShell({ activeTab, setActiveTab }) {
             </button>
           );})}
           <div style={{ flex:1 }} />
-          <a href="/" style={{ display:"flex", alignItems:"center", gap:8, color:T.gold, padding:"10px 14px",
+          <a href="/" style={{ display:"flex", alignItems:"center", gap:8, color:T.textLight, padding:"10px 14px",
             fontSize:"0.84rem", fontWeight:600, textDecoration:"none", borderRadius:8,
-            border:`1px solid ${T.goldLine}`, background:T.goldDim, marginBottom:8 }}>
+            border:`1px solid ${T.borderDark}`, background:"transparent", marginBottom:8 }}>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
               <polyline points="9,22 9,12 15,12 15,22"/>
@@ -639,7 +638,7 @@ function AdminDashboard({ setActiveTab }) {
         </div>
         <div style={{ display:"flex", gap:10 }}>
           {["E","A","T"].map((l,i) => (
-            <div key={l} style={{ width:36, height:36, borderRadius:8, background:"rgba(79,70,229,0.12)", border:`1px solid ${T.goldLine}`, display:"flex", alignItems:"center", justifyContent:"center", fontWeight:700, color:T.gold, fontSize:"0.9rem" }}>{l}</div>
+            <div key={l} style={{ width:36, height:36, borderRadius:8, background:"rgba(255,255,255,0.06)", border:`1px solid ${T.borderDark}`, display:"flex", alignItems:"center", justifyContent:"center", fontWeight:700, color:"rgba(255,255,255,0.7)", fontSize:"0.9rem" }}>{l}</div>
           ))}
         </div>
       </div>
@@ -652,8 +651,8 @@ function AdminDashboard({ setActiveTab }) {
           { label:"Revenue Pending",  value:`$${pendingAmt.toLocaleString()}`, icon:CreditCard, action:()=>setActiveTab("invoices") },
         ].map(s => { const Icon=s.icon; return (
           <div key={s.label} className="card-click" onClick={s.action}>
-            <Icon size={20} style={{ color:T.gold, marginBottom:12 }} />
-            <p style={{ fontSize:"2rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
+            <Icon size={20} style={{ color:T.textLight, marginBottom:12 }} />
+            <p style={{ fontSize:"2rem", color:T.text, fontWeight:700 }}>{s.value}</p>
             <p style={{ fontSize:"0.78rem", color:T.textMid, marginTop:4, fontWeight:600 }}>{s.label}</p>
           </div>
         );})}
@@ -735,8 +734,8 @@ function ClientDashboard({ setActiveTab }) {
           { label:"Pending Invoices", value:pending.length,                                 icon:CreditCard,   action:()=>setActiveTab("invoices") },
         ].map(s => { const Icon=s.icon; return (
           <div key={s.label} className="card-click" onClick={s.action}>
-            <Icon size={18} style={{ color:T.gold, marginBottom:10 }} />
-            <p style={{ fontSize:"1.8rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
+            <Icon size={18} style={{ color:T.textLight, marginBottom:10 }} />
+            <p style={{ fontSize:"1.8rem", color:T.text, fontWeight:700 }}>{s.value}</p>
             <p style={{ fontSize:"0.76rem", color:T.textMid, marginTop:4 }}>{s.label}</p>
           </div>
         );})}
@@ -775,7 +774,7 @@ function ClientDashboard({ setActiveTab }) {
                 </div>
                 <div style={{ display:"flex", justifyContent:"space-between", fontSize:"0.74rem", marginBottom:5 }}>
                   <span style={{ color:T.textMid }}>Progress</span>
-                  <span style={{ color:T.gold, fontWeight:700 }}>{pct}%</span>
+                  <span style={{ color:T.text, fontWeight:700 }}>{pct}%</span>
                 </div>
                 <div className="prog-bg"><div className="prog-fill" style={{ width:`${pct}%` }} /></div>
                 <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginTop:10 }}>
@@ -954,8 +953,8 @@ function AdminProjects() {
       </div>
       <div className="gold-bar" />
       {showCreate && (
-        <div className="card" style={{ marginBottom:24, border:`1.5px solid ${T.goldLine}` }}>
-          <h3 style={{ color:T.gold, fontWeight:700, marginBottom:16, fontSize:"1rem" }}>Create New Project</h3>
+        <div className="card" style={{ marginBottom:24, border:`1px solid ${T.border}` }}>
+          <h3 style={{ color:T.text, fontWeight:700, marginBottom:16, fontSize:"1rem" }}>Create New Project</h3>
           <form onSubmit={createProject} style={{ display:"grid", gap:14 }}>
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
               <label className="lbl">Project Name * <input className="inp" value={form.name} onChange={e=>setForm(f=>({...f,name:e.target.value}))} required placeholder="e.g. App Modernization Phase 1" /></label>
@@ -1003,7 +1002,7 @@ function AdminProjects() {
                 </div>
                 <div style={{ display:"flex", justifyContent:"space-between", fontSize:"0.72rem", marginBottom:5 }}>
                   <span style={{ color:T.textMid }}>{done}/{ms.length} milestones</span>
-                  <span style={{ color:T.gold }}>{pct}%</span>
+                  <span style={{ color:T.text, fontWeight:600 }}>{pct}%</span>
                 </div>
                 <div className="prog-bg"><div className="prog-fill" style={{ width:`${pct}%` }} /></div>
               </div>
@@ -1039,7 +1038,7 @@ function ClientProjects() {
                   <StatusBadge status={p.status} />
                 </div>
                 <div style={{ display:"flex", justifyContent:"space-between", fontSize:"0.74rem", marginBottom:5 }}>
-                  <span style={{ color:T.textMid }}>Progress</span><span style={{ color:T.gold, fontWeight:700 }}>{pct}%</span>
+                  <span style={{ color:T.textMid }}>Progress</span><span style={{ color:T.text, fontWeight:700 }}>{pct}%</span>
                 </div>
                 <div className="prog-bg"><div className="prog-fill" style={{ width:`${pct}%` }} /></div>
                 <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginTop:8 }}>
@@ -1394,8 +1393,8 @@ function AdminInvites() {
       <p className="eyebrow">Access Control</p>
       <h1 className="section-title">Invitations</h1>
       <div className="gold-bar" />
-      <div className="card" style={{ marginBottom:28, border:`1.5px solid ${T.goldLine}` }}>
-        <h3 style={{ color:T.gold, fontWeight:700, marginBottom:6, fontSize:"0.95rem" }}>Generate Invite Code</h3>
+      <div className="card" style={{ marginBottom:28, border:`1px solid ${T.border}` }}>
+        <h3 style={{ color:T.text, fontWeight:700, marginBottom:6, fontSize:"0.95rem" }}>Generate Invite Code</h3>
         <p style={{ color:T.textMid, fontSize:"0.82rem", marginBottom:14 }}>Only clients with a valid invite code can create an account.</p>
         <form onSubmit={send} style={{ display:"flex", gap:10 }}>
           <input className="inp" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="client@company.com" required style={{ flex:1 }} />
@@ -1473,7 +1472,7 @@ function AdminClients() {
                   </div>
                 </div>
                 <div style={{ textAlign:"right" }}>
-                  <p style={{ fontSize:"0.9rem", color:T.gold, fontWeight:700 }}>{cp.length} project{cp.length!==1?"s":""}</p>
+                  <p style={{ fontSize:"0.9rem", color:T.text, fontWeight:700 }}>{cp.length} project{cp.length!==1?"s":""}</p>
                   <p style={{ fontSize:"0.72rem", color:T.textMid }}>{cp.filter(p=>p.status==="active").length} active</p>
                 </div>
               </div>
@@ -1526,7 +1525,7 @@ function AdminInbox() {
         <button className="btn-ghost" onClick={()=>setSelected(null)} style={{ marginBottom:20 }}>← Back to inbox</button>
         <div className="card">
           <span className="badge" style={{ background:c.bg, color:c.color, marginBottom:14, display:"inline-flex" }}>{labels[item.form_type]}</span>
-          <h2 style={{ color:T.gold, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||"Unknown"}</h2>
+          <h2 style={{ color:T.text, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||"Unknown"}</h2>
           <p style={{ color:T.textMid, fontSize:"0.8rem", marginBottom:20 }}>{item.profiles?.company} · {item.profiles?.email} · {new Date(item.submitted_at).toLocaleString()}</p>
           <div style={{ borderTop:`1px solid ${T.border}`, paddingTop:18, display:"grid", gap:14 }}>
             {Object.entries(item.data||{}).map(([key,val])=>(
@@ -1549,7 +1548,7 @@ function AdminInbox() {
       <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:10, marginBottom:22 }}>
         {[{label:"All",type:"all",value:items.length},{label:"Onboarding",type:"onboarding",value:items.filter(i=>i.form_type==="onboarding").length},{label:"Discovery",type:"discovery",value:items.filter(i=>i.form_type==="discovery").length},{label:"Sign-Off",type:"milestone_signoff",value:items.filter(i=>i.form_type==="milestone_signoff").length},{label:"Support",type:"support_request",value:items.filter(i=>i.form_type==="support_request").length}].map(s=>(
           <div key={s.label} className="card-click" onClick={()=>setFilter(s.type)} style={{ padding:"12px 14px", border:filter===s.type?`1.5px solid ${T.goldLine}`:`1px solid ${T.border}`, background:filter===s.type?T.goldDim:T.card }}>
-            <p style={{ fontSize:"1.4rem", color:T.gold, fontWeight:700 }}>{s.value}</p>
+            <p style={{ fontSize:"1.4rem", color:filter===s.type?T.gold:T.text, fontWeight:700 }}>{s.value}</p>
             <p style={{ fontSize:"0.7rem", color:T.textMid, marginTop:3 }}>{s.label}</p>
           </div>
         ))}
@@ -1602,7 +1601,7 @@ function Forms() {
         {defs.map(f => { const Icon=f.icon; const sub=subs.find(s=>s.form_type===f.id); return (
           <div key={f.id} className="card-click" onClick={()=>setActive(f.id)} style={{ position:"relative" }}>
             {sub && <span className="badge" style={{ position:"absolute", top:14, right:14, background:"rgba(22,163,74,0.1)", color:T.success }}>Submitted</span>}
-            <Icon size={24} style={{ color:T.gold, marginBottom:12 }} />
+            <Icon size={24} style={{ color:T.textLight, marginBottom:12 }} />
             <p style={{ fontWeight:700, color:T.text, marginBottom:5 }}>{f.title}</p>
             <p style={{ color:T.textMid, fontSize:"0.82rem", lineHeight:1.6, marginBottom:12 }}>{f.desc}</p>
             <span style={{ color:T.gold, fontSize:"0.8rem", fontWeight:600, display:"flex", alignItems:"center", gap:4 }}>{sub?"View / Resubmit":"Fill out form"} <ArrowRight size={12}/></span>
@@ -1766,13 +1765,13 @@ function Invoices() {
                 <p style={{ fontSize:"0.76rem", color:T.textMid }}>{inv.description}</p>
               </div>
               <div style={{ display:"flex", alignItems:"center", gap:12 }}>
-                <p style={{ fontWeight:700, color:T.gold }}>${Number(inv.amount).toLocaleString()}</p>
+                <p style={{ fontWeight:700, color:T.text }}>${Number(inv.amount).toLocaleString()}</p>
                 <button onClick={() => removeFromCart(inv.id)} className="btn-ghost" style={{ color:T.danger, padding:"3px 8px" }}><Trash2 size={12}/></button>
               </div>
             </div>
           ))}
           <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center", marginTop:14 }}>
-            <p style={{ fontWeight:800, color:T.text }}>Total: <span style={{ color:T.gold }}>${cartTotal.toLocaleString()}</span></p>
+            <p style={{ fontWeight:800, color:T.text }}>Total: <span style={{ color:T.text }}>${cartTotal.toLocaleString()}</span></p>
             <button className="btn-gold" onClick={checkoutCart}><Send size={14}/> Request Payment Link</button>
           </div>
           <p style={{ fontSize:"0.76rem", color:T.textMid, marginTop:10 }}>We will email you a secure Stripe payment link within one business hour.</p>
@@ -1784,7 +1783,7 @@ function Invoices() {
         {[
           {label:"Total Billed", value:`$${total.toLocaleString()}`,   color:T.text},
           {label:"Amount Paid",  value:`$${paid.toLocaleString()}`,    color:T.success},
-          {label:"Amount Due",   value:`$${pending.toLocaleString()}`, color:T.gold},
+          {label:"Amount Due",   value:`$${pending.toLocaleString()}`, color:T.warning},
         ].map(s=>(
           <div key={s.label} className="card">
             <p style={{ fontSize:"0.7rem", color:T.textMid, fontWeight:700, marginBottom:6, textTransform:"uppercase", letterSpacing:"0.08em" }}>{s.label}</p>
@@ -1813,7 +1812,7 @@ function Invoices() {
                 <p style={{ color:T.textMid, fontSize:"0.84rem", marginBottom:4 }}>{inv.description}</p>
                 <div style={{ display:"flex", gap:16, fontSize:"0.76rem", color:T.textLight }}>
                   {inv.due_date && <span>Due: {new Date(inv.due_date).toLocaleDateString()}</span>}
-                  <span style={{ fontWeight:700, color:T.gold, fontSize:"1rem" }}>${Number(inv.amount).toLocaleString()}</span>
+                  <span style={{ fontWeight:700, color:T.text, fontSize:"1rem" }}>${Number(inv.amount).toLocaleString()}</span>
                 </div>
               </div>
               {inv.status !== "paid" && (
