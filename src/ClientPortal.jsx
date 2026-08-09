@@ -11,30 +11,30 @@ import {
 
 /* ─── DESIGN TOKENS ──────────────────────────────────────── */
 const T = {
-  bg:       "#0d1b2e",
-  bg2:      "#152236",
-  bg3:      "#1c2d45",
-  bg4:      "#243552",
+  bg:       "#0b0c0e",
+  bg2:      "#141518",
+  bg3:      "#1c1e22",
+  bg4:      "#26282d",
   card:     "#ffffff",
-  cardBg:   "#f8fafc",
-  gold:     "#4f46e5",
-  gold2:    "#6366f1",
-  goldDim:  "rgba(79,70,229,0.12)",
-  goldLine: "rgba(79,70,229,0.3)",
-  navy:     "#0d1b2e",
-  text:     "#1a2840",
-  textMid:  "#4a5e7a",
-  textLight:"#7a8eaa",
+  cardBg:   "#f7f7f8",
+  gold:     "#18181b",
+  gold2:    "#3f3f46",
+  goldDim:  "rgba(24,24,27,0.06)",
+  goldLine: "rgba(24,24,27,0.16)",
+  navy:     "#0b0c0e",
+  text:     "#18181b",
+  textMid:  "#52525b",
+  textLight:"#71717a",
   white:    "#ffffff",
-  border:   "rgba(13,27,46,0.1)",
+  border:   "rgba(24,24,27,0.09)",
   borderDark:"rgba(255,255,255,0.08)",
   success:  "#16a34a",
   warning:  "#d97706",
   danger:   "#dc2626",
   info:     "#2563eb",
-  engage:   "#1e3a5f",
-  assess:   "#1e3a5f",
-  transform:"#4f46e5",
+  engage:   "#2563eb",
+  assess:   "#7c3aed",
+  transform:"#b45309",
 };
 
 const css = `
@@ -62,10 +62,10 @@ const css = `
     font-size:0.875rem; font-weight:500; border-radius:8px;
     transition:all 0.18s ease; text-align:left; font-family:inherit;
   }
-  .nav-btn:hover { background:rgba(255,255,255,0.06); color:#e8eaf0; }
+  .nav-btn:hover { background:rgba(255,255,255,0.06); color:#e4e4e7; }
   .nav-btn.active {
-    background:${T.goldDim}; color:${T.gold};
-    border-left:3px solid ${T.gold}; padding-left:11px;
+    background:rgba(255,255,255,0.08); color:#ffffff;
+    border-left:3px solid #ffffff; padding-left:11px;
   }
 
   .card {
@@ -85,7 +85,7 @@ const css = `
     display:block; width:100%; text-align:left;
     cursor:pointer;
     touch-action:manipulation;
-    -webkit-tap-highlight-color:rgba(79,70,229,0.15);
+    -webkit-tap-highlight-color:rgba(24,24,27,0.15);
     user-select:none;
     position:relative;
   }
@@ -103,9 +103,9 @@ const css = `
     color:#ffffff; border:none; padding:10px 20px;
     font-weight:600; font-size:0.875rem; border-radius:8px;
     cursor:pointer; font-family:inherit; transition:all 0.15s ease;
-    box-shadow:0 1px 2px rgba(79,70,229,0.25);
+    box-shadow:0 1px 2px rgba(24,24,27,0.25);
   }
-  .btn-gold:hover { background:#4338ca; box-shadow:0 1px 2px rgba(79,70,229,0.3); }
+  .btn-gold:hover { background:#000000; box-shadow:0 1px 2px rgba(24,24,27,0.3); }
   .btn-gold:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
 
   .btn-outline {
@@ -170,10 +170,10 @@ const css = `
   .eat-phase-card { border-radius:10px; padding:24px; position:relative; overflow:hidden; }
   .eat-engage   { background:rgba(13,27,46,0.04); border:1.5px solid rgba(13,27,46,0.12); }
   .eat-assess   { background:rgba(13,27,46,0.04); border:1.5px solid rgba(13,27,46,0.12); }
-  .eat-transform{ background:rgba(79,70,229,0.06); border:1.5px solid rgba(79,70,229,0.2); }
+  .eat-transform{ background:rgba(24,24,27,0.06); border:1.5px solid rgba(24,24,27,0.2); }
 
   .bubble-me   { max-width:72%; background:${T.gold}; color:#ffffff; padding:10px 14px; border-radius:10px 10px 2px 10px; font-size:0.875rem; line-height:1.55; font-weight:500; }
-  .bubble-them { max-width:72%; background:${T.bg3}; border:1px solid ${T.borderDark}; color:#e8eaf0; padding:10px 14px; border-radius:10px 10px 10px 2px; font-size:0.875rem; line-height:1.55; }
+  .bubble-them { max-width:72%; background:${T.bg3}; border:1px solid ${T.borderDark}; color:#e4e4e7; padding:10px 14px; border-radius:10px 10px 10px 2px; font-size:0.875rem; line-height:1.55; }
 
   .ms-row { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:8px; border:1.5px solid ${T.border}; background:${T.card}; cursor:pointer; transition:all 0.18s ease; margin-bottom:8px; }
   .ms-row:hover { border-color:${T.goldLine}; background:${T.cardBg}; box-shadow:0 2px 10px rgba(13,27,46,0.08); }
@@ -203,15 +203,15 @@ const css = `
       justify-content:center; gap:3px; background:transparent; border:none;
       color:${T.textLight}; font-size:0.6rem; font-weight:600;
       cursor:pointer; padding:6px 2px; transition:all 0.15s ease;
-      font-family:inherit; -webkit-tap-highlight-color:rgba(79,70,229,0.2);
+      font-family:inherit; -webkit-tap-highlight-color:rgba(255,255,255,0.15);
     }
-    .mobile-nav-btn.active { color:${T.gold}; }
+    .mobile-nav-btn.active { color:#ffffff; }
     .mobile-nav-btn svg { flex-shrink:0; }
 
     /* Make card-click work reliably on iOS/Android */
     .card-click {
       cursor:pointer !important;
-      -webkit-tap-highlight-color:rgba(79,70,229,0.15) !important;
+      -webkit-tap-highlight-color:rgba(24,24,27,0.15) !important;
       touch-action:manipulation !important;
     }
 
@@ -290,7 +290,7 @@ const EAT_DEFAULT = {
       outcome: "A clear, prioritized modernization roadmap with honest risk scores, cost projections, and recommended actions.",
     },
     {
-      key: "transform", label: "Transform", icon: "Zap", color: "#4f46e5",
+      key: "transform", label: "Transform", icon: "Zap", color: "#b45309",
       headline: "We execute with precision and speed.",
       description: "With alignment and clarity in place, we move to execution using cutting-edge tools, proven architectures, and agile delivery practices.",
       steps: ["Phased implementation with milestone-based delivery","CI/CD pipeline setup for fast, reliable deployments","Cloud migration, containerization, and infrastructure automation","Security hardening and identity modernization","Monitoring, observability, and incident response setup","Knowledge transfer and team enablement"],
@@ -447,12 +447,12 @@ function PortalAuth({ setSession }) {
     <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:24, background:`radial-gradient(ellipse at 30% 40%, ${T.bg3} 0%, ${T.bg} 65%)` }}>
       <div style={{ width:"100%", maxWidth:420 }}>
         <div style={{ textAlign:"center", marginBottom:36 }}>
-          <div style={{ width:52, height:52, borderRadius:"50%", background:T.goldDim, border:`1px solid ${T.goldLine}`, display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 14px" }}>
-            <Shield size={22} style={{ color:T.gold }} />
+          <div style={{ width:52, height:52, borderRadius:"50%", background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.14)", display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 14px" }}>
+            <Shield size={22} style={{ color:"#ffffff" }} />
           </div>
           <h1 style={{ fontSize:"1.9rem", color:T.white, marginBottom:6 }}>BlueLink Portal</h1>
           <p style={{ color:T.textLight, fontSize:"0.875rem" }}>{mode==="login" ? "Sign in to your workspace" : "Create your account"}</p>
-          <p className="eat-badge" style={{ marginTop:8, display:"block" }}>Let's EAT!</p>
+          <p className="eat-badge" style={{ marginTop:8, display:"block", color:"rgba(255,255,255,0.75)" }}>Let's EAT!</p>
         </div>
         <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:10, padding:32 }}>
           {error && <div style={{ background:"rgba(220,38,38,0.1)", border:"1px solid rgba(220,38,38,0.3)", borderRadius:8, padding:"10px 14px", marginBottom:16, fontSize:"0.84rem", color:"#fca5a5" }}>{error}</div>}
@@ -465,18 +465,18 @@ function PortalAuth({ setSession }) {
             </>}
             <label className="lbl" style={{ color:T.textLight }}>Email <input className="inp" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@company.com" required /></label>
             <label className="lbl" style={{ color:T.textLight }}>Password <input className="inp" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Minimum 6 characters" minLength={6} required /></label>
-            <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", marginTop:4 }}>
+            <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", marginTop:4, background:"#ffffff", color:"#18181b" }}>
               {loading ? <Spinner size={15} /> : mode==="login" ? "Sign In" : "Create Account"}
               {!loading && <ArrowRight size={15} />}
             </button>
           </form>
           <div style={{ textAlign:"center", marginTop:18 }}>
             <button onClick={() => { setMode(mode==="login"?"signup":"login"); setError(""); setMsg(""); }}
-              style={{ background:"none", border:"none", color:T.gold, fontWeight:600, cursor:"pointer", fontSize:"0.84rem", fontFamily:"inherit" }}>
+              style={{ background:"none", border:"none", color:"#ffffff", fontWeight:600, cursor:"pointer", fontSize:"0.84rem", fontFamily:"inherit" }}>
               {mode==="login" ? "Have an invite code? Create account" : "Already have an account? Sign in"}
             </button>
           </div>
-          {mode==="login" && <p style={{ textAlign:"center", marginTop:14, fontSize:"0.76rem", color:T.textLight }}>Access by invitation only · <span style={{ color:T.gold }}>info@bluelinkconsults.com</span></p>}
+          {mode==="login" && <p style={{ textAlign:"center", marginTop:14, fontSize:"0.76rem", color:T.textLight }}>Access by invitation only · <span style={{ color:"#ffffff" }}>info@bluelinkconsults.com</span></p>}
         </div>
       </div>
     </div>
@@ -605,7 +605,7 @@ function PortalShell({ activeTab, setActiveTab }) {
           );
         })}
         {/* Back to website as last mobile nav item */}
-        <a href="/" className="mobile-nav-btn" style={{ textDecoration:"none", color:T.gold }}>
+        <a href="/" className="mobile-nav-btn" style={{ textDecoration:"none", color:T.textLight }}>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
             <polyline points="9,22 9,12 15,12 15,22"/>
@@ -633,7 +633,7 @@ function AdminDashboard({ setActiveTab }) {
 
       <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:10, padding:"20px 28px", marginBottom:28, display:"flex", alignItems:"center", justifyContent:"space-between" }}>
         <div>
-          <p className="eat-badge" style={{ fontSize:"1.05rem", display:"block", marginBottom:4 }}>Let's EAT</p>
+          <p className="eat-badge" style={{ fontSize:"1.05rem", display:"block", marginBottom:4, color:"#ffffff" }}>Let's EAT</p>
           <p style={{ color:"rgba(255,255,255,0.55)", fontSize:"0.84rem" }}>Engage · Assess · Transform — your clients' technology journey starts here.</p>
         </div>
         <div style={{ display:"flex", gap:10 }}>
@@ -716,7 +716,7 @@ function ClientDashboard({ setActiveTab }) {
       <div className="gold-bar" />
 
       {/* EAT banner */}
-      <div style={{ background:"rgba(79,70,229,0.05)", border:`1px solid ${T.goldLine}`, borderRadius:10, padding:"18px 24px", marginBottom:28, cursor:"pointer" }} onClick={()=>setActiveTab("eat")}>
+      <div style={{ background:"rgba(24,24,27,0.05)", border:`1px solid ${T.goldLine}`, borderRadius:10, padding:"18px 24px", marginBottom:28, cursor:"pointer" }} onClick={()=>setActiveTab("eat")}>
         <div style={{ display:"flex", justifyContent:"space-between", alignItems:"center" }}>
           <div>
             <p className="eat-badge" style={{ fontSize:"1.1rem", display:"block", marginBottom:3 }}>{eatContent.catchphrase}</p>
@@ -912,13 +912,13 @@ function EATAdmin() {
         {msg && <div style={{ padding:"8px 14px", borderRadius:8, background:msg.includes("Error")||msg.includes("Invalid")?"rgba(220,38,38,0.1)":"rgba(22,163,74,0.1)", color:msg.includes("Error")||msg.includes("Invalid")?T.danger:T.success, fontSize:"0.84rem", marginBottom:12 }}>{msg}</div>}
         <div style={{ display:"grid", gap:14, marginBottom:editing?16:0 }}>
           <label className="lbl">Catchphrase
-            <input className="inp" value={eatContent.catchphrase} readOnly={!editing} onChange={e=>setEatContent(p=>({...p,catchphrase:e.target.value}))} style={{ background:editing?T.cardBg:"#f1f5f9", cursor:editing?"text":"default" }} />
+            <input className="inp" value={eatContent.catchphrase} readOnly={!editing} onChange={e=>setEatContent(p=>({...p,catchphrase:e.target.value}))} style={{ background:editing?T.cardBg:"#f4f4f5", cursor:editing?"text":"default" }} />
           </label>
           <label className="lbl">Tagline
-            <input className="inp" value={eatContent.tagline} readOnly={!editing} onChange={e=>setEatContent(p=>({...p,tagline:e.target.value}))} style={{ background:editing?T.cardBg:"#f1f5f9", cursor:editing?"text":"default" }} />
+            <input className="inp" value={eatContent.tagline} readOnly={!editing} onChange={e=>setEatContent(p=>({...p,tagline:e.target.value}))} style={{ background:editing?T.cardBg:"#f4f4f5", cursor:editing?"text":"default" }} />
           </label>
         </div>
-        {editing && <textarea className="inp" value={draft} onChange={e=>setDraft(e.target.value)} rows={20} style={{ fontFamily:"monospace", fontSize:"0.78rem", resize:"vertical", background:"#f8fafc" }} />}
+        {editing && <textarea className="inp" value={draft} onChange={e=>setDraft(e.target.value)} rows={20} style={{ fontFamily:"monospace", fontSize:"0.78rem", resize:"vertical", background:"#f4f4f5" }} />}
       </div>
     </div>
   );
@@ -1237,7 +1237,7 @@ function MilestoneComments({ milestoneId, session }) {
                     {c.content.split(/(https?:\/\/[^\s]+)/g).map((part, i) =>
                       /^https?:\/\//.test(part)
                         ? <a key={i} href={part} target="_blank" rel="noopener noreferrer"
-                            style={{ color: isMe ? "#0d1b2e" : T.gold, textDecoration:"underline", wordBreak:"break-all" }}>{part}</a>
+                            style={{ color: isMe ? "#ffffff" : "#ffffff", textDecoration:"underline", wordBreak:"break-all" }}>{part}</a>
                         : part
                     )}
                   </div>
@@ -1336,7 +1336,7 @@ function Messages() {
                       {m.content.split(/(https?:\/\/[^\s]+)/g).map((part, i) =>
                         part.startsWith("http")
                           ? <a key={i} href={part} target="_blank" rel="noopener noreferrer"
-                              style={{ color: isMe ? "#0d1b2e" : T.gold, textDecoration:"underline", wordBreak:"break-all" }}>{part}</a>
+                              style={{ color: isMe ? "#ffffff" : "#ffffff", textDecoration:"underline", wordBreak:"break-all" }}>{part}</a>
                           : part
                       )}
                     </div>
@@ -1793,7 +1793,7 @@ function Invoices() {
       </div>
 
       {/* How payment works */}
-      <div style={{ background:"rgba(79,70,229,0.06)", border:`1px solid ${T.goldLine}`, borderRadius:10, padding:"14px 18px", marginBottom:20, fontSize:"0.84rem", color:T.textMid, display:"flex", gap:10, alignItems:"flex-start" }}>
+      <div style={{ background:"rgba(24,24,27,0.06)", border:`1px solid ${T.goldLine}`, borderRadius:10, padding:"14px 18px", marginBottom:20, fontSize:"0.84rem", color:T.textMid, display:"flex", gap:10, alignItems:"flex-start" }}>
         <span style={{ fontSize:"1.2rem" }}>💳</span>
         <div>
           <strong style={{ color:T.text }}>How to pay:</strong> Click <strong style={{ color:T.gold }}>Pay Now</strong> on any pending invoice, or add multiple invoices to your cart and request a single payment link. We use <strong style={{ color:T.text }}>Stripe</strong> for secure online payments. You will receive a payment link by email within one business hour.
@@ -1872,10 +1872,10 @@ function Invoices() {
 
      const html = `
        <div style="font-family:sans-serif;max-width:520px;margin:0 auto;">
-         <h2 style="color:#0d1b2e;">BlueLink Consults Portal</h2>
+         <h2 style="color:#18181b;">BlueLink Consults Portal</h2>
          <p><strong>${senderName}</strong> sent you a ${type === "message" ? "message" : "comment"}:</p>
-         <blockquote style="border-left:3px solid #4f46e5;padding-left:14px;color:#444;">${messagePreview}</blockquote>
-         <a href="https://www.bluelinkconsults.com/client-login" style="display:inline-block;background:#4f46e5;color:#0d1b2e;padding:12px 24px;text-decoration:none;font-weight:700;border-radius:6px;margin-top:16px;">Open Portal</a>
+         <blockquote style="border-left:3px solid #18181b;padding-left:14px;color:#444;">${messagePreview}</blockquote>
+         <a href="https://www.bluelinkconsults.com/client-login" style="display:inline-block;background:#18181b;color:#ffffff;padding:12px 24px;text-decoration:none;font-weight:700;border-radius:6px;margin-top:16px;">Open Portal</a>
        </div>`;
 
      await fetch("https://api.resend.com/emails", {
