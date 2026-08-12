@@ -3075,11 +3075,62 @@ function ConnectPage() {
 }
 
 
+/* ─── PRIVATE ROOFING OUTREACH DEMOS ────────────────────── */
+const roofingOutreachCompanies = {
+  "mr-roof-7k2p9": "Mr. Roof Inc.",
+  "five-stars-4m8qx": "Five Stars Roofing Company",
+  "peak-9v3rn": "Peak Roofing",
+  "mike-gorman-6t2kw": "Mike Gorman Roofing Inc.",
+  "bobbygs-8p4mz": "Bobbyg’s Roofing",
+  "jmk-3x7qd": "JMK Roofing Inc.",
+  "budget-5n9vc": "Budget Roofing Construction",
+  "suali-joseph-2r6hf": "Suali Joseph & Sons Roofing Co.",
+  "gorman-7w4kb": "Gorman Roofing",
+  "jeremy-pennaccini-9q2mt": "Jeremy Pennaccini Roofing",
+  "prime-state-4h8nx": "Prime State Roofing",
+};
+
+function RoofingOutreachDemo() {
+  const { demoKey } = useParams();
+  const company = roofingOutreachCompanies[demoKey];
+
+  useEffect(() => {
+    const previousTitle = document.title;
+    let robots = document.querySelector('meta[name="robots"]');
+    const created = !robots;
+    if (!robots) { robots = document.createElement("meta"); robots.name = "robots"; document.head.appendChild(robots); }
+    robots.content = "noindex, nofollow, noarchive";
+    document.title = company ? `Website Concept for ${company} | BlueLink Consults` : "Private Website Concept";
+    return () => { document.title = previousTitle; if (created) robots.remove(); else robots.content = "index, follow"; };
+  }, [company]);
+
+  if (!company) return <NotFound />;
+
+  return <main className="roof-demo">
+    <section className="roof-demo-marquee" aria-label="We can build a website like this for your business and more">
+      <div><span>WE CAN BUILD A WEBSITE LIKE THIS FOR YOUR BUSINESS AND MORE.</span><i>•</i><span aria-hidden="true">WE CAN BUILD A WEBSITE LIKE THIS FOR YOUR BUSINESS AND MORE.</span></div>
+    </section>
+    <section className="roof-demo-contact">
+      <a href="https://www.bluelinkconsults.com"><small>VISIT OUR WEBSITE</small>www.bluelinkconsults.com ↗</a>
+      <a href="tel:+14014402434"><small>CALL BLUELINK</small>(401) 440-2434</a>
+      <a href="mailto:info@bluelinkconsults.com"><small>EMAIL US</small>info@bluelinkconsults.com</a>
+    </section>
+    <div className="roof-demo-personal"><span>PERSONALIZED WEBSITE CONCEPT FOR</span><strong>{company}</strong></div>
+    <nav className="roof-demo-nav"><a href="#roof-top" className="roof-demo-logo">{company}<small>ROOFING WEBSITE CONCEPT</small></a><div><a href="#roof-services">Services</a><a href="#roof-proof">Why us</a><a href="#roof-quote" className="roof-demo-nav-cta">Free estimate</a></div></nav>
+    <section className="roof-demo-hero" id="roof-top"><div><p>LOCAL ROOFING · REPAIRS · REPLACEMENTS</p><h1>A roof you can<br/>stop worrying about.</h1><span>Clear estimates, dependable crews and roofing work built for New England weather.</span><div className="roof-demo-actions"><a href="#roof-quote">Request a free inspection</a><a href="#roof-services">Explore services ↓</a></div></div></section>
+    <section className="roof-demo-proof" id="roof-proof"><div><b>20+</b><span>Years of local experience</span></div><div><b>4.9</b><span>Average customer rating</span></div><div><b>10 yr</b><span>Workmanship warranty</span></div><div><b>24 hr</b><span>Emergency response</span></div></section>
+    <section className="roof-demo-services" id="roof-services"><p>WHAT WE DO</p><h2>Honest recommendations.<br/>Solid workmanship.</h2><div><article><b>01</b><h3>Roof replacement</h3><span>Complete asphalt-shingle systems with proper ventilation, flashing and cleanup.</span></article><article><b>02</b><h3>Repairs & leaks</h3><span>Targeted repairs for active leaks, storm damage, flashing and missing shingles.</span></article><article><b>03</b><h3>Gutters & ventilation</h3><span>Gutter replacement and attic airflow improvements that help protect your roof.</span></article></div></section>
+    <section className="roof-demo-quote" id="roof-quote"><p>NO PRESSURE. NO SURPRISES.</p><h2>Know exactly what your roof needs.</h2><span>Request an inspection and receive photos, recommendations and a written estimate.</span><a href="tel:+14014402434">Call for a free estimate</a></section>
+    <footer className="roof-demo-footer"><strong>{company}</strong><span>Personalized website demonstration by BlueLink Consults</span><a href="https://www.bluelinkconsults.com">www.bluelinkconsults.com</a></footer>
+  </main>;
+}
+
 /* ─── APP ROOT ───────────────────────────────────────────── */
 function AppInner() {
   const location = useLocation();
   const isPortal = location.pathname === "/client-login";
   const isConnectPage = location.pathname === "/connect";
+  const isPrivateDemo = location.pathname.startsWith("/preview/roofing/");
 
   // Lock horizontal scroll globally — critical for mobile
   useEffect(() => {
@@ -3093,13 +3144,14 @@ function AppInner() {
 
   return (
     <>
-      {!isPortal && !isConnectPage && <Header />}
-      {!isPortal && !isConnectPage && <div className="header-spacer" aria-hidden="true" />}
+      {!isPortal && !isConnectPage && !isPrivateDemo && <Header />}
+      {!isPortal && !isConnectPage && !isPrivateDemo && <div className="header-spacer" aria-hidden="true" />}
       <ScrollToHash />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
           <Route path="/client-login"            element={<ClientPortal />} />
           <Route path="/connect"                 element={<ConnectPage />} />
+          <Route path="/preview/roofing/:demoKey" element={<RoofingOutreachDemo />} />
           <Route path="/"                        element={<Home />} />
           <Route path="/services"                element={<ServicesPage />} />
           <Route path="/services/:slug"          element={<ServiceDetail />} />
@@ -3118,7 +3170,7 @@ function AppInner() {
           <Route path="*"                        element={<NotFound />} />
         </Routes>
       </AnimatePresence>
-      {!isPortal && !isConnectPage && <Footer />}
+      {!isPortal && !isConnectPage && !isPrivateDemo && <Footer />}
     </>
   );
 }
