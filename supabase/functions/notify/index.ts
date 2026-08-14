@@ -83,7 +83,7 @@ serve(async (req) => {
         <tr>
           <td style="background:#f8fafc;padding:18px 32px;border-top:1px solid #e5e7eb;">
             <p style="margin:0;font-size:12px;color:#9ca3af;">
-              BlueLink Consults · offiongconnect@gmail.com · 401-440-2434
+              BlueLink Consults · info@bluelinkconsults.com · 401-440-2434
             </p>
           </td>
         </tr>
