@@ -2034,13 +2034,13 @@ function AboutPage() {
               John Offiong, Founder &amp; CEO
             </h2>
             <p style={{ lineHeight: 1.8, color: "var(--text-dark)", marginBottom: 18, fontSize: "1rem" }}>
-              John is the Founder and CEO of BlueLink Consults, a technology consulting firm that helps enterprises replace outdated, legacy systems with modern, scalable technology built to support long-term growth. Under his leadership, BlueLink delivers solutions across web development, application modernization, cloud infrastructure, data and systems integration, and pre-deployment validation — guided by its "Engage, Access, Transform" approach.
+              John is the Founder and CEO of BlueLink Consults, a technology consulting firm that helps enterprises replace outdated, legacy systems with modern, scalable technology built for long-term growth. BlueLink delivers solutions across web development, application modernization, cloud infrastructure, data and systems integration, and pre-deployment validation — guided by its "Engage, Access, Transform" approach.
             </p>
             <p style={{ lineHeight: 1.8, color: "var(--muted)", marginBottom: 18, fontSize: "0.97rem" }}>
-              With extensive experience in Cloud and DevOps, John has spent a significant part of his career helping enterprises design and deliver diverse solutions across software and infrastructure. His work focuses on building lasting partnerships that guide organizations through every stage of technological change, rather than simply completing a project and moving on.
+              With extensive experience in Cloud and DevOps, John has spent much of his career helping enterprises design and deliver solutions across software and infrastructure, building lasting partnerships that guide organizations through every stage of technological change.
             </p>
             <p style={{ lineHeight: 1.8, color: "var(--muted)", fontSize: "0.97rem" }}>
-              John is also the Founder of Zarfy.ai, a pre-deployment validation platform designed to help IT enterprises identify risks, validate systems, and deploy technology with greater confidence.
+              John is also the Founder of Zarfy.ai, a pre-deployment validation platform helping IT enterprises identify risks, validate systems, and deploy technology with greater confidence.
             </p>
           </div>
         </div>
