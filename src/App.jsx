@@ -2144,9 +2144,7 @@ function ContactPage() {
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState("");
 
-  const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ID
-    ? `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID}`
-    : null;
+  const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID || "meedwzan"}`;
 
   async function handleSubmit(e) {
     e.preventDefault();
