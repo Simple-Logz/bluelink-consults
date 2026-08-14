@@ -2005,15 +2005,67 @@ function AboutPage() {
         text="BlueLink Consults is a specialist application modernization consultancy based in Providence, RI. We work with growing organizations across the US and beyond to replace old, slow, broken systems with technology that actually works."
       />
 
+      <style>{`
+        .about-split-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 60px;
+          max-width: 1100px;
+          margin: 0 auto;
+          align-items: center;
+        }
+        .about-split-media {
+          border-radius: 14px;
+          overflow: hidden;
+          width: 100%;
+          aspect-ratio: 4 / 3;
+          background-size: cover;
+          background-position: center;
+        }
+        .about-split-media.about-ceo-photo { aspect-ratio: 1 / 1; }
+        @media (max-width: 720px) {
+          .about-split-grid { grid-template-columns: 1fr !important; gap: 28px !important; }
+          .about-split-media { aspect-ratio: 4 / 3 !important; }
+        }
+      `}</style>
+
+      {/* ── OUR CEO ── */}
+      <section style={{ background: "white", padding: "72px 7vw 52px" }}>
+        <div className="about-split-grid">
+          {/* CEO photo — left */}
+          <div
+            className="about-split-media about-ceo-photo"
+            style={{ backgroundImage: "url('/john-offiong-ceo.jpg')", backgroundPosition: "center top" }}
+          />
+          {/* CEO write-up — right */}
+          <div>
+            <p className="eyebrow">Our CEO</p>
+            <h2 style={{ fontFamily: "Libre Baskerville, serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "var(--bronze)", lineHeight: 1.1, margin: "10px 0 20px" }}>
+              John Offiong, Founder &amp; CEO
+            </h2>
+            <p style={{ lineHeight: 1.8, color: "var(--text-dark)", marginBottom: 18, fontSize: "1rem" }}>
+              John is the Founder and CEO of BlueLink Consults, a technology consulting firm that helps enterprises replace outdated, legacy systems with modern, scalable technology built to support long-term growth. Under his leadership, BlueLink delivers solutions across web development, application modernization, cloud infrastructure, data and systems integration, and pre-deployment validation — guided by its "Engage, Access, Transform" approach.
+            </p>
+            <p style={{ lineHeight: 1.8, color: "var(--muted)", marginBottom: 18, fontSize: "0.97rem" }}>
+              With extensive experience in Cloud and DevOps, John has spent a significant part of his career helping enterprises design and deliver diverse solutions across software and infrastructure. His work focuses on building lasting partnerships that guide organizations through every stage of technological change, rather than simply completing a project and moving on.
+            </p>
+            <p style={{ lineHeight: 1.8, color: "var(--muted)", fontSize: "0.97rem" }}>
+              John is also the Founder of Zarfy.ai, a pre-deployment validation platform designed to help IT enterprises identify risks, validate systems, and deploy technology with greater confidence.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── THIN DIVIDER ── */}
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 7vw" }}>
+        <div style={{ height: 1, background: "linear-gradient(90deg, transparent, var(--bronze) 50%, transparent)", opacity: 0.55 }} />
+      </div>
+
       {/* ── ORIGIN STORY ── */}
-      <section style={{ background: "white", padding: "72px 7vw" }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, maxWidth: 1100, margin: "0 auto", alignItems: "center" }}>
-          <style>{`
-            @media (max-width: 720px) {
-              .about-story-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-            }
-          `}</style>
-          <div className="about-story-grid">
+      <section style={{ background: "white", padding: "52px 7vw 72px" }}>
+        <div className="about-split-grid">
+          {/* Write-up — left */}
+          <div>
             <p className="eyebrow">Our Story</p>
             <h2 style={{ fontFamily: "Libre Baskerville, serif", fontSize: "clamp(1.8rem, 3vw, 2.6rem)", color: "var(--bronze)", lineHeight: 1.1, margin: "10px 0 20px" }}>
               Born from a clear and growing need in the market.
@@ -2028,15 +2080,13 @@ function AboutPage() {
               Our approach is straightforward. We come in, take the time to properly understand your environment, and work with your team to modernize what matters most — in a way that is practical, sustainable, and built to last long after our engagement ends.
             </p>
           </div>
-          {/* Story image */}
-          <div style={{
-            borderRadius: 14,
-            overflow: "hidden",
-            minHeight: 420,
-            backgroundImage: "linear-gradient(rgba(5,11,45,0.08), rgba(5,11,45,0.08)), url('https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=1600&auto=format&fit=crop')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }} />
+          {/* Story image — right */}
+          <div
+            className="about-split-media"
+            style={{
+              backgroundImage: "linear-gradient(rgba(5,11,45,0.08), rgba(5,11,45,0.08)), url('https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&w=1600&auto=format&fit=crop')",
+            }}
+          />
         </div>
       </section>
 
