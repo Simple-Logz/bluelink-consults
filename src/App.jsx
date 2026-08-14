@@ -2143,35 +2143,48 @@ function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState("");
+  const formLoadingRef = useRef(false);
+  const formTimeoutRef = useRef(null);
 
   const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID || "meedwzan"}`;
+  const iframeTargetName = "bluelink-contact-frame";
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  // Submits the form the plain HTML way — a real POST into a hidden iframe —
+  // instead of a JS fetch() call. This sidesteps the CORS / ad-blocker /
+  // browser-extension issues that can make fetch() report "network error"
+  // even though Formspree already received and emailed the submission.
+  function handleSubmit() {
     setFormError("");
-    if (!formspreeEndpoint) {
-      setFormError("Form is not configured. Please email info@bluelinkconsults.com directly.");
-      return;
-    }
     setFormLoading(true);
-    try {
-      const res = await fetch(formspreeEndpoint, {
-        method: "POST",
-        body: new FormData(e.currentTarget),
-        headers: { Accept: "application/json" },
-      });
-      if (res.ok) { e.currentTarget.reset(); setSubmitted(true); }
-      else {
-        const data = await res.json().catch(() => null);
-        setFormError(data?.errors?.[0]?.message || "Your message could not be sent. Please email info@bluelinkconsults.com.");
+    formLoadingRef.current = true;
+    clearTimeout(formTimeoutRef.current);
+    formTimeoutRef.current = setTimeout(() => {
+      if (formLoadingRef.current) {
+        formLoadingRef.current = false;
+        setFormLoading(false);
+        setFormError("This is taking longer than expected. If you don't hear back from us, please email info@bluelinkconsults.com directly.");
       }
-    } catch {
-      setFormError("Network error. Please check your connection or email info@bluelinkconsults.com.");
-    } finally { setFormLoading(false); }
+    }, 15000);
+  }
+
+  function handleFrameLoad() {
+    // Ignore the iframe's initial blank load on mount — only react once a
+    // real submission is in flight.
+    if (!formLoadingRef.current) return;
+    formLoadingRef.current = false;
+    clearTimeout(formTimeoutRef.current);
+    setFormLoading(false);
+    setSubmitted(true);
   }
 
   return (
     <>
+      <iframe
+        name={iframeTargetName}
+        title="Form submission target"
+        style={{ display: "none" }}
+        onLoad={handleFrameLoad}
+      />
       {isWebDev ? (
         <PageHero label="Contact" title="Let's build your new website." text="Tell us a bit about your business and what you're hoping to launch." />
       ) : (
@@ -2197,7 +2210,14 @@ function ContactPage() {
             <button onClick={() => { setSubmitted(false); setFormError(""); }}>Submit another inquiry</button>
           </div>
         ) : isWebDev ? (
-          <form className="contact-form" id="consultation-form" onSubmit={handleSubmit}>
+          <form
+            className="contact-form"
+            id="consultation-form"
+            action={formspreeEndpoint}
+            method="POST"
+            target={iframeTargetName}
+            onSubmit={handleSubmit}
+          >
             {formError && <div className="auth-message">{formError}</div>}
             <input type="hidden" name="_subject" value="New Web Development inquiry from bluelinkconsults.com" />
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
@@ -2225,7 +2245,14 @@ function ContactPage() {
             <small>Your inquiry will be securely delivered to BlueLink Consult.</small>
           </form>
         ) : (
-          <form className="contact-form" id="consultation-form" onSubmit={handleSubmit}>
+          <form
+            className="contact-form"
+            id="consultation-form"
+            action={formspreeEndpoint}
+            method="POST"
+            target={iframeTargetName}
+            onSubmit={handleSubmit}
+          >
             {formError && <div className="auth-message">{formError}</div>}
             <input type="hidden" name="_subject" value="New BlueLink Consult website inquiry" />
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
