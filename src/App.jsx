@@ -3051,11 +3051,12 @@ function SimulatorPage() {
             <div style={{ display:"flex", alignItems:"center", gap:14 }}>
               <div style={{
                 width:44, height:44, borderRadius:12, flexShrink:0,
-                background:"linear-gradient(135deg,#378add,#1d9e75)",
+                background:"#ffffff",
                 display:"flex", alignItems:"center", justifyContent:"center",
-                boxShadow:"0 8px 18px rgba(55,138,221,0.32)",
+                boxShadow:"0 8px 18px rgba(15,23,42,0.14)",
+                padding:6,
               }}>
-                <Zap size={22} color="#fff" />
+                <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ width:"100%", height:"100%", objectFit:"contain" }} />
               </div>
               <div>
                 <p className="sim-hdr-h">Modernization Simulator</p>
