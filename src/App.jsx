@@ -602,16 +602,6 @@ function Header() {
         <NavLink to="/contact#consultation" className="contact-btn" onClick={close}>Contact Us</NavLink>
       </nav>
 
-      <button
-        type="button"
-        className="theme-toggle-btn"
-        onClick={toggleTheme}
-        aria-label={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
-        title={theme === "light" ? "Switch to dark mode" : "Switch to light mode"}
-      >
-        {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-      </button>
-
       <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">
         {open ? <X size={22} /> : <Menu size={22} />}
       </button>
