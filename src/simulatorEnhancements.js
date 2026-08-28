@@ -1,121 +1,48 @@
 const SUPABASE_URL = "https://kqjyubxrbjyvakpvcymc.supabase.co";
 const SUPABASE_KEY = "sb_publishable_yNpvKpFRVhqTs02wclmX6A_FJwhg_5c";
-
-const STORE = "bluelink_simulator_state_v2";
+const STORE = "bluelink_simulator_state_v3";
 const fresh = () => ({ sessionId: crypto.randomUUID(), started: false, stack: [], services: [], modules: [], users: 2000 });
-let state;
-try { state = JSON.parse(sessionStorage.getItem(STORE)) || fresh(); } catch { state = fresh(); }
+let state; try { state = JSON.parse(sessionStorage.getItem(STORE)) || fresh(); } catch { state = fresh(); }
 const save = () => sessionStorage.setItem(STORE, JSON.stringify(state));
 
-async function record(eventType, extra = {}) {
+async function record(eventType, extra={}) {
   if (location.pathname !== "/simulator") return;
-  const payload = {
-    session_id: state.sessionId,
-    event_type: eventType,
-    status: eventType === "completed" ? "completed" : eventType === "started" ? "started" : "in_progress",
-    last_step: Math.min(4, Number(extra.last_step ?? 0)),
-    technology_stack: state.stack,
-    legacy_services: state.services,
-    modernization_modules: state.modules,
-    user_count: state.users,
-    page_path: location.pathname,
-    referrer: document.referrer || null,
-    user_agent: navigator.userAgent,
-    completed_at: eventType === "completed" ? new Date().toISOString() : null,
-    ...extra,
-  };
-  try {
-    await fetch(`${SUPABASE_URL}/rest/v1/simulator_sessions`, {
-      method: "POST",
-      headers: { apikey: SUPABASE_KEY, "Content-Type": "application/json", Prefer: "return=minimal" },
-      body: JSON.stringify(payload),
-      keepalive: true,
-    });
-  } catch (_) {}
+  const payload={session_id:state.sessionId,event_type:eventType,status:eventType==="completed"?"completed":eventType==="started"?"started":"in_progress",last_step:Math.min(4,Number(extra.last_step??0)),technology_stack:state.stack,legacy_services:state.services,modernization_modules:state.modules,user_count:state.users,page_path:location.pathname,referrer:document.referrer||null,user_agent:navigator.userAgent,completed_at:eventType==="completed"?new Date().toISOString():null,...extra};
+  try { const r=await fetch(`${SUPABASE_URL}/rest/v1/simulator_sessions`,{method:"POST",headers:{apikey:SUPABASE_KEY,Authorization:`Bearer ${SUPABASE_KEY}`,"Content-Type":"application/json",Prefer:"return=minimal"},body:JSON.stringify(payload),keepalive:true}); if(!r.ok) console.error("Simulator analytics failed",r.status,await r.text()); } catch(e){ console.error("Simulator analytics failed",e); }
 }
 
-function selectedLabels() {
-  return [...document.querySelectorAll(".sim-opt.on .sim-ol")].map(x => x.textContent.trim());
+const TECH=["JavaScript","TypeScript","Node.js","Python","Java","C# / .NET","C / C++","PHP","Ruby","Go","Rust","Kotlin","Swift","Scala","Perl","COBOL","Visual Basic 6","ColdFusion","AS/400 / RPG","Dart","Elixir","Haskell","MATLAB","R","Groovy","Objective-C"];
+const LEARN={
+ "Docker":["Packages an application and its dependencies into portable containers.","https://docs.docker.com/get-started/"],
+ "Kubernetes":["Runs, scales and manages containerized applications across clusters of machines.","https://kubernetes.io/docs/concepts/overview/"],
+ "CI/CD pipeline":["Automates building, testing and safely releasing software changes.","https://docs.github.com/actions"],
+ "Cloud migration":["Moves applications, data or infrastructure to managed cloud platforms.","https://learn.microsoft.com/azure/cloud-adoption-framework/"],
+ "REST APIs":["A common web API approach for connecting applications and services over HTTP.","https://developer.mozilla.org/en-US/docs/Glossary/REST"],
+ "SSO & OAuth 2.0":["Centralizes sign-in and delegated access so users and applications authenticate more safely.","https://oauth.net/2/"],
+ "Observability stack":["Combines metrics, logs and traces to understand system health and diagnose problems.","https://opentelemetry.io/docs/what-is-opentelemetry/"],
+ "Microservices":["Separates selected business capabilities into independently deployable services.","https://learn.microsoft.com/azure/architecture/guide/architecture-styles/microservices"],
+ "Cloud database":["Uses managed database services to reduce infrastructure operations and improve resilience options.","https://aws.amazon.com/products/databases/learn/"],
+ "CDN & edge caching":["Caches content closer to users to reduce latency and origin load.","https://developer.mozilla.org/en-US/docs/Glossary/CDN"],
+ "Infrastructure as Code":["Defines infrastructure in version-controlled code for repeatable, reviewable environments.","https://developer.hashicorp.com/terraform/intro"],
+ "Security hardening":["Reduces attack surface through stronger identity, network, configuration and application controls.","https://www.cisa.gov/resources-tools/resources/cybersecurity-performance-goals"],
+ "API gateway":["Provides a controlled entry point for APIs with routing, authentication, throttling and policy enforcement.","https://learn.microsoft.com/azure/api-management/api-management-key-concepts"],
+ "Data pipeline modern.":["Modernizes how data is collected, transformed, moved and delivered for operational or analytical use.","https://learn.microsoft.com/azure/architecture/data-guide/"],
+ "Message queues":["Decouples services by allowing work and events to be processed asynchronously and reliably.","https://aws.amazon.com/message-queue/"],
+ "AI / ML integration":["Adds model-driven prediction, extraction, generation or automation where it has measurable business value.","https://learn.microsoft.com/azure/architecture/ai-ml/"],
+};
+
+function selectedLabels(){return [...document.querySelectorAll(".sim-opt.on .sim-ol")].map(x=>x.textContent.trim());}
+function captureStep(){const step=document.querySelector(".sim-ey")?.textContent||"",labels=selectedLabels();if(step.includes("Step 1")){const custom=[...document.querySelectorAll(".bl-stack-chip")].map(x=>x.dataset.value);state.stack=[...new Set([...labels,...custom])];}if(step.includes("Step 2"))state.services=labels;if(step.includes("Step 4"))state.modules=labels;const slider=document.querySelector("#susl");if(slider)state.users=Number(slider.value||2000);save();}
+
+function addStackSearch(){if(!document.querySelector(".sim-ey")?.textContent.includes("Step 1")||document.querySelector("#bl-stack-search"))return;const grid=document.querySelector(".sim-g2");if(!grid)return;const box=document.createElement("div");box.id="bl-stack-search";box.style.cssText="grid-column:1/-1;margin:2px 0 16px;position:relative";box.innerHTML=`<div style="font-size:14px;font-weight:800;color:#0d1b2e;margin-bottom:7px">Type what your application uses</div><div style="font-size:12px;color:#5a7090;margin-bottom:9px">Not sure whether it is in our list? Start typing — for example <b>NO</b> for Node.js, <b>PY</b> for Python, or enter another technology.</div><input id="bl-stack-input" autocomplete="off" placeholder="Search or type a programming language / technology…" style="width:100%;box-sizing:border-box;padding:13px 14px;border:1.5px solid #a9cdf0;border-radius:10px;font-size:14px;outline:none;background:white"><div id="bl-stack-suggest" style="display:none;position:absolute;z-index:20;left:0;right:0;top:100%;background:white;border:1px solid #d9e4ef;border-radius:10px;box-shadow:0 12px 30px rgba(13,27,46,.14);overflow:hidden;margin-top:5px"></div><div id="bl-stack-chips" style="display:flex;gap:7px;flex-wrap:wrap;margin-top:9px"></div>`;grid.parentNode.insertBefore(box,grid);
+ const input=box.querySelector("#bl-stack-input"),suggest=box.querySelector("#bl-stack-suggest"),chips=box.querySelector("#bl-stack-chips");
+ const add=v=>{v=v.trim();if(!v||state.stack.some(x=>x.toLowerCase()===v.toLowerCase()))return;state.stack.push(v);save();renderChips();input.value="";suggest.style.display="none";};
+ const renderChips=()=>{chips.innerHTML=state.stack.filter(x=>!selectedLabels().includes(x)).map(v=>`<span class="bl-stack-chip" data-value="${v.replace(/"/g,"&quot;")}" style="display:inline-flex;align-items:center;gap:6px;background:#eef6fd;color:#174a73;border:1px solid #c8e0f4;padding:6px 9px;border-radius:20px;font-size:12px;font-weight:700">${v}<button type="button" aria-label="Remove ${v}" style="border:0;background:none;cursor:pointer;color:#174a73;font-size:15px;line-height:1">×</button></span>`).join("");chips.querySelectorAll("button").forEach(b=>b.onclick=()=>{const v=b.parentElement.dataset.value;state.stack=state.stack.filter(x=>x!==v);save();renderChips();});};
+ input.oninput=()=>{const q=input.value.trim().toLowerCase();if(!q){suggest.style.display="none";return;}const hits=TECH.filter(x=>x.toLowerCase().includes(q)).slice(0,6);suggest.innerHTML=hits.map(x=>`<button type="button" data-v="${x}" style="display:block;width:100%;text-align:left;border:0;border-bottom:1px solid #edf2f7;background:white;padding:11px 13px;cursor:pointer;font-size:13px"><b>${x}</b></button>`).join("")+(hits.some(x=>x.toLowerCase()===q)?"":`<button type="button" data-v="${input.value.trim().replace(/"/g,"&quot;")}" style="display:block;width:100%;text-align:left;border:0;background:#f7fafc;padding:11px 13px;cursor:pointer;font-size:13px;color:#378add">+ Use “${input.value.trim()}”</button>`);suggest.style.display="block";suggest.querySelectorAll("button").forEach(b=>b.onclick=()=>add(b.dataset.v));};input.onkeydown=e=>{if(e.key==="Enter"){e.preventDefault();const first=suggest.querySelector("button");add(first?.dataset.v||input.value);}};renderChips();
 }
 
-function captureStep() {
-  const step = document.querySelector(".sim-ey")?.textContent || "";
-  const labels = selectedLabels();
-  if (step.includes("Step 1")) state.stack = labels;
-  if (step.includes("Step 2")) state.services = labels;
-  if (step.includes("Step 4")) state.modules = labels;
-  const slider = document.querySelector("#susl");
-  if (slider) state.users = Number(slider.value || 2000);
-  save();
-}
+function addLearning(){if(!document.querySelector(".sim-ey")?.textContent.includes("Step 4"))return;document.querySelectorAll(".sim-opt").forEach(opt=>{if(opt.querySelector(".bl-info"))return;const label=opt.querySelector(".sim-ol")?.textContent.trim(),data=LEARN[label];if(!data)return;const b=document.createElement("button");b.type="button";b.className="bl-info";b.setAttribute("aria-label",`Learn about ${label}`);b.innerHTML="i";b.style.cssText="margin-left:auto;flex:0 0 22px;width:22px;height:22px;border-radius:50%;border:1px solid #9cc6e9;background:#f5faff;color:#286da8;font-weight:900;font-family:serif;cursor:help;position:relative";const tip=document.createElement("div");tip.style.cssText="display:none;position:absolute;z-index:30;width:270px;right:-8px;bottom:30px;background:#0d1b2e;color:white;border-radius:11px;padding:13px;text-align:left;box-shadow:0 14px 32px rgba(0,0,0,.22);font-family:Arial,sans-serif;font-weight:400;font-size:12px;line-height:1.5";tip.innerHTML=`<strong style="font-size:13px">${label}</strong><div style="color:#d8e3ee;margin:5px 0 8px">${data[0]}</div><a href="${data[1]}" target="_blank" rel="noopener noreferrer" style="color:#7fc2ff;font-weight:800;text-decoration:none">Learn from the official documentation ↗</a>`;b.appendChild(tip);b.onmouseenter=()=>tip.style.display="block";b.onmouseleave=()=>tip.style.display="none";b.onclick=e=>{e.stopPropagation();tip.style.display=tip.style.display==="block"?"none":"block";};opt.appendChild(b);});}
 
-function buildAssessment() {
-  const svc = state.services.map(x => x.toLowerCase());
-  const mods = state.modules.map(x => x.toLowerCase());
-  const findings = [];
-  const recs = [];
-  const add = (severity, title, detail, recommendation) => { findings.push({ severity, title, detail }); recs.push(recommendation); };
-
-  if (svc.some(x => x.includes("manual deployment"))) add("High", "Release process is manually dependent", "Manual deployments increase release inconsistency, recovery time, and operational dependency on individual staff.", "Introduce a staged CI/CD pipeline with approval gates, rollback, and automated validation.");
-  if (svc.some(x => x.includes("custom auth") || x.includes("ldap"))) add("High", "Identity modernization opportunity", "Legacy or custom identity increases access-control overhead and makes MFA, SSO, and centralized governance harder.", "Move toward managed identity with SSO, MFA, role-based access, and auditable access policies.");
-  if (svc.some(x => x.includes("ftp"))) add("High", "Legacy file-transfer exposure", "FTP-based workflows create avoidable security and operational risk, especially when business-critical data is transferred outside modern controls.", "Replace FTP workflows with encrypted managed transfer, object storage, or API-based exchange.");
-  if (svc.some(x => x.includes("paper"))) add("High", "Manual workflow bottleneck", "Paper-based processes limit visibility, create re-entry work, and make approvals and reporting difficult to scale.", "Digitize the workflow first, then automate routing, approvals, notifications, and reporting.");
-  if (svc.some(x => x.includes("on-prem database") || x.includes("virtual servers"))) add("Medium", "Infrastructure concentration risk", "Core workloads appear dependent on locally managed infrastructure, increasing maintenance burden and limiting elasticity.", "Assess cloud/hybrid readiness, backup posture, recovery objectives, and phased migration options.");
-  if (svc.some(x => x.includes("soap"))) add("Medium", "Integration architecture is aging", "SOAP/XML dependencies can slow partner integration and make modern web/mobile services harder to evolve.", "Introduce an API modernization layer and migrate interfaces incrementally rather than rewriting everything at once.");
-  if (svc.some(x => x.includes("monolithic"))) add("Medium", "Deployment coupling detected", "A single deployment unit increases blast radius and makes independent scaling or releases more difficult.", "Identify high-change domains and separate them selectively; avoid unnecessary full microservice decomposition.");
-  if (svc.some(x => x.includes("no caching"))) add("Medium", "Performance headroom identified", "Lack of caching can increase database/application load and worsen response time under traffic spikes.", "Profile real bottlenecks, then add application, data, CDN, or edge caching where measurements justify it.");
-  if (!findings.length) add("Low", "No major red flag selected", "The supplied answers do not indicate an obvious critical modernization blocker, but a questionnaire cannot verify production performance or security.", "Validate the result with a short technical discovery review before committing to modernization work.");
-
-  const high = findings.filter(f => f.severity === "High").length;
-  const medium = findings.filter(f => f.severity === "Medium").length;
-  const score = Math.max(20, Math.min(92, 88 - high * 14 - medium * 7 - Math.max(0, state.services.length - 3) * 2));
-  const priority = high >= 2 ? "High priority" : high === 1 || medium >= 3 ? "Moderate priority" : "Monitor / validate";
-  return { findings: findings.slice(0, 5), recommendations: [...new Set(recs)].slice(0, 5), score, priority };
-}
-
-function enhanceResults() {
-  if (document.querySelector("#bluelink-assessment")) return;
-  const results = document.querySelector(".sim-ins");
-  if (!results || !document.body.textContent.includes("Health before")) return;
-  const A = buildAssessment();
-  const panel = document.createElement("section");
-  panel.id = "bluelink-assessment";
-  panel.style.cssText = "margin-top:18px;border:1px solid #d9e4ef;border-radius:14px;background:#fff;padding:22px;color:#0d1b2e";
-  panel.innerHTML = `
-    <div style="display:flex;justify-content:space-between;gap:16px;align-items:flex-start;flex-wrap:wrap">
-      <div><div style="font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#378add">Business Technology Assessment</div><h3 style="margin:6px 0 4px;font-size:22px">What your answers actually indicate</h3><p style="margin:0;color:#5a7090;font-size:13px">Evidence-based guidance from the conditions you selected — not a promise of future performance.</p></div>
-      <div style="min-width:130px;text-align:center;background:#f5f9fd;border-radius:12px;padding:12px"><div style="font-size:28px;font-weight:800">${A.score}/100</div><div style="font-size:12px;color:#5a7090">Readiness score</div><div style="font-size:12px;font-weight:800;color:${A.priority.startsWith("High") ? "#b42318" : "#b8720f"};margin-top:4px">${A.priority}</div></div>
-    </div>
-    <div style="margin-top:20px"><strong>Priority findings</strong>${A.findings.map(f => `<div style="margin-top:10px;padding:12px;border-left:3px solid ${f.severity === "High" ? "#dc4545" : f.severity === "Medium" ? "#b8720f" : "#1d9e75"};background:#f8fafc"><div style="font-weight:800;font-size:14px">${f.severity}: ${f.title}</div><div style="font-size:13px;color:#52657a;margin-top:3px;line-height:1.5">${f.detail}</div></div>`).join("")}</div>
-    <div style="margin-top:20px"><strong>Recommended next moves</strong><ol style="margin:10px 0 0;padding-left:20px;color:#52657a;font-size:13px;line-height:1.65">${A.recommendations.map(r => `<li style="margin-bottom:6px">${r}</li>`).join("")}</ol></div>
-    <div style="margin-top:20px;padding:16px;background:#0d1b2e;border-radius:12px;color:#fff"><strong>Want this assessment tied to your company?</strong><p style="font-size:13px;color:#c6d2df;margin:5px 0 12px">Leave your details and BlueLink can review the result against your real environment. No obligation.</p><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><input id="bla-company" placeholder="Company" style="padding:10px;border-radius:7px;border:1px solid #50657c"><input id="bla-email" type="email" placeholder="Business email" style="padding:10px;border-radius:7px;border:1px solid #50657c"></div><button id="bla-save" style="margin-top:9px;background:#378add;color:white;border:0;border-radius:7px;padding:10px 16px;font-weight:800;cursor:pointer">Save my assessment</button><span id="bla-msg" style="font-size:12px;margin-left:10px;color:#a9c9e8"></span></div>`;
-  results.insertAdjacentElement("afterend", panel);
-  record("completed", { last_step: 4, health_score: A.score, priority_level: A.priority, findings: A.findings, recommendations: A.recommendations, result_snapshot: { stack: state.stack, services: state.services, modules: state.modules, users: state.users } });
-  panel.querySelector("#bla-save")?.addEventListener("click", () => {
-    const company = panel.querySelector("#bla-company").value.trim();
-    const email = panel.querySelector("#bla-email").value.trim();
-    if (!email || !email.includes("@")) { panel.querySelector("#bla-msg").textContent = "Enter a valid email."; return; }
-    record("lead", { last_step: 4, company_name: company || null, contact_email: email, health_score: A.score, priority_level: A.priority, findings: A.findings, recommendations: A.recommendations });
-    panel.querySelector("#bla-msg").textContent = "Assessment saved.";
-  });
-}
-
-function watch() {
-  if (location.pathname !== "/simulator") return;
-  if (!state.started) { state.started = true; save(); record("started", { last_step: 0 }); }
-  document.addEventListener("click", e => {
-    if (!e.target.closest(".simulator-page, .sim-wrap, [class*='sim-']")) return;
-    setTimeout(() => {
-      captureStep();
-      const txt = e.target.textContent || "";
-      if (/Continue/.test(txt)) record("progress", { last_step: Math.min(4, Number((document.querySelector(".sim-ey")?.textContent.match(/Step (\d)/) || [0,0])[1])) });
-      if (/Run simulation/.test(txt)) record("simulation_run", { last_step: 4 });
-      if (/Start over/.test(txt)) { state = fresh(); save(); record("restarted", { last_step: 0 }); }
-    }, 50);
-  }, true);
-  const observer = new MutationObserver(() => { captureStep(); enhanceResults(); });
-  observer.observe(document.getElementById("root") || document.body, { childList: true, subtree: true });
-  setTimeout(enhanceResults, 500);
-}
-
-if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", watch); else watch();
+function enhance(){addStackSearch();addLearning();}
+function watch(){if(location.pathname!=="/simulator")return;if(!state.started){state.started=true;save();record("started",{last_step:0});}document.addEventListener("click",e=>{if(!e.target.closest("[class*='sim-'],#bl-stack-search"))return;setTimeout(()=>{captureStep();enhance();const txt=e.target.textContent||"";if(/Continue/.test(txt))record("progress",{last_step:Number((document.querySelector(".sim-ey")?.textContent.match(/Step (\d)/)||[0,0])[1])});if(/Run simulation/.test(txt))record("simulation_run",{last_step:4});if(/Start over/.test(txt)){state=fresh();save();record("restarted",{last_step:0});}},80);},true);const observer=new MutationObserver(()=>{captureStep();enhance();});observer.observe(document.getElementById("root")||document.body,{childList:true,subtree:true});setTimeout(enhance,300);}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",watch);else setTimeout(watch,0);
