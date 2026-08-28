@@ -1,79 +1,24 @@
 const DEVOPS_PATH = "/services/devops";
+const DEVOPS_ICON = `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 17.5a4.5 4.5 0 1 1 0-9h1.1A6 6 0 0 1 20.5 11a3.5 3.5 0 0 1-.5 6.96"/><path d="M8 14l-2 2 2 2"/><path d="M6 16h6a3 3 0 0 0 3-3v-1"/><path d="M16 10l2-2-2-2"/><path d="M18 8h-5a3 3 0 0 0-3 3v1"/></svg>`;
 
 function renderDevOpsPage() {
   if (location.pathname !== DEVOPS_PATH) return false;
-  const root = document.getElementById("root");
-  if (!root) return false;
+  const root = document.getElementById("root"); if (!root) return false;
   document.title = "DevOps Services | BlueLink Consults";
-  root.innerHTML = `
-    <div style="font-family:Inter,Arial,sans-serif;color:#10233f;background:#fff;min-height:100vh">
-      <header style="position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid #e4edf6;padding:18px 6%">
-        <a href="/" style="font-size:24px;font-weight:900;text-decoration:none;color:#10233f">Blue<span style="color:#1677e8">Link</span> <span style="font-size:14px;letter-spacing:3px;color:#7137d8">CONSULTS</span></a>
-      </header>
-      <main>
-        <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:42px;align-items:center;padding:72px 7%;background:linear-gradient(135deg,#f5faff,#eef5ff)">
-          <div>
-            <div style="color:#178b68;font-weight:900;letter-spacing:2px;font-size:13px;margin-bottom:14px">DEVOPS & DELIVERY AUTOMATION</div>
-            <h1 style="font-size:clamp(38px,6vw,68px);line-height:1.02;margin:0 0 22px;color:#10233f">Modernize applications. Ship changes faster. Operate with confidence.</h1>
-            <p style="font-size:19px;line-height:1.7;color:#536b86;max-width:720px">BlueLink Consults uses DevOps to turn slow, manual and risky software delivery into a repeatable engineering system. We connect development, infrastructure, testing, security and operations so modernized applications can move from code to production safely and consistently.</p>
-            <a href="/contact" style="display:inline-block;margin-top:24px;background:#1677e8;color:white;text-decoration:none;padding:14px 22px;border-radius:10px;font-weight:800">Discuss your DevOps needs →</a>
-          </div>
-          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=85&w=1800&auto=format&fit=crop" alt="Modern cloud infrastructure and DevOps operations" style="width:100%;height:440px;object-fit:cover;border-radius:24px;box-shadow:0 24px 60px rgba(18,54,91,.18)" />
-        </section>
-        <section style="padding:70px 7%;max-width:1250px;margin:auto">
-          <div style="max-width:850px;margin-bottom:45px"><div style="color:#178b68;font-weight:900;letter-spacing:1.5px;font-size:13px">HOW DEVOPS SUPPORTS MODERNIZATION</div><h2 style="font-size:38px;margin:10px 0 16px">Modern code needs a modern delivery system.</h2><p style="font-size:18px;line-height:1.75;color:#60758d">Rewriting an application is only part of modernization. If releases are still manual, environments drift, infrastructure is configured by hand, or teams cannot see failures quickly, the application remains difficult to operate. BlueLink builds the delivery foundation around the application so modernization produces lasting operational improvement.</p></div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px">
-            ${[
-              ["CI/CD Pipelines","Automate build, test, validation and deployment workflows so releases become faster, repeatable and easier to roll back."],
-              ["Infrastructure as Code","Use Terraform and cloud-native tooling to create consistent, version-controlled infrastructure instead of fragile manual configuration."],
-              ["Containers & Cloud","Containerize suitable workloads and deploy them to scalable Azure, AWS, Kubernetes or managed application platforms."],
-              ["Observability","Implement logs, metrics, traces and alerting so teams can understand application health and find production problems quickly."],
-              ["DevSecOps","Build security checks, secrets handling, identity controls and policy validation into the delivery lifecycle rather than adding security at the end."],
-              ["Release Reliability","Introduce environment validation, approval gates, rollback strategies and BlueLink predeployment checks before changes reach production."]
-            ].map(([t,d])=>`<article style="border:1px solid #dce8f3;border-radius:16px;padding:25px;background:#fff;box-shadow:0 8px 25px rgba(23,61,98,.05)"><h3 style="margin:0 0 10px;font-size:20px">${t}</h3><p style="margin:0;color:#60758d;line-height:1.65">${d}</p></article>`).join("")}
-          </div>
-        </section>
-        <section style="padding:70px 7%;background:#07142d;color:white">
-          <div style="max-width:1150px;margin:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:50px">
-            <div><div style="color:#55d6ad;font-weight:900;letter-spacing:1.5px;font-size:13px">WHAT BLUELINK DELIVERS</div><h2 style="font-size:38px;margin:12px 0">From modernization plan to production.</h2><p style="color:#c4d3e5;line-height:1.75;font-size:17px">We assess the current release process, identify bottlenecks and operational risks, then build a DevOps roadmap around the application and the team that supports it.</p></div>
-            <div style="display:grid;gap:13px">${["Current-state DevOps and release assessment","GitHub Actions, Azure DevOps or GitLab CI/CD","Terraform and Infrastructure as Code","Docker and Kubernetes where they add value","Automated testing and predeployment validation","Monitoring, logging and production alerting","Secure secrets, identity and deployment controls","Documentation, handover and team enablement"].map(x=>`<div style="padding:15px 17px;border:1px solid #29415f;border-radius:10px;background:#0c1d3a">✓ ${x}</div>`).join("")}</div>
-          </div>
-        </section>
-        <section style="padding:70px 7%;text-align:center"><h2 style="font-size:38px;margin-bottom:12px">Your application should not be modern while your deployment process stays in the past.</h2><p style="font-size:18px;color:#60758d;max-width:760px;margin:0 auto 25px">BlueLink brings application modernization and DevOps together so new architecture is supported by reliable delivery, scalable infrastructure and measurable operational visibility.</p><a href="/simulator" style="display:inline-block;background:#178b68;color:#fff;text-decoration:none;padding:14px 22px;border-radius:10px;font-weight:800">Run the BlueLink technology assessment →</a></section>
-      </main>
-    </div>`;
-  return true;
+  root.innerHTML = `<div style="font-family:Inter,Arial,sans-serif;color:#10233f;background:#fff;min-height:100vh"><header style="position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid #e4edf6;padding:18px 6%"><a href="/" style="font-size:24px;font-weight:900;text-decoration:none;color:#10233f">Blue<span style="color:#1677e8">Link</span> <span style="font-size:14px;letter-spacing:3px;color:#7137d8">CONSULTS</span></a></header><main><section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:42px;align-items:center;padding:72px 7%;background:linear-gradient(135deg,#f5faff,#eef5ff)"><div><div style="color:#178b68;font-weight:900;letter-spacing:2px;font-size:13px;margin-bottom:14px">DEVOPS & DELIVERY AUTOMATION</div><h1 style="font-size:clamp(38px,6vw,68px);line-height:1.02;margin:0 0 22px;color:#10233f">Modernize applications. Ship changes faster. Operate with confidence.</h1><p style="font-size:19px;line-height:1.7;color:#536b86;max-width:720px">BlueLink Consults uses DevOps to turn slow, manual and risky software delivery into a repeatable engineering system. We connect development, infrastructure, testing, security and operations so modernized applications can move from code to production safely and consistently.</p><a href="/contact" style="display:inline-block;margin-top:24px;background:#1677e8;color:white;text-decoration:none;padding:14px 22px;border-radius:10px;font-weight:800">Discuss your DevOps needs →</a></div><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=85&w=1800&auto=format&fit=crop" alt="Modern cloud infrastructure and DevOps operations" style="width:100%;height:440px;object-fit:cover;border-radius:24px;box-shadow:0 24px 60px rgba(18,54,91,.18)" /></section><section style="padding:70px 7%;max-width:1250px;margin:auto"><div style="max-width:850px;margin-bottom:45px"><div style="color:#178b68;font-weight:900;letter-spacing:1.5px;font-size:13px">HOW DEVOPS SUPPORTS MODERNIZATION</div><h2 style="font-size:38px;margin:10px 0 16px">Modern code needs a modern delivery system.</h2><p style="font-size:18px;line-height:1.75;color:#60758d">Rewriting an application is only part of modernization. If releases are still manual, environments drift, infrastructure is configured by hand, or teams cannot see failures quickly, the application remains difficult to operate. BlueLink builds the delivery foundation around the application so modernization produces lasting operational improvement.</p></div><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(245px,1fr));gap:18px">${[["CI/CD Pipelines","Automate build, test, validation and deployment workflows so releases become faster, repeatable and easier to roll back."],["Infrastructure as Code","Use Terraform and cloud-native tooling to create consistent, version-controlled infrastructure instead of fragile manual configuration."],["Containers & Cloud","Containerize suitable workloads and deploy them to scalable Azure, AWS, Kubernetes or managed application platforms."],["Observability","Implement logs, metrics, traces and alerting so teams can understand application health and find production problems quickly."],["DevSecOps","Build security checks, secrets handling, identity controls and policy validation into the delivery lifecycle rather than adding security at the end."],["Release Reliability","Introduce environment validation, approval gates, rollback strategies and BlueLink predeployment checks before changes reach production."]].map(([t,d])=>`<article style="border:1px solid #dce8f3;border-radius:16px;padding:25px;background:#fff"><h3>${t}</h3><p style="color:#60758d;line-height:1.65">${d}</p></article>`).join("")}</div></section></main></div>`; return true;
 }
 
-function addDevOpsLinks() {
-  if (location.pathname === DEVOPS_PATH) return;
-  document.querySelectorAll('a[href="/services/cloud-infrastructure"],a[href="/services/application-modernization"]').forEach((anchor) => {
-    const parent = anchor.parentElement;
-    if (!parent || parent.querySelector('a[data-bl-devops="1"]')) return;
-    const link = document.createElement("a");
-    link.href = DEVOPS_PATH;
-    link.dataset.blDevops = "1";
-    link.textContent = "DevOps";
-    link.className = anchor.className;
-    link.style.cssText = anchor.style.cssText;
-    parent.appendChild(link);
-  });
-
-  const serviceHeadings=[...document.querySelectorAll("h1,h2,h3")].filter(x=>/^services$/i.test(x.textContent.trim())||/our services/i.test(x.textContent.trim()));
-  serviceHeadings.forEach(h=>{
-    const section=h.closest("section")||h.parentElement;
-    if(!section||section.querySelector('[data-bl-devops-card="1"]'))return;
-    const cloud=[...section.querySelectorAll('a[href="/services/cloud-infrastructure"]')].find(a=>a.textContent.trim().length>20);
-    if(!cloud)return;
-    const card=cloud.cloneNode(true);card.href=DEVOPS_PATH;card.dataset.blDevopsCard="1";
-    const title=[...card.querySelectorAll("h2,h3,h4,strong")].find(x=>/cloud infrastructure/i.test(x.textContent));if(title)title.textContent="DevOps & Delivery Automation";
-    const p=[...card.querySelectorAll("p")][0];if(p)p.textContent="CI/CD, Infrastructure as Code, containers, observability and release automation that make application modernization reliable in production.";
-    cloud.parentElement.appendChild(card);
-  });
+function decorateDevOpsLink(link){
+  if(!link || link.dataset.blDevopsIcon==="1") return;
+  link.dataset.blDevopsIcon="1";
+  link.style.display="flex";link.style.alignItems="center";link.style.gap="16px";
+  const icon=document.createElement("span");icon.className="bl-devops-nav-icon";icon.innerHTML=DEVOPS_ICON;icon.style.cssText="display:inline-flex;align-items:center;justify-content:center;flex:0 0 30px;width:30px;height:30px;color:#ad5e17";
+  const svg=icon.querySelector("svg");svg.style.cssText="width:27px;height:27px;display:block";
+  link.insertBefore(icon,link.firstChild);
 }
-
-if (!renderDevOpsPage()) {
-  const observer = new MutationObserver(addDevOpsLinks);
-  observer.observe(document.getElementById("root") || document.body,{childList:true,subtree:true});
-  setTimeout(addDevOpsLinks,250);
+function addDevOpsLinks(){
+  if(location.pathname===DEVOPS_PATH)return;
+  document.querySelectorAll('a[href="/services/cloud-infrastructure"],a[href="/services/application-modernization"]').forEach(anchor=>{const parent=anchor.parentElement;if(!parent||parent.querySelector('a[data-bl-devops="1"]'))return;const link=document.createElement("a");link.href=DEVOPS_PATH;link.dataset.blDevops="1";link.textContent="DevOps";link.className=anchor.className;link.style.cssText=anchor.style.cssText;parent.appendChild(link);decorateDevOpsLink(link);});
+  document.querySelectorAll('a[href="/services/devops"]').forEach(decorateDevOpsLink);
 }
+if(!renderDevOpsPage()){const observer=new MutationObserver(addDevOpsLinks);observer.observe(document.getElementById("root")||document.body,{childList:true,subtree:true});setTimeout(addDevOpsLinks,250);}
