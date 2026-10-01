@@ -2193,3 +2193,7 @@ h1, h2, h3, h4 { margin: 0; }
   .roof-demo-actions a:first-child{padding:13px 15px;font-size:8px}
   .roof-demo-actions a:last-child{font-size:8px}
 }
+
+.demo-profile { display: grid; gap: 12px; padding: 22px; background: var(--paper, #f5f7fa); border: 1px solid var(--line); border-radius: 8px; }
+.demo-profile a, .success-box > a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
+.contact-details a { display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; }

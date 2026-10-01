@@ -45,11 +45,12 @@ import {
 import "./styles.css";
 import { supabase } from "./supabaseClient";
 import ClientPortal from "./ClientPortal";
+import DemoRequestPage from "./DemoRequestPage";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
 ───────────────────────────────────────────────────────────── */
-const services = [
+const globalServices = [
   {
     slug: "web-development",
     title: "Web Development",
@@ -197,6 +198,48 @@ const services = [
     ],
   },
 ];
+
+// Keep the existing international website intact; Nigeria uses its own catalogue.
+const isNigeriaSite = ["bluelinkconsults.ng", "www.bluelinkconsults.ng"].includes(window.location.hostname);
+const nigeriaServices = [
+  { slug: "technology-audit-assessment", title: "Technology Audit & Assessment", icon: ShieldCheck,
+    summary: "Understand your technology risks, costs and improvement priorities before investing in change.",
+    body: "We assess application architecture, infrastructure configurations, dependencies, resource utilisation and access controls. Findings are prioritised by business impact and technical risk, with a practical improvement roadmap.",
+    tools: ["Architecture and dependency review", "Configuration and access-control assessment", "Resource utilisation and cost analysis"],
+    outcomes: ["Evidence-based findings report", "Risk register with priorities", "Phased improvement roadmap"],
+    blueLinkHelp: ["Agree the assessment scope and evidence required.", "Review systems and validate findings with your team.", "Assign priorities, owners and recommended next steps."] },
+  { slug: "application-modernization", title: "Application Modernisation", icon: ServerCog,
+    summary: "Improve fragile applications, slow transactions and disconnected systems with a clear modernisation plan.",
+    body: "We review code structure, APIs, database dependencies, performance and maintainability, then select the right approach: refactoring, replatforming, rebuilding or integrating. Delivery is phased to support business continuity.",
+    tools: ["Code and database dependency analysis", "API and integration design", "Performance and regression testing"],
+    outcomes: ["Target application architecture", "Modernised application components", "Documented test results and handover"],
+    blueLinkHelp: ["Identify technical debt and business-critical workflows.", "Agree a target architecture and delivery plan.", "Implement and test changes in manageable phases."] },
+  { slug: "cloud-infrastructure", title: "Cloud Infrastructure", icon: Cloud,
+    summary: "Build secure, scalable public, private or hybrid infrastructure with recovery built into the design.",
+    body: "We design and implement compute, storage, networking, identity, backup and recovery foundations. Architecture decisions reflect workload needs, operating costs and your team's support capabilities.",
+    tools: ["Azure, AWS and hybrid environments", "Network and identity design", "Backup and recovery validation"],
+    outcomes: ["Infrastructure architecture and deployment configuration", "Access and network controls", "Backup and recovery plan"],
+    blueLinkHelp: ["Assess workload and availability requirements.", "Design and deploy the infrastructure foundation.", "Validate recovery and document operational ownership."] },
+  { slug: "devops-automation", title: "DevOps & Automation", icon: Workflow,
+    summary: "Replace manual builds and deployments with repeatable, version-controlled delivery workflows.",
+    body: "We connect source control, build pipelines, automated testing, infrastructure provisioning and secrets management. Release approvals and rollback procedures make changes traceable and easier to operate.",
+    tools: ["GitHub Actions, Azure DevOps and GitLab CI/CD", "Terraform and configuration automation", "Secrets management and release gates"],
+    outcomes: ["Repeatable delivery pipelines", "Version-controlled infrastructure", "Release and rollback runbooks"],
+    blueLinkHelp: ["Map the existing delivery workflow and bottlenecks.", "Automate build, test and provisioning steps.", "Document approvals and train your delivery team."] },
+  { slug: "predeployment-validation", title: "Pre-Deployment Validation", icon: FlaskConical,
+    summary: "Check configuration, integration, security and rollback readiness before a release reaches production.",
+    body: "We define release acceptance criteria and validate applications, infrastructure and configuration against them. Evidence, unresolved exceptions and a release recommendation help your team make an informed deployment decision.",
+    tools: ["Configuration and environment checks", "Integration and performance tests", "Security checks and rollback rehearsal"],
+    outcomes: ["Validation report with test evidence", "Unresolved exceptions and remediation actions", "Release readiness recommendation"],
+    blueLinkHelp: ["Agree acceptance criteria for the release.", "Run validation checks in the target environment.", "Review exceptions and recommend the next release action."] },
+  { slug: "operational-incident-support", title: "Operational & Incident Support", icon: Activity,
+    summary: "Improve visibility, diagnose incidents and restore services with practical operational support.",
+    body: "We help teams configure metrics, logs and alerting, investigate incidents and restore affected services. Runbooks and incident reviews turn operational learning into concrete improvements.",
+    tools: ["Metrics, logs and alerting", "Incident diagnosis and service restoration", "Operational runbooks and incident reviews"],
+    outcomes: ["Monitoring and alert configurations", "Operational response runbooks", "Incident reports and improvement actions"],
+    blueLinkHelp: ["Identify critical services and monitoring gaps.", "Configure actionable alerts and response procedures.", "Investigate incidents and track corrective actions."] },
+].map(service => ({ ...service, image: globalServices.find(item => item.slug === service.slug)?.image || globalServices[2].image }));
+const services = isNigeriaSite ? nigeriaServices : globalServices;
 
 const industries = [
   {
@@ -599,7 +642,7 @@ function Header() {
         </NavLink>
         <style>{`@keyframes simPulse{0%,100%{box-shadow:0 0 0 0 rgba(29,158,117,0.4)}50%{box-shadow:0 0 0 6px rgba(29,158,117,0)}}`}</style>
         <NavLink to="/client-login" className="login-btn" onClick={close}>Client Login</NavLink>
-        <NavLink to="/contact#consultation" className="contact-btn" onClick={close}>Contact Us</NavLink>
+        <NavLink to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} className="contact-btn" onClick={close}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</NavLink>
       </nav>
 
       <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">
@@ -660,19 +703,22 @@ function Footer() {
     <footer className="footer">
       <div>
         <strong>BlueLink Consults</strong>
-        <p>We fix old and slow applications — web development, cloud infrastructure, DevOps automation, data integration, and predeployment validation for growing organizations.</p>
+        <p>{isNigeriaSite ? "Technology assessment, application modernisation, cloud infrastructure, automation, release validation and operational support for Nigerian organisations." : "We fix old and slow applications — web development, cloud infrastructure, DevOps automation, data integration, and predeployment validation for growing organizations."}</p>
       </div>
       <div>
+        {isNigeriaSite ? services.map(service => <Link key={service.slug} to={`/services/${service.slug}`}>{service.title}</Link>) : <>
         <Link to="/services/web-development">Web Development</Link>
         <Link to="/services/application-modernization">Application Modernization</Link>
         <Link to="/services/cloud-infrastructure">Cloud Infrastructure</Link>
         <Link to="/services/predeployment-validation">Predeployment Validation</Link>
+        </>}
+        {isNigeriaSite && <a href="/BlueLink-Company-Profile.pdf" download>Download Company Profile</a>}
         <Link to="/insights">Insights</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
         <Link to="/terms">Terms of Service</Link>
       </div>
-      <small>© 2026 BlueLink Consults. All rights reserved. · Providence, RI, USA · info@bluelinkconsults.com</small>
+      <small>© 2026 BlueLink Consults. All rights reserved. · {isNigeriaSite ? "Nigeria" : "Providence, RI, USA"} · info@bluelinkconsults.com</small>
     </footer>
   );
 }
@@ -828,7 +874,7 @@ function CTABanner() {
           },
           {
             title: "Stay protected",
-            body: "Outdated software is the number one way hackers break in. We close those doors permanently.",
+            body: isNigeriaSite ? "We assess security gaps and strengthen access, configuration and release controls." : "Outdated software is the number one way hackers break in. We close those doors permanently.",
             svg: (
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none"
                 stroke="#0EA5E9" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
@@ -869,12 +915,12 @@ function CTABanner() {
       </div>
 
       {/* CTA Button */}
-      <Link to="/contact#consultation" className="bl-cta-btn">
-        Get a free 20-minute consultation →
+      <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} className="bl-cta-btn">
+        {isNigeriaSite ? "Request Demo" : "Get a free 20-minute consultation →"}
       </Link>
 
       <p style={{ fontSize: 12, color: "#0EA5E9", marginTop: 10, marginBottom: 0 }}>
-        www.bluelinkconsults.com
+        {isNigeriaSite ? "www.bluelinkconsults.ng" : "www.bluelinkconsults.com"}
       </p>
     </section>
   );
@@ -972,7 +1018,7 @@ function WhoWeServeStrip() {
 
       <div className="who-grid">
         {industries.map((ind) => (
-          <Link key={ind.name} to="/contact#consultation" className="who-card">
+          <Link key={ind.name} to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} className="who-card">
             <strong>{ind.name}</strong>
             {/* Description — visible on desktop, hidden on mobile */}
             <span className="who-desc">{ind.desc}</span>
@@ -1239,7 +1285,7 @@ function Hero() {
       >
         <h1>Modernize your applications. Accelerate your business performance.</h1>
         <p>Your website is slow. Your systems break. Your team wastes hours on things that should be automatic. We come in, find what's broken, and rebuild it properly — so your business runs the way it should.</p>
-        <Link to="/contact#consultation">Get a Free 20-Minute Consultation <ArrowRight size={19} /></Link>
+        <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Get a Free 20-Minute Consultation"} <ArrowRight size={19} /></Link>
       </motion.div>
     </section>
   );
@@ -1353,7 +1399,7 @@ function SolutionsPreview() {
       </div>
       <div className="solution-list">
         {industries.map((industry) => (
-          <Link to="/contact#consultation" key={industry}>
+          <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} key={industry}>
             <span>{industry}</span>
             <ArrowRight size={18} />
           </Link>
@@ -1425,7 +1471,7 @@ function ServicesPage() {
   usePageTitle("Services");
   return (
     <>
-      <PageHero label="Services" title="Explore BlueLink Consult services." text="We help organizations improve the full technical foundation: websites, applications, cloud infrastructure, DevOps, data, and predeployment validation." />
+      <PageHero label="Services" title="Explore BlueLink Consult services." text={isNigeriaSite ? "Six services to assess, modernise, deploy and support your technology." : "We help organizations improve the full technical foundation: websites, applications, cloud infrastructure, DevOps, data, and predeployment validation."} />
       <ServicesPreview />
     </>
   );
@@ -1433,7 +1479,7 @@ function ServicesPage() {
 
 function ServiceDetail() {
   const { slug } = useParams();
-  const service = services.find((s) => s.slug === slug) || services[0];
+  const service = services.find((s) => s.slug === (isNigeriaSite && slug === "devops" ? "devops-automation" : slug)) || services[0];
   const Icon = service.icon;
   usePageTitle(service.title);
   return (
@@ -1506,7 +1552,7 @@ function ServiceDetail() {
             <>
               <h3>Start with a modernization review</h3>
               <p>We can begin with a focused review of your current environment and provide a practical modernization roadmap.</p>
-              <Link to="/contact#consultation">Request Review <ArrowRight size={17} /></Link>
+              <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Request Review <ArrowRight size={17} /></Link>
             </>
           )}
         </aside>
@@ -1547,7 +1593,7 @@ function ServiceDetail() {
                     </li>
                   ))}
                 </ul>
-                <Link to="/contact#consultation">Talk to us <ArrowRight size={18} /></Link>
+                <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Talk to us <ArrowRight size={18} /></Link>
               </article>
             ))}
           </div>
@@ -1603,7 +1649,7 @@ function WhoWeHelpPage() {
               <h3>{industry.name}</h3>
               <div className="rule" />
               <p>{industry.desc}</p>
-              <Link to="/contact#consultation">Discuss Your Needs <ArrowRight size={18} /></Link>
+              <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Discuss Your Needs <ArrowRight size={18} /></Link>
             </article>
           ))}
         </div>
@@ -1613,7 +1659,7 @@ function WhoWeHelpPage() {
           <p className="eyebrow" style={{ color:"var(--bronze)" }}>Ready to start?</p>
           <h2 style={{ fontFamily:"var(--font-display)", color:"white", marginBottom:16, fontSize:"clamp(1.6rem,2.8vw,2.2rem)" }}>Not sure which category fits you?</h2>
           <p style={{ color:"rgba(255,255,255,0.6)", marginBottom:28, lineHeight:1.7 }}>Most organizations we work with don't fit a single box. If your challenge is technology-related, we can help — regardless of sector. Start with a consultation and we'll assess where you stand.</p>
-          <Link to="/contact#consultation" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"var(--bronze)", color:"white", padding:"13px 26px", fontWeight:800, textDecoration:"none" }}>
+          <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} style={{ display:"inline-flex", alignItems:"center", gap:8, background:"var(--bronze)", color:"white", padding:"13px 26px", fontWeight:800, textDecoration:"none" }}>
             Request a Free Consultation <ArrowRight size={17} />
           </Link>
         </div>
@@ -1728,7 +1774,7 @@ function EATFrameworkPage() {
           <p className="eyebrow" style={{ color:"var(--bronze)" }}>Ready to begin?</p>
           <h2 style={{ fontFamily:"var(--font-display)", color:"white", marginBottom:16, fontSize:"clamp(1.6rem,2.5vw,2.2rem)" }}>Start with Engage — it costs you nothing but a conversation.</h2>
           <p style={{ color:"rgba(255,255,255,0.6)", marginBottom:32, lineHeight:1.7 }}>The first phase of every BlueLink Consult engagement is a discovery session. No obligation. No sales pressure. Just an honest conversation about your technology, your goals, and whether we are the right fit.</p>
-          <Link to="/contact#consultation" style={{ display:"inline-flex", alignItems:"center", gap:10, background:"var(--bronze)", color:"white", padding:"14px 28px", fontWeight:800, textDecoration:"none" }}>
+          <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} style={{ display:"inline-flex", alignItems:"center", gap:10, background:"var(--bronze)", color:"white", padding:"14px 28px", fontWeight:800, textDecoration:"none" }}>
             Schedule Your Discovery Session <ArrowRight size={17} />
           </Link>
         </div>
@@ -1792,7 +1838,7 @@ function InsightDetail() {
         </ul>
         <h2>How BlueLink can help</h2>
         <p>We help convert uncertainty into a clear modernization roadmap with phased priorities, practical recommendations, and execution support.</p>
-        <Link className="article-cta" to="/contact#consultation">Discuss this with BlueLink <ArrowRight size={17} /></Link>
+        <Link className="article-cta" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Discuss this with BlueLink <ArrowRight size={17} /></Link>
       </article>
     </>
   );
@@ -1919,7 +1965,7 @@ function ProposalViewer() {
                 <Download size={17} /> Download PDF
               </a>
               <Link
-                to="/contact#consultation"
+                to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}
                 style={{
                   display: "inline-flex", alignItems: "center", gap: 8, background: "transparent",
                   color: "var(--bronze)", border: "1.5px solid var(--bronze)", padding: "13px 26px",
@@ -3229,7 +3275,8 @@ function AppInner() {
           <Route path="/solutions/who-we-help"   element={<WhoWeHelpPage />} />
           <Route path="/solutions/eat-framework" element={<EATFrameworkPage />} />
           <Route path="/about"                   element={<AboutPage />} />
-          <Route path="/contact"                 element={<ContactPage />} />
+          <Route path="/contact"                 element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
+          <Route path="/request-demo"            element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
           <Route path="/privacy-policy"          element={<PrivacyPolicyPage />} />
           <Route path="/simulator"               element={<SimulatorPage />} />
           <Route path="/terms"                   element={<TermsPage />} />
