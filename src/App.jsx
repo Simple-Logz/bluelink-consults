@@ -46,6 +46,7 @@ import "./styles.css";
 import { supabase } from "./supabaseClient";
 import ClientPortal from "./ClientPortal";
 import DemoRequestPage from "./DemoRequestPage";
+import { NigeriaHeader, DemoBanner, OurStory, OurTeam, BlogPage } from "./NigeriaPages";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -725,6 +726,7 @@ function Footer() {
 
 /* ─── CTA BANNER (between Hero and Process on homepage) ──── */
 function CTABanner() {
+  if (isNigeriaSite) return <DemoBanner />;
   return (
     <section style={{
       background: "#0B1F3A",
@@ -3256,7 +3258,7 @@ function AppInner() {
 
   return (
     <>
-      {!isPortal && !isConnectPage && !isPrivateDemo && <Header />}
+      {!isPortal && !isConnectPage && !isPrivateDemo && (isNigeriaSite ? <NigeriaHeader services={services} /> : <Header />)}
       {!isPortal && !isConnectPage && !isPrivateDemo && <div className="header-spacer" aria-hidden="true" />}
       <ScrollToHash />
       <AnimatePresence mode="wait">
@@ -3274,7 +3276,10 @@ function AppInner() {
           <Route path="/solutions"               element={<SolutionsPage />} />
           <Route path="/solutions/who-we-help"   element={<WhoWeHelpPage />} />
           <Route path="/solutions/eat-framework" element={<EATFrameworkPage />} />
-          <Route path="/about"                   element={<AboutPage />} />
+          <Route path="/about"                   element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
+          <Route path="/about/our-story"         element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
+          <Route path="/about/our-team"          element={isNigeriaSite ? <OurTeam /> : <AboutPage />} />
+          <Route path="/blog"                    element={isNigeriaSite ? <BlogPage /> : <InsightsPage />} />
           <Route path="/contact"                 element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
           <Route path="/request-demo"            element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
           <Route path="/privacy-policy"          element={<PrivacyPolicyPage />} />

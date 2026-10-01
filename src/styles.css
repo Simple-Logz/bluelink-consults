@@ -2197,3 +2197,53 @@ h1, h2, h3, h4 { margin: 0; }
 .demo-profile { display: grid; gap: 12px; padding: 22px; background: var(--paper, #f5f7fa); border: 1px solid var(--line); border-radius: 8px; }
 .demo-profile a, .success-box > a { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; }
 .contact-details a { display: flex; align-items: center; gap: 8px; overflow-wrap: anywhere; }
+
+/* Nigeria navigation and company pages */
+.ng-header { gap: 32px; background: var(--white, #fff); }
+.ng-primary { display:flex; align-items:center; gap:30px; margin-left:auto; }
+.ng-primary a,.ng-primary button { display:inline-flex; align-items:center; gap:6px; color:var(--navy); font-size:15px; font-weight:650; background:none; border:0; padding:12px 0; cursor:pointer; text-decoration:none; }
+.ng-primary a:hover,.ng-primary button:hover { color:#1677e8; }
+.ng-nav-group { position:relative; }
+.ng-submenu { position:absolute; top:100%; right:0; min-width:270px; max-width:90vw; padding:12px; background:var(--cream); border:1px solid var(--line); border-radius:12px; box-shadow:0 16px 40px #081c3420; }
+.ng-submenu a { display:flex; padding:12px; border-radius:6px; font-size:14px; }
+.ng-submenu a:hover { background:#1677e810; }
+.ng-menu-toggle { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; width:44px; height:44px; border:1px solid var(--line); border-radius:10px; color:var(--navy); background:var(--cream); cursor:pointer; }
+.ng-more { position:absolute; right:6vw; top:76px; width:300px; max-height:calc(100dvh - 105px); overflow:auto; padding:14px; background:var(--cream); border:1px solid var(--line); border-radius:14px; box-shadow:0 20px 60px #081c3426; }
+.ng-more[hidden] { display:none; }
+.ng-more > a { display:flex; align-items:center; gap:12px; padding:16px 14px; border-radius:8px; color:var(--navy); font-weight:650; }
+.ng-more > a > svg:last-child { margin-left:auto; }
+.ng-more a:hover { background:#1677e810; color:#1677e8; }
+.ng-mobile-primary { display:none; }
+.ng-demo-banner { position:relative; isolation:isolate; overflow:hidden; display:flex; align-items:center; justify-content:center; min-height:220px; padding:64px 24px; background:linear-gradient(120deg,#071b34,#123a69 58%,#0a2545); }
+.ng-demo-banner::before { content:""; position:absolute; z-index:-1; inset:0; opacity:.12; background-image:linear-gradient(#67b8ff 1px,transparent 1px),linear-gradient(90deg,#67b8ff 1px,transparent 1px); background-size:56px 56px; }
+.ng-demo-glow { position:absolute; z-index:-1; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,#1686ef50,transparent 70%); }
+.ng-demo-banner a { display:inline-flex; align-items:center; gap:18px; padding:20px 36px; border-radius:10px; background:#1677e8; color:white; font-size:20px; font-weight:750; box-shadow:0 12px 34px #0003; transition:background .2s,transform .2s; }
+.ng-demo-banner a:hover { background:#0861c6; transform:translateY(-2px); }
+.ng-about-hero { padding:88px 7vw 80px; color:white; background:linear-gradient(125deg,#071b34,#173e6d); }
+.ng-about-hero h1 { font-family:'Libre Baskerville',serif; font-size:clamp(2.3rem,4vw,4rem); line-height:1.15; max-width:920px; margin:18px 0 24px; }
+.ng-about-hero > p:last-child { max-width:720px; color:#d1dfee; font-size:18px; line-height:1.8; }
+.ng-about-hero .eyebrow { color:#73c6ff; }
+.ng-story-layout { display:grid; grid-template-columns:1fr 1.5fr; gap:64px; padding:80px 7vw; max-width:1500px; margin:auto; }
+.ng-story-layout h2,.ng-section-heading h2 { color:var(--navy); font-size:clamp(1.8rem,2.5vw,2.6rem); line-height:1.25; }
+.ng-story-layout p:not(.eyebrow) { color:var(--text-dark); line-height:1.85; margin:0 0 20px; }
+.ng-principles { padding:70px 7vw; background:var(--cream); }
+.ng-section-heading { margin-bottom:36px; }
+.ng-principle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
+.ng-principle-grid article { padding:34px; border:1px solid var(--line); border-radius:12px; background:var(--white,#fff); }
+.ng-principle-grid article > span { color:#1677e8; font-weight:800; font-size:14px; }
+.ng-principle-grid h3 { font-size:25px; margin:20px 0 14px; color:var(--navy); }
+.ng-principle-grid p { line-height:1.8; color:var(--text-dark); }
+.ng-text-link { display:inline-flex; align-items:center; gap:10px; color:#1677e8; font-weight:750; }
+.ng-team-grid { padding:72px 7vw 90px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:28px; max-width:1600px; margin:auto; }
+.ng-team-card { border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--cream); }
+.ng-team-photo { height:260px; padding:24px 30px 0; background:linear-gradient(140deg,#edf6ff,#f8fbff); display:flex; justify-content:center; align-items:flex-end; }
+.ng-team-photo img { height:100%; max-width:100%; object-fit:contain; }
+.ng-team-info { padding:28px; }
+.ng-team-info h2 { color:var(--navy); font-size:23px; margin:0 0 8px; }
+.ng-team-role { font-size:14px; color:#1677e8; font-weight:750; min-height:44px; line-height:1.5; }
+.ng-team-info p:last-child { color:var(--text-dark); font-size:15px; line-height:1.8; margin-top:16px; }
+.ng-blog-empty { padding:80px 7vw; text-align:center; color:var(--navy); }
+.ng-blog-empty h2 { margin:20px 0 28px; }
+@media(max-width:1100px) { .ng-header { gap:20px; padding:0 4vw; } .ng-primary { gap:20px; } }
+@media(max-width:850px) { .ng-primary { display:none; } .ng-menu-toggle { margin-left:auto; } .ng-more { right:18px; width:min(340px,calc(100vw - 36px)); } .ng-mobile-primary { display:grid; padding-bottom:14px; margin-bottom:10px; border-bottom:1px solid var(--line); } .ng-mobile-primary > a,.ng-mobile-primary summary { display:block; padding:13px 14px; color:var(--navy); font-weight:700; cursor:pointer; } .ng-mobile-primary details > a { display:block; padding:12px 28px; color:var(--navy); } .ng-story-layout { grid-template-columns:1fr; gap:28px; padding:55px 7vw; } .ng-team-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .ng-principle-grid { grid-template-columns:1fr; } }
+@media(max-width:520px) { .ng-team-grid { grid-template-columns:1fr; padding:40px 6vw; } .ng-about-hero { padding:60px 7vw; } .ng-demo-banner { min-height:180px; padding:48px 24px; } }
