@@ -3562,3 +3562,25 @@ body { overflow-x:hidden; }
  .editorial-card>div{padding:20px!important}
  .editorial-card h3{font-size:1.05rem!important;margin-bottom:20px}
 }
+
+/* Compact service network while preserving its connected layout. */
+.service-network{padding:56px 28px 60px!important}
+.service-network-copy{margin-bottom:16px!important}
+.service-network-copy h2{font-size:clamp(2rem,2.8vw,3rem)!important;line-height:1.08}
+@media(min-width:651px){
+ .network-stage{height:520px!important;max-width:1000px!important}
+ .network-node{width:265px!important;min-height:84px!important;padding:14px 16px!important;grid-template-columns:36px 1fr 22px;gap:10px}
+ .network-node-icon{width:36px;height:36px}
+ .network-node strong{font-size:.9rem!important}
+ .network-node small{font-size:.68rem!important}
+ .network-core{width:320px!important;height:110px!important;bottom:14px!important}
+ .network-core img{width:50px!important;height:50px!important}
+}
+@media(min-width:651px) and (max-width:900px){
+ .network-node{width:43%!important}
+}
+@media(max-width:650px){
+ .service-network{padding:44px 14px 48px!important}
+ .network-stage{height:520px!important}
+ .network-core,.network-stage .network-core,.network-stage.has-active .network-core{bottom:36px!important;height:98px!important}
+}
