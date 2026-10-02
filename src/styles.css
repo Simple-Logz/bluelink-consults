@@ -3542,3 +3542,25 @@ body { overflow-x:hidden; }
  .editorial-card img{min-height:195px!important}
  .editorial-card>div{padding:24px 22px!important}
 }
+
+/* Keep image sizing from stretching the service cards vertically. */
+.editorial-card{
+ height:220px!important;
+ min-height:0!important;
+ overflow:hidden;
+}
+.editorial-card img{
+ height:100%!important;
+ min-height:0!important;
+ max-height:100%!important;
+ min-width:0;
+ object-fit:cover;
+}
+.editorial-card>div{padding:22px 20px!important}
+@media(max-width:900px){
+ .editorial-card{height:190px!important;min-height:0!important}
+}
+@media(max-width:520px){
+ .editorial-card{height:190px!important}
+ .editorial-card>div{padding:20px 18px!important}
+}
