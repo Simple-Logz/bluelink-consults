@@ -515,10 +515,10 @@ function Header() {
           <motion.div className="qore-mobile-panel" initial={{opacity:0,y:-16}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{duration:.22}}>
             <div className="qore-mobile-top"><span>Explore BlueLink</span><button onClick={close}><X size={20}/></button></div>
             <div className="qore-mobile-links">
-              <details><summary><span>Services</span><span className="mobile-drop-arrow" aria-hidden="true">⌄</span></summary><div>{services.map(s=><Link key={s.slug} to={`/services/${s.slug}`} onClick={close}>{s.title}<ArrowRight size={14}/></Link>)}</div></details>
-              <details><summary><span>Solutions</span><span className="mobile-drop-arrow" aria-hidden="true">⌄</span></summary><div><Link to="/solutions/who-we-help" onClick={close}>Who We Help <ArrowRight size={14}/></Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework <ArrowRight size={14}/></Link></div></details>
+              <details><summary><span>Services</span><span className="mobile-drop-arrow" aria-hidden="true"><ChevronDown size={22}/></span></summary><div>{services.map(s=><Link key={s.slug} to={`/services/${s.slug}`} onClick={close}>{s.title}<ArrowRight size={14}/></Link>)}</div></details>
+              <details><summary><span>Solutions</span><span className="mobile-drop-arrow" aria-hidden="true"><ChevronDown size={22}/></span></summary><div><Link to="/solutions/who-we-help" onClick={close}>Who We Help <ArrowRight size={14}/></Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework <ArrowRight size={14}/></Link></div></details>
               <Link to="/insights" onClick={close}>Insights <ArrowRight size={15}/></Link>
-              <details><summary><span>About</span><span className="mobile-drop-arrow" aria-hidden="true">⌄</span></summary><div><Link to="/about" onClick={close}>Our Story <ArrowRight size={14}/></Link>{isNigeriaSite && <Link to="/about/team" onClick={close}>Our Team <ArrowRight size={14}/></Link>}<Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div></details>
+              <details><summary><span>About</span><span className="mobile-drop-arrow" aria-hidden="true"><ChevronDown size={22}/></span></summary><div><Link to="/about" onClick={close}>Our Story <ArrowRight size={14}/></Link>{isNigeriaSite && <Link to="/about/team" onClick={close}>Our Team <ArrowRight size={14}/></Link>}<Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div></details>
               <Link to="/contact" onClick={close}>Contact <ArrowRight size={15}/></Link>
             </div>
             <div className="qore-mobile-actions">
