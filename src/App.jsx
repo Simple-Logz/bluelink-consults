@@ -1161,10 +1161,10 @@ function Home() {
 }
 
 const corporateHeroSlides = [
-  { src: '/images/hero/slides/woman-stock-v3.webp', alt: 'Corporate stock photograph of a smiling woman holding documents in an office', position: '50% 38%' },
-  { src: '/images/hero/slides/man-stock-v3.webp', alt: 'Corporate stock photograph of a smiling man in a dark blazer beside office windows', position: '50% 32%' },
-  { src: '/images/hero/slides/woman-office-stock-v3.webp', alt: 'Corporate stock photograph of a woman in a white blazer and blue dress in a modern office', position: '50% 35%' },
-  { src: '/images/hero/slides/man-office-stock-v3.webp', alt: 'Corporate stock photograph of a smiling man in a suit holding a clipboard', position: '50% 40%' },
+  { src: '/images/hero/slides/office-entry-v4.webp', alt: 'Businesswoman seen from behind entering a modern glass office, with no face visible', position: '58% 50%' },
+  { src: '/images/hero/slides/boardroom-v4.webp', alt: 'Business professional seen from behind in a modern boardroom, with face out of view', position: '52% 50%' },
+  { src: '/images/hero/slides/office-work-v4.webp', alt: 'Businesswoman in a blazer seen from behind in a contemporary office', position: '28% 50%' },
+  { src: '/images/hero/slides/collaboration-v4.webp', alt: 'Corporate colleagues reviewing documents, showing hands and business attire with faces out of frame', position: '50% 50%' },
 ];
 function Hero() {
   const [slide, setSlide] = useState(0);
