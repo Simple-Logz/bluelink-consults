@@ -2798,3 +2798,86 @@ body { overflow-x:hidden; }
  .tech-data-card{display:none}.tech-hero-ticker{min-height:58px;margin-top:5px;font-size:.58rem;gap:12px}
 }
 @media(prefers-reduced-motion:reduce){.glow-one,.glow-two,.pulse-dot,.tech-core,.tech-scan,.data-lines i{animation:none!important}}
+
+
+/* ─── HUMAN-DESIGNED REFINEMENT ──────────────────────────── */
+/* Clearly blue-tinted translucent navigation — intentionally not white. */
+.qore-header.site-header,
+.qore-header.scrolled{
+  background:rgba(194,224,248,.72)!important;
+  border:1px solid rgba(99,165,216,.30)!important;
+  box-shadow:0 8px 24px rgba(20,63,105,.08)!important;
+  backdrop-filter:blur(14px)!important;
+  -webkit-backdrop-filter:blur(14px)!important;
+}
+.qore-header.scrolled{background:rgba(190,222,248,.80)!important}
+
+/* Pull the hero away from the common AI-generated neon-dashboard aesthetic. */
+.tech-hero{
+  background:#071a34;
+}
+.tech-hero-grid{
+  opacity:.42;
+  background-size:72px 72px;
+}
+.tech-hero-glow{opacity:.42;filter:blur(40px)}
+.tech-hero h1{
+  font-size:clamp(3.1rem,5vw,5.45rem);
+  letter-spacing:-.052em;
+  line-height:.98;
+}
+.tech-hero h1 span{color:#8abaf1}
+.tech-hero-kicker{
+  background:transparent;
+  border:0;
+  padding:0;
+  border-radius:0;
+  color:#8eb9e8;
+}
+.tech-hero-copy>p{max-width:560px}
+.tech-secondary{background:transparent}
+.tech-visual{
+  height:500px;
+  border-left:1px solid rgba(140,184,230,.14);
+}
+.tech-core{
+  width:205px;height:205px;
+  border-radius:20px;
+  background:#0c2a50;
+  box-shadow:0 22px 60px rgba(0,0,0,.22);
+  animation:none;
+}
+.core-mark{border-radius:10px}
+.tech-node{
+  min-width:165px;
+  border-radius:10px;
+  background:rgba(10,40,76,.82);
+  box-shadow:0 12px 28px rgba(0,0,0,.15);
+  backdrop-filter:blur(8px);
+}
+.node-icon{border-radius:7px}
+.node-1{left:8%;top:15%}.node-2{right:2%;top:19%}.node-3{left:5%;bottom:17%}.node-4{right:4%;bottom:15%}
+.tech-rule{
+  position:absolute;left:50%;top:10%;bottom:10%;width:1px;
+  background:linear-gradient(transparent,rgba(107,177,255,.22),transparent);
+}
+.tech-data-card,.tech-scan,.tech-orbit{display:none!important}
+.tech-hero-ticker{justify-content:flex-start;gap:26px}
+.tech-hero-ticker i{width:18px;height:1px;border-radius:0;background:rgba(116,168,226,.28)}
+
+@media(max-width:860px){
+ .qore-header.site-header,.qore-header.scrolled{
+   background:rgba(194,224,248,.76)!important;
+   border-color:rgba(99,165,216,.28)!important;
+   backdrop-filter:blur(13px)!important;
+   -webkit-backdrop-filter:blur(13px)!important;
+ }
+}
+@media(max-width:640px){
+ .tech-hero{padding-top:36px}
+ .tech-hero h1{font-size:clamp(2.55rem,12vw,3.85rem);letter-spacing:-.048em}
+ .tech-visual{height:350px;border-left:0;border-top:1px solid rgba(140,184,230,.13);margin-top:24px;padding-top:12px}
+ .tech-core{width:142px;height:142px;border-radius:16px}
+ .tech-node{min-width:120px;border-radius:9px}
+ .node-1{left:0;top:12%}.node-2{right:0;top:17%}.node-3{left:0;bottom:11%}.node-4{right:0;bottom:9%}
+}
