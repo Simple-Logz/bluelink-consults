@@ -1063,15 +1063,15 @@ function Hero() {
 
       <motion.div className="hero-logo-assembly" aria-hidden="true"
         initial={{opacity:1}} animate={{opacity:[1,1,1,0]}}
-        transition={{duration:4.6,times:[0,.62,.82,1],delay:.15,ease:"easeInOut"}}>
+        transition={{duration:6.7,times:[0,.69,.93,1],ease:"easeInOut"}}>
         <motion.img src="/bluelink-logo-mark.png" alt="" className="assembly-half assembly-left"
-          initial={{x:-320,rotate:-38,opacity:0}}
-          animate={{x:0,rotate:0,opacity:[0,1,1,1]}}
-          transition={{duration:2.05,delay:.35,ease:[.22,1,.36,1]}} />
+          initial={{x:-320,rotate:-24,opacity:.55}}
+          animate={{x:[-320,-320,0,0],rotate:[-24,-24,0,0],opacity:[.55,.55,.24,.24]}}
+          transition={{duration:6.2,times:[0,.48,.74,1],ease:[.22,1,.36,1]}} />
         <motion.img src="/bluelink-logo-mark.png" alt="" className="assembly-half assembly-right"
-          initial={{x:320,rotate:38,opacity:0}}
-          animate={{x:0,rotate:0,opacity:[0,1,1,1]}}
-          transition={{duration:2.05,delay:.35,ease:[.22,1,.36,1]}} />
+          initial={{x:320,rotate:24,opacity:.55}}
+          animate={{x:[320,320,0,0],rotate:[24,24,0,0],opacity:[.55,.55,.24,.24]}}
+          transition={{duration:6.2,times:[0,.48,.74,1],ease:[.22,1,.36,1]}} />
       </motion.div>
 
       <motion.div className="hero-clean-copy"
