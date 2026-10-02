@@ -1114,8 +1114,8 @@ function Home() {
     <>
       <Hero />
       <WhoWeServeStrip />
-      <EditorialShowcase />
       <WhyInstitutionsChoose embedded />
+      <EditorialShowcase />
       <ClientLogos />
       <ServiceNetwork />
       <SimulatorTeaser />
