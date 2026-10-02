@@ -3075,3 +3075,25 @@ body { overflow-x:hidden; }
  .editorial-card img{height:155px!important}
 }
 @media(max-width:440px){.who-grid{grid-template-columns:1fr!important}}
+
+
+/* Hero logo: static on entry, fade after 3 seconds. */
+.hero-logo-assembly,.hero-logo-motion{display:none!important}
+.hero-logo-fade{position:absolute;z-index:2;left:50%;top:50%;width:min(44vw,560px);height:min(44vw,560px);object-fit:contain;transform:translate(-50%,-50%);pointer-events:none;filter:drop-shadow(0 18px 42px rgba(19,75,128,.08))}
+.hero-clean-copy{position:relative;z-index:3}
+
+/* Mobile accordion affordance */
+.qore-mobile-links details>summary{display:flex!important;align-items:center!important;justify-content:space-between!important;cursor:pointer!important}
+.qore-mobile-links details>summary svg{transition:transform .2s ease}
+.qore-mobile-links details[open]>summary svg{transform:rotate(180deg)}
+
+/* Reduce legacy cream / bronze / pink cast across internal pages. */
+.page-hero,.service-detail-section,.white-section,.resource-section,.about-page,.contact-section{background:#f7fbff!important}
+.service-hero,.split-copy{background:#f1f7fc!important}
+.detail-card,.sub-service-card,.resource-card,.border-card{background:#fff!important;border-color:#dce8f2!important}
+.eyebrow,.mini-label,.service-icon-large,.card-icon{color:#1b67a8!important}
+.rule{background:#b9d5ea!important}
+.service-detail-main h2,.detail-card h3,.sub-service-card strong,.resource-card h3{color:#0a2744!important}
+.service-detail-main p,.detail-card p,.sub-service-card p,.resource-card p{color:#536d84!important}
+
+@media(max-width:720px){.hero-logo-fade{width:430px;height:430px}}
