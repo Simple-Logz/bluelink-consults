@@ -978,6 +978,40 @@ function ClientLogos() {
   );
 }
 
+function ServiceNetwork() {
+  const nodes = [
+    { icon: Search, title:"Technology Audit", status:"Assessing environment", cls:"sn-a" },
+    { icon: ServerCog, title:"App Modernization", status:"Modernizing systems", cls:"sn-b" },
+    { icon: Cloud, title:"Cloud Infrastructure", status:"Engineering platform", cls:"sn-c" },
+    { icon: Workflow, title:"DevOps & Automation", status:"Automating delivery", cls:"sn-d" },
+    { icon: ShieldCheck, title:"Pre-deployment", status:"Validating release", cls:"sn-e" },
+    { icon: Activity, title:"Operational Support", status:"Monitoring operations", cls:"sn-f" },
+  ];
+  return (
+    <section className="service-network">
+      <div className="service-network-copy">
+        <span>One technology partner</span>
+        <h2>From assessment to operation, everything connects.</h2>
+        <p>BlueLink brings your applications, infrastructure, delivery and operational needs into one practical transformation path.</p>
+      </div>
+      <div className="network-stage">
+        <svg className="network-lines" viewBox="0 0 1200 650" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M600 330 C440 330 430 130 290 130"/><path d="M600 330 C760 330 770 130 910 130"/>
+          <path d="M600 330 C430 330 410 300 245 300"/><path d="M600 330 C770 330 790 300 955 300"/>
+          <path d="M600 330 C440 330 430 490 290 490"/><path d="M600 330 C760 330 770 490 910 490"/>
+        </svg>
+        <motion.div className="network-core" initial={{scale:.94,opacity:0}} whileInView={{scale:1,opacity:1}} viewport={{once:true,amount:.4}} transition={{duration:.6}}>
+          <img src="/bluelink-logo-mark.png" alt=""/><div><strong>BlueLink</strong><small>Engage · Assess · Transform</small></div>
+        </motion.div>
+        {nodes.map(({icon:Icon,title,status,cls},i)=><motion.div key={title} className={`network-node ${cls}`}
+          initial={{opacity:0,y:16}} whileInView={{opacity:1,y:0}} viewport={{once:true,amount:.35}} transition={{duration:.45,delay:.1+i*.08}}>
+          <span className="network-node-icon"><Icon size={21}/></span><div><strong>{title}</strong><small>{status}</small></div><i className="network-loader"/>
+        </motion.div>)}
+      </div>
+    </section>
+  );
+}
+
 function SimulatorTeaser() {
   return (
     <section style={{
@@ -1048,6 +1082,7 @@ function Home() {
       <WhoWeServeStrip />
       <EditorialShowcase />
       <ClientLogos />
+      <ServiceNetwork />
       <SimulatorTeaser />
       {/* <TestimonialsSection /> */}{/* TESTIMONIALS — uncomment when ready */}
     </>
