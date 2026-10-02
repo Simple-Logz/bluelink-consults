@@ -15,7 +15,7 @@ export default function WhyInstitutionsChoose({ embedded = false }) {
   const Heading = embedded ? "h2" : "h1";
   return <section className="bl-why" aria-labelledby={embedded ? "bl-why-home-title" : "bl-why-page-title"}>
     <style>{`
-      .bl-why{background:#0b2236;color:#fff;padding:48px 32px}
+      .bl-why{background:#0b2236;color:#fff;padding:56px 32px}
       .bl-why-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.08fr 1fr;gap:40px;align-items:center}
       .bl-why-kicker{display:block;color:#8dc4ff;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:700;margin-bottom:12px}
       .bl-why h1,.bl-why h2{font-family:Inter,system-ui,sans-serif;color:#fff;font-size:clamp(28px,2.4vw,34px);line-height:1.12;letter-spacing:-.035em;margin:0 0 18px;font-weight:650}
@@ -28,8 +28,8 @@ export default function WhyInstitutionsChoose({ embedded = false }) {
       .bl-why-photo img{width:100%;height:380px;display:block;object-fit:cover;object-position:center;border-radius:12px}
       .bl-why-cta{display:inline-flex;align-items:center;gap:10px;margin-top:18px;color:#fff!important;font-weight:700;font-size:15px;text-decoration:none;border-bottom:1px solid #8dc4ff;padding-bottom:7px}
       .bl-why-cta:hover{color:#8dc4ff!important}
-      @media(max-width:900px){.bl-why-inner{gap:24px;grid-template-columns:1fr}.bl-why-photo img{height:auto;aspect-ratio:3/2}.bl-why{padding:40px 24px}}
-      @media(max-width:520px){.bl-why{padding:36px 20px}.bl-why h1,.bl-why h2{font-size:28px}.bl-why ul{gap:12px}}
+      @media(max-width:900px){.bl-why-inner{gap:24px;grid-template-columns:1fr}.bl-why-photo img{height:auto;aspect-ratio:3/2}.bl-why{padding:44px 24px}}
+      @media(max-width:520px){.bl-why{padding:40px 20px}.bl-why h1,.bl-why h2{font-size:28px}.bl-why ul{gap:12px}}
     `}</style>
     <div className="bl-why-inner">
       <div>
