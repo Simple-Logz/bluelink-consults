@@ -3188,3 +3188,29 @@ body { overflow-x:hidden; }
  .network-core>div{max-width:185px}
  .network-core div>span{font-size:.56rem;margin-top:5px}
 }
+
+
+/* Mobile menu dropdown arrows — force visible affordance */
+@media(max-width:860px){
+ .qore-mobile-links details>summary{
+   display:flex!important;
+   width:100%!important;
+   align-items:center!important;
+   justify-content:space-between!important;
+   gap:18px!important;
+   list-style:none!important;
+ }
+ .qore-mobile-links details>summary::-webkit-details-marker{display:none!important}
+ .qore-mobile-links details>summary svg{
+   display:block!important;
+   visibility:visible!important;
+   opacity:1!important;
+   flex:0 0 auto!important;
+   width:20px!important;
+   height:20px!important;
+   color:#071a3d!important;
+   stroke-width:2.4!important;
+   margin-left:auto!important;
+ }
+ .qore-mobile-links details[open]>summary svg{transform:rotate(180deg)!important}
+}
