@@ -3294,3 +3294,34 @@ body { overflow-x:hidden; }
    z-index:5!important;
  }
 }
+
+
+/* Mobile dropdown chevrons: explicit, right-aligned, never hidden */
+@media(max-width:860px){
+ .qore-mobile-links details>summary .mobile-drop-arrow{
+   display:flex!important;
+   align-items:center!important;
+   justify-content:center!important;
+   justify-self:end!important;
+   width:36px!important;
+   height:36px!important;
+   margin-left:auto!important;
+   opacity:1!important;
+   visibility:visible!important;
+   color:#071a3d!important;
+   transform:none!important;
+ }
+ .qore-mobile-links details>summary .mobile-drop-arrow svg{
+   display:block!important;
+   width:22px!important;
+   height:22px!important;
+   opacity:1!important;
+   visibility:visible!important;
+   stroke:currentColor!important;
+   stroke-width:2.75!important;
+   transform:none!important;
+ }
+ .qore-mobile-links details[open]>summary .mobile-drop-arrow{
+   transform:rotate(180deg)!important;
+ }
+}
