@@ -981,6 +981,29 @@ function ClientLogos() {
 
 function ServiceNetwork() {
   const [activeService, setActiveService] = useState(null);
+  const stageRef = useRef(null);
+  const coreRef = useRef(null);
+  const [coreConnection, setCoreConnection] = useState({left:408,right:792,y:570});
+  useEffect(() => {
+    const stage = stageRef.current;
+    const core = coreRef.current;
+    if (!stage || !core) return;
+    const alignConnections = () => {
+      const stageBox = stage.getBoundingClientRect();
+      const coreBox = core.getBoundingClientRect();
+      if (!stageBox.width || !stageBox.height) return;
+      setCoreConnection({
+        left: (coreBox.left - stageBox.left) / stageBox.width * 1200,
+        right: (coreBox.right - stageBox.left) / stageBox.width * 1200,
+        y: (coreBox.top - stageBox.top + Math.min(28, coreBox.height / 2)) / stageBox.height * 700,
+      });
+    };
+    alignConnections();
+    const observer = new ResizeObserver(alignConnections);
+    observer.observe(stage);
+    observer.observe(core);
+    return () => observer.disconnect();
+  }, []);
   const nodes = [
     { icon: Search, title:"Technology Audit", status:"Assessing environment", slug:"technology-audit-assessment", cls:"sn-a", value:"Understand risk, gaps and priorities before you invest." },
     { icon: ServerCog, title:"App Modernization", status:"Modernizing systems", slug:"application-modernisation", cls:"sn-b", value:"Modernize legacy applications without losing business continuity." },
@@ -1004,17 +1027,17 @@ function ServiceNetwork() {
         </defs>
       </svg>
       <div className="service-network-copy"><span>Connected technology services</span><h2>One partner. Six connected capabilities.</h2><p>Select a capability to see how it creates value, then explore the service in detail.</p></div>
-      <div className={active ? "network-stage has-active" : "network-stage"}>
+      <div ref={stageRef} className={active ? "network-stage has-active" : "network-stage"}>
         <svg className="network-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
           <path className={activeService==="technology-audit-assessment"?"line-a active":"line-a"} d="M600 405 C470 405 485 120 315 120"/><path className={activeService==="application-modernisation"?"line-b active":"line-b"} d="M600 405 C730 405 715 120 885 120"/>
           <path className={activeService==="cloud-infrastructure"?"line-c active":"line-c"} d="M600 405 C450 405 450 290 250 290"/><path className={activeService==="devops-automation"?"line-d active":"line-d"} d="M600 405 C750 405 750 290 950 290"/>
-          <path className={activeService==="pre-deployment-validation"?"line-e active":"line-e"} d="M600 405 C470 405 470 535 315 535"/><path className={activeService==="operational-incident-support"?"line-f active":"line-f"} d="M600 405 C730 405 730 535 885 535"/>
+          <path className={activeService==="pre-deployment-validation"?"line-e active":"line-e"} d={`M600 405 C470 405 315 ${coreConnection.y} ${coreConnection.left} ${coreConnection.y}`}/><path className={activeService==="operational-incident-support"?"line-f active":"line-f"} d={`M600 405 C730 405 885 ${coreConnection.y} ${coreConnection.right} ${coreConnection.y}`}/>
           <circle className="pulse p1" cx="600" cy="405" r="5"/>
         </svg>
         {nodes.map(({icon:Icon,title,status,slug,cls})=><Link key={slug} to={`/services/${slug}`} className={activeService===slug?`network-node ${cls} active`:`network-node ${cls}`} onMouseEnter={()=>setActiveService(slug)} onMouseLeave={()=>setActiveService(null)} onFocus={()=>setActiveService(slug)} onBlur={()=>setActiveService(null)}>
           <span className="network-node-icon"><Icon size={22}/></span><div><strong>{title}</strong><small>{status}</small></div><ArrowRight className="network-node-arrow" size={18}/>
         </Link>)}
-        <Link to="/services" className={active ? "network-core active" : "network-core"}>
+        <Link ref={coreRef} to="/services" className={active ? "network-core active" : "network-core"}>
           <img src="/bluelink-logo-mark.png" alt=""/><div><strong>BlueLink</strong><small>{active ? active.value : "Engage · Assess · Transform"}</small>{active && <span>Explore {active.title} <ArrowRight size={13}/></span>}</div>
         </Link>
       </div>
