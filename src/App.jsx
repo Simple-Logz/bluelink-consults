@@ -1046,7 +1046,7 @@ function Home() {
     <>
       <Hero />
       <WhoWeServeStrip />
-      <Process />
+      <EditorialShowcase />
       <ClientLogos />
       <SimulatorTeaser />
       {/* <TestimonialsSection /> */}{/* TESTIMONIALS — uncomment when ready */}
@@ -1060,17 +1060,23 @@ function Hero() {
       <div className="hero-rings" aria-hidden="true">
         {[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}
       </div>
-      <motion.div className="hero-logo-motion" initial="apart" animate="together" aria-hidden="true">
-        <motion.span className="logo-piece logo-piece-left"
-          variants={{apart:{x:-180,rotate:-32,opacity:.2},together:{x:0,rotate:0,opacity:1}}}
-          transition={{duration:1.35,ease:[.22,1,.36,1]}} />
-        <motion.span className="logo-piece logo-piece-right"
-          variants={{apart:{x:180,rotate:32,opacity:.2},together:{x:0,rotate:0,opacity:1}}}
-          transition={{duration:1.35,ease:[.22,1,.36,1]}} />
+
+      <motion.div className="hero-logo-assembly" aria-hidden="true"
+        initial={{opacity:1}} animate={{opacity:[1,1,1,0]}}
+        transition={{duration:4.6,times:[0,.62,.82,1],delay:.15,ease:"easeInOut"}}>
+        <motion.img src="/bluelink-logo-mark.png" alt="" className="assembly-half assembly-left"
+          initial={{x:-320,rotate:-38,opacity:0}}
+          animate={{x:0,rotate:0,opacity:[0,1,1,1]}}
+          transition={{duration:2.05,delay:.35,ease:[.22,1,.36,1]}} />
+        <motion.img src="/bluelink-logo-mark.png" alt="" className="assembly-half assembly-right"
+          initial={{x:320,rotate:38,opacity:0}}
+          animate={{x:0,rotate:0,opacity:[0,1,1,1]}}
+          transition={{duration:2.05,delay:.35,ease:[.22,1,.36,1]}} />
       </motion.div>
+
       <motion.div className="hero-clean-copy"
-        initial={{opacity:0,y:24}} animate={{opacity:1,y:0}}
-        transition={{duration:.8,delay:.35,ease:[.22,1,.36,1]}}>
+        initial={{opacity:0,y:22}} animate={{opacity:1,y:0}}
+        transition={{duration:.8,delay:.55,ease:[.22,1,.36,1]}}>
         <span className="hero-clean-kicker">Engage · Assess · Transform</span>
         <h1>Technology built for <span>your business.</span></h1>
         <p>We assess what you have, modernize what matters, and engineer technology that performs reliably as your business grows.</p>
