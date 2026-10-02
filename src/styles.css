@@ -3601,3 +3601,24 @@ body { overflow-x:hidden; }
  .ng-mobile-primary details>a{display:block;padding:12px 28px;color:var(--navy);line-height:1.45}
  .ng-more{width:min(340px,calc(100vw - 36px))}
 }
+
+/* Gentle orbital movement behind the hero copy. */
+.hero-rings .ring{
+ animation:heroOrbitDrift 48s linear infinite;
+ transform-origin:center;
+}
+.hero-rings .ring:nth-child(even){animation-direction:reverse}
+.hero-rings .ring:nth-child(3){animation-duration:58s;animation-delay:-18s!important}
+.hero-rings .ring:nth-child(5){animation-duration:68s;animation-delay:-36s!important}
+.hero-rings .ring:nth-child(odd)::after{
+ content:"";position:absolute;top:50%;right:-2px;width:4px;height:4px;
+ margin-top:-2px;border-radius:50%;background:rgba(25,94,157,.35);
+}
+@keyframes heroOrbitDrift{
+ 0%{transform:rotate(0deg) scale(1)}
+ 50%{transform:rotate(180deg) scale(1.018)}
+ 100%{transform:rotate(360deg) scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-rings .ring{animation:none!important}
+}
