@@ -983,7 +983,7 @@ function ServiceNetwork() {
   const [activeService, setActiveService] = useState(null);
   const stageRef = useRef(null);
   const coreRef = useRef(null);
-  const [coreConnection, setCoreConnection] = useState({left:408,right:792,y:570});
+  const [coreConnection, setCoreConnection] = useState({left:504,right:696,y:533});
   useEffect(() => {
     const stage = stageRef.current;
     const core = coreRef.current;
@@ -993,9 +993,9 @@ function ServiceNetwork() {
       const coreBox = core.getBoundingClientRect();
       if (!stageBox.width || !stageBox.height) return;
       setCoreConnection({
-        left: (coreBox.left - stageBox.left) / stageBox.width * 1200,
-        right: (coreBox.right - stageBox.left) / stageBox.width * 1200,
-        y: (coreBox.top - stageBox.top + Math.min(28, coreBox.height / 2)) / stageBox.height * 700,
+        left: (coreBox.left - stageBox.left + coreBox.width * .25) / stageBox.width * 1200,
+        right: (coreBox.right - stageBox.left - coreBox.width * .25) / stageBox.width * 1200,
+        y: (coreBox.top - stageBox.top) / stageBox.height * 700,
       });
     };
     alignConnections();
@@ -1031,7 +1031,7 @@ function ServiceNetwork() {
         <svg className="network-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
           <path className={activeService==="technology-audit-assessment"?"line-a active":"line-a"} d="M600 405 C470 405 485 120 315 120"/><path className={activeService==="application-modernisation"?"line-b active":"line-b"} d="M600 405 C730 405 715 120 885 120"/>
           <path className={activeService==="cloud-infrastructure"?"line-c active":"line-c"} d="M600 405 C450 405 450 290 250 290"/><path className={activeService==="devops-automation"?"line-d active":"line-d"} d="M600 405 C750 405 750 290 950 290"/>
-          <path className={activeService==="pre-deployment-validation"?"line-e active":"line-e"} d={`M600 405 C470 405 315 ${coreConnection.y} ${coreConnection.left} ${coreConnection.y}`}/><path className={activeService==="operational-incident-support"?"line-f active":"line-f"} d={`M600 405 C730 405 885 ${coreConnection.y} ${coreConnection.right} ${coreConnection.y}`}/>
+          <path className={activeService==="pre-deployment-validation"?"line-e active":"line-e"} d={`M600 405 C470 405 ${coreConnection.left} ${coreConnection.y - 70} ${coreConnection.left} ${coreConnection.y}`}/><path className={activeService==="operational-incident-support"?"line-f active":"line-f"} d={`M600 405 C730 405 ${coreConnection.right} ${coreConnection.y - 70} ${coreConnection.right} ${coreConnection.y}`}/>
           <circle className="pulse p1" cx="600" cy="405" r="5"/>
         </svg>
         {nodes.map(({icon:Icon,title,status,slug,cls})=><Link key={slug} to={`/services/${slug}`} className={activeService===slug?`network-node ${cls} active`:`network-node ${cls}`} onMouseEnter={()=>setActiveService(slug)} onMouseLeave={()=>setActiveService(null)} onFocus={()=>setActiveService(slug)} onBlur={()=>setActiveService(null)}>
