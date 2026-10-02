@@ -3167,3 +3167,24 @@ body { overflow-x:hidden; }
  .network-core{top:72%!important;width:68%!important;height:105px!important;border-radius:20px!important}.network-core img{width:45px!important;height:45px!important}.network-core strong{font-size:1.15rem!important}.network-core small{font-size:.6rem!important}
  .network-human{width:58%;min-height:70px;bottom:-1%;padding:10px 12px;grid-template-columns:30px 1fr 8px}.network-human strong{font-size:.66rem}.network-human small{font-size:.55rem}.network-human:before{top:-35px;height:35px}
 }
+
+
+/* Interactive service matrix */
+.network-loader{display:none!important}
+.network-node{text-decoration:none!important;color:#fff!important;cursor:pointer;transition:transform .24s ease,border-color .24s ease,background .24s ease,box-shadow .24s ease}
+.network-node-arrow{color:#84baff;opacity:.52;transition:transform .22s ease,opacity .22s ease}
+.network-node:hover,.network-node:focus-visible,.network-node.active{transform:translateY(-4px);border-color:#8db9ff!important;background:rgba(83,130,190,.24)!important;box-shadow:0 0 0 1px rgba(120,171,255,.18),0 18px 45px rgba(0,0,0,.18),0 0 30px rgba(86,125,255,.13)!important;outline:none}
+.network-node:hover .network-node-arrow,.network-node:focus-visible .network-node-arrow,.network-node.active .network-node-arrow{opacity:1;transform:translateX(3px)}
+.network-stage.has-active .network-lines path{stroke-opacity:.16!important;filter:none!important}
+.network-stage.has-active .network-lines path.active{stroke:#9e9aff!important;stroke-width:4!important;stroke-opacity:1!important;filter:drop-shadow(0 0 9px rgba(139,132,255,.95))!important}
+.network-core{text-decoration:none!important;color:#fff!important;cursor:pointer;transition:border-color .25s ease,box-shadow .25s ease,background .25s ease}
+.network-core.active{border-color:#a39cff!important;background:#191b40!important;box-shadow:0 0 42px rgba(126,117,255,.42)!important}
+.network-core>div{max-width:245px}.network-core small{line-height:1.35}
+.network-core div>span{display:flex;align-items:center;gap:5px;margin-top:9px;color:#9fc8ff;font-size:.69rem;font-weight:700}
+.network-core:hover{box-shadow:0 0 48px rgba(126,117,255,.48)!important}
+@media(max-width:650px){
+ .network-node:hover,.network-node:focus-visible,.network-node.active{transform:none}
+ .network-node-arrow{width:15px;height:15px}
+ .network-core>div{max-width:185px}
+ .network-core div>span{font-size:.56rem;margin-top:5px}
+}
