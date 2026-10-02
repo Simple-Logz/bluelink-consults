@@ -3489,81 +3489,6 @@ body { overflow-x:hidden; }
  }
 }
 
-/* Strengthen the original white service cards through typography only. */
-.editorial-card h3{
- font-weight:800!important;
- color:#07162c!important;
-}
-.editorial-card>div>span{
- font-weight:900!important;
- color:#234e7c!important;
-}
-.editorial-card small{
- font-weight:900!important;
- color:#1b5793!important;
-}
-.editorial-card small svg{stroke-width:2.5}
-
-/* Modest size increase and a restrained raised edge on the white cards. */
-.editorial-card{
- border:1px solid #dce4ec!important;
- box-shadow:0 3px 10px rgba(14,35,62,.07),inset 0 1px 0 #fff!important;
-}
-.editorial-card h3{
- font-size:1.1rem!important;
- line-height:1.3!important;
-}
-.editorial-card>div>span{font-size:.75rem!important}
-.editorial-card small{font-size:.94rem!important;line-height:1.25}
-.editorial-card small svg{width:16px;height:16px}
-@media(max-width:900px){
- .editorial-card{height:auto!important;min-height:170px!important}
- .editorial-card img{height:100%!important;min-height:170px!important}
- .editorial-card h3{font-size:1.2rem!important}
-}
-@media(max-width:520px){
- .editorial-card{min-height:165px!important}
- .editorial-card img{min-height:165px!important}
- .editorial-card h3{font-size:1.08rem!important}
- .editorial-card>div>span{font-size:.76rem!important}
-}
-
-/* Give all three service boxes more space and a wider right edge. */
-.editorial-card{height:auto!important;min-height:225px!important}
-.editorial-card img{height:100%!important;min-height:225px!important}
-.editorial-card>div{padding:25px 24px!important}
-@media(max-width:900px){
- .editorial-card{min-height:215px!important}
- .editorial-card img{min-height:215px!important}
-}
-@media(max-width:720px){
- .editorial-row{width:calc(100% + 6px)!important;max-width:none!important}
- .editorial-card{min-height:195px!important}
- .editorial-card img{min-height:195px!important}
- .editorial-card>div{padding:24px 22px!important}
-}
-
-/* Keep image sizing from stretching the service cards vertically. */
-.editorial-card{
- height:220px!important;
- min-height:0!important;
- overflow:hidden;
-}
-.editorial-card img{
- height:100%!important;
- min-height:0!important;
- max-height:100%!important;
- min-width:0;
- object-fit:cover;
-}
-.editorial-card>div{padding:22px 20px!important}
-@media(max-width:900px){
- .editorial-card{height:190px!important;min-height:0!important}
-}
-@media(max-width:520px){
- .editorial-card{height:190px!important}
- .editorial-card>div{padding:20px 18px!important}
-}
 /* Contact strip and clean two-level navigation. */
 .bl-header-shell{position:fixed;top:0;left:0;width:100%;z-index:9000;background:#fff;box-shadow:0 5px 22px #1026480a}
 .bl-header-utility{background:#0b2850;color:#fff}
@@ -3596,3 +3521,44 @@ body { overflow-x:hidden; }
 .header-spacer{height:136px!important}
 @media(max-width:900px){.header-spacer{height:122px!important}}
 @media(max-width:600px){.header-spacer{height:140px!important}}
+
+/* Consistent spacing and alignment for the feature and service cards. */
+.editorial-heading,.editorial-lead,.editorial-row{
+ width:min(100%,var(--home-max))!important;max-width:var(--home-max)!important;
+}
+.editorial-lead{align-items:stretch;min-height:0!important}
+.editorial-lead-image{position:relative;min-height:460px}
+.editorial-lead-image img{position:absolute;inset:0;width:100%;height:100%!important;min-height:0!important;object-fit:cover}
+.editorial-lead-copy{padding:48px!important}
+.editorial-lead-copy h3{line-height:1.15!important;margin:16px 0 20px}
+.editorial-lead-copy p{margin:0;line-height:1.65}
+.editorial-lead-copy>a{margin-top:28px}
+.editorial-row{gap:24px!important;margin-top:24px!important;align-items:stretch}
+.editorial-card{
+ grid-template-columns:minmax(0,38%) minmax(0,1fr)!important;
+ height:auto!important;min-height:240px!important;overflow:visible;
+ border:1px solid #dce4ec!important;
+ box-shadow:0 3px 10px rgba(14,35,62,.07);text-decoration:none;
+}
+.editorial-card img{height:100%!important;min-height:0!important;max-height:none;min-width:0;object-fit:cover}
+.editorial-card>div{padding:24px!important;min-width:0;display:flex;flex-direction:column}
+.editorial-card>div>span{font-size:.75rem!important;line-height:1.4;font-weight:850;color:#234e7c}
+.editorial-card h3{font-size:1.1rem!important;line-height:1.4!important;font-weight:800;color:#07162c;margin:12px 0 24px;overflow-wrap:normal}
+.editorial-card small{margin-top:auto;font-size:.94rem!important;line-height:1.4;font-weight:800;color:#1b5793;gap:8px}
+.editorial-card small svg{width:16px;height:16px;flex-shrink:0}
+@media(max-width:1100px){
+ .editorial-row{grid-template-columns:1fr!important}
+ .editorial-card{grid-template-columns:minmax(0,32%) minmax(0,1fr)!important;min-height:190px!important}
+}
+@media(max-width:900px){
+ .editorial-lead-image{min-height:320px}
+ .editorial-lead-copy{padding:32px!important}
+}
+@media(max-width:520px){
+ .editorial-lead-image{min-height:240px}
+ .editorial-lead-copy{padding:28px 24px!important}
+ .editorial-row{gap:20px!important}
+ .editorial-card{grid-template-columns:minmax(0,30%) minmax(0,1fr)!important;min-height:210px!important}
+ .editorial-card>div{padding:20px!important}
+ .editorial-card h3{font-size:1.05rem!important;margin-bottom:20px}
+}
