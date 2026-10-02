@@ -3325,3 +3325,32 @@ body { overflow-x:hidden; }
    transform:rotate(180deg)!important;
  }
 }
+
+
+/* MOBILE MATRIX — definitive BlueLink core placement below all service tiles */
+@media(max-width:650px){
+  .network-stage{
+    height:760px!important;
+    position:relative!important;
+    transform:none!important;
+    margin-bottom:0!important;
+  }
+  .network-core,
+  .network-stage .network-core,
+  .network-stage.has-active .network-core{
+    position:absolute!important;
+    left:50%!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:12px!important;
+    transform:translateX(-50%)!important;
+    width:78%!important;
+    max-width:78%!important;
+    height:108px!important;
+    margin:0!important;
+    z-index:6!important;
+  }
+  .sn-a,.sn-b{top:3%!important}
+  .sn-c,.sn-d{top:27%!important}
+  .sn-e,.sn-f{top:51%!important}
+}
