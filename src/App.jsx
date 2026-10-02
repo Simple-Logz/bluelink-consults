@@ -533,7 +533,7 @@ function Header() {
         </nav>
 
         <div className="qore-header-actions">
-          <Link className="qore-demo-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Request Demo <ArrowRight size={15}/></Link>
+          <Link className="qore-demo-btn" to="/request-demo">Request Demo <ArrowRight size={15}/></Link>
           <div className="qore-utility-wrap" ref={utilityRef}>
             <button className="qore-menu-btn" onClick={() => setUtilityOpen(v=>!v)} aria-label="Open quick links" aria-expanded={utilityOpen}><Menu size={21}/></button>
             <div className={utilityOpen ? "qore-utility show" : "qore-utility"}>
@@ -560,7 +560,7 @@ function Header() {
             <div className="qore-mobile-actions">
               <Link to="/simulator" onClick={close}>Try Simulator</Link>
               <Link to="/client-login" onClick={close}>Client Login</Link>
-              <Link className="primary" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} onClick={close}>Request Demo <ArrowRight size={15}/></Link>
+              <Link className="primary" to="/request-demo" onClick={close}>Request Demo <ArrowRight size={15}/></Link>
             </div>
           </motion.div>
         )}
@@ -3217,7 +3217,7 @@ function AppInner() {
           <Route path="/about/our-team"          element={<OurTeam />} />
           <Route path="/blog"                    element={isNigeriaSite ? <BlogPage /> : <InsightsPage />} />
           <Route path="/contact"                 element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
-          <Route path="/request-demo"            element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
+          <Route path="/request-demo"            element={<DemoRequestPage />} />
           <Route path="/faqs" element={<FAQsPage />} />
           <Route path="/privacy-policy"          element={<PrivacyPolicyPage />} />
           <Route path="/simulator"               element={<SimulatorPage />} />
