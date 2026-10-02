@@ -2697,3 +2697,58 @@ body { overflow-x:hidden; }
  .qore-header .brand-wordmark small{letter-spacing:.35em}
  .qore-mobile-panel{padding:15px;border-radius:20px}
 }
+
+
+/* ─── GLASS HEADER REFINEMENT ──────────────────────────────
+   Softer, translucent surface so the header belongs to the page.
+───────────────────────────────────────────────────────────── */
+.qore-header.site-header{
+  top:18px;
+  width:min(1240px,calc(100vw - 48px));
+  height:72px;
+  padding:0 12px 0 22px;
+  border-radius:22px;
+  background:rgba(255,255,255,.68);
+  border:1px solid rgba(255,255,255,.62);
+  box-shadow:0 12px 36px rgba(5,22,48,.08);
+  backdrop-filter:blur(22px) saturate(145%);
+  -webkit-backdrop-filter:blur(22px) saturate(145%);
+}
+.qore-header.scrolled{
+  top:10px;
+  width:min(1160px,calc(100vw - 40px));
+  height:66px;
+  border-radius:22px;
+  background:rgba(255,255,255,.78);
+  border-color:rgba(255,255,255,.72);
+  box-shadow:0 14px 42px rgba(5,22,48,.11);
+}
+.qore-header .brand-logo-mark{width:40px;height:40px}
+.qore-header .brand-wordmark strong{font-size:1.18rem!important}
+.qore-header .brand-wordmark small{font-size:.5rem;margin-top:4px}
+.qore-desktop-nav{gap:30px}
+.qore-desktop-nav>a,.qore-nav-item>button{font-size:.86rem;font-weight:650;color:#12213a}
+.qore-demo-btn{height:44px;padding:0 17px;background:rgba(7,92,255,.94);box-shadow:none}
+.qore-menu-btn{width:44px;height:44px;border-radius:13px;background:rgba(16,28,58,.92)}
+.qore-mega{top:65px}
+.qore-header.scrolled .qore-mega{top:59px}
+
+@media(max-width:860px){
+ .qore-header.site-header,.qore-header.scrolled{
+   top:10px;width:calc(100vw - 20px);height:64px;padding:0 9px 0 14px;
+   border-radius:18px;background:rgba(255,255,255,.72);
+   border:1px solid rgba(255,255,255,.68);
+   box-shadow:0 10px 30px rgba(5,22,48,.09);
+   backdrop-filter:blur(20px) saturate(140%);
+   -webkit-backdrop-filter:blur(20px) saturate(140%);
+ }
+ .qore-header .brand-logo-mark{width:37px;height:37px}
+ .qore-mobile-toggle{width:43px;height:43px;border-radius:12px;background:rgba(16,28,58,.92)}
+ .qore-mobile-panel{
+   top:80px;
+   background:rgba(11,27,53,.94);
+   backdrop-filter:blur(22px) saturate(130%);
+   -webkit-backdrop-filter:blur(22px) saturate(130%);
+   border:1px solid rgba(255,255,255,.1);
+ }
+}
