@@ -3237,3 +3237,41 @@ body { overflow-x:hidden; }
  .network-stage{height:570px!important;margin-bottom:0!important}
  .network-core{left:50%!important;right:auto!important;top:auto!important;bottom:8px!important;transform:translateX(-50%)!important;width:72%!important;height:108px!important}
 }
+
+
+/* Definitive mobile dropdown affordance — independent of icon/SVG styles */
+@media(max-width:860px){
+ .qore-mobile-links details>summary{
+   display:grid!important;
+   grid-template-columns:minmax(0,1fr) 34px!important;
+   align-items:center!important;
+   width:100%!important;
+   padding-right:4px!important;
+ }
+ .qore-mobile-links .mobile-drop-arrow{
+   display:grid!important;
+   place-items:center!important;
+   justify-self:end!important;
+   width:32px!important;
+   height:32px!important;
+   color:#071a3d!important;
+   font-family:Arial,sans-serif!important;
+   font-size:28px!important;
+   font-weight:700!important;
+   line-height:1!important;
+   opacity:1!important;
+   visibility:visible!important;
+   transform:translateY(-3px) rotate(0deg)!important;
+   transition:transform .2s ease!important;
+ }
+ .qore-mobile-links details[open] .mobile-drop-arrow{
+   transform:translateY(3px) rotate(180deg)!important;
+ }
+ .qore-mobile-links details>div{
+   padding:4px 0 12px 14px!important;
+ }
+ .qore-mobile-links details>div>a{
+   font-size:.86em!important;
+   font-weight:600!important;
+ }
+}
