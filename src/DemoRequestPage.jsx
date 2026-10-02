@@ -37,8 +37,7 @@ export default function DemoRequestPage() {
     <section className="page-hero"><p className="eyebrow">BlueLink Consults</p><h1>Request Demo</h1><p>Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team.</p></section>
     <section className="contact-section" id="consultation">
       <div className="contact-copy">
-        <p className="eyebrow">Engage · Assess · Transform</p><h2>See how we can help.</h2>
-        <p>Choose an available time on our Zoom booking page. Your appointment is confirmed when you complete the booking there.</p>
+        <p className="eyebrow">Engage · Assess · Transform</p>
         <BookingButton />
         <p>Prefer to discuss your requirements first? Select a service and send us your priorities using the form.</p>
         <div className="contact-details"><a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a><a href="tel:+2348068649496">+234 806 864 9496</a></div>
