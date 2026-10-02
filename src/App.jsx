@@ -517,8 +517,8 @@ function Header() {
             <div className="qore-mobile-links">
               <details><summary>Services <ChevronDown size={16}/></summary><div>{services.map(s=><Link key={s.slug} to={`/services/${s.slug}`} onClick={close}>{s.title}<ArrowRight size={14}/></Link>)}</div></details>
               <details><summary>Solutions <ChevronDown size={16}/></summary><div><Link to="/solutions/who-we-help" onClick={close}>Who We Help <ArrowRight size={14}/></Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework <ArrowRight size={14}/></Link></div></details>
-              <details><summary>Insights <ChevronDown size={16}/></summary><div>{cmsInsights.slice(0,4).map(i=><Link key={i.slug} to={`/insights/${i.slug}`} onClick={close}>{i.title}<ArrowRight size={14}/></Link>)}</div></details>
-              <Link to="/about" onClick={close}>About <ArrowRight size={15}/></Link>
+              <Link to="/insights" onClick={close}>Insights <ArrowRight size={15}/></Link>
+              <details><summary>About <ChevronDown size={16}/></summary><div><Link to="/about" onClick={close}>Our Story <ArrowRight size={14}/></Link>{isNigeriaSite && <Link to="/about/team" onClick={close}>Our Team <ArrowRight size={14}/></Link>}<Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div></details>
               <Link to="/contact" onClick={close}>Contact <ArrowRight size={15}/></Link>
             </div>
             <div className="qore-mobile-actions">
@@ -1057,33 +1057,14 @@ function Home() {
 function Hero() {
   return (
     <section className="tech-hero hero-clean">
-      <div className="hero-rings" aria-hidden="true">
-        {[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}
-      </div>
-
-      <motion.div className="hero-logo-assembly" aria-hidden="true"
-        initial={{opacity:1}} animate={{opacity:[1,1,1,0]}}
-        transition={{duration:6.7,times:[0,.69,.93,1],ease:"easeInOut"}}>
-        <motion.img src="/bluelink-logo-mark.png" alt="" className="assembly-half assembly-left"
-          initial={{x:-320,rotate:-24,opacity:.55}}
-          animate={{x:[-320,-320,0,0],rotate:[-24,-24,0,0],opacity:[.55,.55,.24,.24]}}
-          transition={{duration:6.2,times:[0,.48,.74,1],ease:[.22,1,.36,1]}} />
-        <motion.img src="/bluelink-logo-mark.png" alt="" className="assembly-half assembly-right"
-          initial={{x:320,rotate:24,opacity:.55}}
-          animate={{x:[320,320,0,0],rotate:[24,24,0,0],opacity:[.55,.55,.24,.24]}}
-          transition={{duration:6.2,times:[0,.48,.74,1],ease:[.22,1,.36,1]}} />
-      </motion.div>
-
-      <motion.div className="hero-clean-copy"
-        initial={{opacity:0,y:22}} animate={{opacity:1,y:0}}
-        transition={{duration:.8,delay:.55,ease:[.22,1,.36,1]}}>
+      <div className="hero-rings" aria-hidden="true">{[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}</div>
+      <motion.img src="/bluelink-logo-mark.png" alt="" className="hero-logo-fade" aria-hidden="true"
+        initial={{opacity:.22}} animate={{opacity:0}} transition={{duration:1.5,delay:3,ease:"easeOut"}} />
+      <motion.div className="hero-clean-copy" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.35,ease:[.22,1,.36,1]}}>
         <span className="hero-clean-kicker">Engage · Assess · Transform</span>
         <h1>Technology built for <span>your business.</span></h1>
         <p>We assess what you have, modernize what matters, and engineer technology that performs reliably as your business grows.</p>
-        <div className="hero-clean-actions">
-          <Link className="hero-dark-btn" to="/services">Explore BlueLink</Link>
-          <Link className="hero-light-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link>
-        </div>
+        <div className="hero-clean-actions"><Link className="hero-dark-btn" to="/services">Explore BlueLink</Link><Link className="hero-light-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link></div>
       </motion.div>
     </section>
   );
