@@ -992,6 +992,17 @@ function ServiceNetwork() {
   const active = nodes.find(n => n.slug === activeService);
   return (
     <section className="service-network">
+      <svg width="0" height="0" aria-hidden="true" style={{position:"absolute",pointerEvents:"none"}}>
+        <defs>
+          <filter id="network-logo-white-ring" colorInterpolationFilters="sRGB">
+            <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 -3 -3 -3 0 1.8" result="darkPixels"/>
+            <feComposite in="darkPixels" in2="SourceAlpha" operator="in" result="ringMask"/>
+            <feFlood floodColor="#ffffff" result="white"/>
+            <feComposite in="white" in2="ringMask" operator="in" result="whiteRing"/>
+            <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="whiteRing"/></feMerge>
+          </filter>
+        </defs>
+      </svg>
       <div className="service-network-copy"><span>Connected technology services</span><h2>One partner. Six connected capabilities.</h2><p>Select a capability to see how it creates value, then explore the service in detail.</p></div>
       <div className={active ? "network-stage has-active" : "network-stage"}>
         <svg className="network-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
