@@ -1161,10 +1161,10 @@ function Home() {
 }
 
 const corporateHeroSlides = [
-  { src: '/images/hero/slides/office-entry-v4.webp', alt: 'Businesswoman seen from behind entering a modern glass office, with no face visible', position: '58% 50%' },
+  { src: '/images/hero/slides/teamwork-v5.webp', alt: 'Colleagues collaborating over business reports and a laptop, with faces out of frame', position: '50% 50%' },
   { src: '/images/hero/slides/boardroom-v4.webp', alt: 'Business professional seen from behind in a modern boardroom, with face out of view', position: '52% 50%' },
-  { src: '/images/hero/slides/office-work-v4.webp', alt: 'Businesswoman in a blazer seen from behind in a contemporary office', position: '28% 50%' },
-  { src: '/images/hero/slides/collaboration-v4.webp', alt: 'Corporate colleagues reviewing documents, showing hands and business attire with faces out of frame', position: '50% 50%' },
+  { src: '/images/hero/slides/consultation-v5.webp', alt: 'Business consultation over a document, showing professional attire and hands with faces out of frame', position: '50% 50%' },
+  { src: '/images/hero/slides/laptop-work-v5.webp', alt: 'Woman working on a laptop and making notes, with her face outside the frame', position: '50% 50%' },
 ];
 function Hero() {
   const [slide, setSlide] = useState(0);
