@@ -401,6 +401,7 @@ function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [insightsOpen, setInsightsOpen] = useState(false);
+  const [utilityOpen, setUtilityOpen] = useState(false);
   const searchRef = useRef(null);
   const isDesktop = useIsDesktop();
   const { insights: cmsInsights } = useInsights();
@@ -423,6 +424,7 @@ function Header() {
     setServicesOpen(false);
     setSolutionsOpen(false);
     setInsightsOpen(false);
+    setUtilityOpen(false);
     setSearchOpen(false);
     setSearchQuery("");
   };
@@ -623,27 +625,24 @@ function Header() {
           )}
         </div>
 
-        <NavLink to="/simulator" onClick={close} style={{
-          display:"inline-flex", alignItems:"center", gap:6,
-          background:"linear-gradient(135deg,#0d2a1a,#0a1e10)",
-          color:"#1d9e75",
-          border:"1px solid #1d9e75",
-          padding:"7px 14px",
-          borderRadius:20,
-          fontWeight:700,
-          fontSize:"0.82rem",
-          textDecoration:"none",
-          letterSpacing:"0.02em",
-          animation:"simPulse 2.5s ease-in-out infinite",
-          flexShrink:0,
-        }}>
-          <Zap size={13} style={{ color:"#1d9e75", flexShrink:0 }} />
-          Try Simulator
-          <span style={{ fontSize:"0.65rem", background:"#1d9e75", color:"#0a1e10", padding:"1px 5px", borderRadius:4, fontWeight:800, letterSpacing:"0.06em" }}>NEW</span>
-        </NavLink>
-        <style>{`@keyframes simPulse{0%,100%{box-shadow:0 0 0 0 rgba(29,158,117,0.4)}50%{box-shadow:0 0 0 6px rgba(29,158,117,0)}}`}</style>
-        <NavLink to="/client-login" className="login-btn" onClick={close}>Client Login</NavLink>
-        <NavLink to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} className="contact-btn" onClick={close}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</NavLink>
+        <div className="utility-menu-wrap">
+          <button
+            type="button"
+            className="utility-menu-button"
+            onClick={() => setUtilityOpen((value) => !value)}
+            aria-expanded={utilityOpen}
+            aria-label="Open quick links"
+          >
+            <Menu size={20} />
+          </button>
+          <div className={utilityOpen ? "utility-menu show" : "utility-menu"}>
+            <span className="dropdown-heading">Quick access</span>
+            <NavLink to="/simulator" onClick={close}><Zap size={17} /><span><strong>Try Simulator</strong><small>Validate before deployment</small></span></NavLink>
+            <NavLink to="/client-login" onClick={close}><LockKeyhole size={17} /><span><strong>Client Login</strong><small>Access your workspace</small></span></NavLink>
+            <NavLink to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} onClick={close}><CalendarDays size={17} /><span><strong>Request Demo</strong><small>See BlueLink in action</small></span></NavLink>
+            <NavLink to="/blog" onClick={close}><FileText size={17} /><span><strong>Blog</strong><small>Ideas, guidance and updates</small></span></NavLink>
+          </div>
+        </div>
       </nav>
 
       <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">
