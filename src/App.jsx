@@ -1,3 +1,4 @@
+import WhyInstitutionsChoose from "./WhyInstitutionsChoose";
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
   Routes,
@@ -1114,6 +1115,7 @@ function Home() {
       <Hero />
       <WhoWeServeStrip />
       <EditorialShowcase />
+      <WhyInstitutionsChoose embedded />
       <ClientLogos />
       <ServiceNetwork />
       <SimulatorTeaser />
@@ -3175,6 +3177,7 @@ function AppInner() {
           <Route path="/solutions"               element={<SolutionsPage />} />
           <Route path="/solutions/who-we-help"   element={<WhoWeHelpPage />} />
           <Route path="/solutions/eat-framework" element={<EATFrameworkPage />} />
+          <Route path="/about/why-bluelink" element={<WhyInstitutionsChoose />} />
           <Route path="/about"                   element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
           <Route path="/about/our-story"         element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
           <Route path="/about/our-team"          element={isNigeriaSite ? <OurTeam /> : <AboutPage />} />
