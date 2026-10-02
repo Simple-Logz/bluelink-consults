@@ -3588,3 +3588,16 @@ body { overflow-x:hidden; }
 /* Keep the logo visible on the dark BlueLink core. */
 .network-core img{filter:url("#network-logo-white-ring")}
 
+
+/* Explicit mobile dropdown indicators and complete navigation at tablet widths. */
+@media(max-width:900px){
+ .ng-mobile-primary{display:grid;padding-bottom:14px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+ .ng-mobile-primary> a,.ng-mobile-primary summary{padding:14px;color:var(--navy);font-weight:700;cursor:pointer}
+ .ng-mobile-primary summary{display:flex;align-items:center;justify-content:space-between;gap:16px;list-style:none;min-height:48px}
+ .ng-mobile-primary summary::-webkit-details-marker{display:none}
+ .ng-mobile-primary summary::marker{content:""}
+ .ng-mobile-primary .ng-dropdown-caret{display:block!important;width:9px;height:9px;flex:0 0 9px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-right:4px;transition:transform .2s}
+ .ng-mobile-primary details[open]>summary .ng-dropdown-caret{transform:rotate(225deg)}
+ .ng-mobile-primary details>a{display:block;padding:12px 28px;color:var(--navy);line-height:1.45}
+ .ng-more{width:min(340px,calc(100vw - 36px))}
+}
