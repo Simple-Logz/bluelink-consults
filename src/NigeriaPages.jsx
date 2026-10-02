@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, ArrowRight, Zap, Users, FileText, CalendarDays } from "lucide-react";
+import { Menu, X, ChevronDown, ArrowRight, Zap, Users, FileText, CalendarDays, Mail, Phone, Facebook } from "lucide-react";
 
 export function NigeriaHeader({ services }) {
   const [panel, setPanel] = useState(null);
@@ -21,19 +21,20 @@ export function NigeriaHeader({ services }) {
     <div className="ng-nav-group"><button onClick={() => flip("services")} aria-expanded={panel === "services"} aria-controls="ng-services">Services <ChevronDown size={14} /></button>{panel === "services" && <div id="ng-services" className="ng-submenu"><Link to="/services" onClick={close}>All Services</Link>{services.map(service => <Link key={service.slug} to={`/services/${service.slug}`} onClick={close}>{service.title}</Link>)}</div>}</div>
     <div className="ng-nav-group"><button onClick={() => flip("solutions")} aria-expanded={panel === "solutions"} aria-controls="ng-solutions">Solutions <ChevronDown size={14} /></button>{panel === "solutions" && <div id="ng-solutions" className="ng-submenu"><Link to="/solutions/who-we-help" onClick={close}>Who We Help</Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework</Link></div>}</div>
     <NavLink to="/insights" onClick={close}>Insights</NavLink>
-    <div className="ng-nav-group"><button onClick={() => flip("about")} aria-expanded={panel === "about"} aria-controls="ng-about">About <ChevronDown size={14} /></button>{panel === "about" && <div id="ng-about" className="ng-submenu"><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link></div>}</div>
+    <div className="ng-nav-group"><button onClick={() => flip("about")} aria-expanded={panel === "about"} aria-controls="ng-about">About Us <ChevronDown size={14} /></button>{panel === "about" && <div id="ng-about" className="ng-submenu"><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link></div>}</div>
     <NavLink to="/contact" onClick={close}>Contact</NavLink>
   </>;
-  const extras = [{ title: "Try Simulator", path: "/simulator", icon: Zap }, { title: "Client Login", path: "/client-login", icon: Users }, { title: "Request Demo", path: "/request-demo", icon: CalendarDays }, { title: "Blog", path: "/blog", icon: FileText }];
-  return <header ref={root} className="site-header ng-header">
+  const extras = [{ title: "Try Simulator", path: "/simulator", icon: Zap }, { title: "Client Login", path: "/client-login", icon: Users }, { title: "Request Demo", path: "/request-demo", icon: CalendarDays, Mail, Phone, Facebook }, { title: "Blog", path: "/blog", icon: FileText }];
+  return <div className="bl-header-shell"><HeaderUtility nigeria /><header ref={root} className="site-header ng-header">
     <Link to="/" className="brand-logo-wrap brand-home-link" aria-label="BlueLink Consults homepage" onClick={close}><img src="/bluelink-logo-mark.png" alt="" className="brand-logo-mark" /><span className="brand-wordmark"><strong>Blue<span>Link</span></strong><small>Consults</small></span></Link>
     <nav className="ng-primary" aria-label="Main navigation">{primary}</nav>
+    <Link to="/request-demo" onClick={close} className="bl-header-demo">Request Demo</Link>
     <button ref={toggle} type="button" className="ng-menu-toggle" onClick={() => flip("more")} aria-expanded={panel === "more"} aria-controls="ng-more" aria-label={panel === "more" ? "Close additional menu" : "Open additional menu"}>{panel === "more" ? <X size={23} /> : <Menu size={23} />}</button>
     <nav id="ng-more" className={`ng-more ${panel === "more" ? "is-open" : ""}`} aria-label="Additional navigation" hidden={panel !== "more"}>
-      <div className="ng-mobile-primary"><Link to="/services" onClick={close}>Services</Link><Link to="/solutions" onClick={close}>Solutions</Link><Link to="/insights" onClick={close}>Insights</Link><details><summary>About</summary><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link></details><Link to="/contact" onClick={close}>Contact</Link></div>
+      <div className="ng-mobile-primary"><Link to="/services" onClick={close}>Services</Link><Link to="/solutions" onClick={close}>Solutions</Link><Link to="/insights" onClick={close}>Insights</Link><details><summary>About Us</summary><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link></details><Link to="/contact" onClick={close}>Contact</Link></div>
       {extras.map(({ title, path, icon: Icon }) => <Link key={path} to={path} onClick={close}><Icon size={18} /> {title}<ArrowRight size={15} /></Link>)}
     </nav>
-  </header>;
+  </header></div>;
 }
 
 export function DemoBanner() {
@@ -71,4 +72,25 @@ export function OurTeam() {
 
 export function BlogPage() {
   return <><Hero label="Blog" title="Ideas from BlueLink." text="Our blog is coming soon. In the meantime, explore our existing insights on technology modernisation and delivery." /><section className="ng-blog-empty"><FileText size={36} /><h2>More from our team, soon.</h2><Link className="ng-text-link" to="/insights">Explore Insights <ArrowRight size={18} /></Link></section></>;
+}
+
+
+export function HeaderUtility({ nigeria = false }) {
+  const phone = nigeria ? "+234 806 864 9496" : "+1 (401) 440-2434";
+  const phoneHref = nigeria ? "tel:+2348068649496" : "tel:+14014402434";
+  return <div className="bl-header-utility"><div className="bl-header-utility-inner">
+    <div className="bl-header-contact"><a href={phoneHref}><Phone size={15} aria-hidden="true" /><span>{phone}</span></a><a href="mailto:info@bluelinkconsults.com"><Mail size={15} aria-hidden="true" /><span>info@bluelinkconsults.com</span></a></div>
+    <div className="bl-header-shortcuts"><Link to="/faqs">FAQs</Link><span className="bl-facebook-pending" aria-label="Facebook page link awaiting confirmation"><Facebook size={16} aria-hidden="true" /><span>Facebook</span></span></div>
+  </div></div>;
+}
+
+export function FAQsPage() {
+  const questions = [
+    ["What services does BlueLink Consults provide?", "We provide technology audits and assessments, application modernisation, cloud infrastructure, DevOps and automation, pre-deployment validation, and operational and incident support."],
+    ["How do we begin an engagement?", "Contact us to discuss your organisation’s goals and challenges. We agree the scope, deliverables and approach before work begins."],
+    ["Can we see a demonstration first?", "Yes. Use Request Demo to tell us what you would like to explore. Our team will contact you to arrange a suitable time."],
+    ["Can you work with our existing IT team and systems?", "Yes. We work with your team to assess the existing environment and plan improvements around your operational requirements."],
+    ["How is project pricing determined?", "Pricing depends on the agreed scope, technical complexity and delivery requirements. Contact us for a proposal based on your needs."],
+  ];
+  return <><Hero label="FAQs" title="Your questions, answered." text="A few things to know before working with BlueLink Consults." /><section className="bl-faq-list">{questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}<Link className="bl-header-demo" to="/request-demo">Request Demo</Link></section></>;
 }

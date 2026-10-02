@@ -46,7 +46,7 @@ import "./styles.css";
 import { supabase } from "./supabaseClient";
 import ClientPortal from "./ClientPortal";
 import DemoRequestPage from "./DemoRequestPage";
-import { NigeriaHeader, DemoBanner, OurStory, OurTeam, BlogPage } from "./NigeriaPages";
+import { NigeriaHeader, DemoBanner, OurStory, OurTeam, BlogPage, HeaderUtility, FAQsPage } from "./NigeriaPages";
 
 /* ─────────────────────────────────────────────────────────────
    DATA
@@ -395,6 +395,7 @@ function usePageTitle(title) {
 
 /* ─── HEADER ─────────────────────────────────────────────── */
 function Header() {
+  const [mobileSection, setMobileSection] = useState(null);
   const [open, setOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(null);
   const [utilityOpen, setUtilityOpen] = useState(false);
@@ -426,7 +427,7 @@ function Header() {
 
   return (
     <>
-      <header className={headerScrolled ? "site-header qore-header scrolled" : "site-header qore-header"}>
+      <div className="bl-header-shell"><HeaderUtility /><header className={headerScrolled ? "site-header qore-header scrolled" : "site-header qore-header"}>
         <Link to="/" className="brand-logo-wrap brand-home-link" onClick={close} aria-label="BlueLink Consults home">
           <img src="/bluelink-logo-mark.png" alt="" className="brand-logo-mark" />
           <span className="brand-wordmark"><strong>Blue<span>Link</span></strong><small>Consults</small></span>
@@ -492,7 +493,7 @@ function Header() {
             </div>
           </div>
 
-          <NavLink to="/about">About</NavLink>
+          <NavLink to="/about">About Us</NavLink>
           <NavLink to="/contact">Contact</NavLink>
         </nav>
 
@@ -508,7 +509,7 @@ function Header() {
           </div>
           <button className="qore-mobile-toggle" onClick={()=>setOpen(v=>!v)} aria-label="Toggle navigation">{open ? <X size={22}/> : <Menu size={22}/>}</button>
         </div>
-      </header>
+      </header></div>
 
       <AnimatePresence>
         {open && (
@@ -518,7 +519,7 @@ function Header() {
               <div className={"mobile-accordion "+(mobileSection==="services"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="services"?null:"services")}><span>Services</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="services"&&<div className="mobile-accordion-content">{services.map(s=><Link key={s.slug} to={`/services/${s.slug}`} onClick={close}>{s.title}<ArrowRight size={14}/></Link>)}</div>}</div>
               <div className={"mobile-accordion "+(mobileSection==="solutions"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="solutions"?null:"solutions")}><span>Solutions</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="solutions"&&<div className="mobile-accordion-content"><Link to="/solutions/who-we-help" onClick={close}>Who We Help <ArrowRight size={14}/></Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework <ArrowRight size={14}/></Link></div>}</div>
               <Link to="/insights" onClick={close}>Insights <ArrowRight size={15}/></Link>
-              <div className={"mobile-accordion "+(mobileSection==="about"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="about"?null:"about")}><span>About</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="about"&&<div className="mobile-accordion-content"><Link to="/about" onClick={close}>Our Story <ArrowRight size={14}/></Link>{isNigeriaSite&&<Link to="/about/team" onClick={close}>Our Team <ArrowRight size={14}/></Link>}<Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div>}</div>
+              <div className={"mobile-accordion "+(mobileSection==="about"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="about"?null:"about")}><span>About Us</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="about"&&<div className="mobile-accordion-content"><Link to="/about" onClick={close}>Our Story <ArrowRight size={14}/></Link>{isNigeriaSite&&<Link to="/about/team" onClick={close}>Our Team <ArrowRight size={14}/></Link>}<Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div>}</div>
               <Link to="/contact" onClick={close}>Contact <ArrowRight size={15}/></Link>
             </div>
             <div className="qore-mobile-actions">
@@ -3146,6 +3147,7 @@ function AppInner() {
           <Route path="/blog"                    element={isNigeriaSite ? <BlogPage /> : <InsightsPage />} />
           <Route path="/contact"                 element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
           <Route path="/request-demo"            element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
+          <Route path="/faqs" element={<FAQsPage />} />
           <Route path="/privacy-policy"          element={<PrivacyPolicyPage />} />
           <Route path="/simulator"               element={<SimulatorPage />} />
           <Route path="/terms"                   element={<TermsPage />} />
