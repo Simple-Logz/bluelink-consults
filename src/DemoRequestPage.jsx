@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { CheckCircle2, Download, Mail, Send } from "lucide-react";
+import { CheckCircle2, Download, Mail, Send, CalendarDays } from "lucide-react";
+
+const bookingUrl = "https://scheduler.zoom.us/bluelink-consults-fe0ra0/30-mins-with-bluelink";
+const bookingButtonStyle = { display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 10, background: "#1557c0", color: "#fff", padding: "14px 22px", borderRadius: 8, fontWeight: 700, textDecoration: "none", margin: "12px 0" };
+function BookingButton() {
+  return <a href={bookingUrl} target="_blank" rel="noopener noreferrer" style={bookingButtonStyle}><CalendarDays size={18} aria-hidden="true" /> Book a 30-minute demo</a>;
+}
 
 const services = ["Technology Audit & Assessment", "Application Modernisation", "Cloud Infrastructure", "DevOps & Automation", "Pre-Deployment Validation", "Operational & Incident Support"];
 
@@ -28,14 +34,16 @@ export default function DemoRequestPage() {
     } finally { clearTimeout(timeout); }
   }
   return <>
-    <section className="page-hero"><p className="eyebrow">BlueLink Consults · Nigeria</p><h1>Request Demo</h1><p>Tell us what you want to improve. We will arrange a demonstration relevant to your team and technology needs.</p></section>
+    <section className="page-hero"><p className="eyebrow">BlueLink Consults · Nigeria</p><h1>Request Demo</h1><p>Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team.</p></section>
     <section className="contact-section" id="consultation">
       <div className="contact-copy">
         <p className="eyebrow">Engage · Assess · Transform</p><h2>See how we can help.</h2>
-        <p>Select a service and share your priorities so we can prepare a focused session.</p>
+        <p>Choose an available time on our Zoom booking page. Your appointment is confirmed when you complete the booking there.</p>
+        <BookingButton />
+        <p>Prefer to discuss your requirements first? Select a service and send us your priorities using the form.</p>
         <div className="contact-details"><a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a><a href="tel:+2348068649496">+234 806 864 9496</a></div>
       </div>
-      {status === "sent" ? <div className="success-box" role="status"><CheckCircle2 size={40} /><h3>Demo request received</h3><p>Thank you. Our team will contact you to agree a suitable time.</p><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><p><a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20Nigeria%20demo%20follow-up">Email our team</a></p><button onClick={() => setStatus("idle")}>Send another request</button></div> :
+      {status === "sent" ? <div className="success-box" role="status"><CheckCircle2 size={40} /><h3>Demo request received</h3><p>Thank you. Choose an available time below to book your demo. If you have already booked, our team will use these details to prepare your session.</p><BookingButton /><br /><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><p><a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20Nigeria%20demo%20follow-up">Email our team</a></p><button onClick={() => setStatus("idle")}>Send another request</button></div> :
       <form className="contact-form" onSubmit={submit}>
         <input type="hidden" name="_subject" value="Demo request — bluelinkconsults.ng" />
         <input type="hidden" name="source" value="BlueLink Nigeria / Request Demo" />
