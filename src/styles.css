@@ -2495,3 +2495,123 @@ h1, h2, h3, h4 { margin: 0; }
   .header-spacer { height: 90px; }
   .site-header .main-nav { margin-left:0; }
 }
+
+
+/* ─── QORE-STYLE POLISH PASS ──────────────────────────────── */
+html { scroll-behavior:smooth; }
+body { overflow-x:hidden; }
+
+/* Qore reference: airy transparent header at rest, compact glass surface on scroll. */
+.site-header {
+  top: 18px;
+  width: min(1320px, calc(100vw - 48px));
+  height: 82px;
+  padding: 0 24px 0 28px;
+  border-radius: 22px;
+  background: rgba(255,255,255,.94);
+  border: 1px solid rgba(9,30,66,.08);
+  box-shadow: 0 8px 28px rgba(9,30,66,.07);
+  transition: top .28s ease, height .28s ease, width .28s ease, background .28s ease, box-shadow .28s ease, border-radius .28s ease;
+}
+.site-header.scrolled {
+  top: 10px;
+  width: min(1180px, calc(100vw - 48px));
+  height: 68px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 16px 48px rgba(9,30,66,.13);
+}
+.header-spacer { height:118px; }
+
+.site-header .brand-wordmark,
+.site-header .brand-wordmark strong { color:#101c3a !important; }
+.site-header .brand-wordmark strong span { color:#075cff !important; }
+.site-header .brand-wordmark small { color:#315fae !important; }
+.site-header .main-nav { justify-content:center; gap:32px; margin-left:auto; }
+.site-header .main-nav > a,
+.site-header .main-nav > a:visited,
+.site-header .main-nav > button,
+.site-header .nav-dropdown > button {
+  color:#14203b !important;
+  font-size:.91rem;
+  font-weight:650;
+}
+.site-header .main-nav > a:hover,
+.site-header .main-nav > button:hover,
+.site-header .nav-dropdown > button:hover,
+.site-header .main-nav > a.active { color:#075cff !important; }
+.site-header .nav-dropdown > button svg { color:#5c6880; }
+
+.site-header .utility-menu-button {
+  width:46px; height:46px; margin-left:4px;
+  border-radius:999px !important;
+  background:#101c3a !important;
+  color:#fff !important;
+  border:1px solid #101c3a !important;
+}
+.site-header .utility-menu-button:hover { background:#075cff !important; color:#fff !important; transform:rotate(4deg) scale(1.04); }
+
+/* Large editorial flyouts instead of ordinary dropdown boxes. */
+.site-header .dropdown-menu {
+  top:72px;
+  width:520px;
+  padding:18px;
+  border-radius:28px;
+  background:rgba(255,255,255,.98);
+  border:1px solid rgba(9,30,66,.08);
+  box-shadow:0 28px 80px rgba(9,30,66,.16);
+}
+.site-header.scrolled .dropdown-menu { top:60px; }
+.site-header .dropdown-menu.compact { width:470px; }
+.site-header .dropdown-menu .dropdown-heading { color:#075cff; }
+.site-header .dropdown-menu a,
+.site-header .simple-dropdown-item { color:#14203b !important; border-radius:18px; }
+.site-header .dropdown-menu a:hover,
+.site-header .simple-dropdown-item:hover { background:#f2f6ff; transform:translateX(4px); }
+.site-header .dropdown-menu strong { color:#101c3a; font-size:.9rem; }
+.site-header .dropdown-menu small { color:#667085; }
+.site-header .dropdown-menu svg,
+.site-header .simple-dropdown-item svg { color:#075cff; }
+
+.site-header .utility-menu {
+  top:58px; width:350px; padding:14px; border-radius:26px;
+  background:#101c3a; border:1px solid rgba(255,255,255,.1);
+}
+.site-header .utility-menu > a { border-radius:17px; }
+.site-header .utility-menu > a:hover { background:rgba(255,255,255,.08) !important; }
+
+/* Replicate the reference site's motion language across existing BlueLink surfaces. */
+.section, .about-section, .contact-section, .service-detail-section {
+  position:relative;
+}
+.section-heading h2, .split-copy h2, .about-section h2, .contact-copy h2 {
+  letter-spacing:-.045em;
+}
+.border-card, .solution-card, .resource-card, .detail-card, .principles {
+  overflow:hidden;
+  position:relative;
+}
+.border-card::after, .solution-card::after, .resource-card::after {
+  content:""; position:absolute; inset:auto -30% -55% 20%; height:160px;
+  background:radial-gradient(circle,rgba(7,92,255,.09),transparent 66%);
+  opacity:0; transform:translateY(24px);
+  transition:opacity .35s ease, transform .35s ease;
+  pointer-events:none;
+}
+.border-card:hover::after, .solution-card:hover::after, .resource-card:hover::after { opacity:1; transform:translateY(0); }
+.border-card a svg, .solution-card a svg, .resource-content a svg { transition:transform .2s ease; }
+.border-card a:hover svg, .solution-card a:hover svg, .resource-content a:hover svg { transform:translateX(5px); }
+
+.hero-image { transform:scale(1.01); animation:qoreHeroSettle 1.1s cubic-bezier(.2,.8,.2,1) both; }
+.hero-message { animation:qorePanelIn .8s .12s cubic-bezier(.2,.8,.2,1) both; }
+@keyframes qoreHeroSettle { from{transform:scale(1.055)} to{transform:scale(1.01)} }
+@keyframes qorePanelIn { from{opacity:0;transform:translateY(26px)} to{opacity:1;transform:translateY(0)} }
+
+@media (max-width:1050px) {
+  .site-header, .site-header.scrolled { top:10px; width:calc(100vw - 24px); height:68px; border-radius:22px; }
+  .site-header .main-nav { justify-content:flex-start; gap:0; }
+}
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  .hero-image,.hero-message { animation:none !important; }
+}
