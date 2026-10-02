@@ -1166,12 +1166,15 @@ function Hero() {
       <div className="hero-rings" aria-hidden="true">{[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}</div>
       <motion.img src="/bluelink-logo-mark.png" alt="" className="hero-logo-fade" aria-hidden="true"
         initial={{opacity:.22}} animate={{opacity:0}} transition={{duration:.45,delay:1,ease:"easeOut"}} />
+      <div className="hero-clean-layout">
       <motion.div className="hero-clean-copy" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.35,ease:[.22,1,.36,1]}}>
         <span className="hero-clean-kicker">Engage · Assess · Transform</span>
         <h1>Technology built for <span>your business.</span></h1>
         <p>We assess what you have, modernize what matters, and engineer technology that performs reliably as your business grows.</p>
         <div className="hero-clean-actions"><Link className="hero-dark-btn" to="/services">Explore BlueLink</Link><Link className="hero-light-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link></div>
       </motion.div>
+      <figure className="hero-professional-photo"><img src="/images/hero/corporate-professional.webp" alt="Black businesswoman in a tailored suit standing confidently in a bright office" width="1000" height="1500" fetchPriority="high" /></figure>
+      </div>
     </section>
   );
 }
