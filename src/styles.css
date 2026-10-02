@@ -3420,3 +3420,42 @@ body { overflow-x:hidden; }
  }
  .qore-mobile-links details[open] .mobile-menu-label b{transform:rotate(180deg)!important}
 }
+
+
+/* FINAL mobile accordion rows — self-contained layout, independent of inherited menu rules */
+@media(max-width:860px){
+ .qore-mobile-links>details>summary{
+   display:grid!important;
+   grid-template-columns:1fr 40px!important;
+   align-items:center!important;
+   width:100%!important;
+   min-height:68px!important;
+   padding:0 8px 0 0!important;
+   color:#071a3d!important;
+ }
+ .qore-mobile-links>details>summary .mobile-menu-label{
+   display:block!important;
+   color:#071a3d!important;
+ }
+ .qore-mobile-links>details>summary .mobile-menu-caret{
+   display:flex!important;
+   align-items:center!important;
+   justify-content:center!important;
+   width:40px!important;
+   height:40px!important;
+   justify-self:end!important;
+   color:#071a3d!important;
+   font-family:Arial,sans-serif!important;
+   font-size:18px!important;
+   font-weight:900!important;
+   line-height:1!important;
+   opacity:1!important;
+   visibility:visible!important;
+   -webkit-text-fill-color:#071a3d!important;
+   transform:rotate(0deg)!important;
+   transition:transform .2s ease!important;
+ }
+ .qore-mobile-links>details[open]>summary .mobile-menu-caret{
+   transform:rotate(180deg)!important;
+ }
+}
