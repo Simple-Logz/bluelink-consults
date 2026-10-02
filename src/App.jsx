@@ -395,268 +395,140 @@ function usePageTitle(title) {
 
 /* ─── HEADER ─────────────────────────────────────────────── */
 function Header() {
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchOpen, setSearchOpen] = useState(false);
   const [open, setOpen] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const [solutionsOpen, setSolutionsOpen] = useState(false);
-  const [insightsOpen, setInsightsOpen] = useState(false);
+  const [megaOpen, setMegaOpen] = useState(null);
   const [utilityOpen, setUtilityOpen] = useState(false);
   const [headerScrolled, setHeaderScrolled] = useState(false);
-  const searchRef = useRef(null);
   const isDesktop = useIsDesktop();
   const { insights: cmsInsights } = useInsights();
-  const siteSearchIndex = buildSiteSearchIndex(cmsInsights);
-
-  const [theme, setTheme] = useState(() => {
-    if (typeof window === "undefined") return "light";
-    return localStorage.getItem("bluelink-theme") || "light";
-  });
 
   useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("bluelink-theme", theme);
-  }, [theme]);
-
-  useEffect(() => {
-    const onScroll = () => setHeaderScrolled(window.scrollY > 28);
+    const onScroll = () => setHeaderScrolled(window.scrollY > 24);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
+  useEffect(() => {
+    if (!isDesktop) setMegaOpen(null);
+  }, [isDesktop]);
 
   const close = () => {
     setOpen(false);
-    setServicesOpen(false);
-    setSolutionsOpen(false);
-    setInsightsOpen(false);
+    setMegaOpen(null);
     setUtilityOpen(false);
-    setSearchOpen(false);
-    setSearchQuery("");
   };
 
-  const toggleServices = () => { setServicesOpen((c) => !c); setSolutionsOpen(false); setInsightsOpen(false); setSearchOpen(false); };
-  const toggleSolutions = () => { setSolutionsOpen((c) => !c); setServicesOpen(false); setInsightsOpen(false); setSearchOpen(false); };
-  const toggleInsights = () => { setInsightsOpen((c) => !c); setServicesOpen(false); setSolutionsOpen(false); setSearchOpen(false); };
-  const toggleSearch = () => { setSearchOpen((c) => !c); setServicesOpen(false); setSolutionsOpen(false); setInsightsOpen(false); setSearchQuery(""); };
-
-  useEffect(() => {
-    function handler(e) {
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setSearchOpen(false);
-        setSearchQuery("");
-      }
-    }
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
-
-  const filteredSearchResults = searchQuery.trim().length > 1
-    ? siteSearchIndex.filter((item) => {
-        const q = searchQuery.toLowerCase();
-        return item.title.toLowerCase().includes(q)
-          || item.category.toLowerCase().includes(q)
-          || item.description.toLowerCase().includes(q)
-          || item.keywords.toLowerCase().includes(q);
-      })
-    : [];
+  const toggleMega = (name) => {
+    setMegaOpen((current) => current === name ? null : name);
+    setUtilityOpen(false);
+  };
 
   return (
     <>
-      {/* Mobile overlay — tap anywhere outside menu to close it */}
-      {open && (
-        <div
-          onClick={close}
-          style={{
-            position: "fixed",
-            inset: 0,
-            zIndex: 8998,
-            background: "rgba(5,11,45,0.35)",
-            backdropFilter: "blur(2px)",
-            WebkitBackdropFilter: "blur(2px)",
-          }}
-          aria-hidden="true"
-        />
-      )}
-    <header className={headerScrolled ? "site-header scrolled" : "site-header"}>
-      <Link to="/" className="brand-logo-wrap brand-home-link" onClick={close} aria-label="Go to BlueLink Consults homepage">
-        <img
-          src="/bluelink-logo-mark.png"
-          alt="BlueLink Consults"
-          className="brand-logo-mark"
-          onError={(e) => {
-            e.currentTarget.style.display = "none";
-            e.currentTarget.nextSibling.style.display = "block";
-          }}
-        />
-        <span className="brand-wordmark">
-          <strong>Blue<span>Link</span></strong>
-          <small>Consults</small>
-        </span>
-        <span className="brand-text-fallback" style={{ display: "none" }}>BlueLink Consults</span>
-      </Link>
+      <header className={headerScrolled ? "site-header qore-header scrolled" : "site-header qore-header"}>
+        <Link to="/" className="brand-logo-wrap brand-home-link" onClick={close} aria-label="BlueLink Consults home">
+          <img src="/bluelink-logo-mark.png" alt="" className="brand-logo-mark" />
+          <span className="brand-wordmark"><strong>Blue<span>Link</span></strong><small>Consults</small></span>
+        </Link>
 
-      <nav className={open ? "main-nav open" : "main-nav"}>
-        <div
-          className="nav-dropdown"
-          onMouseEnter={() => isDesktop && setServicesOpen(true)}
-          onMouseLeave={() => isDesktop && setServicesOpen(false)}
-        >
-          <button type="button" onClick={toggleServices} aria-expanded={servicesOpen} aria-haspopup="true">
-            Services <ChevronDown size={15} />
-          </button>
-          <div className={servicesOpen ? "dropdown-menu show" : "dropdown-menu"}>
-            <span className="dropdown-heading">Modernization Services</span>
-            {services.map((s) => {
-              const Icon = s.icon;
-              return (
-                <Link key={s.slug} to={`/services/${s.slug}`} onClick={close} className="simple-dropdown-item">
-                  <Icon size={17} />
-                  <strong>{s.title}</strong>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-
-        <div
-          className="nav-dropdown"
-          onMouseEnter={() => isDesktop && setSolutionsOpen(true)}
-          onMouseLeave={() => isDesktop && setSolutionsOpen(false)}
-        >
-          <button type="button" onClick={toggleSolutions} aria-expanded={solutionsOpen} aria-haspopup="true">
-            Solutions <ChevronDown size={15} />
-          </button>
-          <div className={solutionsOpen ? "dropdown-menu show" : "dropdown-menu"}>
-            <span className="dropdown-heading">Solutions</span>
-            <Link to="/solutions/who-we-help" onClick={close} className="simple-dropdown-item">
-              <Building2 size={17} />
-              <strong>Who We Help</strong>
-            </Link>
-            <Link to="/solutions/eat-framework" onClick={close} className="simple-dropdown-item">
-              <Target size={17} />
-              <strong>The EAT Framework</strong>
-            </Link>
-          </div>
-        </div>
-
-        <div
-          className="nav-dropdown"
-          onMouseEnter={() => isDesktop && setInsightsOpen(true)}
-          onMouseLeave={() => isDesktop && setInsightsOpen(false)}
-        >
-          <button type="button" onClick={toggleInsights} aria-expanded={insightsOpen} aria-haspopup="true">
-            Insights <ChevronDown size={15} />
-          </button>
-          <div className={insightsOpen ? "dropdown-menu compact show" : "dropdown-menu compact"}>
-            <span className="dropdown-heading">Resources</span>
-            {cmsInsights.map((i) => (
-              <Link key={i.slug} to={`/insights/${i.slug}`} onClick={close}>
-                <FileText size={16} />
-                <span>
-                  <strong>{i.title}</strong>
-                  <small>{i.category} · {i.minutes}</small>
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-
-        <NavLink to="/about" onClick={close}>About</NavLink>
-        <NavLink to="/contact" onClick={close}>Contact</NavLink>
-
-        <div className="search-wrapper" ref={searchRef}>
-          {isDesktop ? (
-            <>
-              <button type="button" className="search-button" onClick={toggleSearch} aria-label="Search">
-                <Search size={19} />
-              </button>
-              {searchOpen && (
-                <div className="search-dropdown">
-                  <div className="search-input-wrap">
-                    <Search size={16} />
-                    <input
-                      className="search-input"
-                      type="text"
-                      placeholder="Search services, insights, DevOps..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      autoFocus
-                    />
-                  </div>
-                  {searchQuery.trim().length > 1 && (
-                    <div className="search-results">
-                      {filteredSearchResults.length > 0 ? (
-                        filteredSearchResults.map((item) => (
-                          <Link key={item.path} to={item.path} onClick={() => { setSearchQuery(""); setSearchOpen(false); close(); }}>
-                            <strong>{item.title}</strong>
-                            <small>{item.category} — {item.description}</small>
-                          </Link>
-                        ))
-                      ) : (
-                        <div className="no-search-results">No results found.</div>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-            </>
-          ) : (
-            <div className="search-dropdown">
-              <div className="search-input-wrap">
-                <Search size={16} />
-                <input
-                  className="search-input"
-                  type="text"
-                  placeholder="Search services, insights, DevOps..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                />
+        <nav className="qore-desktop-nav" aria-label="Primary navigation">
+          <div className="qore-nav-item"
+            onMouseEnter={() => setMegaOpen("services")}
+            onMouseLeave={() => setMegaOpen(null)}>
+            <button onClick={() => toggleMega("services")} aria-expanded={megaOpen === "services"}>
+              Services <ChevronDown size={14}/>
+            </button>
+            <div className={megaOpen === "services" ? "qore-mega services show" : "qore-mega services"}>
+              <div className="qore-mega-intro">
+                <span className="qore-menu-kicker">What we do</span>
+                <h3>Technology built around your business.</h3>
+                <p>Assess, modernise and operate critical technology with a practical delivery partner.</p>
+                <Link to="/contact" onClick={close}>Talk to BlueLink <ArrowRight size={15}/></Link>
               </div>
-              {searchQuery.trim().length > 1 && (
-                <div className="search-results">
-                  {filteredSearchResults.length > 0 ? (
-                    filteredSearchResults.map((item) => (
-                      <Link key={item.path} to={item.path} onClick={() => { setSearchQuery(""); close(); }}>
-                        <strong>{item.title}</strong>
-                        <small>{item.category} — {item.description}</small>
-                      </Link>
-                    ))
-                  ) : (
-                    <div className="no-search-results">No results found.</div>
-                  )}
-                </div>
-              )}
+              <div className="qore-mega-links">
+                {services.map((s) => {
+                  const Icon=s.icon;
+                  return <Link key={s.slug} to={`/services/${s.slug}`} onClick={close}><span className="qore-menu-icon"><Icon size={18}/></span><span><strong>{s.title}</strong><small>{s.summary}</small></span><ArrowRight className="qore-menu-arrow" size={15}/></Link>;
+                })}
+              </div>
             </div>
-          )}
-        </div>
-
-        <div className="utility-menu-wrap">
-          <button
-            type="button"
-            className="utility-menu-button"
-            onClick={() => setUtilityOpen((value) => !value)}
-            aria-expanded={utilityOpen}
-            aria-label="Open quick links"
-          >
-            <Menu size={20} />
-          </button>
-          <div className={utilityOpen ? "utility-menu show" : "utility-menu"}>
-            <span className="dropdown-heading">Quick access</span>
-            <NavLink to="/simulator" onClick={close}><Zap size={17} /><span><strong>Try Simulator</strong><small>Validate before deployment</small></span></NavLink>
-            <NavLink to="/client-login" onClick={close}><LockKeyhole size={17} /><span><strong>Client Login</strong><small>Access your workspace</small></span></NavLink>
-            <NavLink to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} onClick={close}><CalendarDays size={17} /><span><strong>Request Demo</strong><small>See BlueLink in action</small></span></NavLink>
-            <NavLink to="/blog" onClick={close}><FileText size={17} /><span><strong>Blog</strong><small>Ideas, guidance and updates</small></span></NavLink>
           </div>
-        </div>
-      </nav>
 
-      <button className="mobile-toggle" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-        {open ? <X size={22} /> : <Menu size={22} />}
-      </button>
-    </header>
+          <div className="qore-nav-item"
+            onMouseEnter={() => setMegaOpen("solutions")}
+            onMouseLeave={() => setMegaOpen(null)}>
+            <button onClick={() => toggleMega("solutions")} aria-expanded={megaOpen === "solutions"}>
+              Solutions <ChevronDown size={14}/>
+            </button>
+            <div className={megaOpen === "solutions" ? "qore-mega compact show" : "qore-mega compact"}>
+              <div className="qore-mega-intro">
+                <span className="qore-menu-kicker">How we engage</span>
+                <h3>From assessment to transformation.</h3>
+                <p>Structured engagements for organisations that need clarity, modernisation and reliable delivery.</p>
+              </div>
+              <div className="qore-mega-links">
+                <Link to="/solutions/who-we-help" onClick={close}><span className="qore-menu-icon"><Building2 size={18}/></span><span><strong>Who We Help</strong><small>Solutions shaped around operating realities.</small></span><ArrowRight size={15}/></Link>
+                <Link to="/solutions/eat-framework" onClick={close}><span className="qore-menu-icon"><Target size={18}/></span><span><strong>The EAT Framework</strong><small>Engage. Assess. Transform.</small></span><ArrowRight size={15}/></Link>
+              </div>
+            </div>
+          </div>
+
+          <div className="qore-nav-item"
+            onMouseEnter={() => setMegaOpen("insights")}
+            onMouseLeave={() => setMegaOpen(null)}>
+            <button onClick={() => toggleMega("insights")} aria-expanded={megaOpen === "insights"}>
+              Insights <ChevronDown size={14}/>
+            </button>
+            <div className={megaOpen === "insights" ? "qore-mega compact show" : "qore-mega compact"}>
+              <div className="qore-mega-intro">
+                <span className="qore-menu-kicker">Thinking</span>
+                <h3>Practical technology insight.</h3>
+                <p>Guidance for leaders making infrastructure, modernisation and delivery decisions.</p>
+              </div>
+              <div className="qore-mega-links">
+                {cmsInsights.slice(0,4).map((i)=><Link key={i.slug} to={`/insights/${i.slug}`} onClick={close}><span className="qore-menu-icon"><FileText size={18}/></span><span><strong>{i.title}</strong><small>{i.category} · {i.minutes}</small></span><ArrowRight size={15}/></Link>)}
+              </div>
+            </div>
+          </div>
+
+          <NavLink to="/about">About</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+        </nav>
+
+        <div className="qore-header-actions">
+          <Link className="qore-demo-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Request Demo <ArrowRight size={15}/></Link>
+          <div className="qore-utility-wrap">
+            <button className="qore-menu-btn" onClick={() => setUtilityOpen(v=>!v)} aria-label="Open quick links" aria-expanded={utilityOpen}><Menu size={21}/></button>
+            <div className={utilityOpen ? "qore-utility show" : "qore-utility"}>
+              <Link to="/simulator" onClick={close}><Zap size={17}/><span><strong>Try Simulator</strong><small>Test deployment readiness</small></span></Link>
+              <Link to="/client-login" onClick={close}><LockKeyhole size={17}/><span><strong>Client Login</strong><small>Access your workspace</small></span></Link>
+              <Link to="/blog" onClick={close}><FileText size={17}/><span><strong>Blog</strong><small>Ideas and updates</small></span></Link>
+            </div>
+          </div>
+          <button className="qore-mobile-toggle" onClick={()=>setOpen(v=>!v)} aria-label="Toggle navigation">{open ? <X size={22}/> : <Menu size={22}/>}</button>
+        </div>
+      </header>
+
+      <AnimatePresence>
+        {open && (
+          <motion.div className="qore-mobile-panel" initial={{opacity:0,y:-16}} animate={{opacity:1,y:0}} exit={{opacity:0,y:-12}} transition={{duration:.22}}>
+            <div className="qore-mobile-top"><span>Explore BlueLink</span><button onClick={close}><X size={20}/></button></div>
+            <div className="qore-mobile-links">
+              <details><summary>Services <ChevronDown size={16}/></summary><div>{services.map(s=><Link key={s.slug} to={`/services/${s.slug}`} onClick={close}>{s.title}<ArrowRight size={14}/></Link>)}</div></details>
+              <details><summary>Solutions <ChevronDown size={16}/></summary><div><Link to="/solutions/who-we-help" onClick={close}>Who We Help <ArrowRight size={14}/></Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework <ArrowRight size={14}/></Link></div></details>
+              <details><summary>Insights <ChevronDown size={16}/></summary><div>{cmsInsights.slice(0,4).map(i=><Link key={i.slug} to={`/insights/${i.slug}`} onClick={close}>{i.title}<ArrowRight size={14}/></Link>)}</div></details>
+              <Link to="/about" onClick={close}>About <ArrowRight size={15}/></Link>
+              <Link to="/contact" onClick={close}>Contact <ArrowRight size={15}/></Link>
+            </div>
+            <div className="qore-mobile-actions">
+              <Link to="/simulator" onClick={close}>Try Simulator</Link>
+              <Link to="/client-login" onClick={close}>Client Login</Link>
+              <Link className="primary" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} onClick={close}>Request Demo <ArrowRight size={15}/></Link>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }
