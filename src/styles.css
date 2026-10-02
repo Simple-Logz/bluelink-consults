@@ -2966,3 +2966,37 @@ body { overflow-x:hidden; }
  .ring-4{width:580px;height:580px}.ring-5{width:760px;height:760px}.ring-6{width:950px;height:950px}
 }
 @media(prefers-reduced-motion:reduce){.hero-rings .ring{animation:none!important}}
+
+
+/* ─── LOGO ASSEMBLY + EDITORIAL RESTORE ─────────────────── */
+.hero-logo-motion{display:none!important}
+.hero-logo-assembly{position:absolute;z-index:2;inset:0;display:grid;place-items:center;pointer-events:none}
+.assembly-half{position:absolute;width:min(42vw,560px);height:min(42vw,560px);object-fit:contain;filter:drop-shadow(0 18px 40px rgba(6,70,88,.10));opacity:.22!important}
+.assembly-left{clip-path:inset(0 50% 0 0)}
+.assembly-right{clip-path:inset(0 0 0 50%)}
+.hero-clean-copy{z-index:4}
+.hero-clean h1{text-shadow:0 1px 0 rgba(255,255,255,.16)}
+
+/* Restore Harvard-style hierarchy, but remove the boxy border collisions. */
+.editorial-showcase{display:block!important;background:#f7f8fa!important;padding:96px 6vw!important}
+.editorial-heading{border-bottom:0!important;padding-bottom:14px!important;margin-bottom:28px!important}
+.editorial-lead{border:0!important;box-shadow:none!important;background:#fff!important;gap:0}
+.editorial-lead-copy{border:0!important}
+.editorial-row{gap:18px!important;margin-top:20px!important}
+.editorial-card{border:0!important;min-height:185px!important;background:#fff!important}
+.editorial-card:hover{background:#eef4f8!important}
+.editorial-card img{min-height:185px}
+.editorial-heading h2,.editorial-lead-copy h3,.editorial-card h3{font-family:Inter,system-ui,sans-serif!important}
+
+/* The old photo-heavy EAT split is no longer part of the homepage. */
+.split-section{border:0!important}
+.split-image{background-image:none!important;background:#dcecf6!important}
+
+@media(max-width:720px){
+ .assembly-half{width:460px;height:460px}
+ .editorial-showcase{padding:64px 18px!important}
+ .editorial-row{gap:10px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .hero-logo-assembly{display:none!important}
+}
