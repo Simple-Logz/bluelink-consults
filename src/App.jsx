@@ -1169,7 +1169,7 @@ function Hero() {
       <div className="hero-clean-layout">
       <motion.div className="hero-clean-copy" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.35,ease:[.22,1,.36,1]}}>
         <span className="hero-clean-kicker">Engage · Assess · Transform</span>
-        <h1>Technology built for <span>your business.</span></h1>
+        <h1>Technology<br />built for <span>your business.</span></h1>
         <p>We assess what you have, modernize what matters, and engineer technology that performs reliably as your business grows.</p>
         <div className="hero-clean-actions"><Link className="hero-dark-btn" to="/services">Explore BlueLink</Link><Link className="hero-light-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link></div>
       </motion.div>
