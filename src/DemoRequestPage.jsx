@@ -34,8 +34,8 @@ export default function DemoRequestPage() {
     } finally { clearTimeout(timeout); }
   }
   return <>
-    <section className="page-hero"><p className="eyebrow">BlueLink Consults</p><h1>Request Demo</h1><p>Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team.</p></section>
-    <section className="contact-section" id="consultation">
+    <section className="page-hero" style={{ paddingBottom: 40 }}><p className="eyebrow">BlueLink Consults</p><h1>Request Demo</h1><p>Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team.</p></section>
+    <section className="contact-section" id="consultation" style={{ paddingTop: 48 }}>
       <div className="contact-copy">
         <p className="eyebrow">Engage · Assess · Transform</p>
         <BookingButton />
