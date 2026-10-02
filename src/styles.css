@@ -2380,3 +2380,118 @@ h1, h2, h3, h4 { margin: 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior:auto !important; animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
 }
+
+
+/* ─── QORE-REFERENCE HEADER CORRECTION ─────────────────────
+   Keeps BlueLink branding/content while matching the reference's
+   compact centered floating navigation proportions and contrast.
+───────────────────────────────────────────────────────────── */
+.site-header {
+  top: 26px;
+  left: 50%;
+  width: min(1140px, calc(100vw - 64px));
+  height: 76px;
+  padding: 0 18px 0 24px;
+  transform: translateX(-50%);
+  border-radius: 38px;
+  background: rgba(10, 31, 38, .91);
+  border: 1px solid rgba(72, 211, 189, .18);
+  box-shadow: 0 16px 42px rgba(5, 11, 45, .16);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.header-spacer { height: 118px; }
+
+/* Critical contrast correction: the previous global nav rule was
+   overriding the header text with the dark body color. */
+.site-header .main-nav > a,
+.site-header .main-nav > a:visited,
+.site-header .main-nav > button,
+.site-header .nav-dropdown > button,
+.site-header .nav-dropdown > button:visited {
+  color: rgba(255,255,255,.92) !important;
+}
+.site-header .main-nav > a:hover,
+.site-header .main-nav > button:hover,
+.site-header .nav-dropdown > button:hover,
+.site-header .main-nav > a.active {
+  color: #66e0d0 !important;
+}
+
+.site-header .brand-wordmark { color:#fff !important; }
+.site-header .brand-wordmark strong { color:#fff !important; }
+.site-header .brand-wordmark strong span { color:#4c8dff !important; }
+.site-header .brand-wordmark small { color:#8ab5ff !important; }
+
+.site-header .main-nav {
+  flex: 1;
+  justify-content: flex-end;
+  gap: 34px;
+  margin-left: 42px;
+}
+.site-header .main-nav > a,
+.site-header .nav-dropdown > button {
+  font-size: .92rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+.site-header .nav-dropdown { height:76px; }
+.site-header .nav-dropdown > button svg {
+  color: rgba(255,255,255,.7);
+  transition: transform .2s ease;
+}
+.site-header .nav-dropdown:hover > button svg { transform: rotate(180deg); }
+
+.site-header .utility-menu-button {
+  width: 50px;
+  height: 50px;
+  margin-left: 2px;
+  border-radius: 18px !important;
+  background: #fff !important;
+  color: #102033 !important;
+  border-color: rgba(255,255,255,.8) !important;
+}
+.site-header .utility-menu-button:hover {
+  background:#eef6ff !important;
+  color:#075cff !important;
+}
+
+/* Wider, calmer Qore-like flyouts. */
+.site-header .dropdown-menu {
+  top: 68px;
+  left: 50%;
+  width: 440px;
+  transform: translate(-50%, 12px) scale(.985);
+  transform-origin: top center;
+  border-radius: 26px;
+  background: rgba(8, 28, 34, .98);
+  border: 1px solid rgba(102,224,208,.16);
+}
+.site-header .dropdown-menu.show {
+  transform: translate(-50%, 0) scale(1);
+}
+.site-header .dropdown-menu.compact { width: 410px; }
+.site-header .utility-menu { top: 62px; }
+
+/* Qore-like hero breathing room immediately below the floating nav. */
+.hero-section { margin-top: 0; }
+.hero-message { border-radius: 30px; }
+
+@media (max-width: 1180px) and (min-width: 1051px) {
+  .site-header { width: calc(100vw - 40px); }
+  .site-header .main-nav { gap: 20px; margin-left: 22px; }
+  .site-header .main-nav > a,
+  .site-header .nav-dropdown > button { font-size:.84rem; }
+}
+@media (max-width: 1050px) {
+  .site-header {
+    top: 10px;
+    left: 50%;
+    width: calc(100vw - 24px);
+    height: 68px;
+    transform: translateX(-50%);
+    border-radius: 24px;
+  }
+  .header-spacer { height: 90px; }
+  .site-header .main-nav { margin-left:0; }
+}
