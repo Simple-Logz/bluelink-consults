@@ -3398,3 +3398,25 @@ body { overflow-x:hidden; }
     transform:translateY(-25%) rotate(225deg)!important;
   }
 }
+
+
+/* Mobile expandable labels: arrow is part of the visible label, not an icon layer. */
+@media(max-width:860px){
+ .qore-mobile-links details>summary::after{display:none!important;content:none!important}
+ .qore-mobile-links details>summary{padding-right:0!important}
+ .qore-mobile-links .mobile-menu-label{
+   display:flex!important;
+   align-items:center!important;
+   gap:10px!important;
+   width:auto!important;
+ }
+ .qore-mobile-links .mobile-menu-label b{
+   display:inline-block!important;
+   visibility:visible!important;
+   opacity:1!important;
+   color:#071a3d!important;
+   font:700 20px/1 Arial,sans-serif!important;
+   transition:transform .2s ease!important;
+ }
+ .qore-mobile-links details[open] .mobile-menu-label b{transform:rotate(180deg)!important}
+}
