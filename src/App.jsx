@@ -1161,10 +1161,10 @@ function Home() {
 }
 
 const corporateHeroSlides = [
-  { src: '/images/hero/slides/portrait.webp', alt: 'Smiling Black businesswoman in a tailored dark blazer', position: '50% 12%' },
-  { src: '/images/hero/slides/leadership.webp', alt: 'Black corporate professional in a suit and white blouse', position: '50% 14%' },
-  { src: '/images/hero/slides/team.webp', alt: 'Corporate team collaborating in a modern office', position: '50% 50%' },
-  { src: '/images/hero/slides/meeting.webp', alt: 'Business professionals in a strategic meeting', position: '50% 50%' },
+  { src: '/images/hero/slides/portrait-v2.webp', alt: 'Black businesswoman in a vivid blue blazer against a burgundy studio backdrop', position: '50% 20%' },
+  { src: '/images/hero/slides/leadership-v2.webp', alt: 'African businesswoman in a vibrant pink suit holding a tablet', position: '50% 30%' },
+  { src: '/images/hero/slides/team-v2.webp', alt: 'Smiling African professional working at her laptop in Kinshasa', position: '48% 50%' },
+  { src: '/images/hero/slides/meeting-v2.webp', alt: 'Nigerian businesswoman in a tailored suit and headscarf', position: '50% 35%' },
 ];
 function Hero() {
   const [slide, setSlide] = useState(0);
