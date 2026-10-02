@@ -1160,7 +1160,20 @@ function Home() {
   );
 }
 
+const corporateHeroSlides = [
+  { src: '/images/hero/slides/portrait.webp', alt: 'Smiling Black businesswoman in a tailored dark blazer', position: '50% 12%' },
+  { src: '/images/hero/slides/leadership.webp', alt: 'Black corporate professional in a suit and white blouse', position: '50% 14%' },
+  { src: '/images/hero/slides/team.webp', alt: 'Corporate team collaborating in a modern office', position: '50% 50%' },
+  { src: '/images/hero/slides/meeting.webp', alt: 'Business professionals in a strategic meeting', position: '50% 50%' },
+];
 function Hero() {
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    if (paused) return;
+    const timer = window.setInterval(() => setSlide(current => (current + 1) % corporateHeroSlides.length), 3000);
+    return () => window.clearInterval(timer);
+  }, [paused]);
   return (
     <section className="tech-hero hero-clean">
       <div className="hero-rings" aria-hidden="true">{[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}</div>
@@ -1173,7 +1186,15 @@ function Hero() {
         <p>We assess what you have, modernize what matters, and engineer technology that performs reliably as your business grows.</p>
         <div className="hero-clean-actions"><Link className="hero-dark-btn" to="/services">Explore BlueLink</Link><Link className="hero-light-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link></div>
       </motion.div>
-      <figure className="hero-professional-photo"><img src="/images/hero/corporate-professional.webp" alt="Black businesswoman in a tailored suit standing confidently in a bright office" width="1000" height="1500" fetchPriority="high" /></figure>
+      <div className="hero-corporate-carousel" role="region" aria-label="Corporate photography">
+        <div className="hero-corporate-viewport">
+          <AnimatePresence initial={false}>
+            <motion.img key={slide} src={corporateHeroSlides[slide].src} alt={corporateHeroSlides[slide].alt} style={{objectPosition: corporateHeroSlides[slide].position}} initial={{x:'100%'}} animate={{x:0}} exit={{x:'-100%'}} transition={{duration:.65,ease:[.22,1,.36,1]}} />
+          </AnimatePresence>
+        </div>
+        <div className="hero-slide-controls"><div className="hero-slide-dots">{corporateHeroSlides.map((photo,index) => <button key={photo.src} type="button" aria-label={`Show corporate photo ${index+1}`} aria-pressed={slide===index} className={slide===index?'is-active':''} onClick={() => setSlide(index)} />)}</div><button className="hero-slide-pause" type="button" onClick={() => setPaused(current=>!current)} aria-label={paused?'Play slideshow':'Pause slideshow'}>{paused?'Play':'Pause'}</button></div>
+        <div hidden>{corporateHeroSlides.map(photo=><img key={photo.src} src={photo.src} alt="" />)}</div>
+      </div>
       </div>
     </section>
   );
