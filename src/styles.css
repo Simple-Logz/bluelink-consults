@@ -3214,3 +3214,26 @@ body { overflow-x:hidden; }
  }
  .qore-mobile-links details[open]>summary svg{transform:rotate(180deg)!important}
 }
+
+
+/* Service matrix core correction: six capabilities converge into one centered BlueLink core. */
+.network-core{
+ left:50%!important;
+ right:auto!important;
+ top:auto!important;
+ bottom:18px!important;
+ transform:translateX(-50%)!important;
+ width:390px!important;
+ max-width:calc(100% - 32px)!important;
+ height:132px!important;
+ justify-content:center!important;
+}
+.network-human{display:none!important}
+.network-human:before{display:none!important}
+@media(max-width:900px){
+ .network-core{left:50%!important;right:auto!important;top:auto!important;bottom:14px!important;transform:translateX(-50%)!important;width:350px!important}
+}
+@media(max-width:650px){
+ .network-stage{height:570px!important;margin-bottom:0!important}
+ .network-core{left:50%!important;right:auto!important;top:auto!important;bottom:8px!important;transform:translateX(-50%)!important;width:72%!important;height:108px!important}
+}
