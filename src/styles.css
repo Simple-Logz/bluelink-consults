@@ -3275,3 +3275,22 @@ body { overflow-x:hidden; }
    font-weight:600!important;
  }
 }
+
+
+/* Correct mobile service-matrix core placement: core belongs below all six service tiles. */
+@media(max-width:650px){
+ .network-stage{height:720px!important;transform:none!important;margin-bottom:0!important}
+ .sn-a{top:4%!important}.sn-b{top:4%!important}
+ .sn-c{top:27%!important}.sn-d{top:27%!important}
+ .sn-e{top:50%!important}.sn-f{top:50%!important}
+ .network-core{
+   left:50%!important;
+   right:auto!important;
+   top:auto!important;
+   bottom:18px!important;
+   transform:translateX(-50%)!important;
+   width:78%!important;
+   height:108px!important;
+   z-index:5!important;
+ }
+}
