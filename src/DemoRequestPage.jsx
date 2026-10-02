@@ -10,7 +10,7 @@ function BookingButton() {
 const services = ["Technology Audit & Assessment", "Application Modernisation", "Cloud Infrastructure", "DevOps & Automation", "Pre-Deployment Validation", "Operational & Incident Support"];
 
 export default function DemoRequestPage() {
-  useEffect(() => { document.title = "Request Demo | BlueLink Consults Nigeria"; }, []);
+  useEffect(() => { document.title = "Request Demo | BlueLink Consults"; }, []);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
   async function submit(event) {
@@ -34,7 +34,7 @@ export default function DemoRequestPage() {
     } finally { clearTimeout(timeout); }
   }
   return <>
-    <section className="page-hero"><p className="eyebrow">BlueLink Consults · Nigeria</p><h1>Request Demo</h1><p>Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team.</p></section>
+    <section className="page-hero"><p className="eyebrow">BlueLink Consults</p><h1>Request Demo</h1><p>Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team.</p></section>
     <section className="contact-section" id="consultation">
       <div className="contact-copy">
         <p className="eyebrow">Engage · Assess · Transform</p><h2>See how we can help.</h2>
@@ -45,8 +45,8 @@ export default function DemoRequestPage() {
       </div>
       {status === "sent" ? <div className="success-box" role="status"><CheckCircle2 size={40} /><h3>Demo request received</h3><p>Thank you. Choose an available time below to book your demo. If you have already booked, our team will use these details to prepare your session.</p><BookingButton /><br /><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><p><a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20Nigeria%20demo%20follow-up">Email our team</a></p><button onClick={() => setStatus("idle")}>Send another request</button></div> :
       <form className="contact-form" onSubmit={submit}>
-        <input type="hidden" name="_subject" value="Demo request — bluelinkconsults.ng" />
-        <input type="hidden" name="source" value="BlueLink Nigeria / Request Demo" />
+        <input type="hidden" name="_subject" value="BlueLink demo request" />
+        <input type="hidden" name="source" value="BlueLink / Request Demo" />
         <label>Full Name<input required name="name" autoComplete="name" /></label>
         <label>Work Email<input required name="email" type="email" autoComplete="email" /></label>
         <label>Organisation<input required name="company" autoComplete="organization" /></label>
