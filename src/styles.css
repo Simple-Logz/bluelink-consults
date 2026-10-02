@@ -3354,3 +3354,14 @@ body { overflow-x:hidden; }
   .sn-c,.sn-d{top:27%!important}
   .sn-e,.sn-f{top:51%!important}
 }
+
+
+/* Mobile matrix: pull BlueLink core directly beneath the converging lines */
+@media(max-width:650px){
+  .network-stage{height:650px!important;}
+  .network-core,
+  .network-stage .network-core,
+  .network-stage.has-active .network-core{
+    bottom:54px!important;
+  }
+}
