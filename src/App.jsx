@@ -413,10 +413,12 @@ function Header() {
         utilityRef.current?.querySelector("button")?.focus();
       }
     };
-    document.addEventListener("pointerdown", outside);
+    document.addEventListener("pointerdown", outside, true);
+    document.addEventListener("click", outside, true);
     document.addEventListener("keydown", escape);
     return () => {
-      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("pointerdown", outside, true);
+      document.removeEventListener("click", outside, true);
       document.removeEventListener("keydown", escape);
     };
   }, [utilityOpen]);
