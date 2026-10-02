@@ -88,7 +88,7 @@ const globalServices = [
     title: "Application Modernization",
     icon: ServerCog,
     summary: "Transform outdated business applications into secure, scalable, cloud-ready platforms.",
-    image: "https://images.unsplash.com/photo-1551434678-e076c223a692?q=80&w=2000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2000&auto=format&fit=crop",
     body: "BlueLink Consult helps organizations move legacy applications away from fragile, outdated, difficult-to-maintain systems into modern, secure, scalable platforms. We assess your current application, identify business and technical risks, redesign the user experience, modernize APIs, improve performance, and create a practical path toward cloud-ready architecture.",
     tools: [
       "React / Angular / modern frontend frameworks",
@@ -1049,6 +1049,7 @@ function Home() {
       <WhoWeServeStrip />
       <ClientLogos />
       <Process />
+      <EditorialShowcase />
       <SimulatorTeaser />
       {/* <TestimonialsSection /> */}{/* TESTIMONIALS — uncomment when ready */}
     </>
@@ -1107,6 +1108,60 @@ function Hero() {
       <motion.div className="tech-hero-ticker" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.65,duration:.6}}>
         <span>Application Modernization</span><i/><span>Cloud Infrastructure</span><i/><span>DevOps & Automation</span><i/><span>Pre-deployment Validation</span><i/><span>Operational Support</span>
       </motion.div>
+    </section>
+  );
+}
+
+function EditorialShowcase() {
+  const stories = [
+    {
+      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1600&auto=format&fit=crop",
+      eyebrow: "Application Modernization",
+      title: "Modernization starts with understanding what the business cannot afford to break.",
+      text: "A practical path from legacy constraints to secure, maintainable applications.",
+      to: "/services/application-modernization",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=900&auto=format&fit=crop",
+      eyebrow: "Cloud",
+      title: "Build cloud infrastructure around operations, not fashion.",
+      to: "/services/cloud-infrastructure",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=900&auto=format&fit=crop",
+      eyebrow: "Automation",
+      title: "Release faster without making production the test environment.",
+      to: "/services/devops-automation",
+    },
+    {
+      image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=900&auto=format&fit=crop",
+      eyebrow: "Validation",
+      title: "Know what is ready before deployment day.",
+      to: "/services/pre-deployment-validation",
+    },
+  ];
+  const lead=stories[0];
+  return (
+    <section className="editorial-showcase">
+      <div className="editorial-heading">
+        <div><span>From BlueLink</span><h2>Technology, in practice.</h2></div>
+        <Link to="/insights">View insights <ArrowRight size={16}/></Link>
+      </div>
+      <div className="editorial-lead">
+        <Link to={lead.to} className="editorial-lead-image"><img src={lead.image} alt="" loading="lazy"/></Link>
+        <div className="editorial-lead-copy">
+          <span>{lead.eyebrow}</span>
+          <h3>{lead.title}</h3>
+          <p>{lead.text}</p>
+          <Link to={lead.to}>Explore the approach <ArrowRight size={16}/></Link>
+        </div>
+      </div>
+      <div className="editorial-row">
+        {stories.slice(1).map((story)=><Link className="editorial-card" to={story.to} key={story.title}>
+          <img src={story.image} alt="" loading="lazy"/>
+          <div><span>{story.eyebrow}</span><h3>{story.title}</h3><small>Explore <ArrowRight size={13}/></small></div>
+        </Link>)}
+      </div>
     </section>
   );
 }
@@ -1940,7 +1995,7 @@ function AboutPage() {
           <div
             className="about-split-media"
             style={{
-              backgroundImage: "linear-gradient(rgba(5,11,45,0.08), rgba(5,11,45,0.08)), url('https://images.unsplash.com/photo-1573164574572-cb89e39749b4?q=80&w=1600&auto=format&fit=crop')",
+              backgroundImage: "linear-gradient(rgba(5,11,45,0.08), rgba(5,11,45,0.08)), url('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1600&auto=format&fit=crop')",
             }}
           />
         </div>
