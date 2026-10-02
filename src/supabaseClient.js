@@ -1,6 +1,6 @@
 // supabaseClient.js
-// Reads credentials from environment variables so they are never
-// exposed in the JavaScript bundle or source code.
+// The project URL and public anon key are included in the browser bundle.
+// Authorization must be enforced by RLS. Never put a service-role key here.
 //
 // Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY in your .env.local file.
 // See .env.example for the template.
