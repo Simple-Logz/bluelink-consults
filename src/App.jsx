@@ -1086,6 +1086,7 @@ function Hero() {
         <motion.div className="tech-visual"
           initial={{opacity:0,scale:.94,x:25}} animate={{opacity:1,scale:1,x:0}}
           transition={{duration:.9,delay:.12,ease:[.22,1,.36,1]}} aria-label="BlueLink technology capabilities">
+          <div className="tech-orbit orbit-one"/><div className="tech-orbit orbit-two"/>
           <div className="tech-core">
             <div className="core-mark"><img src="/bluelink-logo-mark.png" alt=""/></div>
             <span>BlueLink</span><small>Technology Core</small>
