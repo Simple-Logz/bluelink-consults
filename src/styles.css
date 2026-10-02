@@ -3585,18 +3585,6 @@ body { overflow-x:hidden; }
  .network-core,.network-stage .network-core,.network-stage.has-active .network-core{bottom:36px!important;height:98px!important}
 }
 
-/* Carry the service convergence vertically into the BlueLink core. */
-.network-stage::after{
- content:"";position:absolute;left:50%;top:57.857%;bottom:124px;
- width:2px;transform:translateX(-50%);z-index:1;pointer-events:none;
- background:#8e8bff;box-shadow:0 0 7px rgba(127,121,255,.75);
-}
-.network-stage::before{
- content:"";position:absolute;left:50%;bottom:124px;z-index:2;pointer-events:none;
- transform:translateX(-50%);border-left:5px solid transparent;
- border-right:5px solid transparent;border-top:7px solid #8e8bff;
-}
+/* Keep the logo visible on the dark BlueLink core. */
 .network-core img{filter:url("#network-logo-white-ring")}
-@media(max-width:650px){
- .network-stage::after,.network-stage::before{bottom:134px}
-}
+
