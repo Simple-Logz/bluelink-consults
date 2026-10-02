@@ -537,7 +537,7 @@ function Header() {
 function ScrollToHash() {
   const location = useLocation();
   useEffect(() => {
-    if (!location.hash) { window.scrollTo({ top: 0, behavior: "smooth" }); return; }
+    if (!location.hash) { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); return; }
     const id = location.hash.replace("#", "");
     const timer = window.setTimeout(() => {
       const el = document.getElementById(id);
