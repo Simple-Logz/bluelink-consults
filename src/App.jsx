@@ -979,30 +979,32 @@ function ClientLogos() {
 }
 
 function ServiceNetwork() {
+  const [activeService, setActiveService] = useState(null);
   const nodes = [
-    { icon: Search, title:"Technology Audit", status:"Assessing environment", cls:"sn-a" },
-    { icon: ServerCog, title:"App Modernization", status:"Modernizing systems", cls:"sn-b" },
-    { icon: Cloud, title:"Cloud Infrastructure", status:"Engineering platform", cls:"sn-c" },
-    { icon: Workflow, title:"DevOps & Automation", status:"Automating delivery", cls:"sn-d" },
-    { icon: ShieldCheck, title:"Pre-deployment", status:"Validating release", cls:"sn-e" },
-    { icon: Activity, title:"Operational Support", status:"Monitoring operations", cls:"sn-f" },
+    { icon: Search, title:"Technology Audit", status:"Assessing environment", slug:"technology-audit-assessment", cls:"sn-a", value:"Understand risk, gaps and priorities before you invest." },
+    { icon: ServerCog, title:"App Modernization", status:"Modernizing systems", slug:"application-modernisation", cls:"sn-b", value:"Modernize legacy applications without losing business continuity." },
+    { icon: Cloud, title:"Cloud Infrastructure", status:"Engineering platform", slug:"cloud-infrastructure", cls:"sn-c", value:"Build secure, scalable infrastructure around real workload needs." },
+    { icon: Workflow, title:"DevOps & Automation", status:"Automating delivery", slug:"devops-automation", cls:"sn-d", value:"Reduce manual delivery work and make releases repeatable." },
+    { icon: ShieldCheck, title:"Pre-deployment", status:"Validating release", slug:"pre-deployment-validation", cls:"sn-e", value:"Find deployment risks before they reach production." },
+    { icon: Activity, title:"Operational Support", status:"Monitoring operations", slug:"operational-incident-support", cls:"sn-f", value:"Keep critical systems stable when incidents and operational issues occur." },
   ];
+  const active = nodes.find(n => n.slug === activeService);
   return (
     <section className="service-network">
-      <div className="service-network-copy"><span>Connected technology services</span><h2>One partner. Six connected capabilities.</h2></div>
-      <div className="network-stage">
+      <div className="service-network-copy"><span>Connected technology services</span><h2>One partner. Six connected capabilities.</h2><p>Select a capability to see how it creates value, then explore the service in detail.</p></div>
+      <div className={active ? "network-stage has-active" : "network-stage"}>
         <svg className="network-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
-          <path className="line-a" d="M600 405 C470 405 485 120 315 120"/><path className="line-b" d="M600 405 C730 405 715 120 885 120"/>
-          <path className="line-c" d="M600 405 C450 405 450 290 250 290"/><path className="line-d" d="M600 405 C750 405 750 290 950 290"/>
-          <path className="line-e" d="M600 405 C470 405 470 535 315 535"/><path className="line-f" d="M600 405 C730 405 730 535 885 535"/>
-          <circle className="pulse p1" cx="600" cy="405" r="5"/><circle className="pulse p2" cx="600" cy="405" r="5"/>
+          <path className={activeService==="technology-audit-assessment"?"line-a active":"line-a"} d="M600 405 C470 405 485 120 315 120"/><path className={activeService==="application-modernisation"?"line-b active":"line-b"} d="M600 405 C730 405 715 120 885 120"/>
+          <path className={activeService==="cloud-infrastructure"?"line-c active":"line-c"} d="M600 405 C450 405 450 290 250 290"/><path className={activeService==="devops-automation"?"line-d active":"line-d"} d="M600 405 C750 405 750 290 950 290"/>
+          <path className={activeService==="pre-deployment-validation"?"line-e active":"line-e"} d="M600 405 C470 405 470 535 315 535"/><path className={activeService==="operational-incident-support"?"line-f active":"line-f"} d="M600 405 C730 405 730 535 885 535"/>
+          <circle className="pulse p1" cx="600" cy="405" r="5"/>
         </svg>
-        {nodes.map(({icon:Icon,title,status,cls},i)=><motion.div key={title} className={`network-node ${cls}`} initial={{opacity:0,scale:.96}} whileInView={{opacity:1,scale:1}} viewport={{once:true}} transition={{delay:i*.08}}>
-          <span className="network-node-icon"><Icon size={22}/></span><div><strong>{title}</strong><small>{status}</small></div><i className="network-loader"/>
-        </motion.div>)}
-        <motion.div className="network-core" initial={{opacity:0,scale:.94}} whileInView={{opacity:1,scale:1}} viewport={{once:true}} transition={{duration:.55,delay:.2}}>
-          <img src="/bluelink-logo-mark.png" alt=""/><div><strong>BlueLink</strong><small>Engage · Assess · Transform</small></div>
-        </motion.div>
+        {nodes.map(({icon:Icon,title,status,slug,cls})=><Link key={slug} to={`/services/${slug}`} className={activeService===slug?`network-node ${cls} active`:`network-node ${cls}`} onMouseEnter={()=>setActiveService(slug)} onMouseLeave={()=>setActiveService(null)} onFocus={()=>setActiveService(slug)} onBlur={()=>setActiveService(null)}>
+          <span className="network-node-icon"><Icon size={22}/></span><div><strong>{title}</strong><small>{status}</small></div><ArrowRight className="network-node-arrow" size={18}/>
+        </Link>)}
+        <Link to="/services" className={active ? "network-core active" : "network-core"}>
+          <img src="/bluelink-logo-mark.png" alt=""/><div><strong>BlueLink</strong><small>{active ? active.value : "Engage · Assess · Transform"}</small>{active && <span>Explore {active.title} <ArrowRight size={13}/></span>}</div>
+        </Link>
         <div className="network-human"><Users size={22}/><div><strong>Business & Technology Teams</strong><small>Decisions stay human</small></div><span/></div>
       </div>
     </section>
