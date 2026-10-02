@@ -1142,10 +1142,10 @@ function EditorialShowcase() {
   const stories = [
     {
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
-      eyebrow: "Application Modernization",
+      eyebrow: "The EAT Framework",
       title: "Modernization starts with understanding what the business cannot afford to break.",
       text: "A practical path from legacy constraints to secure, maintainable applications.",
-      to: "/services/application-modernization",
+      to: "/solutions/eat-framework",
     },
     {
       image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=900&auto=format&fit=crop",
@@ -1170,8 +1170,8 @@ function EditorialShowcase() {
   return (
     <section className="editorial-showcase">
       <div className="editorial-heading">
-        <div><span>From BlueLink</span><h2>Technology, in practice.</h2></div>
-        <Link to="/insights">View insights <ArrowRight size={16}/></Link>
+        <div><span>From BlueLink</span><h2><Link to="/solutions/eat-framework" style={{color:"inherit",textDecoration:"none"}}>Technology, in practice.</Link></h2></div>
+        <Link to="/solutions/eat-framework">Explore EAT Framework <ArrowRight size={16}/></Link>
       </div>
       <div className="editorial-lead">
         <Link to={lead.to} className="editorial-lead-image"><img src={lead.image} alt="" loading="lazy"/></Link>
