@@ -1056,117 +1056,61 @@ function Home() {
 }
 
 function Hero() {
+  const heroServices = [
+    { icon: ServerCog, label: "Modernize", text: "Applications" },
+    { icon: Cloud, label: "Engineer", text: "Cloud" },
+    { icon: Workflow, label: "Automate", text: "Delivery" },
+    { icon: ShieldCheck, label: "Validate", text: "Releases" },
+  ];
+
   return (
-    <section className="hero-section-v2">
-      <style>{`
-        .hero-section-v2 {
-          position: relative;
-          overflow: hidden;
-          background: var(--cream);
-          display: flex;
-          align-items: stretch;
-          min-height: 560px;
-        }
-        .hero-bg-v2 {
-          position: absolute;
-          inset: 0;
-          background-image:
-            linear-gradient(rgba(5,11,45,0.18), rgba(5,11,45,0.08)),
-            url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=2400&auto=format&fit=crop');
-          background-size: cover;
-          background-position: center;
-        }
-        .hero-message-v2 {
-          position: relative;
-          z-index: 1;
-          margin-left: auto;
-          margin-right: 6vw;
-          width: min(600px, 52vw);
-          background: rgba(244, 240, 235, 0.95);
-          padding: 52px 44px;
-          backdrop-filter: blur(8px);
-          box-shadow: 0 25px 70px rgba(5,11,45,0.2);
-          align-self: center;
-        }
-        .hero-message-v2 h1 {
-          font-family: 'Libre Baskerville', serif;
-          font-size: clamp(1.9rem, 3.2vw, 3.4rem);
-          line-height: 1.06;
-          letter-spacing: -0.03em;
-          color: var(--navy);
-          margin: 0 0 18px;
-        }
-        .hero-message-v2 p {
-          font-size: 1.02rem;
-          line-height: 1.72;
-          margin: 0 0 24px;
-          color: var(--text-dark);
-        }
-        .hero-message-v2 a {
-          display: inline-flex;
-          align-items: center;
-          gap: 8px;
-          background: var(--bronze);
-          color: #FFFFFF;
-          font-size: 15px;
-          font-weight: 700;
-          padding: 15px 38px;
-          border-radius: 9px;
-          border: 0;
-          text-decoration: none;
-          box-shadow: 0 4px 20px rgba(169,94,33,0.35);
-          transition: background 0.2s, color 0.2s, transform 0.15s;
-        }
-        .hero-message-v2 a:hover {
-          background: var(--bronze-dark);
-          color: #FFFFFF;
-          transform: translateY(-2px);
-        }
+    <section className="tech-hero">
+      <div className="tech-hero-grid" aria-hidden="true" />
+      <div className="tech-hero-glow glow-one" aria-hidden="true" />
+      <div className="tech-hero-glow glow-two" aria-hidden="true" />
 
-        @media (max-width: 720px) {
-          .hero-section-v2 {
-            flex-direction: column;
-            min-height: auto;
-          }
-          .hero-bg-v2 {
-            position: relative;
-            inset: auto;
-            height: 220px;
-            flex-shrink: 0;
-          }
-          .hero-message-v2 {
-            width: 100%;
-            margin: 0;
-            padding: 30px 22px;
-            box-shadow: none;
-            backdrop-filter: none;
-          }
-          .hero-message-v2 h1 {
-            font-size: clamp(1.7rem, 7vw, 2.2rem);
-          }
-          .hero-message-v2 a {
-            width: 100%;
-            justify-content: center;
-          }
-        }
-      `}</style>
+      <div className="tech-hero-inner">
+        <motion.div className="tech-hero-copy"
+          initial={{opacity:0,y:28}} animate={{opacity:1,y:0}}
+          transition={{duration:.72,ease:[.22,1,.36,1]}}>
+          <div className="tech-hero-kicker"><span className="pulse-dot"/> Technology transformation, engineered for business</div>
+          <h1>Build technology that <span>moves your business forward.</span></h1>
+          <p>BlueLink assesses, modernizes and engineers the applications, cloud infrastructure and delivery systems your organization depends on.</p>
+          <div className="tech-hero-actions">
+            <Link className="tech-primary" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Start a Conversation"} <ArrowRight size={17}/></Link>
+            <Link className="tech-secondary" to="/services">Explore our services <ArrowRight size={16}/></Link>
+          </div>
+          <div className="tech-hero-proof"><span>ENGAGE</span><i/><span>ASSESS</span><i/><span>TRANSFORM</span></div>
+        </motion.div>
 
-      <motion.div
-        className="hero-bg-v2"
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-      />
+        <motion.div className="tech-visual"
+          initial={{opacity:0,scale:.94,x:25}} animate={{opacity:1,scale:1,x:0}}
+          transition={{duration:.9,delay:.12,ease:[.22,1,.36,1]}} aria-label="BlueLink technology capabilities">
+          <div className="tech-orbit orbit-one"/><div className="tech-orbit orbit-two"/>
+          <div className="tech-core">
+            <div className="core-mark"><img src="/bluelink-logo-mark.png" alt=""/></div>
+            <span>BlueLink</span><small>Technology Core</small>
+            <div className="core-status"><i/> Systems ready</div>
+          </div>
+          {heroServices.map((item,index)=>{
+            const Icon=item.icon;
+            return <motion.div key={item.label} className={`tech-node node-${index+1}`}
+              animate={{y:[0,index%2?8:-8,0]}}
+              transition={{duration:4+index*.45,repeat:Infinity,ease:"easeInOut"}}>
+              <span className="node-icon"><Icon size={19}/></span><div><strong>{item.label}</strong><small>{item.text}</small></div>
+            </motion.div>;
+          })}
+          <div className="tech-data-card">
+            <div><Activity size={16}/><span>Operational intelligence</span></div>
+            <div className="data-lines"><i/><i/><i/><i/><i/></div>
+            <small>Assess → Validate → Transform</small>
+          </div>
+          <div className="tech-scan"/>
+        </motion.div>
+      </div>
 
-      <motion.div
-        className="hero-message-v2"
-        initial={{ opacity: 0, y: 26, x: 26 }}
-        animate={{ opacity: 1, y: 0, x: 0 }}
-        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-      >
-        <h1>Modernize your applications. Accelerate your business performance.</h1>
-        <p>Your website is slow. Your systems break. Your team wastes hours on things that should be automatic. We come in, find what's broken, and rebuild it properly — so your business runs the way it should.</p>
-        <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Get a Free 20-Minute Consultation"} <ArrowRight size={19} /></Link>
+      <motion.div className="tech-hero-ticker" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.65,duration:.6}}>
+        <span>Application Modernization</span><i/><span>Cloud Infrastructure</span><i/><span>DevOps & Automation</span><i/><span>Pre-deployment Validation</span><i/><span>Operational Support</span>
       </motion.div>
     </section>
   );
