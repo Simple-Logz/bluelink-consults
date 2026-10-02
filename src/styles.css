@@ -3647,3 +3647,27 @@ body { overflow-x:hidden; }
 .qore-utility svg{color:#1557c0}
 .qore-header .qore-menu-btn{background:#fff!important;color:#10243b;border:1px solid #e2e8f0}
 .qore-header .qore-menu-btn:hover{background:#f3f6fa!important}
+
+/* Confident corporate portrait alongside the homepage message. */
+.hero-clean{min-height:720px!important;padding:56px 30px!important;text-align:left}
+.hero-clean-layout{width:100%;max-width:1220px;margin:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center;gap:64px;position:relative;z-index:3}
+.hero-clean .hero-clean-copy{width:100%;max-width:none;margin:0!important}
+.hero-clean h1{font-size:clamp(3.5rem,5.6vw,5.5rem)!important;line-height:1.02!important;letter-spacing:-.055em;margin:22px 0 28px!important;max-width:none!important}
+.hero-clean .hero-clean-copy>p{max-width:560px!important;margin:0;font-size:1.08rem;line-height:1.7}
+.hero-clean-actions{justify-content:flex-start}
+.hero-professional-photo{margin:0;width:100%;height:600px;border-radius:28px 28px 100px 28px;overflow:hidden;box-shadow:0 24px 60px rgba(13,48,81,.16);background:#eef1ed}
+.hero-professional-photo img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+@media(max-width:1000px){
+ .hero-clean{padding:48px 24px!important;min-height:640px!important}
+ .hero-clean-layout{gap:32px;grid-template-columns:1.1fr 1fr}
+ .hero-clean h1{font-size:clamp(3rem,5.5vw,4.5rem)!important}
+ .hero-professional-photo{height:520px}
+}
+@media(max-width:700px){
+ .hero-clean{padding:44px 20px 36px!important;min-height:0!important}
+ .hero-clean-layout{grid-template-columns:1fr;gap:36px;max-width:540px}
+ .hero-clean h1{font-size:clamp(2.8rem,10vw,4rem)!important}
+ .hero-clean-actions{display:flex;flex-wrap:wrap;max-width:none;margin:28px 0 0;gap:10px}
+ .hero-clean-actions a{min-width:0;padding:14px 20px}
+ .hero-professional-photo{height:460px;border-radius:24px 24px 72px 24px}
+}
