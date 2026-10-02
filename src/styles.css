@@ -3632,3 +3632,12 @@ body { overflow-x:hidden; }
 @media(prefers-reduced-motion:reduce){
  .hero-rings .ring,.hero-rings .ring::after{animation:none!important}
 }
+
+/* White quick-links menu in the header. */
+.qore-utility{background:#fff;border:1px solid #e2e8f0;box-shadow:0 18px 48px rgba(15,23,42,.14)}
+.qore-utility a{color:#10243b}
+.qore-utility a:hover{background:#f3f6fa}
+.qore-utility small{color:#64748b}
+.qore-utility svg{color:#1557c0}
+.qore-header .qore-menu-btn{background:#fff!important;color:#10243b;border:1px solid #e2e8f0}
+.qore-header .qore-menu-btn:hover{background:#f3f6fa!important}
