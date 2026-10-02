@@ -3000,3 +3000,78 @@ body { overflow-x:hidden; }
 @media(prefers-reduced-motion:reduce){
  .hero-logo-assembly{display:none!important}
 }
+
+
+/* ─── FINAL ALIGNMENT / BLUE HERO TUNING ─────────────────── */
+:root{--home-max:1240px}
+
+/* Blue, not teal/green. */
+.hero-clean{
+ min-height:780px!important;
+ padding:150px 32px 76px!important;
+ background:linear-gradient(145deg,#d9efff 0%,#b9ddfa 46%,#dcebfa 100%)!important;
+ color:#071d36!important;
+ overflow:hidden;
+}
+.hero-clean:after{background:linear-gradient(transparent,rgba(255,255,255,.24))!important}
+.hero-rings .ring{border-color:rgba(25,94,157,.12)!important}
+.hero-clean-copy{width:min(100%,1040px);margin-inline:auto!important}
+.hero-clean-kicker{color:#286caa!important}
+.hero-clean h1{color:#071d36!important;margin:20px auto 26px!important;max-width:1040px!important}
+.hero-clean h1 span{color:#0a4f8f!important}
+.hero-clean-copy>p{color:#315b7d!important;max-width:700px!important}
+.hero-dark-btn{background:#082c4d!important}.hero-light-btn{background:rgba(255,255,255,.72)!important;color:#082c4d!important}
+.assembly-half{filter:drop-shadow(0 18px 42px rgba(19,75,128,.09))!important}
+
+/* Shared geometry so the page reads as one system. */
+.who-serve-strip>div,.who-grid,.client-logo-row,.editorial-heading,.editorial-lead,.editorial-row{
+ width:min(100%,var(--home-max))!important;
+ margin-left:auto!important;margin-right:auto!important;
+ box-sizing:border-box;
+}
+.who-serve-strip{padding:82px 32px 78px!important}
+.who-serve-strip>div:first-of-type{margin-bottom:38px!important}
+.who-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important}
+.who-card{min-height:160px!important;padding:25px 24px!important;justify-content:flex-start!important}
+.who-card .who-cta{margin-top:auto!important;padding-top:12px!important}
+
+.editorial-showcase{padding:90px 32px 96px!important}
+.editorial-heading{min-height:92px;align-items:flex-end!important;margin-bottom:28px!important}
+.editorial-heading h2{line-height:1!important}
+.editorial-lead{grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;min-height:460px!important}
+.editorial-lead-image{min-width:0!important}
+.editorial-lead-image img{height:460px!important;min-height:0!important}
+.editorial-lead-copy{padding:48px 52px!important;min-width:0!important}
+.editorial-lead-copy h3{font-size:clamp(2rem,2.8vw,3.25rem)!important}
+.editorial-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:14px!important;margin-top:14px!important}
+.editorial-card{grid-template-columns:42% minmax(0,58%)!important;min-width:0!important;height:190px!important;min-height:190px!important}
+.editorial-card img{height:190px!important;min-height:0!important}
+.editorial-card>div{min-width:0!important;padding:20px!important}
+.editorial-card h3{overflow-wrap:anywhere}
+
+.client-logo-row{justify-content:space-between!important}
+.step-list>div{display:grid!important;grid-template-columns:42px minmax(0,1fr)!important;column-gap:14px!important}
+.step-list span,.step-list small{min-width:0!important}
+
+@media(max-width:900px){
+ .hero-clean{min-height:730px!important;padding:138px 24px 66px!important}
+ .editorial-lead{grid-template-columns:1fr!important}
+ .editorial-lead-image img{height:360px!important}
+ .editorial-row{grid-template-columns:1fr!important}
+ .editorial-card{height:170px!important;min-height:170px!important}
+ .editorial-card img{height:170px!important}
+}
+@media(max-width:720px){
+ .hero-clean{min-height:700px!important;padding:126px 18px 54px!important}
+ .who-serve-strip,.editorial-showcase{padding-left:18px!important;padding-right:18px!important}
+ .who-grid{grid-template-columns:1fr 1fr!important}
+ .who-card{min-height:92px!important;padding:16px!important}
+ .editorial-heading{display:block!important;min-height:0}
+ .editorial-heading>a{display:inline-flex!important;margin-top:16px!important}
+ .editorial-lead-image img{height:270px!important}
+ .editorial-lead-copy{padding:30px 24px!important}
+ .editorial-row{gap:10px!important}
+ .editorial-card{grid-template-columns:36% minmax(0,64%)!important;height:155px!important;min-height:155px!important}
+ .editorial-card img{height:155px!important}
+}
+@media(max-width:440px){.who-grid{grid-template-columns:1fr!important}}
