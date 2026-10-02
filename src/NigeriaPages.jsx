@@ -18,7 +18,7 @@ export function NigeriaHeader({ services }) {
   const close = () => setPanel(null);
   const flip = name => setPanel(current => current === name ? null : name);
   const primary = <>
-    <div className="ng-nav-group"><button onClick={() => flip("services")} aria-expanded={panel === "services"} aria-controls="ng-services">Services <ChevronDown size={14} /></button>{panel === "services" && <div id="ng-services" className="ng-submenu"><Link to="/services" onClick={close}>All Services</Link>{services.map(service => <Link key={service.slug} to={`/services/${service.slug}`} onClick={close}>{service.title}</Link>)}</div>}</div>
+    <div className="ng-nav-group"><button onClick={() => flip("services")} aria-expanded={panel === "services"} aria-controls="ng-services">Services <ChevronDown size={14} /></button>{panel === "services" && <div id="ng-services" className="ng-submenu">{services.map(service => <Link key={service.slug} to={`/services/${service.slug}`} onClick={close}>{service.title}</Link>)}</div>}</div>
     <div className="ng-nav-group"><button onClick={() => flip("solutions")} aria-expanded={panel === "solutions"} aria-controls="ng-solutions">Solutions <ChevronDown size={14} /></button>{panel === "solutions" && <div id="ng-solutions" className="ng-submenu"><Link to="/solutions/who-we-help" onClick={close}>Who We Help</Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework</Link></div>}</div>
     <NavLink to="/insights" onClick={close}>Insights</NavLink>
     <div className="ng-nav-group"><button onClick={() => flip("about")} aria-expanded={panel === "about"} aria-controls="ng-about">About Us <ChevronDown size={14} /></button>{panel === "about" && <div id="ng-about" className="ng-submenu"><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link></div>}</div>
@@ -31,7 +31,13 @@ export function NigeriaHeader({ services }) {
     <Link to="/request-demo" onClick={close} className="bl-header-demo">Request Demo</Link>
     <button ref={toggle} type="button" className="ng-menu-toggle" onClick={() => flip("more")} aria-expanded={panel === "more"} aria-controls="ng-more" aria-label={panel === "more" ? "Close additional menu" : "Open additional menu"}>{panel === "more" ? <X size={23} /> : <Menu size={23} />}</button>
     <nav id="ng-more" className={`ng-more ${panel === "more" ? "is-open" : ""}`} aria-label="Additional navigation" hidden={panel !== "more"}>
-      <div className="ng-mobile-primary"><Link to="/services" onClick={close}>Services</Link><Link to="/solutions" onClick={close}>Solutions</Link><Link to="/insights" onClick={close}>Insights</Link><details><summary>About Us</summary><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link></details><Link to="/contact" onClick={close}>Contact</Link></div>
+      <div className="ng-mobile-primary">
+        <details><summary><span>Services</span><span className="ng-dropdown-caret" aria-hidden="true" /></summary>{services.map(service => <Link key={service.slug} to={`/services/${service.slug}`} onClick={close}>{service.title}</Link>)}</details>
+        <details><summary><span>Solutions</span><span className="ng-dropdown-caret" aria-hidden="true" /></summary><Link to="/solutions/who-we-help" onClick={close}>Who We Help</Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework</Link></details>
+        <Link to="/insights" onClick={close}>Insights</Link>
+        <details><summary><span>About Us</span><span className="ng-dropdown-caret" aria-hidden="true" /></summary><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link></details>
+        <Link to="/contact" onClick={close}>Contact</Link>
+      </div>
       {extras.map(({ title, path, icon: Icon }) => <Link key={path} to={path} onClick={close}><Icon size={18} /> {title}<ArrowRight size={15} /></Link>)}
     </nav>
   </header></div>;
