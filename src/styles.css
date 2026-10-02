@@ -3564,32 +3564,3 @@ body { overflow-x:hidden; }
  .editorial-card{height:190px!important}
  .editorial-card>div{padding:20px 18px!important}
 }
-
-/* Square service tiles: no tall image strip beside the copy. */
-.editorial-card{
- grid-template-columns:minmax(0,1fr)!important;
- grid-template-rows:34% minmax(0,66%)!important;
- aspect-ratio:1 / 1;
- height:auto!important;
- min-height:0!important;
-}
-.editorial-card img{
- width:100%!important;
- height:100%!important;
- min-height:0!important;
- max-height:100%!important;
- object-fit:cover;
-}
-.editorial-card>div{padding:22px 24px!important}
-.editorial-card h3{font-size:clamp(1.1rem,1.6vw,1.4rem)!important}
-@media(max-width:900px){
- .editorial-row{width:100%!important;max-width:440px!important;margin-left:auto!important;margin-right:auto!important}
- .editorial-card{height:auto!important;aspect-ratio:1 / 1}
- .editorial-card>div{padding:24px!important}
- .editorial-card h3{font-size:1.35rem!important}
-}
-@media(max-width:520px){
- .editorial-card{height:auto!important}
- .editorial-card>div{padding:20px 22px!important}
- .editorial-card h3{font-size:1.18rem!important}
-}
