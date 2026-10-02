@@ -400,6 +400,26 @@ function Header() {
   const [open, setOpen] = useState(false);
   const [megaOpen, setMegaOpen] = useState(null);
   const [utilityOpen, setUtilityOpen] = useState(false);
+  const utilityRef = useRef(null);
+
+  useEffect(() => {
+    if (!utilityOpen) return;
+    const outside = event => {
+      if (!utilityRef.current?.contains(event.target)) setUtilityOpen(false);
+    };
+    const escape = event => {
+      if (event.key === "Escape") {
+        setUtilityOpen(false);
+        utilityRef.current?.querySelector("button")?.focus();
+      }
+    };
+    document.addEventListener("pointerdown", outside);
+    document.addEventListener("keydown", escape);
+    return () => {
+      document.removeEventListener("pointerdown", outside);
+      document.removeEventListener("keydown", escape);
+    };
+  }, [utilityOpen]);
   const [headerScrolled, setHeaderScrolled] = useState(false);
   const isDesktop = useIsDesktop();
   const { insights: cmsInsights } = useInsights();
@@ -514,7 +534,7 @@ function Header() {
 
         <div className="qore-header-actions">
           <Link className="qore-demo-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Request Demo <ArrowRight size={15}/></Link>
-          <div className="qore-utility-wrap">
+          <div className="qore-utility-wrap" ref={utilityRef}>
             <button className="qore-menu-btn" onClick={() => setUtilityOpen(v=>!v)} aria-label="Open quick links" aria-expanded={utilityOpen}><Menu size={21}/></button>
             <div className={utilityOpen ? "qore-utility show" : "qore-utility"}>
               <Link to="/simulator" onClick={close}><Zap size={17}/><span><strong>Try Simulator</strong><small>Test deployment readiness</small></span></Link>
