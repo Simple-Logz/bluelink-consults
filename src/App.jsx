@@ -3145,7 +3145,7 @@ function AppInner() {
           <Route path="/about/our-team"          element={isNigeriaSite ? <OurTeam /> : <AboutPage />} />
           <Route path="/blog"                    element={isNigeriaSite ? <BlogPage /> : <InsightsPage />} />
           <Route path="/contact"                 element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
-          <Route path="/request-demo"            element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
+          <Route path="/request-demo"            element={<DemoRequestPage />} />
           <Route path="/privacy-policy"          element={<PrivacyPolicyPage />} />
           <Route path="/simulator"               element={<SimulatorPage />} />
           <Route path="/terms"                   element={<TermsPage />} />

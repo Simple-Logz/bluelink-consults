@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
+import DemoBookingsAdmin from "./DemoBookingsAdmin";
 import { supabase } from "./supabaseClient";
 import {
   LayoutDashboard, FolderKanban, FileText, CreditCard,
@@ -497,6 +498,7 @@ function PortalShell({ activeTab, setActiveTab }) {
     { id:"eat",       label:"Approach",    icon:Star },
   ];
   const adminTabs = [
+    { id:"demo_bookings", label:"Demo Bookings", icon:Clock },
     { id:"dashboard", label:"Home",         icon:LayoutDashboard },
     { id:"clients",   label:"Clients",      icon:Users },
     { id:"projects",  label:"Projects",     icon:FolderKanban },
@@ -573,6 +575,7 @@ function PortalShell({ activeTab, setActiveTab }) {
             <div style={{ display:"flex", justifyContent:"center", padding:80 }}><Spinner size={32} /></div>
           ) : (
             <div className="fade-up">
+              {activeTab==="demo_bookings" && isAdmin && <DemoBookingsAdmin />}
               {activeTab==="dashboard" && (isAdmin ? <AdminDashboard setActiveTab={setActiveTab} /> : <ClientDashboard setActiveTab={setActiveTab} />)}
               {activeTab==="eat"       && <EATPage />}
               {activeTab==="eat_admin" && isAdmin && <EATAdmin />}
