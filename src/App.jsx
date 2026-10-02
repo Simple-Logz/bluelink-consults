@@ -88,7 +88,7 @@ const globalServices = [
     title: "Application Modernization",
     icon: ServerCog,
     summary: "Transform outdated business applications into secure, scalable, cloud-ready platforms.",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2000&auto=format&fit=crop",
+    image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop",
     body: "BlueLink Consult helps organizations move legacy applications away from fragile, outdated, difficult-to-maintain systems into modern, secure, scalable platforms. We assess your current application, identify business and technical risks, redesign the user experience, modernize APIs, improve performance, and create a practical path toward cloud-ready architecture.",
     tools: [
       "React / Angular / modern frontend frameworks",
@@ -1045,11 +1045,9 @@ function Home() {
   return (
     <>
       <Hero />
-      <CTABanner />
       <WhoWeServeStrip />
-      <ClientLogos />
       <Process />
-      <EditorialShowcase />
+      <ClientLogos />
       <SimulatorTeaser />
       {/* <TestimonialsSection /> */}{/* TESTIMONIALS — uncomment when ready */}
     </>
@@ -1057,56 +1055,29 @@ function Home() {
 }
 
 function Hero() {
-  const heroServices = [
-    { icon: ServerCog, label: "Modernize", text: "Applications" },
-    { icon: Cloud, label: "Engineer", text: "Cloud" },
-    { icon: Workflow, label: "Automate", text: "Delivery" },
-    { icon: ShieldCheck, label: "Validate", text: "Releases" },
-  ];
-
   return (
-    <section className="tech-hero">
-      <div className="tech-hero-grid" aria-hidden="true" />
-      <div className="tech-hero-glow glow-one" aria-hidden="true" />
-      <div className="tech-hero-glow glow-two" aria-hidden="true" />
-
-      <div className="tech-hero-inner">
-        <motion.div className="tech-hero-copy"
-          initial={{opacity:0,y:28}} animate={{opacity:1,y:0}}
-          transition={{duration:.72,ease:[.22,1,.36,1]}}>
-          <div className="tech-hero-kicker"><span className="pulse-dot"/> Technology transformation, engineered for business</div>
-          <h1>Build technology that <span>moves your business forward.</span></h1>
-          <p>BlueLink assesses, modernizes and engineers the applications, cloud infrastructure and delivery systems your organization depends on.</p>
-          <div className="tech-hero-actions">
-            <Link className="tech-primary" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Start a Conversation"} <ArrowRight size={17}/></Link>
-            <Link className="tech-secondary" to="/services">Explore our services <ArrowRight size={16}/></Link>
-          </div>
-          <div className="tech-hero-proof"><span>ENGAGE</span><i/><span>ASSESS</span><i/><span>TRANSFORM</span></div>
-        </motion.div>
-
-        <motion.div className="tech-visual"
-          initial={{opacity:0,scale:.94,x:25}} animate={{opacity:1,scale:1,x:0}}
-          transition={{duration:.9,delay:.12,ease:[.22,1,.36,1]}} aria-label="BlueLink technology capabilities">
-          <div className="tech-orbit orbit-one"/><div className="tech-orbit orbit-two"/>
-          <div className="tech-core">
-            <div className="core-mark"><img src="/bluelink-logo-mark.png" alt=""/></div>
-            <span>BlueLink</span><small>Technology Core</small>
-            <div className="core-status"><i/> Systems ready</div>
-          </div>
-          {heroServices.map((item,index)=>{
-            const Icon=item.icon;
-            return <motion.div key={item.label} className={`tech-node node-${index+1}`}
-              animate={{y:[0,index%2?8:-8,0]}}
-              transition={{duration:4+index*.45,repeat:Infinity,ease:"easeInOut"}}>
-              <span className="node-icon"><Icon size={19}/></span><div><strong>{item.label}</strong><small>{item.text}</small></div>
-            </motion.div>;
-          })}
-          <div className="tech-rule" aria-hidden="true"/>
-        </motion.div>
+    <section className="tech-hero hero-clean">
+      <div className="hero-rings" aria-hidden="true">
+        {[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}
       </div>
-
-      <motion.div className="tech-hero-ticker" initial={{opacity:0}} animate={{opacity:1}} transition={{delay:.65,duration:.6}}>
-        <span>Application Modernization</span><i/><span>Cloud Infrastructure</span><i/><span>DevOps & Automation</span><i/><span>Pre-deployment Validation</span><i/><span>Operational Support</span>
+      <motion.div className="hero-logo-motion" initial="apart" animate="together" aria-hidden="true">
+        <motion.span className="logo-piece logo-piece-left"
+          variants={{apart:{x:-180,rotate:-32,opacity:.2},together:{x:0,rotate:0,opacity:1}}}
+          transition={{duration:1.35,ease:[.22,1,.36,1]}} />
+        <motion.span className="logo-piece logo-piece-right"
+          variants={{apart:{x:180,rotate:32,opacity:.2},together:{x:0,rotate:0,opacity:1}}}
+          transition={{duration:1.35,ease:[.22,1,.36,1]}} />
+      </motion.div>
+      <motion.div className="hero-clean-copy"
+        initial={{opacity:0,y:24}} animate={{opacity:1,y:0}}
+        transition={{duration:.8,delay:.35,ease:[.22,1,.36,1]}}>
+        <span className="hero-clean-kicker">Engage · Assess · Transform</span>
+        <h1>Technology built for <span>your business.</span></h1>
+        <p>We assess what you have, modernize what matters, and engineer technology that performs reliably as your business grows.</p>
+        <div className="hero-clean-actions">
+          <Link className="hero-dark-btn" to="/services">Explore BlueLink</Link>
+          <Link className="hero-light-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link>
+        </div>
       </motion.div>
     </section>
   );
@@ -1115,7 +1086,7 @@ function Hero() {
 function EditorialShowcase() {
   const stories = [
     {
-      image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1600&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
       eyebrow: "Application Modernization",
       title: "Modernization starts with understanding what the business cannot afford to break.",
       text: "A practical path from legacy constraints to secure, maintainable applications.",
@@ -1995,7 +1966,7 @@ function AboutPage() {
           <div
             className="about-split-media"
             style={{
-              backgroundImage: "linear-gradient(rgba(5,11,45,0.08), rgba(5,11,45,0.08)), url('https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=1600&auto=format&fit=crop')",
+              backgroundImage: "linear-gradient(rgba(5,11,45,0.08), rgba(5,11,45,0.08)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop')",
             }}
           />
         </div>
