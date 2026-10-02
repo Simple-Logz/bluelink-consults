@@ -86,7 +86,7 @@ export function HeaderUtility({ nigeria = false }) {
   const phoneHref = nigeria ? "tel:+2348068649496" : "tel:+14014402434";
   return <div className="bl-header-utility"><div className="bl-header-utility-inner">
     <div className="bl-header-contact"><a href={phoneHref}><Phone size={15} aria-hidden="true" /><span>{phone}</span></a><a href="mailto:info@bluelinkconsults.com"><Mail size={15} aria-hidden="true" /><span>info@bluelinkconsults.com</span></a></div>
-    <div className="bl-header-shortcuts"><Link to="/faqs">FAQs</Link><span className="bl-facebook-pending" aria-label="Facebook page link awaiting confirmation"><Facebook size={16} aria-hidden="true" /><span>Facebook</span></span></div>
+    <div className="bl-header-shortcuts"><Link to="/faqs">FAQs</Link><a href="https://www.facebook.com/share/19XEu6zf1n/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="BlueLink Consults on Facebook"><Facebook size={16} aria-hidden="true" /><span>Facebook</span></a></div>
   </div></div>;
 }
 
