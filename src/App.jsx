@@ -1170,7 +1170,7 @@ function EditorialShowcase() {
   return (
     <section className="editorial-showcase">
       <div className="editorial-heading">
-        <div><span>From BlueLink</span><h2><Link to="/solutions/eat-framework" style={{color:"inherit",textDecoration:"none"}}>Technology, in practice.</Link></h2></div>
+        <div><span>From BlueLink</span><h2><Link to="/solutions/eat-framework" style={{color:"inherit",textDecoration:"none"}}>Technology in practice.</Link></h2></div>
         <Link to="/solutions/eat-framework">Explore EAT Framework <ArrowRight size={16}/></Link>
       </div>
       <div className="editorial-lead">
