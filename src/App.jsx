@@ -402,6 +402,7 @@ function Header() {
   const [solutionsOpen, setSolutionsOpen] = useState(false);
   const [insightsOpen, setInsightsOpen] = useState(false);
   const [utilityOpen, setUtilityOpen] = useState(false);
+  const [headerScrolled, setHeaderScrolled] = useState(false);
   const searchRef = useRef(null);
   const isDesktop = useIsDesktop();
   const { insights: cmsInsights } = useInsights();
@@ -416,6 +417,13 @@ function Header() {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("bluelink-theme", theme);
   }, [theme]);
+
+  useEffect(() => {
+    const onScroll = () => setHeaderScrolled(window.scrollY > 28);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const toggleTheme = () => setTheme((t) => (t === "light" ? "dark" : "light"));
 
@@ -472,7 +480,7 @@ function Header() {
           aria-hidden="true"
         />
       )}
-    <header className="site-header">
+    <header className={headerScrolled ? "site-header scrolled" : "site-header"}>
       <Link to="/" className="brand-logo-wrap brand-home-link" onClick={close} aria-label="Go to BlueLink Consults homepage">
         <img
           src="/bluelink-logo-mark.png"
