@@ -1005,7 +1005,6 @@ function ServiceNetwork() {
         <Link to="/services" className={active ? "network-core active" : "network-core"}>
           <img src="/bluelink-logo-mark.png" alt=""/><div><strong>BlueLink</strong><small>{active ? active.value : "Engage · Assess · Transform"}</small>{active && <span>Explore {active.title} <ArrowRight size={13}/></span>}</div>
         </Link>
-        <div className="network-human"><Users size={22}/><div><strong>Business & Technology Teams</strong><small>Decisions stay human</small></div><span/></div>
       </div>
     </section>
   );
