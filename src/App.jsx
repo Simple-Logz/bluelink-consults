@@ -1093,7 +1093,7 @@ function Hero() {
     <section className="tech-hero hero-clean">
       <div className="hero-rings" aria-hidden="true">{[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}</div>
       <motion.img src="/bluelink-logo-mark.png" alt="" className="hero-logo-fade" aria-hidden="true"
-        initial={{opacity:.22}} animate={{opacity:0}} transition={{duration:1.5,delay:3,ease:"easeOut"}} />
+        initial={{opacity:.22}} animate={{opacity:0}} transition={{duration:.45,delay:1,ease:"easeOut"}} />
       <motion.div className="hero-clean-copy" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.35,ease:[.22,1,.36,1]}}>
         <span className="hero-clean-kicker">Engage · Assess · Transform</span>
         <h1>Technology built for <span>your business.</span></h1>
