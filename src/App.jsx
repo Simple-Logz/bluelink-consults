@@ -1168,12 +1168,10 @@ const corporateHeroSlides = [
 ];
 function Hero() {
   const [slide, setSlide] = useState(0);
-  const [paused, setPaused] = useState(false);
   useEffect(() => {
-    if (paused) return;
     const timer = window.setInterval(() => setSlide(current => (current + 1) % corporateHeroSlides.length), 3000);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, []);
   return (
     <section className="tech-hero hero-clean">
       <div className="hero-rings" aria-hidden="true">{[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}</div>
@@ -1193,7 +1191,7 @@ function Hero() {
             <motion.img key={slide} src={corporateHeroSlides[slide].src} alt={corporateHeroSlides[slide].alt} style={{objectPosition: corporateHeroSlides[slide].position}} initial={{x:'100%'}} animate={{x:0}} exit={{x:'-100%'}} transition={{duration:.65,ease:[.22,1,.36,1]}} />
           </AnimatePresence>
         </div>
-        <div className="hero-slide-controls"><div className="hero-slide-dots">{corporateHeroSlides.map((photo,index) => <button key={photo.src} type="button" aria-label={`Show corporate photo ${index+1}`} aria-pressed={slide===index} className={slide===index?'is-active':''} onClick={() => setSlide(index)} />)}</div><button className="hero-slide-pause" type="button" onClick={() => setPaused(current=>!current)} aria-label={paused?'Play slideshow':'Pause slideshow'}>{paused?'Play':'Pause'}</button></div>
+        <div className="hero-slide-controls"><div className="hero-slide-dots">{corporateHeroSlides.map((photo,index) => <button key={photo.src} type="button" aria-label={`Show corporate photo ${index+1}`} aria-pressed={slide===index} className={slide===index?'is-active':''} onClick={() => setSlide(index)} />)}</div></div>
         <div hidden>{corporateHeroSlides.map(photo=><img key={photo.src} src={photo.src} alt="" />)}</div>
       </div>
       </div>
