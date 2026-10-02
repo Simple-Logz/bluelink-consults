@@ -494,7 +494,21 @@ function Header() {
             </div>
           </div>
 
-          <NavLink to="/about">About Us</NavLink>
+          <div className="qore-nav-item"
+            onMouseEnter={() => setMegaOpen("about")}
+            onMouseLeave={() => setMegaOpen(null)}>
+            <button onClick={() => toggleMega("about")} aria-expanded={megaOpen === "about"} aria-controls="qore-about-menu">
+              About Us <ChevronDown size={14}/>
+            </button>
+            <div id="qore-about-menu" className={megaOpen === "about" ? "qore-mega compact show" : "qore-mega compact"}>
+              <div className="qore-mega-intro"><span className="qore-menu-kicker">About BlueLink</span><h3>Meet your technology partner.</h3><p>Our story, our people and the way we work.</p></div>
+              <div className="qore-mega-links">
+                <Link to="/about/our-story" onClick={close}><span className="qore-menu-icon"><Building2 size={18}/></span><span><strong>Our Story</strong><small>Why BlueLink exists and how we work.</small></span><ArrowRight size={15}/></Link>
+                <Link to="/about/our-team" onClick={close}><span className="qore-menu-icon"><Users size={18}/></span><span><strong>Our Team</strong><small>The people behind BlueLink.</small></span><ArrowRight size={15}/></Link>
+                <Link to="/about/why-bluelink" onClick={close}><span className="qore-menu-icon"><Target size={18}/></span><span><strong>Why BlueLink</strong><small>Built around your institution.</small></span><ArrowRight size={15}/></Link>
+              </div>
+            </div>
+          </div>
           <NavLink to="/contact">Contact</NavLink>
         </nav>
 
@@ -520,7 +534,7 @@ function Header() {
               <div className={"mobile-accordion "+(mobileSection==="services"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="services"?null:"services")}><span>Services</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="services"&&<div className="mobile-accordion-content">{services.map(s=><Link key={s.slug} to={`/services/${s.slug}`} onClick={close}>{s.title}<ArrowRight size={14}/></Link>)}</div>}</div>
               <div className={"mobile-accordion "+(mobileSection==="solutions"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="solutions"?null:"solutions")}><span>Solutions</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="solutions"&&<div className="mobile-accordion-content"><Link to="/solutions/who-we-help" onClick={close}>Who We Help <ArrowRight size={14}/></Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework <ArrowRight size={14}/></Link></div>}</div>
               <Link to="/insights" onClick={close}>Insights <ArrowRight size={15}/></Link>
-              <div className={"mobile-accordion "+(mobileSection==="about"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="about"?null:"about")}><span>About Us</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="about"&&<div className="mobile-accordion-content"><Link to="/about" onClick={close}>Our Story <ArrowRight size={14}/></Link>{isNigeriaSite&&<Link to="/about/team" onClick={close}>Our Team <ArrowRight size={14}/></Link>}<Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div>}</div>
+              <div className={"mobile-accordion "+(mobileSection==="about"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="about"?null:"about")}><span>About Us</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="about"&&<div className="mobile-accordion-content"><Link to="/about/our-story" onClick={close}>Our Story <ArrowRight size={14}/></Link><Link to="/about/our-team" onClick={close}>Our Team <ArrowRight size={14}/></Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink <ArrowRight size={14}/></Link><Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div>}</div>
               <Link to="/contact" onClick={close}>Contact <ArrowRight size={15}/></Link>
             </div>
             <div className="qore-mobile-actions">
@@ -3180,7 +3194,7 @@ function AppInner() {
           <Route path="/about/why-bluelink" element={<WhyInstitutionsChoose />} />
           <Route path="/about"                   element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
           <Route path="/about/our-story"         element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
-          <Route path="/about/our-team"          element={isNigeriaSite ? <OurTeam /> : <AboutPage />} />
+          <Route path="/about/our-team"          element={<OurTeam />} />
           <Route path="/blog"                    element={isNigeriaSite ? <BlogPage /> : <InsightsPage />} />
           <Route path="/contact"                 element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
           <Route path="/request-demo"            element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
