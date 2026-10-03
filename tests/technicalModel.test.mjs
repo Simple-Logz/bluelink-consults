@@ -1,0 +1,22 @@
+import assert from 'node:assert/strict';
+import {MODELS,DEFAULT_SETTINGS,validateRecords,evaluate,parseCSV,toCSV} from '../src/technicalModel.js';
+const model=id=>MODELS.find(m=>m.id===id);const run=(id,rows=model(id).sample,settings={})=>evaluate(model(id),rows,{...DEFAULT_SETTINGS,...settings},'NGN');
+for(const m of MODELS){assert.deepEqual(validateRecords(m,m.sample,DEFAULT_SETTINGS),{});const r=run(m.id);assert.equal(r.provenance.total,m.sample.length);assert(r.findings.every(f=>f.rule&&f.evidence&&f.action&&f.acceptance));assert(r.calculations.every(c=>!c.value.includes('NaN')&&!c.value.includes('Infinity')));assert.equal(r.metrics.length,4);}
+// Financial baseline 12*40k + 100*5k = 980k; proposal max(8*35k,200k)+20k + 80*5k = 700k.
+const cost=run('cost');assert.equal(cost.rowResults.reduce((t,r)=>t+r.delta,0),280000);assert.equal(cost.timeline.at(-1).scenario,980000+11*700000+450000);assert.equal(cost.timeline[0].scenario,450000);assert.equal(cost.timeline[0].baseline,0);assert.equal(cost.timeline.at(-1).baseline-cost.timeline.at(-1).scenario,2630000);
+const floor={...model('cost').sample[0],commitment:450000,targetQuantity:0,targetUnitCost:0};assert.equal(run('cost',[floor]).rowResults[0].target,470000);assert(run('cost',[floor]).findings.some(f=>f.rule==='C-02'));
+const expensive={...floor,extra:1000000};assert(run('cost',[expensive]).options.some(o=>o.tradeoff.includes('not positive')));
+assert(run('cost',undefined,{priceAdjustment:30}).rowResults[0].target>cost.rowResults[0].target);
+const app=run('modernisation');assert.equal(app.calculations.find(c=>c.label==='Projected peak demand').value,'120 requests/s');const stress=run('modernisation',undefined,{demandMultiplier:2});assert(stress.findings.some(f=>f.rule==='A-02'));assert(!app.findings.some(f=>f.rule==='A-02'));
+const noLoad={...model('modernisation').sample[0],testedCapacity:''};assert(run('modernisation',[noLoad]).findings.some(f=>f.rule==='A-03'));
+const migration=run('migration');assert.equal(migration.calculations.find(c=>c.label==='Replication spare rate').value,'34 GB/hour');assert.equal(migration.calculations.find(c=>c.label==='Initial bulk-copy time').value,'37.04 hours');assert(migration.findings.some(f=>f.rule==='M-02'));
+const nonconverging={...model('migration').sample[0],changeRate:100};assert(run('migration',[nonconverging]).findings.some(f=>f.rule==='M-01'));assert(run('migration',undefined,{bandwidthMultiplier:2}).rowResults[0].current<migration.rowResults[0].current);
+const data=run('data');assert.equal(data.rowResults[0].current,7400);assert.equal(data.rowResults[0].target,5900);assert.equal(data.timeline.at(-1).scenario,5900);assert.equal(data.metrics[1].value,'NGN\u00a0110,000/mo');assert(data.findings.some(f=>f.rule==='D-03'));
+const noSavings={...model('data').sample[0],retrieval:5000};assert(run('data',[noSavings]).findings.some(f=>f.rule==='D-05'));assert(validateRecords(model('data'),[{...model('data').sample[0],archiveVolume:6000}],DEFAULT_SETTINGS)['0.archiveVolume']);
+const unknown={...model('audit').sample[0],coverage:'',status:'unknown'};assert.equal(run('audit',[unknown]).rowResults[0].current,null);assert.equal(run('audit',[unknown]).calculations.length,0);assert(run('audit',[unknown]).findings.some(f=>f.rule==='T-01'&&f.priority==='Verify'));
+assert(validateRecords(model('migration'),[{...model('migration').sample[0],bandwidth:0}],DEFAULT_SETTINGS)['0.bandwidth']);assert(validateRecords(model('cost'),[{...model('cost').sample[0],quantity:1.5}],DEFAULT_SETTINGS)['0.quantity']);assert(validateRecords(model('cost'),model('cost').sample,{...DEFAULT_SETTINGS,ramp:13}).ramp);
+const doubleQuotes={...model('cost').sample[0],name:'Hosting, "production"',reference:'billing\nSeptember'};const csv=toCSV(model('cost'),[doubleQuotes]);const parsed=parseCSV(model('cost'),csv);assert.equal(parsed[0].name,doubleQuotes.name);assert.equal(parsed[0].reference,doubleQuotes.reference);assert.throws(()=>parseCSV(model('cost'),'name,bad\nA,2'));assert.throws(()=>parseCSV(model('cost'),'name\n"unclosed'));
+assert(toCSV(model('cost'),[{...doubleQuotes,name:'=HYPERLINK("x")'}]).includes("'=HYPERLINK"));
+console.log('Technical-model verification passed: formulas, commitments, stress scenarios, missing evidence, constraints and CSV handling.');
+
+const delayed=run('data',undefined,{ramp:12});assert.equal(delayed.rowResults[0].target,7400);assert.equal(delayed.timeline.at(-1).scenario,7400);assert.equal(delayed.metrics[1].value,'NGN\u00a00/mo');
