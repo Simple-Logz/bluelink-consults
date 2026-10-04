@@ -1168,10 +1168,10 @@ function Home() {
 }
 
 const corporateHeroSlides = [
-  { src: '/images/hero/slides/teamwork-v5.webp', alt: 'Colleagues collaborating over business reports and a laptop, with faces out of frame', position: '50% 50%' },
-  { src: '/images/hero/slides/consultation-v5.webp', alt: 'Business consultation over a document, showing professional attire and hands with faces out of frame', position: '50% 50%' },
-  { src: '/images/hero/slides/laptop-work-v5.webp', alt: 'Woman working on a laptop and making notes, with her face outside the frame', position: '50% 50%' },
-  { src: '/images/hero/slides/collaboration-v4.webp', alt: 'Corporate colleagues reviewing documents, showing hands and business attire with faces out of frame', position: '50% 50%' },
+  { src: '/images/hero/slides/woman-leadership-v6.webp', alt: 'Confident businesswoman in a dark blazer smiling at the camera', position: '50% 45%' },
+  { src: '/images/hero/slides/man-office-v6.webp', alt: 'Smiling businessman in a suit in a bright professional office', position: '50% 55%' },
+  { src: '/images/hero/slides/woman-professional-v6.webp', alt: 'Black businesswoman in formal corporate attire facing the camera', position: '50% 45%' },
+  { src: '/images/hero/slides/man-professional-v6.webp', alt: 'Smiling businessman in a dark suit standing confidently in an office', position: '50% 45%' },
 ];
 function Hero() {
   const [slide, setSlide] = useState(0);
