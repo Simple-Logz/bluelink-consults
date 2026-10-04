@@ -3756,3 +3756,7 @@ body { overflow-x:hidden; }
   .bl-header-shell .brand-wordmark strong { font-size:1.25rem!important; }
   .bl-header-shell .brand-wordmark small { font-size:.52rem!important; }
 }
+
+/* Preserve the entire fictional portrait at every viewport size. */
+.hero-corporate-viewport { background: #edf5fb; }
+.hero-corporate-viewport img { object-fit: contain; object-position: center; }
