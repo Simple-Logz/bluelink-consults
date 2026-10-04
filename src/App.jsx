@@ -37,6 +37,8 @@ import {
   Zap,
   Globe2,
   Linkedin,
+  Facebook,
+  Instagram,
   Download,
   UserPlus,
   Code2,
@@ -542,6 +544,7 @@ function Header() {
             <div className={utilityOpen ? "qore-utility show" : "qore-utility"}>
               <Link to="/simulator" onClick={close}><Zap size={17}/><span><strong>Try Simulator</strong><small>Test deployment readiness</small></span></Link>
               <Link to="/client-login" onClick={close}><LockKeyhole size={17}/><span><strong>Client Login</strong><small>Access your workspace</small></span></Link>
+              <Link to="/events" onClick={close}><CalendarDays size={17}/><span><strong>Events &amp; Activities</strong><small>Conferences and team highlights</small></span></Link>
               <Link to="/blog" onClick={close}><FileText size={17}/><span><strong>Blog</strong><small>Ideas and updates</small></span></Link>
             </div>
           </div>
@@ -557,7 +560,7 @@ function Header() {
               <div className={"mobile-accordion "+(mobileSection==="services"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="services"?null:"services")}><span>Services</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="services"&&<div className="mobile-accordion-content">{services.map(s=><Link key={s.slug} to={`/services/${s.slug}`} onClick={close}>{s.title}<ArrowRight size={14}/></Link>)}</div>}</div>
               <div className={"mobile-accordion "+(mobileSection==="solutions"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="solutions"?null:"solutions")}><span>Solutions</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="solutions"&&<div className="mobile-accordion-content"><Link to="/solutions/who-we-help" onClick={close}>Who We Help <ArrowRight size={14}/></Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework <ArrowRight size={14}/></Link></div>}</div>
               <Link to="/insights" onClick={close}>Insights <ArrowRight size={15}/></Link>
-              <div className={"mobile-accordion "+(mobileSection==="about"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="about"?null:"about")}><span>About Us</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="about"&&<div className="mobile-accordion-content"><Link to="/about/our-story" onClick={close}>Our Story <ArrowRight size={14}/></Link><Link to="/about/our-team" onClick={close}>Our Team <ArrowRight size={14}/></Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink <ArrowRight size={14}/></Link><Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div>}</div>
+              <div className={"mobile-accordion "+(mobileSection==="about"?"open":"")}><button type="button" onClick={()=>setMobileSection(v=>v==="about"?null:"about")}><span>About Us</span><span className="mobile-accordion-arrow">⌄</span></button>{mobileSection==="about"&&<div className="mobile-accordion-content"><Link to="/about/our-story" onClick={close}>Our Story <ArrowRight size={14}/></Link><Link to="/about/our-team" onClick={close}>Our Team <ArrowRight size={14}/></Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink <ArrowRight size={14}/></Link><Link to="/events" onClick={close}>Events &amp; Activities <ArrowRight size={14}/></Link><Link to="/contact" onClick={close}>Contact BlueLink <ArrowRight size={14}/></Link></div>}</div>
               <Link to="/contact" onClick={close}>Contact <ArrowRight size={15}/></Link>
             </div>
             <div className="qore-mobile-actions">
@@ -617,17 +620,24 @@ function PageHero({ label, title, text }) {
 
 
 
+function EventsPage() {
+  usePageTitle("Events & Activities");
+  return <><PageHero label="Events & Activities" title="BlueLink out in the industry." text="Conferences, industry gatherings and team activities — photos, videos and highlights from the events we attend." /><section className="events-empty"><CalendarDays size={38} aria-hidden="true" /><h2>Our next highlights are on the way.</h2><p>Event photos, videos and updates from our team will appear here.</p><div><a href="https://www.facebook.com/share/19XEu6zf1n/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Follow us on Facebook <ArrowRight size={17} /></a><a href="https://www.instagram.com/bluelinkconsults" target="_blank" rel="noopener noreferrer">Follow us on Instagram <ArrowRight size={17} /></a></div></section></>;
+}
+
 function Footer() {
   return (
     <footer className="footer">
       <div>
         <strong>BlueLink Consults</strong>
         <p>{isNigeriaSite ? "Technology assessment, application modernisation, cloud infrastructure, automation, release validation and operational support for Nigerian organisations." : "Technology assessment, application modernization, cloud infrastructure, DevOps automation, pre-deployment validation and operational support for growing organizations."}</p>
+        <div className="footer-socials" aria-label="Follow BlueLink"><strong>Follow BlueLink</strong><div><a href="https://www.facebook.com/share/19XEu6zf1n/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><Facebook size={19} aria-hidden="true" />Facebook</a><a href="https://www.instagram.com/bluelinkconsults" target="_blank" rel="noopener noreferrer"><Instagram size={19} aria-hidden="true" />Instagram</a></div></div>
       </div>
       <div>
         <strong>Our Services</strong>
         {nigeriaServices.map(service => <Link key={service.slug} to={`/services/${service.slug}`}>{service.title}</Link>)}
         {isNigeriaSite && <a href="/BlueLink-Company-Profile.pdf" download>Download Company Profile</a>}
+        <Link to="/events">Events &amp; Activities</Link>
         <Link to="/insights">Insights</Link>
         <Link to="/contact">Contact</Link>
         <Link to="/privacy-policy">Privacy Policy</Link>
@@ -2677,6 +2687,7 @@ function AppInner() {
           <Route path="/about"                   element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
           <Route path="/about/our-story"         element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
           <Route path="/about/our-team"          element={<OurTeam />} />
+          <Route path="/events" element={<EventsPage />} />
           <Route path="/blog"                    element={isNigeriaSite ? <BlogPage /> : <InsightsPage />} />
           <Route path="/contact"                 element={isNigeriaSite ? <DemoRequestPage /> : <ContactPage />} />
           <Route path="/request-demo"            element={<DemoRequestPage />} />
