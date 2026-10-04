@@ -107,3 +107,26 @@
 
 /* Clip horizontal overflow without creating an ancestor scroll box for the sidebar. */
 #root:has(.es-app.es-technical){overflow-x:clip;overflow-y:visible}
+/* Staff access and persisted assessment controls. */
+.es-app.es-technical .es-required{display:inline;color:#b13232;font-size:13px;font-weight:600}
+.es-app.es-technical .es-label-text{display:block}
+.es-app.es-technical .es-saved-panel{margin:0 0 22px;background:#fff;padding:24px 28px;border:1px solid #dfe3e9;border-radius:8px}
+.es-app.es-technical .es-session .es-tools{gap:18px}
+.es-app.es-technical.es-auth{display:flex;justify-content:center;align-items:flex-start;padding-top:55px;padding-bottom:65px;min-height:70vh}
+.es-auth-card{width:100%;max-width:465px;padding:34px;background:#fff;border:1px solid #dfe3e9;border-radius:8px;box-shadow:0 3px 12px #1b2c4109}
+.es-auth-mark{height:44px;width:44px;display:grid;place-items:center;background:#edf3fb;color:#275885;border-radius:7px;margin-bottom:24px}
+.es-app.es-technical .es-auth-card h1{font-size:26px;line-height:1.25;margin-bottom:12px}
+.es-app.es-technical .es-auth-intro{font-size:13px;line-height:1.65;margin-bottom:25px}
+.es-auth-intro strong{font-weight:600;color:#48576b}
+.es-auth-card form{display:grid;gap:19px}
+.es-auth-card label{display:block;font-size:13px;font-weight:600;color:#39495c}
+.es-auth-card input{display:block;margin-top:8px}
+.es-auth-card label small{display:block;margin-top:7px;font-size:11px;font-weight:400;color:#748092}
+.es-auth-card form>.es-primary{width:100%;margin-top:3px;min-height:43px}
+.es-auth-links{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-top:22px}
+.es-auth-links button{padding:4px 0;border:0;background:none;font-size:12px;color:#1760bd;cursor:pointer;text-align:left;min-height:32px}
+.es-auth-message{padding:12px 14px;border:1px solid #d7e2ee;background:#f4f7fb;border-radius:5px;font-size:13px;line-height:1.6;color:#455c76;margin-bottom:20px}
+.es-auth-message .es-text-button{display:block;margin-top:6px}
+.es-auth-error{border-color:#efd3d3;background:#fff8f8;color:#9f3333}
+.es-app.es-technical .es-auth-foot{font-size:11px;line-height:1.6;border-top:1px solid #edf0f4;margin-top:27px;padding-top:17px;color:#8792a1}
+@media(max-width:760px){.es-app.es-technical.es-auth{padding-top:28px}.es-auth-card{padding:26px 22px}.es-app.es-technical .es-saved-panel{padding:20px}.es-app.es-technical .es-session{align-items:flex-start;flex-wrap:wrap}.es-app.es-technical .es-session .es-label{display:block}.es-app.es-technical .es-session .es-tools{width:100%}}

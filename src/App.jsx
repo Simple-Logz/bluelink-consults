@@ -1,4 +1,4 @@
-import EnterpriseSimulator from "./EnterpriseSimulator";
+import StaffWorkspace from "./StaffWorkspace";
 import WhyInstitutionsChoose from "./WhyInstitutionsChoose";
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
 import {
@@ -542,7 +542,7 @@ function Header() {
           <div className="qore-utility-wrap" ref={utilityRef}>
             <button className="qore-menu-btn" onClick={() => setUtilityOpen(v=>!v)} aria-label="Open quick links" aria-expanded={utilityOpen}><Menu size={21}/></button>
             <div className={utilityOpen ? "qore-utility show" : "qore-utility"}>
-              <Link to="/simulator" onClick={close}><Zap size={17}/><span><strong>Try Simulator</strong><small>Test deployment readiness</small></span></Link>
+              <Link to="/simulator" onClick={close}><Zap size={17}/><span><strong>Staff Workspace</strong><small>Staff sign-in required</small></span></Link>
               <Link to="/client-login" onClick={close}><LockKeyhole size={17}/><span><strong>Client Login</strong><small>Access your workspace</small></span></Link>
               <Link to="/events" onClick={close}><CalendarDays size={17}/><span><strong>Events &amp; Activities</strong><small>Conferences and team highlights</small></span></Link>
               <Link to="/blog" onClick={close}><FileText size={17}/><span><strong>Blog</strong><small>Ideas and updates</small></span></Link>
@@ -564,7 +564,7 @@ function Header() {
               <Link to="/contact" onClick={close}>Contact <ArrowRight size={15}/></Link>
             </div>
             <div className="qore-mobile-actions">
-              <Link to="/simulator" onClick={close}>Try Simulator</Link>
+              <Link to="/simulator" onClick={close}>Staff Workspace</Link>
               <Link to="/client-login" onClick={close}>Client Login</Link>
               <Link className="primary" to="/request-demo" onClick={close}>Request Demo <ArrowRight size={15}/></Link>
             </div>
@@ -1142,10 +1142,10 @@ function SimulatorTeaser() {
         onMouseOver={e => { e.currentTarget.style.background = "var(--bronze-dark)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
         onMouseOut={e => { e.currentTarget.style.background = "var(--bronze)"; e.currentTarget.style.transform = "translateY(0)"; }}
       >
-        Launch the simulator <ArrowRight size={18} />
+        Open staff workspace <ArrowRight size={18} />
       </Link>
       <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.35)", marginTop: 14 }}>
-        Free · No signup required · Results in under 2 minutes
+        Staff access · Verified company email required
       </p>
     </section>
   );
@@ -2525,7 +2525,7 @@ function TermsPage() {
 
 
 /* ─── MODERNIZATION SIMULATOR PAGE ──────────────────────── */
-function SimulatorPage() { return <EnterpriseSimulator />; }
+function SimulatorPage() { return <StaffWorkspace />; }
 
 
 function ConnectPage() {
