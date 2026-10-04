@@ -1168,10 +1168,10 @@ function Home() {
 }
 
 const corporateHeroSlides = [
-  { src: '/images/hero/slides/woman-leadership-v6.webp', alt: 'Confident businesswoman in a dark blazer smiling at the camera', position: '50% 45%' },
-  { src: '/images/hero/slides/man-office-v6.webp', alt: 'Smiling businessman in a suit in a bright professional office', position: '50% 55%' },
-  { src: '/images/hero/slides/woman-professional-v6.webp', alt: 'Black businesswoman in formal corporate attire facing the camera', position: '50% 45%' },
-  { src: '/images/hero/slides/man-professional-v6.webp', alt: 'Smiling businessman in a dark suit standing confidently in an office', position: '50% 45%' },
+  { src: '/images/hero/slides/fictional-professional-1-v7.webp', alt: 'Fictional businesswoman in a navy suit, fully visible from head to shoes', position: '50% 50%' },
+  { src: '/images/hero/slides/fictional-professional-2-v7.webp', alt: 'Fictional businessman in a navy suit, fully visible from head to shoes', position: '50% 50%' },
+  { src: '/images/hero/slides/fictional-professional-3-v7.webp', alt: 'Fictional businesswoman in a light gray suit, fully visible from head to shoes', position: '50% 50%' },
+  { src: '/images/hero/slides/fictional-professional-4-v7.webp', alt: 'Fictional businessman in a charcoal suit, fully visible from head to shoes', position: '50% 50%' },
 ];
 function Hero() {
   const [slide, setSlide] = useState(0);

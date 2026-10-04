@@ -1,0 +1,3 @@
+Fictional corporate portraits generated with the built-in image generation tool. Not photographs of actual people.
+Prompt set: two fictional women and two fictional men in corporate suits, fully inside a 3:4 portrait from head to shoes, confident warm smiles in bright modern offices. No logos, name badges or lettering. Generous margins; no cropping.
+Browser uses object-fit:contain so complete images remain visible on all screen sizes.
