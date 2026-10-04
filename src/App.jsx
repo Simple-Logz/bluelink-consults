@@ -622,15 +622,11 @@ function Footer() {
     <footer className="footer">
       <div>
         <strong>BlueLink Consults</strong>
-        <p>{isNigeriaSite ? "Technology assessment, application modernisation, cloud infrastructure, automation, release validation and operational support for Nigerian organisations." : "We fix old and slow applications — web development, cloud infrastructure, DevOps automation, data integration, and predeployment validation for growing organizations."}</p>
+        <p>{isNigeriaSite ? "Technology assessment, application modernisation, cloud infrastructure, automation, release validation and operational support for Nigerian organisations." : "Technology assessment, application modernization, cloud infrastructure, DevOps automation, pre-deployment validation and operational support for growing organizations."}</p>
       </div>
       <div>
-        {isNigeriaSite ? services.map(service => <Link key={service.slug} to={`/services/${service.slug}`}>{service.title}</Link>) : <>
-        <Link to="/services/web-development">Web Development</Link>
-        <Link to="/services/application-modernization">Application Modernization</Link>
-        <Link to="/services/cloud-infrastructure">Cloud Infrastructure</Link>
-        <Link to="/services/predeployment-validation">Predeployment Validation</Link>
-        </>}
+        <strong>Our Services</strong>
+        {nigeriaServices.map(service => <Link key={service.slug} to={`/services/${service.slug}`}>{service.title}</Link>)}
         {isNigeriaSite && <a href="/BlueLink-Company-Profile.pdf" download>Download Company Profile</a>}
         <Link to="/insights">Insights</Link>
         <Link to="/contact">Contact</Link>
@@ -1442,7 +1438,7 @@ function ServicesPage() {
 
 function ServiceDetail() {
   const { slug } = useParams();
-  const service = services.find((s) => s.slug === (isNigeriaSite && slug === "devops" ? "devops-automation" : slug)) || services[0];
+  const service = services.find((s) => s.slug === (isNigeriaSite && slug === "devops" ? "devops-automation" : slug)) || nigeriaServices.find((s) => s.slug === slug) || services[0];
   const Icon = service.icon;
   usePageTitle(service.title);
   return (
