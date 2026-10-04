@@ -104,3 +104,6 @@
 .es-app.es-technical .es-sidebar{top:180px}
 .es-app.es-technical .es-result-heading h3{scroll-margin-top:185px}
 @media(max-width:760px){.es-app.es-technical .es-result-heading h3{scroll-margin-top:110px}}
+
+/* Clip horizontal overflow without creating an ancestor scroll box for the sidebar. */
+#root:has(.es-app.es-technical){overflow-x:clip;overflow-y:visible}
