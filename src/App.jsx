@@ -1167,9 +1167,30 @@ function Home() {
   );
 }
 
+const heroPhotographs = [1, 2, 3, 4].map(number => `/images/hero/slides/fictional-professional-${number}-v7.webp`);
 function Hero() {
+  const [slide, setSlide] = useState(0);
+  const [paused, setPaused] = useState(false);
+  useEffect(() => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let timer;
+    const updateTimer = () => {
+      window.clearInterval(timer);
+      if (!paused && !reducedMotion.matches) {
+        timer = window.setInterval(() => {
+          if (!document.hidden) setSlide(current => (current + 1) % heroPhotographs.length);
+        }, 3000);
+      }
+    };
+    updateTimer();
+    reducedMotion.addEventListener("change", updateTimer);
+    return () => {
+      window.clearInterval(timer);
+      reducedMotion.removeEventListener("change", updateTimer);
+    };
+  }, [paused]);
   return (
-    <section className="bl-editorial-hero" aria-labelledby="homepage-heading">
+    <section className="bl-editorial-hero" aria-labelledby="homepage-heading" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
       <div className="bl-editorial-hero-inner">
         <div className="bl-editorial-hero-copy">
           <div className="bl-editorial-accent" aria-hidden="true" />
@@ -1178,7 +1199,9 @@ function Hero() {
           <Link className="bl-editorial-hero-cta" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link>
         </div>
         <div className="bl-editorial-hero-photo">
-          <img src="/images/hero/slides/fictional-professional-1-v7.webp" alt="Business professional in a modern office" fetchPriority="high" />
+          {heroPhotographs.map((src, index) => (
+            <img key={src} src={src} alt="" aria-hidden="true" className={slide === index ? "is-active" : ""} fetchPriority={index === 0 ? "high" : "low"} />
+          ))}
         </div>
       </div>
     </section>
