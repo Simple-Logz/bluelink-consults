@@ -62,9 +62,12 @@
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 48%);
 }
 .bl-editorial-hero-photo img {
+  position: absolute; inset: 0;
   width: 100%; height: 100%; display: block;
+  opacity: 0; transition: opacity 1.2s ease;
   object-fit: cover; object-position: 50% 22%; filter: grayscale(1);
 }
+.bl-editorial-hero-photo img.is-active { opacity: 1; }
 /* Keep navigation light; contact details remain available in the footer. */
 .bl-header-shell { font-family: Mulish, Arial, sans-serif; }
 .bl-header-shell .bl-header-utility { display: none; }
@@ -103,5 +106,5 @@
   .bl-header-shell .brand-wordmark small { font-size: .58rem !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .bl-editorial-hero-cta { transition: none; }
+  .bl-editorial-hero-cta, .bl-editorial-hero-photo img { transition: none; }
 }
