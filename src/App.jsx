@@ -1167,40 +1167,19 @@ function Home() {
   );
 }
 
-const corporateHeroSlides = [
-  { src: '/images/hero/slides/fictional-professional-1-v7.webp', alt: 'Fictional businesswoman in a navy suit, fully visible from head to shoes', position: '50% 50%' },
-  { src: '/images/hero/slides/fictional-professional-2-v7.webp', alt: 'Fictional businessman in a navy suit, fully visible from head to shoes', position: '50% 50%' },
-  { src: '/images/hero/slides/fictional-professional-3-v7.webp', alt: 'Fictional businesswoman in a light gray suit, fully visible from head to shoes', position: '50% 50%' },
-  { src: '/images/hero/slides/fictional-professional-4-v7.webp', alt: 'Fictional businessman in a charcoal suit, fully visible from head to shoes', position: '50% 50%' },
-];
 function Hero() {
-  const [slide, setSlide] = useState(0);
-  useEffect(() => {
-    const timer = window.setInterval(() => setSlide(current => (current + 1) % corporateHeroSlides.length), 3000);
-    return () => window.clearInterval(timer);
-  }, []);
   return (
-    <section className="tech-hero hero-clean">
-      <div className="hero-rings" aria-hidden="true">{[1,2,3,4,5,6].map(n => <span key={n} className={`ring ring-${n}`} />)}</div>
-      <motion.img src="/bluelink-logo-mark.png" alt="" className="hero-logo-fade" aria-hidden="true"
-        initial={{opacity:.22}} animate={{opacity:0}} transition={{duration:.45,delay:1,ease:"easeOut"}} />
-      <div className="hero-clean-layout">
-      <motion.div className="hero-clean-copy" initial={{opacity:0,y:22}} animate={{opacity:1,y:0}} transition={{duration:.8,delay:.35,ease:[.22,1,.36,1]}}>
-        <span className="hero-clean-kicker">Engage · Assess · Transform</span>
-        <div className="hero-heading-accent" aria-hidden="true" />
-        <h1>Technology built<br /><span>for your business.</span></h1>
-        <p>We assess what you have, modernize what matters, and engineer technology that performs reliably as your business grows.</p>
-        <div className="hero-clean-actions"><Link className="hero-dark-btn" to="/services">Explore BlueLink</Link><Link className="hero-light-btn" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link></div>
-      </motion.div>
-      <div className="hero-corporate-carousel" role="region" aria-label="Corporate photography">
-        <div className="hero-corporate-viewport">
-          <AnimatePresence initial={false}>
-            <motion.img key={slide} src={corporateHeroSlides[slide].src} alt={corporateHeroSlides[slide].alt} style={{objectPosition: corporateHeroSlides[slide].position}} initial={{x:'100%'}} animate={{x:0}} exit={{x:'-100%'}} transition={{duration:.65,ease:[.22,1,.36,1]}} />
-          </AnimatePresence>
+    <section className="bl-editorial-hero" aria-labelledby="homepage-heading">
+      <div className="bl-editorial-hero-inner">
+        <div className="bl-editorial-hero-copy">
+          <div className="bl-editorial-accent" aria-hidden="true" />
+          <h1 id="homepage-heading">Technology built<br />for your business.</h1>
+          <p>Assess your technology. Modernize with confidence.</p>
+          <Link className="bl-editorial-hero-cta" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link>
         </div>
-        <div className="hero-slide-controls"><div className="hero-slide-dots">{corporateHeroSlides.map((photo,index) => <button key={photo.src} type="button" aria-label={`Show corporate photo ${index+1}`} aria-pressed={slide===index} className={slide===index?'is-active':''} onClick={() => setSlide(index)} />)}</div></div>
-        <div hidden>{corporateHeroSlides.map(photo=><img key={photo.src} src={photo.src} alt="" />)}</div>
-      </div>
+        <div className="bl-editorial-hero-photo">
+          <img src="/images/hero/slides/fictional-professional-1-v7.webp" alt="Business professional in a modern office" fetchPriority="high" />
+        </div>
       </div>
     </section>
   );
