@@ -108,3 +108,38 @@
 @media (prefers-reduced-motion: reduce) {
   .bl-editorial-hero-cta, .bl-editorial-hero-photo img { transition: none; }
 }
+/* Photo-led service discovery, company introduction, audiences and insights. */
+.bl-home-organized{background:#fff}
+.bl-home-services{max-width:1320px;margin:auto;padding:88px 48px}
+.bl-home-section-heading{max-width:720px;margin-bottom:40px}
+.bl-home-section-heading>span,.bl-home-service-guide>span,.bl-home-contact>span{display:block;text-transform:uppercase;letter-spacing:.12em;font:700 12px/1.5 Mulish,Arial,sans-serif;color:#53687d;margin-bottom:12px}
+.bl-home-section-heading h2,.bl-home-contact h2{font:700 clamp(28px,3vw,42px)/1.2 Mulish,Arial,sans-serif;letter-spacing:-.025em;color:#10243b;margin:0 0 24px}
+.bl-home-service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.bl-home-service-card{position:relative;display:block;min-height:310px;overflow:hidden;background:#e7edf2}
+.bl-home-service-card img{display:block;width:100%;height:100%;position:absolute;inset:0;object-fit:cover;transition:transform .3s}
+.bl-home-service-card::after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 25%,rgba(5,20,38,.88))}
+.bl-home-service-card>div{position:absolute;z-index:1;bottom:24px;left:24px;right:24px;color:#fff}
+.bl-home-service-card h3{font:700 22px/1.3 Mulish,Arial,sans-serif;margin:0 0 12px}
+.bl-home-service-card span{display:flex;align-items:center;gap:10px;font:700 14px/1.5 Mulish,Arial,sans-serif}
+.bl-home-service-card:hover img{transform:scale(1.025)}
+.bl-home-organized a:focus-visible{outline:3px solid #075cff;outline-offset:4px}
+.bl-home-service-guide{grid-column:1/-1;background:#f1f4f6;border-radius:20px;padding:40px}
+.bl-home-service-guide h3{font:700 clamp(24px,2.5vw,32px)/1.25 Mulish,Arial,sans-serif;color:#10243b;margin:0 0 18px}
+.bl-home-service-guide p,.bl-home-about p{color:#65707b;line-height:1.7;max-width:620px}
+.bl-home-service-guide a,.bl-home-contact a{display:inline-flex;align-items:center;gap:12px;background:#075cff;color:#fff;padding:16px 24px;border-radius:10px;font:700 16px/1.5 Mulish,Arial,sans-serif;margin-top:14px}
+.bl-home-about{padding:80px 48px;background:#f2f5f7}
+.bl-home-about-inner{max-width:1224px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.bl-home-about-inner>img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:20px}
+.bl-home-about .bl-home-section-heading{margin:0}
+.bl-home-about a{display:inline-flex;align-items:center;gap:12px;color:#075cff;font-weight:700;margin-top:16px}
+.bl-home-organized .who-serve-strip{padding:80px 48px!important}
+.bl-home-organized .who-card{background:#f5f7f8;border-color:#e5eaef;box-shadow:none}
+.bl-home-organized .who-card:hover{background:#edf2f7;border-color:#075cff}
+.bl-home-organized .who-card .who-cta{color:#075cff}
+.bl-home-organized .editorial-showcase{background:#fff;padding-top:80px;padding-bottom:80px}
+.bl-home-organized .editorial-heading h2,.bl-home-organized .who-serve-strip h2{font-family:Mulish,Arial,sans-serif!important}
+.bl-home-contact{text-align:center;padding:80px 24px;background:#f2f5f7}
+.bl-home-contact h2{max-width:740px;margin:0 auto 24px}
+@media(max-width:900px){.bl-home-services{padding:64px 24px}.bl-home-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bl-home-about{padding:64px 24px}.bl-home-about-inner{grid-template-columns:1fr;gap:36px}}
+@media(max-width:600px){.bl-home-services{padding:48px 24px}.bl-home-section-heading{margin-bottom:28px}.bl-home-service-grid{grid-template-columns:1fr;gap:22px}.bl-home-service-card{min-height:340px}.bl-home-service-guide{padding:30px 24px}.bl-home-about{padding:48px 24px}.bl-home-organized .who-serve-strip{padding:48px 24px!important}.bl-home-organized .editorial-showcase{padding:48px 24px}.bl-home-contact{padding:56px 24px}}
+@media(prefers-reduced-motion:reduce){.bl-home-service-card img{transition:none}}
