@@ -1153,17 +1153,16 @@ function SimulatorTeaser() {
 
 function Home() {
   usePageTitle(null);
-  const photos = ["consultation-v5", "laptop-work-v5", "boardroom-v4", "teamwork-v5", "office-work-v4", "collaboration-v4"];
   return <div className="bl-home-organized">
     <Hero />
     <section className="bl-home-services" aria-labelledby="home-services-title">
-      <div className="bl-home-section-heading"><span>Our services</span><h2 id="home-services-title">Technology services built around you.</h2></div>
-      <div className="bl-home-service-grid">
-        {nigeriaServices.map((service, index) => <Link className="bl-home-service-card" key={service.slug} to={`/services/${service.slug}`}>
-          <img src={`/images/hero/slides/${photos[index]}.webp`} alt="" loading="lazy" width="600" height="480" />
-          <div><h3>{service.title}</h3><span>Explore service <ArrowRight size={18} aria-hidden="true" /></span></div>
-        </Link>)}
-        <div className="bl-home-service-guide"><span>Find your starting point</span><h3>Let’s help you choose the right next step.</h3><p>Tell us where your technology is holding you back. We’ll discuss which service fits your needs.</p><Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Talk to BlueLink <ArrowRight size={18} aria-hidden="true" /></Link></div>
+      <div className="bl-home-service-guide">
+        <div className="bl-home-section-heading" style={{ marginBottom: 0 }}>
+          <span>Our services</span>
+          <h2 id="home-services-title">Technology services built around you.</h2>
+          <p>Discover how BlueLink can help you assess, modernise and support the technology your business depends on.</p>
+          <Link to="/services">Explore Our Services <ArrowRight size={18} aria-hidden="true" /></Link>
+        </div>
       </div>
     </section>
     <section className="bl-home-about" aria-labelledby="home-about-title"><div className="bl-home-about-inner">
