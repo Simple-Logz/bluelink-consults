@@ -1194,9 +1194,19 @@ function Hero() {
       <div className="hero-actions"><Link className="bl-editorial-hero-cta" to="/contact#consultation">Discuss Your Project <ArrowRight size={18}/></Link><Link className="hero-secondary" to="/services">Explore Our Services <ArrowRight size={18}/></Link></div>
     </div>
     <div className={`bl-editorial-hero-photo technology-motion${motionPaused ? " is-paused" : ""}`}>
-      <div className="technology-motion-track">
+      <div className="technology-scene">
         <img src="/images/enterprise-technology.webp" alt="Illustration of connected applications, integration services, a database and business reporting" fetchPriority="high" width="2011" height="782" />
-        <img src="/images/enterprise-technology.webp" alt="" aria-hidden="true" width="2011" height="782" />
+        <svg className="technology-data-flow" viewBox="0 0 2011 782" aria-hidden="true" focusable="false">
+          <defs><filter id="data-glow"><feGaussianBlur stdDeviation="3" /></filter></defs>
+          <g fill="none" strokeLinecap="round">
+            <path className="data-pulse pulse-one" pathLength="100" d="M330 370 C390 372 405 410 482 410" />
+            <path className="data-pulse pulse-two" pathLength="100" d="M798 372 C865 378 891 423 945 420" />
+            <path className="data-pulse pulse-three" pathLength="100" d="M1170 419 C1220 423 1275 414 1338 390" />
+            <path className="data-pulse pulse-four" pathLength="100" d="M1544 390 C1600 380 1627 338 1671 336" />
+            <ellipse className="hub-highlight" cx="1055" cy="384" rx="88" ry="28" />
+            <path className="dashboard-highlight" d="M1744 345 L1785 326 L1825 337 L1869 290" />
+          </g>
+        </svg>
       </div>
       <button className="technology-motion-toggle" type="button" onClick={() => setMotionPaused(value => !value)} aria-label={motionPaused ? "Play technology animation" : "Pause technology animation"}>{motionPaused ? "Play" : "Pause"}</button>
     </div>
