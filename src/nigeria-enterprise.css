@@ -240,3 +240,28 @@ html[data-site="nigeria"] .ng-delivery .ng-link:hover { color:#ffd3ce!important;
 html[data-site="nigeria"] .ng-outcomes .ng-section-intro { max-width:870px; margin-bottom:26px; }
 html[data-site="nigeria"] .ng-enterprise-home :is(.ng-btn,.ng-industry-grid a,.ng-platform-grid span) { font-weight:700; }
 html[data-site="nigeria"] .ng-resource-card h3 { font-weight:700; letter-spacing:0; }
+/* Original isometric architecture motion, scoped to Nigeria. */
+html[data-site="nigeria"] .ng-architecture-layout { display:grid; grid-template-columns:.8fr 1.3fr; gap:34px; align-items:center; }
+html[data-site="nigeria"] .ng-outcomes { background:#fff; }
+html[data-site="nigeria"] .ng-architecture-copy .ng-section-intro { margin-bottom:24px; }
+html[data-site="nigeria"] .bl-architecture-motion { position:relative; min-width:0; background:radial-gradient(ellipse at 40% 55%,#f2f7fb 0,transparent 66%); }
+html[data-site="nigeria"] .bl-architecture-motion>svg { display:block; width:100%; height:auto; overflow:visible; }
+html[data-site="nigeria"] .architecture-label-title { font:600 16px 'Open Sans',Arial,sans-serif; fill:#10243b; }
+html[data-site="nigeria"] .architecture-label-caption { font:400 11px 'Open Sans',Arial,sans-serif; fill:#516479; }
+html[data-site="nigeria"] .architecture-label-number { font:700 11px 'Open Sans',Arial,sans-serif; fill:#b52220; letter-spacing:1px; }
+html[data-site="nigeria"] .architecture-stage { animation:bl-platform-float 8s ease-in-out infinite; }
+html[data-site="nigeria"] .architecture-stage-cloud { animation-delay:-6s; }
+html[data-site="nigeria"] .architecture-stage-security { animation-delay:-4s; }
+html[data-site="nigeria"] .architecture-stage-integration { animation-delay:-2s; }
+html[data-site="nigeria"] .architecture-flow { animation:bl-data-flow 4s linear infinite; }
+html[data-site="nigeria"] .architecture-server-light { animation:bl-server-signal 3s ease-in-out infinite; }
+html[data-site="nigeria"] .architecture-processor { animation:bl-processor-signal 4s ease-in-out infinite; }
+html[data-site="nigeria"] .architecture-motion-toggle { display:block; margin:0 14px 0 auto; padding:9px 0; background:none; border:0; border-bottom:1px solid #b9c6d2; color:#516479; font-size:12px; cursor:pointer; }
+html[data-site="nigeria"] .bl-architecture-motion.is-paused * { animation-play-state:paused!important; }
+html[data-site="nigeria"] #connected-architecture { scroll-margin-top:100px; }
+@keyframes bl-platform-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-7px); } }
+@keyframes bl-data-flow { to { stroke-dashoffset:-112; } }
+@keyframes bl-server-signal { 0%,100% { opacity:.35; } 50% { opacity:1; } }
+@keyframes bl-processor-signal { 0%,100% { opacity:.85; } 50% { opacity:1; filter:drop-shadow(0 0 7px #b5222066); } }
+@media(max-width:1023px) { html[data-site="nigeria"] .ng-architecture-layout { grid-template-columns:1fr; gap:24px; } html[data-site="nigeria"] .bl-architecture-motion { max-width:680px; width:100%; margin:auto; } }
+@media(prefers-reduced-motion:reduce) { html[data-site="nigeria"] .bl-architecture-motion * { animation:none!important; } html[data-site="nigeria"] .architecture-motion-toggle { display:none; } }
