@@ -76,12 +76,12 @@ html[data-site="nigeria"] .ng-footer-bottom>div { display:flex; gap:24px; }
 html[data-site="nigeria"] .bl-header-shell { box-shadow:none; border-bottom:1px solid var(--ng-line); }
 html[data-site="nigeria"] .bl-header-utility-inner { max-width:1228px; min-height:36px; padding:6px 24px; font-size:12px; }
 html[data-site="nigeria"] .bl-header-shell .site-header { max-width:1228px; height:82px!important; padding:0 24px!important; gap:20px; }
-html[data-site="nigeria"] .header-spacer { height:119px!important; }
+html[data-site="nigeria"] .header-spacer { height:83px!important; }
 html[data-site="nigeria"] .bl-header-shell .ng-primary { background:none; border-radius:0; padding:0; gap:22px; }
 html[data-site="nigeria"] .ng-primary :is(button,a) { font-size:14px; font-weight:750; color:var(--ng-ink); }
 html[data-site="nigeria"] .bl-header-demo { border:2px solid var(--ng-blue)!important; border-radius:0!important; padding:12px 20px!important; background:var(--ng-blue)!important; color:#fff!important; box-shadow:none!important; font-size:14px!important; }
 html[data-site="nigeria"] .bl-header-shell .ng-menu-toggle { border:1px solid var(--ng-line); border-radius:0; background:#fff; width:44px; height:44px; color:var(--ng-ink); }
-html[data-site="nigeria"] .ng-submenu { position:fixed; top:118px; left:50%; right:auto; transform:translateX(-50%); width:min(1180px,calc(100vw - 48px)); padding:24px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; border:1px solid var(--ng-line); border-radius:0; background:#fff; box-shadow:0 12px 24px #10243b14; }
+html[data-site="nigeria"] .ng-submenu { position:fixed; top:82px; left:50%; right:auto; transform:translateX(-50%); width:min(1180px,calc(100vw - 48px)); padding:24px; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; border:1px solid var(--ng-line); border-radius:0; background:#fff; box-shadow:0 12px 24px #10243b14; }
 html[data-site="nigeria"] .ng-submenu a { display:flex; align-items:flex-start; gap:14px; padding:18px; border:1px solid transparent; white-space:normal; }
 html[data-site="nigeria"] .ng-submenu a:hover { background:var(--ng-soft); border-color:var(--ng-line); }
 html[data-site="nigeria"] .ng-submenu a>svg { flex-shrink:0; color:var(--ng-blue); }
@@ -148,3 +148,7 @@ html[data-site="nigeria"] .ng-demo-banner { border-radius:0; background:var(--ng
  html[data-site="nigeria"] :is(.section,.about-section,.contact-section,.service-detail-section,.ng-story-layout,.ng-team-section,.bl-faq-list) { padding:40px 20px!important; }
  html[data-site="nigeria"] .eat-full-phase-card { padding:24px!important; }
 }
+
+html[data-site="nigeria"] :is(h1,h2,h3,h4) { font-family:inherit!important; }
+html[data-site="nigeria"] :is(a[class*="btn"],button[class*="btn"],.demo-booking-link,.contact-form button) { border-radius:0!important; }
+html[data-site="nigeria"] input[type="checkbox"] { min-height:0!important; width:16px!important; height:16px!important; padding:0!important; }
