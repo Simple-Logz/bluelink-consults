@@ -212,3 +212,4 @@ html[data-site="nigeria"] .ng-resources .ng-resource-card { border-top:3px solid
  html[data-site="nigeria"] .ng-services-media img { aspect-ratio:1.5; }
  html[data-site="nigeria"] .ng-services-copy .ng-btn { width:100%; }
 }
+html[data-site="nigeria"] .ng-services-media img { height:auto; }
