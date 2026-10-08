@@ -50,7 +50,7 @@ html[data-site="international"] .contact-copy h2 { color: #102d50; }
   .eat-full-phase-card { padding: 24px 20px !important; }
 }
 .footer-contact-numbers { display:flex; flex-wrap:wrap; gap:12px 24px; padding-bottom:20px; } .footer-contact-numbers a { color:inherit; font-size:14px; }
-.bl-editorial-hero-photo.technology-motion { position: relative; overflow: hidden; border-radius: 12px; background: white; pointer-events: auto; z-index: 0; }
+.bl-editorial-hero-photo.technology-motion { position: relative; inset: auto; overflow: hidden; border-radius: 12px; background: white; pointer-events: auto; z-index: 0; }
 .technology-motion-track { display: flex; width: 200%; animation: technology-flow-left 22s linear infinite; }
 .technology-motion-track img { width: 50%; flex: 0 0 50%; border-radius: 0; }
 .technology-motion.is-paused .technology-motion-track { animation-play-state: paused; }
