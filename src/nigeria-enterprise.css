@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap");
 /* Nigeria enterprise design system: shared geometry, accessible controls and aligned sections. */
 html[data-site="nigeria"] { --ng-blue:#1557c0; --ng-ink:#10243b; --ng-text:#34465b; --ng-line:#ccd6e1; --ng-soft:#f4f7fa; }
 html[data-site="nigeria"] body { background:#fff!important; color:var(--ng-text); }
@@ -224,3 +225,18 @@ html[data-site="nigeria"] .ng-resource-card:hover h3 { text-decoration:underline
 html[data-site="nigeria"] #featured-guides { scroll-margin-top:100px; }
 @media(max-width:1023px) { html[data-site="nigeria"] .ng-resource-grid { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:42px; } }
 @media(max-width:600px) { html[data-site="nigeria"] .ng-resource-grid { grid-template-columns:1fr; gap:38px; } html[data-site="nigeria"] .ng-resource-card h3 { margin-bottom:18px; font-size:19px; } }
+
+/* Restrained editorial typography and red accents; dark headlines remain distinct. */
+html[data-site="nigeria"] body { font-family:"Open Sans",Arial,sans-serif!important; }
+html[data-site="nigeria"] :is(button,input,select,textarea,h1,h2,h3,h4) { font-family:"Open Sans",Arial,sans-serif!important; }
+html[data-site="nigeria"] .ng-enterprise-home :is(h1,h2,h3) { font-weight:700; letter-spacing:-.015em; }
+html[data-site="nigeria"] .ng-enterprise-home .ng-kicker { color:#b52220!important; font-weight:700; letter-spacing:.07em; }
+html[data-site="nigeria"] .ng-enterprise-home .ng-link { color:#b52220!important; font-weight:700; }
+html[data-site="nigeria"] .ng-enterprise-home .ng-link svg { color:currentColor; }
+html[data-site="nigeria"] .ng-enterprise-home .ng-link:hover { color:#861815!important; }
+html[data-site="nigeria"] :is(.ng-delivery,.ng-enterprise-cta) .ng-kicker,
+html[data-site="nigeria"] .ng-delivery .ng-link { color:#ffaba3!important; }
+html[data-site="nigeria"] .ng-delivery .ng-link:hover { color:#ffd3ce!important; }
+html[data-site="nigeria"] .ng-outcomes .ng-section-intro { max-width:870px; margin-bottom:26px; }
+html[data-site="nigeria"] .ng-enterprise-home :is(.ng-btn,.ng-industry-grid a,.ng-platform-grid span) { font-weight:700; }
+html[data-site="nigeria"] .ng-resource-card h3 { font-weight:700; letter-spacing:0; }
