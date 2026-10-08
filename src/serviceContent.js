@@ -35,6 +35,11 @@ export const serviceContent = {
     tools: ['LytHouse release validation', 'Smoke and regression tests', 'Configuration and environment comparison', 'GitHub Actions, Azure DevOps or GitLab integration review', 'Release acceptance and rollback criteria'],
     outcomes: ['Documented release readiness checks', 'Visible failures and outstanding exceptions', 'Repeatable validation evidence', 'Traceable approval decisions'],
     deliverables: ['Validation scope and acceptance criteria', 'Configured checks and integration instructions', 'Release results and exception record', 'Approval and rollback checklist'],
+    plans: [
+      { name: 'Starter', price: 'Contact us', tagline: 'Discuss a focused validation scope for one delivery workflow.', features: ['Agreed core release checks', 'Pipeline compatibility assessment', 'Configuration review', 'Onboarding scope agreed'] },
+      { name: 'Team', price: 'Contact us', tagline: 'Discuss validation across your delivery team and environments.', features: ['Multi-environment validation scope', 'Release approval workflow review', 'Rollback criteria review', 'Support requirements agreed'] },
+      { name: 'Enterprise', price: 'Contact us', tagline: 'Define validation and governance for a complex release process.', features: ['Organization-specific validation scope', 'Integration and access assessment', 'Onboarding and governance review', 'Support terms agreed in contract'] },
+    ],
   },
   'devops-automation': {
     title: 'DevOps & CI/CD',

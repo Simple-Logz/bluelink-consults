@@ -44,7 +44,7 @@ export default function DemoRequestPage() {
         {!isNigeriaSite && <p>For application, cloud or DevOps consulting, <a href="/contact#consultation">book a consultation</a>.</p>}
         <div className="contact-details"><a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a><a href="tel:+14014402434">US: +1 401-440-2434</a><a href="tel:+2348068649496">Nigeria: +234 806 864 9496</a></div>
       </div>
-      {status === "sent" ? <div className="success-box" role="status"><CheckCircle2 size={40} /><h3>Demo request received</h3><p>Thank you. Choose an available time below to book your demo. If you have already booked, our team will use these details to prepare your session.</p><BookingButton /><br /><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><p><a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20Nigeria%20demo%20follow-up">Email our team</a></p><button onClick={() => setStatus("idle")}>Send another request</button></div> :
+      {status === "sent" ? <div className="success-box" role="status"><CheckCircle2 size={40} /><h3>Demo request received</h3><p>Thank you. Choose an available time below to book your demo. If you have already booked, our team will use these details to prepare your session.</p><BookingButton /><br /><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><p><a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20demo%20follow-up">Email our team</a></p><button onClick={() => setStatus("idle")}>Send another request</button></div> :
       <form className="contact-form" onSubmit={submit}>
         <input type="hidden" name="_subject" value="BlueLink demo request" />
         <input type="hidden" name="source" value="BlueLink / Request Demo" />
@@ -57,9 +57,9 @@ export default function DemoRequestPage() {
         <label>Preferred Date (optional)<input name="preferredDate" type="date" /></label>
         <small>We will confirm availability with you by email. Please do not include passwords or confidential system data.</small>
         <div className="demo-profile"><strong>Learn more about BlueLink Consults</strong><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><small>Optional background information about our services.</small></div>
-        {error && <p className="auth-message" role="alert">{error} <a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20Nigeria%20demo%20request">Email us instead</a></p>}
+        {error && <p className="auth-message" role="alert">{error} <a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20demo%20request">Email us instead</a></p>}
         <button type="submit" disabled={status === "sending"}>{status === "sending" ? "Sending…" : "Send Demo Request"} <Send size={18} /></button>
-        <small>By sending this request, you agree that we may contact you about your enquiry. <a href="/privacy-policy">Privacy policy</a></small>
+        <small>By sending this request, you agree that we may contact you about your inquiry. <a href="/privacy-policy">Privacy policy</a></small>
       </form>}
     </section>
   </>;

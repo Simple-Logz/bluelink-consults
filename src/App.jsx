@@ -454,7 +454,8 @@ function Header() {
   };
 
   const toggleMega = (name) => {
-    setMegaOpen((current) => current === name ? null : name);
+    // A mouse click follows mouse-enter; keep the hovered menu open.
+    setMegaOpen(name);
     setUtilityOpen(false);
   };
 
@@ -466,7 +467,7 @@ function Header() {
           <span className="brand-wordmark"><strong>Blue<span>Link</span></strong><small>Consults</small></span>
         </Link>
 
-        <nav className="qore-desktop-nav" aria-label="Primary navigation">
+        <nav className="qore-desktop-nav" aria-label="Primary navigation" onKeyDown={event => { if (event.key === "Escape") setMegaOpen(null); }} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setMegaOpen(null); }}>
           <div className="qore-nav-item"
             onMouseEnter={() => setMegaOpen("services")}
             onMouseLeave={() => setMegaOpen(null)}>
@@ -650,6 +651,7 @@ function Footer() {
         <Link to="/privacy-policy">Privacy Policy</Link>
         <Link to="/terms">Terms of Service</Link>
       </div>
+      <div className="footer-contact-numbers"><a href="tel:+14014402434">US: +1 401-440-2434</a><a href="tel:+2348068649496">Nigeria: +234 806 864 9496</a></div>
       <small>© 2026 BlueLink Consults. All rights reserved. · {isNigeriaSite ? "Nigeria" : "Providence, RI, USA"} · info@bluelinkconsults.com</small>
     </footer>
   );
@@ -2164,48 +2166,27 @@ function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState("");
-  const formLoadingRef = useRef(false);
-  const formTimeoutRef = useRef(null);
-
   const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID || "meedwzan"}`;
-  const iframeTargetName = "bluelink-contact-frame";
-
-  // Submits the form the plain HTML way — a real POST into a hidden iframe —
-  // instead of a JS fetch() call. This sidesteps the CORS / ad-blocker /
-  // browser-extension issues that can make fetch() report "network error"
-  // even though Formspree already received and emailed the submission.
-  function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
+    if (formLoading) return;
+    const form = event.currentTarget;
     setFormError("");
     setFormLoading(true);
-    formLoadingRef.current = true;
-    clearTimeout(formTimeoutRef.current);
-    formTimeoutRef.current = setTimeout(() => {
-      if (formLoadingRef.current) {
-        formLoadingRef.current = false;
-        setFormLoading(false);
-        setFormError("This is taking longer than expected. If you don't hear back from us, please email info@bluelinkconsults.com directly.");
-      }
-    }, 15000);
-  }
-
-  function handleFrameLoad() {
-    // Ignore the iframe's initial blank load on mount — only react once a
-    // real submission is in flight.
-    if (!formLoadingRef.current) return;
-    formLoadingRef.current = false;
-    clearTimeout(formTimeoutRef.current);
-    setFormLoading(false);
-    setSubmitted(true);
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+    try {
+      const response = await fetch(formspreeEndpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" }, signal: controller.signal });
+      const result = await response.json();
+      if (!response.ok || !result.ok) throw new Error("Submission not confirmed");
+      setSubmitted(true);
+    } catch {
+      setFormError("We could not confirm your submission. Please try again or email info@bluelinkconsults.com.");
+    } finally { clearTimeout(timeout); setFormLoading(false); }
   }
 
   return (
     <>
-      <iframe
-        name={iframeTargetName}
-        title="Form submission target"
-        style={{ display: "none" }}
-        onLoad={handleFrameLoad}
-      />
       {isWebDev ? (
         <PageHero label="Contact" title="Let's build your new website." text="Tell us a bit about your business and what you're hoping to launch." />
       ) : (
@@ -2236,7 +2217,6 @@ function ContactPage() {
             id="consultation-form"
             action={formspreeEndpoint}
             method="POST"
-            target={iframeTargetName}
             onSubmit={handleSubmit}
           >
             {formError && <div className="auth-message">{formError}</div>}
@@ -2271,7 +2251,6 @@ function ContactPage() {
             id="consultation-form"
             action={formspreeEndpoint}
             method="POST"
-            target={iframeTargetName}
             onSubmit={handleSubmit}
           >
             {formError && <div className="auth-message">{formError}</div>}
