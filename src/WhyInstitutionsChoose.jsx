@@ -3,17 +3,17 @@ import { Link } from "react-router-dom";
 import { Target, Layers, ShieldCheck, SlidersHorizontal, ClipboardCheck, ArrowRight } from "lucide-react";
 
 const reasons = [
-  {icon:Target,title:"Your institution comes first",text:"We start with your priorities, workflows and constraints before recommending technology."},
-  {icon:Layers,title:"One connected technology partner",text:"Assessment, modernization, cloud, automation, validation and operational support work together."},
-  {icon:ShieldCheck,title:"Risk considered before release",text:"We examine dependencies, security and deployment readiness to help protect critical operations."},
-  {icon:SlidersHorizontal,title:"Recommendations that fit",text:"Solutions are shaped around your existing systems, budget and growth plans."},
-  {icon:ClipboardCheck,title:"A clear path from assessment to delivery",text:"Our Engage, Assess and Transform framework keeps priorities, responsibilities and next steps clear."},
+  {icon:Target,title:"An agreed scope before implementation",text:"Your business workflows, constraints and success measures define the work."},
+  {icon:Layers,title:"Connected architecture and delivery",text:"Application, data, infrastructure and release decisions are reviewed together so dependencies remain visible."},
+  {icon:ShieldCheck,title:"Evidence before release",text:"Agreed security, integration and rollback checks support an informed approval decision."},
+  {icon:SlidersHorizontal,title:"Explicit technical trade-offs",text:"Recommendations explain their cost assumptions, operating requirements and implementation risks."},
+  {icon:ClipboardCheck,title:"A documented operational handover",text:"Runbooks, ownership and knowledge transfer help your team operate the delivered solution."},
 ];
 
 export default function WhyInstitutionsChoose({ embedded = false }) {
-  useEffect(() => { if (!embedded) document.title = "Why Institutions Choose BlueLink | BlueLink Consults"; }, [embedded]);
+  useEffect(() => { if (!embedded) document.title = "Why BlueLink Consults | BlueLink Consults"; }, [embedded]);
   const Heading = embedded ? "h2" : "h1";
-  return <section className="bl-why" aria-labelledby={embedded ? "bl-why-home-title" : "bl-why-page-title"}>
+  return <><section className="bl-why" aria-labelledby={embedded ? "bl-why-home-title" : "bl-why-page-title"}>
     <style>{`
       .bl-why{background:#0b2236;color:#fff;padding:56px 32px}
       .bl-why-inner{max-width:1240px;margin:auto;display:grid;grid-template-columns:1.08fr 1fr;gap:40px;align-items:center}
@@ -33,12 +33,12 @@ export default function WhyInstitutionsChoose({ embedded = false }) {
     `}</style>
     <div className="bl-why-inner">
       <div>
-        <span className="bl-why-kicker">Built around your institution</span>
-        <Heading id={embedded ? "bl-why-home-title" : "bl-why-page-title"}>Why Institutions Choose BlueLink</Heading>
+        <span className="bl-why-kicker">What to expect from an engagement</span>
+        <Heading id={embedded ? "bl-why-home-title" : "bl-why-page-title"}>Why BlueLink Consults</Heading>
         <ul>{reasons.map(({icon:Icon,title,text})=><li key={title}><Icon size={23} aria-hidden="true"/><div><strong>{title}</strong><p>{text}</p></div></li>)}</ul>
-        <Link className="bl-why-cta" to="/request-demo">Discuss your institution’s needs <ArrowRight size={18}/></Link>
+        <Link className="bl-why-cta" to="/contact#consultation">Discuss your project <ArrowRight size={18}/></Link>
       </div>
       <figure className="bl-why-photo"><img src="/images/bluelink-boardroom.png" alt="Illustrative image of Black business professionals discussing plans in a bright modern boardroom" loading={embedded ? "lazy" : "eager"} width="1536" height="1024"/></figure>
     </div>
-  </section>;
+  </section>{!embedded && <section className="reviewable-deliverables"><div><h2>What you can review before committing</h2><p>Ask to see the proposed scope, acceptance criteria and handover requirements. The examples below illustrate the documents to agree for your project; they are not client results.</p><div className="evidence-grid"><article><h3>Architecture and migration plan</h3><p>Service dependencies, API contracts, data ownership and staged migration decisions—for example, extracting order tracking while billing remains in the existing application.</p></article><article><h3>Release evidence</h3><p>The deployed version, test results, failed checks, approved exceptions and rollback criteria, with a named release decision owner.</p></article><article><h3>Operating handover</h3><p>Monitoring signals, alert thresholds, escalation contacts, recovery steps and the responsibilities your team accepts after delivery.</p></article></div><p className="scope-note">The deliverables and level of detail depend on the agreed engagement scope.</p></div></section>}</>;
 }

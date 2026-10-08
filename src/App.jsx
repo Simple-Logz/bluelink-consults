@@ -1,3 +1,4 @@
+import { serviceContent } from "./serviceContent";
 import StaffWorkspace from "./StaffWorkspace";
 import WhyInstitutionsChoose from "./WhyInstitutionsChoose";
 import React, { createContext, useContext, useEffect, useRef, useState } from "react";
@@ -6,6 +7,7 @@ import {
   Route,
   Link,
   NavLink,
+  Navigate,
   useLocation,
   useParams,
 } from "react-router-dom";
@@ -62,7 +64,7 @@ const globalServices = [
     icon: Code2,
     summary: "Fast, professional websites and web applications that represent your business the way it deserves.",
     image: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=2000&auto=format&fit=crop",
-    body: "Your website is often the first impression a prospective client has of your business — and an outdated, slow, or clunky site undermines the credibility you've worked hard to build. BlueLink Consult designs and builds modern, responsive websites and web applications: marketing sites, client portals, booking and intake tools, and custom internal platforms. We focus on speed, clarity, and conversion, backed by clean, maintainable code that your team can build on for years.",
+    body: "Your website is often the first impression a prospective client has of your business — and an outdated, slow, or clunky site undermines the credibility you've worked hard to build. BlueLink Consults designs and builds modern, responsive websites and web applications: marketing sites, client portals, booking and intake tools, and custom internal platforms. We focus on speed, clarity, and conversion, backed by clean, maintainable code that your team can build on for years.",
     tools: [
       "React, Next.js, and modern frontend frameworks",
       "Responsive, mobile-first design systems",
@@ -93,7 +95,7 @@ const globalServices = [
     icon: ServerCog,
     summary: "Transform outdated business applications into secure, scalable, cloud-ready platforms.",
     image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop",
-    body: "BlueLink Consult helps organizations move legacy applications away from fragile, outdated, difficult-to-maintain systems into modern, secure, scalable platforms. We assess your current application, identify business and technical risks, redesign the user experience, modernize APIs, improve performance, and create a practical path toward cloud-ready architecture.",
+    body: "BlueLink Consults helps organizations move legacy applications away from fragile, outdated, difficult-to-maintain systems into modern, secure, scalable platforms. We assess your current application, identify business and technical risks, redesign the user experience, modernize APIs, improve performance, and create a practical path toward cloud-ready architecture.",
     tools: [
       "React / Angular / modern frontend frameworks",
       "Node.js, .NET, Python, or Java APIs",
@@ -155,9 +157,9 @@ const globalServices = [
     slug: "predeployment-validation",
     title: "Predeployment Validation",
     icon: FlaskConical,
-    summary: "LytHouse, our own release-validation product, catches issues before they reach production — built by BlueLink Consult and used on every engagement we deliver.",
+    summary: "LytHouse, our own release-validation product, catches issues before they reach production — built by BlueLink Consults and used on every engagement we deliver.",
     image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=2000&auto=format&fit=crop",
-    body: "LytHouse is a predeployment validation product built by BlueLink Consult from the ground up. We built it because we needed it: on every consulting engagement we deliver, LytHouse is the tool our own team uses to validate a release before it ships — checking configuration, environment parity, dependencies, and core workflows, and giving a clear go/no-go signal instead of a guess. We now offer LytHouse directly to the market as a standalone product, so your team can get the same release confidence we build into our own delivery work.",
+    body: "LytHouse is a predeployment validation product built by BlueLink Consults from the ground up. We built it because we needed it: on every consulting engagement we deliver, LytHouse is the tool our own team uses to validate a release before it ships — checking configuration, environment parity, dependencies, and core workflows, and giving a clear go/no-go signal instead of a guess. We now offer LytHouse directly to the market as a standalone product, so your team can get the same release confidence we build into our own delivery work.",
     tools: [
       "LytHouse — BlueLink's own predeployment validation engine",
       "Automated smoke and regression checks",
@@ -213,11 +215,11 @@ const nigeriaServices = [
     tools: ["Architecture and dependency review", "Configuration and access-control assessment", "Resource utilisation and cost analysis"],
     outcomes: ["Evidence-based findings report", "Risk register with priorities", "Phased improvement roadmap"],
     blueLinkHelp: ["Agree the assessment scope and evidence required.", "Review systems and validate findings with your team.", "Assign priorities, owners and recommended next steps."] },
-  { slug: "application-modernization", title: "Application Modernisation", icon: ServerCog,
-    summary: "Improve fragile applications, slow transactions and disconnected systems with a clear modernisation plan.",
+  { slug: "application-modernization", title: "Application Modernization", icon: ServerCog,
+    summary: "Improve fragile applications, slow transactions and disconnected systems with a clear modernization plan.",
     body: "We review code structure, APIs, database dependencies, performance and maintainability, then select the right approach: refactoring, replatforming, rebuilding or integrating. Delivery is phased to support business continuity.",
     tools: ["Code and database dependency analysis", "API and integration design", "Performance and regression testing"],
-    outcomes: ["Target application architecture", "Modernised application components", "Documented test results and handover"],
+    outcomes: ["Target application architecture", "Modernized application components", "Documented test results and handover"],
     blueLinkHelp: ["Identify technical debt and business-critical workflows.", "Agree a target architecture and delivery plan.", "Implement and test changes in manageable phases."] },
   { slug: "cloud-infrastructure", title: "Cloud Infrastructure", icon: Cloud,
     summary: "Build secure, scalable public, private or hybrid infrastructure with recovery built into the design.",
@@ -244,7 +246,12 @@ const nigeriaServices = [
     outcomes: ["Monitoring and alert configurations", "Operational response runbooks", "Incident reports and improvement actions"],
     blueLinkHelp: ["Identify critical services and monitoring gaps.", "Configure actionable alerts and response procedures.", "Investigate incidents and track corrective actions."] },
 ].map(service => ({ ...service, image: globalServices.find(item => item.slug === service.slug)?.image || globalServices[2].image }));
-const services = isNigeriaSite ? nigeriaServices : globalServices;
+const internationalServices = [
+  ...globalServices,
+  ...nigeriaServices.filter(service => !globalServices.some(item => item.slug === service.slug)),
+].map(service => ({ ...service, ...serviceContent[service.slug] }));
+const services = isNigeriaSite ? nigeriaServices : internationalServices;
+const serviceAliases = { 'devops': 'devops-automation', 'pre-deployment-validation': 'predeployment-validation', 'application-modernisation': 'application-modernization' };
 
 const industries = [
   {
@@ -311,7 +318,7 @@ function normalizeInsight(item) {
     content: item.content || item.text || "",
     minutes: item.read_time || item.minutes || "5 min read",
     image_url: item.image_url || "",
-    author: item.author || "BlueLink Consult",
+    author: item.author || "BlueLink Consults",
     created_at: item.created_at,
   };
 }
@@ -369,8 +376,8 @@ function buildSiteSearchIndex(currentInsights = fallbackInsights) {
       keywords: [i.title, i.category, i.text, i.content || "", i.minutes].join(" "),
     })),
     { title: "Solutions", category: "Page", path: "/solutions", description: "Solutions for growing organizations.", keywords: industries.map(i => i.name).join(" ") },
-    { title: "About BlueLink Consult", category: "Page", path: "/about", description: "Learn about BlueLink Consult.", keywords: "about company modernization consultancy cloud infrastructure devops security" },
-    { title: "Contact BlueLink Consult", category: "Page", path: "/contact", description: "Contact BlueLink Consult.", keywords: "contact consultation modernization review phone email inquiry" },
+    { title: "About BlueLink Consults", category: "Page", path: "/about", description: "Learn about BlueLink Consults.", keywords: "about company modernization consultancy cloud infrastructure devops security" },
+    { title: "Contact BlueLink Consults", category: "Page", path: "/contact", description: "Contact BlueLink Consults.", keywords: "contact consultation modernization review phone email inquiry" },
     { title: "Client Portal", category: "Portal", path: "/client-login", description: "Secure client login.", keywords: "client login portal dashboard documents support requests" },
   ];
 }
@@ -392,8 +399,8 @@ function useIsDesktop() {
 function usePageTitle(title) {
   useEffect(() => {
     document.title = title
-      ? `${title} | BlueLink Consult`
-      : "BlueLink Consults — We Fix Old & Slow Applications";
+      ? `${title} | BlueLink Consults`
+      : "BlueLink Consults | Application Modernization, Cloud & DevOps";
   }, [title]);
 }
 
@@ -470,7 +477,7 @@ function Header() {
               <div className="qore-mega-intro">
                 <span className="qore-menu-kicker">What we do</span>
                 <h3>Technology built around your business.</h3>
-                <p>Assess, modernise and operate critical technology with a practical delivery partner.</p>
+                <p>Assess, modernize and operate critical technology with a practical delivery partner.</p>
                 <Link to="/contact" onClick={close}>Talk to BlueLink <ArrowRight size={15}/></Link>
               </div>
               <div className="qore-mega-links">
@@ -492,7 +499,7 @@ function Header() {
               <div className="qore-mega-intro">
                 <span className="qore-menu-kicker">How we engage</span>
                 <h3>From assessment to transformation.</h3>
-                <p>Structured engagements for organisations that need clarity, modernisation and reliable delivery.</p>
+                <p>Structured engagements for organizations that need clarity, modernization and reliable delivery.</p>
               </div>
               <div className="qore-mega-links">
                 <Link to="/solutions/who-we-help" onClick={close}><span className="qore-menu-icon"><Building2 size={18}/></span><span><strong>Who We Help</strong><small>Solutions shaped around operating realities.</small></span><ArrowRight size={15}/></Link>
@@ -511,7 +518,7 @@ function Header() {
               <div className="qore-mega-intro">
                 <span className="qore-menu-kicker">Thinking</span>
                 <h3>Practical technology insight.</h3>
-                <p>Guidance for leaders making infrastructure, modernisation and delivery decisions.</p>
+                <p>Guidance for leaders making infrastructure, modernization and delivery decisions.</p>
               </div>
               <div className="qore-mega-links">
                 {cmsInsights.slice(0,4).map((i)=><Link key={i.slug} to={`/insights/${i.slug}`} onClick={close}><span className="qore-menu-icon"><FileText size={18}/></span><span><strong>{i.title}</strong><small>{i.category} · {i.minutes}</small></span><ArrowRight size={15}/></Link>)}
@@ -538,7 +545,7 @@ function Header() {
         </nav>
 
         <div className="qore-header-actions">
-          <Link className="qore-demo-btn" to="/request-demo">Request Demo <ArrowRight size={15}/></Link>
+          <Link className="qore-demo-btn" to="/contact#consultation">Book a Consultation <ArrowRight size={15}/></Link>
           <div className="qore-utility-wrap" ref={utilityRef}>
             <button className="qore-menu-btn" onClick={() => setUtilityOpen(v=>!v)} aria-label="Open quick links" aria-expanded={utilityOpen}><Menu size={21}/></button>
             <div className={utilityOpen ? "qore-utility show" : "qore-utility"}>
@@ -566,7 +573,7 @@ function Header() {
             <div className="qore-mobile-actions">
               <Link to="/simulator" onClick={close}>Staff Workspace</Link>
               <Link to="/client-login" onClick={close}>Client Login</Link>
-              <Link className="primary" to="/request-demo" onClick={close}>Request Demo <ArrowRight size={15}/></Link>
+              <Link className="primary" to="/contact#consultation" onClick={close}>Book a Consultation <ArrowRight size={15}/></Link>
             </div>
           </motion.div>
         )}
@@ -630,12 +637,12 @@ function Footer() {
     <footer className="footer">
       <div>
         <strong>BlueLink Consults</strong>
-        <p>{isNigeriaSite ? "Technology assessment, application modernisation, cloud infrastructure, automation, release validation and operational support for Nigerian organisations." : "Technology assessment, application modernization, cloud infrastructure, DevOps automation, pre-deployment validation and operational support for growing organizations."}</p>
+        <p>{isNigeriaSite ? "Technology assessment, application modernization, cloud infrastructure, automation, release validation and operational support for Nigerian organizations." : "Technology assessment, application modernization, cloud infrastructure, DevOps automation, pre-deployment validation and operational support for growing organizations."}</p>
         <div className="footer-socials" aria-label="Follow BlueLink"><strong>Follow BlueLink</strong><div><a href="https://www.facebook.com/share/19XEu6zf1n/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><Facebook size={19} aria-hidden="true" />Facebook</a><a href="https://www.instagram.com/bluelinkconsults" target="_blank" rel="noopener noreferrer"><Instagram size={19} aria-hidden="true" />Instagram</a></div></div>
       </div>
       <div>
         <strong>Our Services</strong>
-        {nigeriaServices.map(service => <Link key={service.slug} to={`/services/${service.slug}`}>{service.title}</Link>)}
+        {services.map(service => <Link key={service.slug} to={`/services/${service.slug}`}>{service.title}</Link>)}
         {isNigeriaSite && <a href="/BlueLink-Company-Profile.pdf" download>Download Company Profile</a>}
         <Link to="/events">Events &amp; Activities</Link>
         <Link to="/insights">Insights</Link>
@@ -1050,7 +1057,7 @@ function ServiceNetwork() {
   }, []);
   const nodes = [
     { icon: Search, title:"Technology Audit", status:"Assessing environment", slug:"technology-audit-assessment", cls:"sn-a", value:"Understand risk, gaps and priorities before you invest." },
-    { icon: ServerCog, title:"App Modernization", status:"Modernizing systems", slug:"application-modernisation", cls:"sn-b", value:"Modernize legacy applications without losing business continuity." },
+    { icon: ServerCog, title:"App Modernization", status:"Modernizing systems", slug:"application-modernization", cls:"sn-b", value:"Modernize legacy applications without losing business continuity." },
     { icon: Cloud, title:"Cloud Infrastructure", status:"Engineering platform", slug:"cloud-infrastructure", cls:"sn-c", value:"Build secure, scalable infrastructure around real workload needs." },
     { icon: Workflow, title:"DevOps & Automation", status:"Automating delivery", slug:"devops-automation", cls:"sn-d", value:"Reduce manual delivery work and make releases repeatable." },
     { icon: ShieldCheck, title:"Pre-deployment", status:"Validating release", slug:"pre-deployment-validation", cls:"sn-e", value:"Find deployment risks before they reach production." },
@@ -1073,7 +1080,7 @@ function ServiceNetwork() {
       <div className="service-network-copy"><span>Connected technology services</span><h2>One partner. Six connected capabilities.</h2><p>Select a capability to see how it creates value, then explore the service in detail.</p></div>
       <div ref={stageRef} className={active ? "network-stage has-active" : "network-stage"}>
         <svg className="network-lines" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
-          <path className={activeService==="technology-audit-assessment"?"line-a active":"line-a"} d="M600 405 C470 405 485 120 315 120"/><path className={activeService==="application-modernisation"?"line-b active":"line-b"} d="M600 405 C730 405 715 120 885 120"/>
+          <path className={activeService==="technology-audit-assessment"?"line-a active":"line-a"} d="M600 405 C470 405 485 120 315 120"/><path className={activeService==="application-modernization"?"line-b active":"line-b"} d="M600 405 C730 405 715 120 885 120"/>
           <path className={activeService==="cloud-infrastructure"?"line-c active":"line-c"} d="M600 405 C450 405 450 290 250 290"/><path className={activeService==="devops-automation"?"line-d active":"line-d"} d="M600 405 C750 405 750 290 950 290"/>
           <path className={activeService==="pre-deployment-validation"?"line-e active":"line-e"} d={`M600 405 C470 405 ${coreConnection.left} ${coreConnection.y - 70} ${coreConnection.left} ${coreConnection.y}`}/><path className={activeService==="operational-incident-support"?"line-f active":"line-f"} d={`M600 405 C730 405 ${coreConnection.right} ${coreConnection.y - 70} ${coreConnection.right} ${coreConnection.y}`}/>
           <circle className="pulse p1" cx="600" cy="405" r="5"/>
@@ -1160,14 +1167,14 @@ function Home() {
         <div className="bl-home-section-heading" style={{ marginBottom: 0 }}>
           <span>Our services</span>
           <h2 id="home-services-title">Technology services built around you.</h2>
-          <p>Discover how BlueLink can help you assess, modernise and support the technology your business depends on.</p>
+          <p>Discover how BlueLink can help you assess, modernize and support the technology your business depends on.</p>
           <Link to="/services">Explore Our Services <ArrowRight size={18} aria-hidden="true" /></Link>
         </div>
       </div>
     </section>
     <section className="bl-home-about" aria-labelledby="home-about-title"><div className="bl-home-about-inner">
       <img src="/images/bluelink-boardroom.png" alt="Illustrative boardroom discussion" loading="lazy" width="1536" height="1024" />
-      <div className="bl-home-section-heading"><span>About BlueLink Consults</span><h2 id="home-about-title">A clear path to better technology.</h2><p>We help organisations understand what they have, improve what matters and support the systems their business depends on.</p><p>Engage. Assess. Transform. Our approach connects business priorities with practical technology decisions.</p><Link to="/about/why-bluelink">Why choose BlueLink <ArrowRight size={18} aria-hidden="true" /></Link></div>
+      <div className="bl-home-section-heading"><span>About BlueLink Consults</span><h2 id="home-about-title">A clear path to better technology.</h2><p>We help organizations understand what they have, improve what matters and support the systems their business depends on.</p><p>Engage. Assess. Transform. Our approach connects business priorities with practical technology decisions.</p><Link to="/about/why-bluelink">Why choose BlueLink <ArrowRight size={18} aria-hidden="true" /></Link></div>
     </div></section>
     <WhoWeServeStrip /><EditorialShowcase />
     <section className="bl-home-contact"><span>Let’s work together</span><h2>What would you like your technology to do better?</h2><Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"} <ArrowRight size={18} aria-hidden="true" /></Link></section>
@@ -1176,43 +1183,15 @@ function Home() {
 
 const heroPhotographs = [1, 2, 3, 4].map(number => `/images/hero/slides/fictional-professional-${number}-v7.webp`);
 function Hero() {
-  const [slide, setSlide] = useState(0);
-  const [paused, setPaused] = useState(false);
-  useEffect(() => {
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let timer;
-    const updateTimer = () => {
-      window.clearInterval(timer);
-      if (!paused && !reducedMotion.matches) {
-        timer = window.setInterval(() => {
-          if (!document.hidden) setSlide(current => (current + 1) % heroPhotographs.length);
-        }, 3000);
-      }
-    };
-    updateTimer();
-    reducedMotion.addEventListener("change", updateTimer);
-    return () => {
-      window.clearInterval(timer);
-      reducedMotion.removeEventListener("change", updateTimer);
-    };
-  }, [paused]);
-  return (
-    <section className="bl-editorial-hero" aria-labelledby="homepage-heading" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)} onFocusCapture={() => setPaused(true)} onBlurCapture={event => { if (!event.currentTarget.contains(event.relatedTarget)) setPaused(false); }}>
-      <div className="bl-editorial-hero-inner">
-        <div className="bl-editorial-hero-copy">
-          <div className="bl-editorial-accent" aria-hidden="true" />
-          <h1 id="homepage-heading">Technology built<br />for your business.</h1>
-          <p>Assess your technology. Modernize with confidence.</p>
-          <Link className="bl-editorial-hero-cta" to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>{isNigeriaSite ? "Request Demo" : "Contact Us"}</Link>
-        </div>
-        <div className="bl-editorial-hero-photo">
-          {heroPhotographs.map((src, index) => (
-            <img key={src} src={src} alt="" aria-hidden="true" className={slide === index ? "is-active" : ""} fetchPriority={index === 0 ? "high" : "low"} />
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <section className="bl-editorial-hero"><div className="bl-editorial-hero-inner">
+    <div className="bl-editorial-hero-copy"><div className="bl-editorial-accent" />
+      <p className="hero-kicker">APPLICATIONS · CLOUD · SOFTWARE DELIVERY</p>
+      <h1>Modernize your applications.<br/>Improve how your business runs.</h1>
+      <p>BlueLink Consults helps organizations upgrade legacy applications, connect business systems, build cloud infrastructure and automate software delivery—with security and release validation built into the work.</p>
+      <div className="hero-actions"><Link className="bl-editorial-hero-cta" to="/contact#consultation">Discuss Your Project <ArrowRight size={18}/></Link><Link className="hero-secondary" to="/services">Explore Our Services <ArrowRight size={18}/></Link></div>
+    </div>
+    <div className="bl-editorial-hero-photo"><img src="/images/enterprise-technology.webp" alt="Illustration of connected applications, integration services, a database and business reporting" fetchPriority="high" width="2011" height="782" /></div>
+  </div></section>;
 }
 
 function EditorialShowcase() {
@@ -1220,27 +1199,27 @@ function EditorialShowcase() {
     {
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1600&auto=format&fit=crop",
       eyebrow: "The EAT Framework",
-      title: "Modernization starts with understanding what the business cannot afford to break.",
+      title: "A modernization plan your business and engineering teams can review.",
       text: "A practical path from legacy constraints to secure, maintainable applications.",
       to: "/solutions/eat-framework",
     },
     {
       image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=900&auto=format&fit=crop",
       eyebrow: "Cloud",
-      title: "Build cloud infrastructure around operations, not fashion.",
+      title: "Cloud infrastructure with clear costs and tested recovery.",
       to: "/services/cloud-infrastructure",
     },
     {
       image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=900&auto=format&fit=crop",
       eyebrow: "Automation",
-      title: "Release faster without making production the test environment.",
+      title: "Automate builds, tests and deployments.",
       to: "/services/devops-automation",
     },
     {
       image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=900&auto=format&fit=crop",
       eyebrow: "Validation",
-      title: "Know what is ready before deployment day.",
-      to: "/services/pre-deployment-validation",
+      title: "Validate your release before production.",
+      to: "/services/predeployment-validation",
     },
   ];
   const lead=stories[0];
@@ -1282,7 +1261,7 @@ function HomeValueProps() {
       <div className="section-heading narrow">
         <p className="eyebrow">What We Do</p>
         <h2>End-to-end modernization for growing organizations</h2>
-        <p>From new websites to aging applications, cloud infrastructure, DevOps, data, and predeployment validation — BlueLink Consult helps you build a technology foundation that supports long-term growth.</p>
+        <p>From new websites to aging applications, cloud infrastructure, DevOps, data, and predeployment validation — BlueLink Consults helps you build a technology foundation that supports long-term growth.</p>
         <Link to="/services" style={{ display:"inline-flex", alignItems:"center", gap:8, background:"var(--bronze)", color:"white", padding:"12px 22px", fontWeight:800, marginTop:16, textDecoration:"none" }}>
           Explore All Services <ArrowRight size={17} />
         </Link>
@@ -1310,7 +1289,7 @@ function EATPreview() {
       <div className="eat-preview-inner">
         <p className="eyebrow" style={{ color:"var(--bronze)" }}>Our Delivery Framework</p>
         <h2>We don't just deploy solutions — we <em>EAT</em> through complexity.</h2>
-        <p>Every engagement BlueLink Consult delivers follows our structured EAT framework — a proven three-phase approach that ensures we deeply understand your business before recommending any technology change.</p>
+        <p>Every engagement BlueLink Consults delivers follows our structured EAT framework — a three-phase approach that defines priorities, assesses technical constraints and delivers changes against agreed acceptance criteria.</p>
         <div className="eat-phases">
           <div className="eat-phase engage">
             <span className="eat-letter">E</span>
@@ -1373,7 +1352,7 @@ function SolutionsPreview() {
       <div className="section-heading narrow">
         <p className="eyebrow">Who We Help</p>
         <h2>Modern digital foundations for growing companies and institutions</h2>
-        <p>Whether your business is struggling with outdated systems, manual processes, weak security, or unreliable infrastructure, BlueLink Consult helps define a practical path forward.</p>
+        <p>Whether your business is struggling with outdated systems, manual processes, weak security, or unreliable infrastructure, BlueLink Consults helps define a practical path forward.</p>
       </div>
       <div className="solution-list">
         {industries.map((industry) => (
@@ -1449,7 +1428,7 @@ function ServicesPage() {
   usePageTitle("Services");
   return (
     <>
-      <PageHero label="Services" title="Explore BlueLink Consult services." text={isNigeriaSite ? "Six services to assess, modernise, deploy and support your technology." : "We help organizations improve the full technical foundation: websites, applications, cloud infrastructure, DevOps, data, and predeployment validation."} />
+      <PageHero label="Services" title="Explore BlueLink Consults services." text={isNigeriaSite ? "Six services to assess, modernize, deploy and support your technology." : "We help organizations improve the full technical foundation: websites, applications, cloud infrastructure, DevOps, data, and predeployment validation."} />
       <ServicesPreview />
     </>
   );
@@ -1457,9 +1436,12 @@ function ServicesPage() {
 
 function ServiceDetail() {
   const { slug } = useParams();
-  const service = services.find((s) => s.slug === (isNigeriaSite && slug === "devops" ? "devops-automation" : slug)) || nigeriaServices.find((s) => s.slug === slug) || services[0];
+  const canonicalSlug = serviceAliases[slug] || slug;
+  const service = services.find(item => item.slug === canonicalSlug);
+  usePageTitle(service?.title || "Service not found");
+  if (canonicalSlug !== slug) return <Navigate replace to={`/services/${canonicalSlug}`} />;
+  if (!service) return <><PageHero label="404" title="Service not found." text="This service address does not exist. Explore our services or contact us to discuss your project." /><section className="section"><Link to="/services">Explore our services <ArrowRight size={18}/></Link></section></>;
   const Icon = service.icon;
-  usePageTitle(service.title);
   return (
     <>
       <section className="service-hero">
@@ -1477,7 +1459,7 @@ function ServiceDetail() {
           <p>{service.body}</p>
           <div className="detail-grid">
             <div className="detail-card">
-              <h3>Key outcomes to expect:</h3>
+              <h3>What the work supports</h3>
               <div className="detail-list">
                 {service.outcomes.map((item) => (
                   <span key={item}><CheckCircle2 size={17} /> {item}</span>
@@ -1485,7 +1467,7 @@ function ServiceDetail() {
               </div>
             </div>
             <div className="detail-card">
-              <h3>Tools and platforms commonly used:</h3>
+              <h3>Tools selected for your environment</h3>
               <div className="detail-list">
                 {service.tools.map((item) => (
                   <span key={item}><CheckCircle2 size={17} /> {item}</span>
@@ -1506,9 +1488,10 @@ function ServiceDetail() {
               </div>
             </div>
           )}
+          {service.deliverables && <div className="detail-card delivery-card"><h3>What you receive</h3><div className="detail-list">{service.deliverables.map(item => <span key={item}><CheckCircle2 size={17}/>{item}</span>)}</div><p className="scope-note">Final scope, integrations and acceptance criteria are agreed before implementation.</p></div>}
           <div className="blue-help-panel">
-            <h2>How BlueLink Consult can help</h2>
-            <p>We do not only make systems look better. We help redesign the technical foundation so the application becomes easier to operate, secure, scale, and improve over time.</p>
+            <h2>How BlueLink Consults can help</h2>
+            <p>{service.deliveryIntro || "We agree the scope, implement and test the changes, and document the operational responsibilities with your team."}</p>
             <div className="help-steps">
               {service.blueLinkHelp.map((item, i) => (
                 <div key={item}>
@@ -1520,7 +1503,9 @@ function ServiceDetail() {
           </div>
         </div>
         <aside className="service-detail-aside">
-          {service.slug === "web-development" ? (
+          {service.slug === "predeployment-validation" ? (
+            <><h3>See LytHouse in action</h3><p>Review validation checks, pipeline compatibility and the evidence your team needs before approving a release.</p><Link to="/request-demo">Request a LytHouse Demo <ArrowRight size={17}/></Link></>
+          ) : service.slug === "web-development" ? (
             <>
               <h3>Start your website project</h3>
               <p>Tell us a bit about your business and what you're hoping to launch, and we'll follow up with next steps.</p>
@@ -1528,9 +1513,9 @@ function ServiceDetail() {
             </>
           ) : (
             <>
-              <h3>Start with a modernization review</h3>
-              <p>We can begin with a focused review of your current environment and provide a practical modernization roadmap.</p>
-              <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Request Review <ArrowRight size={17} /></Link>
+              <h3>Discuss your project</h3>
+              <p>Tell us which systems need to change, the constraints you face and your priorities. We will agree the next assessment or delivery step with you.</p>
+              <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"}>Book a Consultation <ArrowRight size={17} /></Link>
             </>
           )}
         </aside>
@@ -1540,7 +1525,7 @@ function ServiceDetail() {
           <div style={{ textAlign: "center", maxWidth: 640, margin: "0 auto 40px" }}>
             <p className="eyebrow">Plans</p>
             <h2 style={{ fontFamily: "Libre Baskerville, serif", fontSize: "clamp(1.8rem, 2.8vw, 2.6rem)", color: "var(--navy)", marginBottom: 10 }}>
-              What we're offering with {service.title === "Predeployment Validation" ? "LytHouse" : service.title}
+              What we're offering with {service.slug === "predeployment-validation" ? "LytHouse" : service.title}
             </h2>
             <p style={{ color: "var(--muted)" }}>Simple plans that scale with your release volume. Contact us for pricing tailored to your team.</p>
           </div>
@@ -1557,7 +1542,7 @@ function ServiceDetail() {
                     background: "var(--navy)", color: "white",
                     fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.06em",
                     padding: "4px 12px", borderRadius: 20, textTransform: "uppercase",
-                  }}>Most popular</span>
+                  }}>For growing teams</span>
                 )}
                 <h3>{plan.name}</h3>
                 <p style={{ fontFamily: "Libre Baskerville, serif", fontSize: "1.5rem", color: "var(--bronze)", margin: "6px 0 4px" }}>{plan.price}</p>
@@ -1587,7 +1572,7 @@ function SolutionsPage() {
       <PageHero
         label="Solutions"
         title="Technology solutions built around your business."
-        text="BlueLink Consult helps growing organizations modernize systems, strengthen infrastructure, and build digital foundations that support long-term growth."
+        text="BlueLink Consults helps growing organizations modernize systems, strengthen infrastructure, and build digital foundations that support long-term growth."
       />
       <section className="section white-section">
         <div className="card-grid" style={{ maxWidth:700, margin:"0 auto" }}>
@@ -1602,7 +1587,7 @@ function SolutionsPage() {
             <Target size={32} style={{ color:"var(--bronze)", marginBottom:14 }} />
             <h3>The EAT Framework</h3>
             <div className="rule" />
-            <p>Our proven three-phase delivery methodology — Engage, Assess, Transform — ensures we deeply understand your business before recommending or deploying any technology change.</p>
+            <p>Our three-phase delivery framework — Engage, Assess, Transform — ensures we deeply understand your business before recommending or deploying any technology change.</p>
             <Link to="/solutions/eat-framework">Explore the Framework <ArrowRight size={18} /></Link>
           </article>
         </div>
@@ -1650,57 +1635,69 @@ function EATFrameworkPage() {
   usePageTitle("EAT Framework");
   const phases = [
     {
-      number: "01", letter: "E", label: "Engage", tagline: "We start by truly understanding you.",
-      color: "#2563eb", colorLight: "rgba(37,99,235,0.08)", colorBorder: "rgba(37,99,235,0.2)",
-      description: "Before any assessment or solution, we invest time in understanding your business — your goals, your customers, your team culture, and your constraints. This phase is not about technology. It is about alignment, trust, and building the shared understanding that makes transformation possible.",
-      steps: [
-        "Stakeholder discovery sessions with leadership and operations teams",
-        "Business goals, KPI definition, and success criteria alignment",
-        "Customer journey mapping and experience gap identification",
-        "Scope definition, governance model, and communication rhythm setup",
-        "Risk appetite and change readiness assessment",
-      ],
-      outcome: "A shared, documented understanding of where you are, where you want to go, and what success looks like — agreed by all stakeholders before any work begins.",
+        "number": "01",
+        "letter": "E",
+        "label": "Engage",
+        "tagline": "Agree the scope and success measures.",
+        "color": "#2563eb",
+        "colorLight": "rgba(37,99,235,0.08)",
+        "colorBorder": "rgba(37,99,235,0.2)",
+        "description": "Business and technical stakeholders agree which workflows need improvement, what must remain available and how results will be judged. We establish decision owners, budget constraints and the information needed for assessment.",
+        "steps": [
+            "Identify the affected applications, teams and business workflows.",
+            "Record current performance, costs and operational pain points.",
+            "Agree measurable success criteria and service requirements.",
+            "Document scope, decision owners, milestones and communication."
+        ],
+        "outcome": "An agreed engagement brief: scope, success measures, decision owners and assessment plan."
     },
     {
-      number: "02", letter: "A", label: "Assess", tagline: "We diagnose before we prescribe.",
-      color: "#7c3aed", colorLight: "rgba(124,58,237,0.08)", colorBorder: "rgba(124,58,237,0.2)",
-      description: "We conduct a rigorous, structured review of your current technology environment. This is where we get honest about technical debt, security exposure, cost inefficiencies, and scalability constraints — giving you a clear picture of what you have, what it costs, and what it will take to modernize it responsibly.",
-      steps: [
-        "Full application portfolio audit — architecture, dependencies, and maintainability",
-        "Infrastructure review — cloud, on-premise, hybrid, containerization readiness",
-        "Security posture assessment — IAM, access controls, compliance gaps, vulnerabilities",
-        "Cost analysis — cloud spend, licensing, operational overhead, and waste identification",
-        "Scalability and performance bottleneck mapping",
-        "Technical debt scoring and risk prioritization matrix",
-      ],
-      outcome: "A clear, prioritized modernization roadmap with risk scores, cost projections, phased recommendations, and honest trade-off analysis — before a single line of code is changed.",
+        "number": "02",
+        "letter": "A",
+        "label": "Assess",
+        "tagline": "Build the evidence for a decision.",
+        "color": "#1677b8",
+        "colorLight": "rgba(22,119,184,0.08)",
+        "colorBorder": "rgba(22,119,184,0.2)",
+        "description": "We review the agreed applications, infrastructure and delivery processes. Dependencies, security findings and performance constraints are validated with your team. Options are compared against cost assumptions, operational risk and implementation effort.",
+        "steps": [
+            "Map application, database and external integration dependencies.",
+            "Review access controls, infrastructure configuration and recovery arrangements.",
+            "Identify performance bottlenecks, delivery delays and avoidable costs.",
+            "Compare refactoring, migration and replacement options.",
+            "Prioritize changes and document assumptions and trade-offs."
+        ],
+        "outcome": "A findings report, dependency map, prioritized risk register and phased roadmap with cost assumptions."
     },
     {
-      number: "03", letter: "T", label: "Transform", tagline: "We execute with precision, speed, and accountability.",
-      color: "#c9a84c", colorLight: "rgba(201,168,76,0.08)", colorBorder: "rgba(201,168,76,0.25)",
-      description: "With alignment secured and the environment fully understood, we execute. Using modern tools, proven architectures, and agile delivery practices, we modernize your systems phase by phase — delivering measurable value at every milestone and leaving your team fully equipped to operate and extend what we build.",
-      steps: [
-        "Phased implementation plan with milestone-based delivery and sign-off gates",
-        "CI/CD pipeline implementation for fast, reliable, auditable deployments",
-        "Cloud migration, infrastructure automation, and environment standardization",
-        "Security hardening — identity modernization, RBAC enforcement, access governance",
-        "Monitoring, observability, alerting, and incident response configuration",
-        "Knowledge transfer, runbook documentation, and team enablement",
-      ],
-      outcome: "A modernized, secure, scalable technology platform — delivered on time, within budget, with your team fully equipped to operate it and your leadership with full visibility at every step.",
-    },
-  ];
+        "number": "03",
+        "letter": "T",
+        "label": "Transform",
+        "tagline": "Deliver changes with acceptance evidence.",
+        "color": "#1557c0",
+        "colorLight": "rgba(21,87,192,0.08)",
+        "colorBorder": "rgba(21,87,192,0.2)",
+        "description": "We implement the approved roadmap in manageable stages. Each stage has acceptance criteria, release checks and a rollback approach. Progress, spending and scope changes are reviewed with the agreed decision owners.",
+        "steps": [
+            "Implement agreed application, infrastructure or integration changes.",
+            "Automate builds, tests and environment provisioning where appropriate.",
+            "Record security, performance and pre-deployment validation results.",
+            "Approve releases with monitoring and rollback procedures in place.",
+            "Complete runbooks, knowledge transfer and operational handover."
+        ],
+        "outcome": "Implemented changes, test and release evidence, operational documentation and an acceptance record for each delivery stage."
+    }
+];
 
   return (
     <>
       <PageHero
         label="Our Delivery Framework"
-        title="The EAT Framework — How BlueLink Consult Delivers Results."
+        title="The EAT Framework — How BlueLink Consults Delivers Results."
         text={
           <>
             EAT stands for <strong>Engage</strong>, <strong>Assess</strong>, and{" "}
-            <strong>Transform</strong>. It is our proven methodology for understanding
+            <strong>Transform</strong>. It is our delivery framework for understanding
             your business, evaluating your technology landscape, and delivering
             measurable transformation outcomes.
           </>
@@ -1709,9 +1706,9 @@ function EATFrameworkPage() {
       <section className="section white-section">
         <div style={{ maxWidth:760, margin:"0 auto", textAlign:"center" }}>
           <p className="eyebrow">Why EAT?</p>
-          <h2 style={{ fontFamily:"var(--font-display)", fontSize:"clamp(1.5rem,2.5vw,2rem)", marginBottom:16 }}>Most technology failures are not technology problems.</h2>
-          <p style={{ color:"#5d687d", lineHeight:1.8, fontSize:"1rem", marginBottom:16 }}>They are alignment problems. Solutions deployed without understanding the business. Migrations executed without understanding the dependencies. Security controls imposed without understanding how people actually work. The EAT Framework exists to prevent all of that.</p>
-          <p style={{ color:"#5d687d", lineHeight:1.8, fontSize:"1rem" }}>Every BlueLink Consult engagement — regardless of size or service — follows this same three-phase process. It is how we ensure every transformation we deliver is grounded in reality, aligned to business goals, and built to last.</p>
+          <h2 style={{ fontFamily:"var(--font-display)", fontSize:"clamp(1.5rem,2.5vw,2rem)", marginBottom:16 }}>Every stage should produce a reviewable result.</h2>
+          <p style={{ color:"#5d687d", lineHeight:1.8, fontSize:"1rem", marginBottom:16 }}>Engage produces an agreed brief. Assess produces findings and an investment roadmap. Transform produces implemented changes, test evidence and operational handover. These outputs give leadership a basis for approving the next stage.</p>
+          <p style={{ color:"#5d687d", lineHeight:1.8, fontSize:"1rem" }}>The depth of each stage depends on your project. A focused application change needs a different assessment from a portfolio migration. Scope, timelines and responsibilities are agreed before delivery begins.</p>
         </div>
       </section>
       <section className="section" style={{ background:"#f8f7f5" }}>
@@ -1750,8 +1747,8 @@ function EATFrameworkPage() {
       <section className="section" style={{ background:"var(--navy, #050e1f)", padding:"72px 0" }}>
         <div style={{ maxWidth:640, margin:"0 auto", padding:"0 48px", textAlign:"center" }}>
           <p className="eyebrow" style={{ color:"var(--bronze)" }}>Ready to begin?</p>
-          <h2 style={{ fontFamily:"var(--font-display)", color:"white", marginBottom:16, fontSize:"clamp(1.6rem,2.5vw,2.2rem)" }}>Start with Engage — it costs you nothing but a conversation.</h2>
-          <p style={{ color:"rgba(255,255,255,0.6)", marginBottom:32, lineHeight:1.7 }}>The first phase of every BlueLink Consult engagement is a discovery session. No obligation. No sales pressure. Just an honest conversation about your technology, your goals, and whether we are the right fit.</p>
+          <h2 style={{ fontFamily:"var(--font-display)", color:"white", marginBottom:16, fontSize:"clamp(1.6rem,2.5vw,2.2rem)" }}>Discuss your modernization priorities.</h2>
+          <p style={{ color:"rgba(255,255,255,0.6)", marginBottom:32, lineHeight:1.7 }}>Tell us which systems need to improve, your constraints and the outcomes you need. We will discuss the appropriate assessment scope and next steps.</p>
           <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} style={{ display:"inline-flex", alignItems:"center", gap:10, background:"var(--bronze)", color:"white", padding:"14px 28px", fontWeight:800, textDecoration:"none" }}>
             Schedule Your Discovery Session <ArrowRight size={17} />
           </Link>
@@ -2216,12 +2213,12 @@ function ContactPage() {
       )}
       <section className="contact-section" id="consultation">
         <div className="contact-copy">
-          <p className="eyebrow">Contact BlueLink Consult</p>
+          <p className="eyebrow">Contact BlueLink Consults</p>
           <h2>{isWebDev ? "Start your website project." : "Start with a modernization conversation."}</h2>
           <p>Submit your inquiry below. We will respond within one business day.</p>
           <div className="contact-details">
-            <span><Mail size={17} /> info@bluelinkconsults.com</span>
-            <span><Phone size={17} /> 401-440-2434</span>
+            <a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a>
+            <a href="tel:+14014402434"><Phone size={17} /> US: +1 401-440-2434</a><a href="tel:+2348068649496"><Phone size={17} /> Nigeria: +234 806 864 9496</a>
             <span><MapPin size={17} /> Providence, RI, 02909 United States</span>
             <span><Building2 size={17} /> Serving growing organizations and business teams</span>
           </div>
@@ -2230,7 +2227,7 @@ function ContactPage() {
           <div className="success-box">
             <CheckCircle2 size={40} />
             <h3>Inquiry sent successfully</h3>
-            <p>Thank you. Your message was successfully delivered to BlueLink Consult.</p>
+            <p>Thank you. Your message was successfully delivered to BlueLink Consults.</p>
             <button onClick={() => { setSubmitted(false); setFormError(""); }}>Submit another inquiry</button>
           </div>
         ) : isWebDev ? (
@@ -2247,7 +2244,7 @@ function ContactPage() {
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
             <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
             <label>Company Name<input name="company" type="text" placeholder="Company name" /></label>
-            <label>Phone Number<input required name="phone" type="tel" placeholder="+1 ..." /></label>
+            <label>Phone Number (optional)<input name="phone" type="tel" placeholder="+1 ..." /></label>
             <label>
               What type of business are you in?
               <select required name="businessType" defaultValue="">
@@ -2266,7 +2263,7 @@ function ContactPage() {
             <button type="submit" disabled={formLoading}>
               {formLoading ? "Sending..." : "Submit Inquiry"} <Send size={18} />
             </button>
-            <small>Your inquiry will be securely delivered to BlueLink Consult.</small>
+            <small>Your inquiry will be securely delivered to BlueLink Consults.</small>
           </form>
         ) : (
           <form
@@ -2278,15 +2275,15 @@ function ContactPage() {
             onSubmit={handleSubmit}
           >
             {formError && <div className="auth-message">{formError}</div>}
-            <input type="hidden" name="_subject" value="New BlueLink Consult website inquiry" />
+            <input type="hidden" name="_subject" value="New BlueLink Consults website inquiry" />
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
             <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
             <label>Company<input name="company" type="text" placeholder="Company name" /></label>
-            <label>Phone Number<input required name="phone" type="tel" placeholder="+1 ..." /></label>
+            <label>Phone Number (optional)<input name="phone" type="tel" placeholder="+1 ..." /></label>
             <div style={{ display: "grid", gap: 8 }}>
               <span style={{ fontWeight: 800, fontSize: "0.92rem" }}>What are your biggest pain points? <span style={{ color: "var(--bronze)" }}>(Check all that apply)</span></span>
               <p style={{ fontSize: "0.82rem", color: "var(--muted)", margin: 0 }}>This helps us come prepared with the right answers for your consultation.</p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "8px 16px", marginTop: 6 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "8px 16px", marginTop: 6 }}>
                 {[
                   "Application modernization",
                   "Cloud migration & infrastructure",
@@ -2312,7 +2309,7 @@ function ContactPage() {
             <button type="submit" disabled={formLoading}>
               {formLoading ? "Sending..." : "Submit Inquiry"} <Send size={18} />
             </button>
-            <small>Your inquiry will be securely delivered to BlueLink Consult.</small>
+            <small>Your inquiry will be securely delivered to BlueLink Consults.</small>
           </form>
         )}
       </section>

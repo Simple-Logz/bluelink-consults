@@ -1,5 +1,25 @@
 {
+  "redirects": [
+    {
+      "source": "/services/pre-deployment-validation",
+      "destination": "/services/predeployment-validation",
+      "permanent": true
+    },
+    {
+      "source": "/services/devops",
+      "destination": "/services/devops-automation",
+      "permanent": true
+    },
+    {
+      "source": "/services/application-modernisation",
+      "destination": "/services/application-modernization",
+      "permanent": true
+    }
+  ],
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
