@@ -213,3 +213,14 @@ html[data-site="nigeria"] .ng-resources .ng-resource-card { border-top:3px solid
  html[data-site="nigeria"] .ng-services-copy .ng-btn { width:100%; }
 }
 html[data-site="nigeria"] .ng-services-media img { height:auto; }
+/* Editorial resource row, matching the reference's image/title/link hierarchy. */
+html[data-site="nigeria"] .ng-resource-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
+html[data-site="nigeria"] .ng-resources .ng-resource-card { border:0; padding:0; background:transparent; }
+html[data-site="nigeria"] .ng-resource-card img { display:block; width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+html[data-site="nigeria"] .ng-resource-card .ng-kicker { margin:18px 0 10px; font-size:12px; letter-spacing:.04em; }
+html[data-site="nigeria"] .ng-resource-card h3 { font-size:17px; line-height:1.45; letter-spacing:0; margin:0 0 30px; font-weight:750; }
+html[data-site="nigeria"] .ng-resource-card .ng-link { justify-content:flex-end; padding-top:12px; width:100%; margin-top:auto; }
+html[data-site="nigeria"] .ng-resource-card:hover h3 { text-decoration:underline; text-underline-offset:4px; }
+html[data-site="nigeria"] #featured-guides { scroll-margin-top:100px; }
+@media(max-width:1023px) { html[data-site="nigeria"] .ng-resource-grid { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:42px; } }
+@media(max-width:600px) { html[data-site="nigeria"] .ng-resource-grid { grid-template-columns:1fr; gap:38px; } html[data-site="nigeria"] .ng-resource-card h3 { margin-bottom:18px; font-size:19px; } }
