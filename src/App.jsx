@@ -1185,6 +1185,7 @@ function Home() {
 
 const heroPhotographs = [1, 2, 3, 4].map(number => `/images/hero/slides/fictional-professional-${number}-v7.webp`);
 function Hero() {
+  const [motionPaused, setMotionPaused] = useState(false);
   return <section className="bl-editorial-hero"><div className="bl-editorial-hero-inner">
     <div className="bl-editorial-hero-copy"><div className="bl-editorial-accent" />
       <p className="hero-kicker">APPLICATIONS · CLOUD · SOFTWARE DELIVERY</p>
@@ -1192,7 +1193,13 @@ function Hero() {
       <p>BlueLink Consults helps organizations upgrade legacy applications, connect business systems, build cloud infrastructure and automate software delivery—with security and release validation built into the work.</p>
       <div className="hero-actions"><Link className="bl-editorial-hero-cta" to="/contact#consultation">Discuss Your Project <ArrowRight size={18}/></Link><Link className="hero-secondary" to="/services">Explore Our Services <ArrowRight size={18}/></Link></div>
     </div>
-    <div className="bl-editorial-hero-photo"><img src="/images/enterprise-technology.webp" alt="Illustration of connected applications, integration services, a database and business reporting" fetchPriority="high" width="2011" height="782" /></div>
+    <div className={`bl-editorial-hero-photo technology-motion${motionPaused ? " is-paused" : ""}`}>
+      <div className="technology-motion-track">
+        <img src="/images/enterprise-technology.webp" alt="Illustration of connected applications, integration services, a database and business reporting" fetchPriority="high" width="2011" height="782" />
+        <img src="/images/enterprise-technology.webp" alt="" aria-hidden="true" width="2011" height="782" />
+      </div>
+      <button className="technology-motion-toggle" type="button" onClick={() => setMotionPaused(value => !value)} aria-label={motionPaused ? "Play technology animation" : "Pause technology animation"}>{motionPaused ? "Play" : "Pause"}</button>
+    </div>
   </div></section>;
 }
 
