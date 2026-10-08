@@ -18,17 +18,17 @@ export function NigeriaHeader({ services }) {
   const close = () => setPanel(null);
   const flip = name => setPanel(current => current === name ? null : name);
   const primary = <>
-    <div className="ng-nav-group"><button onClick={() => flip("services")} aria-expanded={panel === "services"} aria-controls="ng-services">Services <ChevronDown size={14} /></button>{panel === "services" && <div id="ng-services" className="ng-submenu">{services.map(service => <Link key={service.slug} to={`/services/${service.slug}`} onClick={close}>{service.title}</Link>)}</div>}</div>
+    <div className="ng-nav-group"><button onClick={() => flip("services")} aria-expanded={panel === "services"} aria-controls="ng-services">Services <ChevronDown size={14} /></button>{panel === "services" && <div id="ng-services" className="ng-submenu">{services.map(({slug,title,summary,icon: Icon}) => <Link key={slug} to={`/services/${slug}`} onClick={close}><Icon size={24} aria-hidden="true" /><span><strong>{title}</strong><small>{summary}</small></span><ArrowRight size={17} aria-hidden="true" /></Link>)}</div>}</div>
     <div className="ng-nav-group"><button onClick={() => flip("solutions")} aria-expanded={panel === "solutions"} aria-controls="ng-solutions">Solutions <ChevronDown size={14} /></button>{panel === "solutions" && <div id="ng-solutions" className="ng-submenu"><Link to="/solutions/who-we-help" onClick={close}>Who We Help</Link><Link to="/solutions/eat-framework" onClick={close}>The EAT Framework</Link></div>}</div>
     <NavLink to="/insights" onClick={close}>Insights</NavLink>
-    <div className="ng-nav-group" onMouseEnter={() => setPanel("about")} onMouseLeave={() => setPanel(current => current === "about" ? null : current)}><button onClick={() => flip("about")} aria-expanded={panel === "about"} aria-controls="ng-about">About Us <ChevronDown size={14} /></button>{panel === "about" && <div id="ng-about" className="ng-submenu"><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink</Link></div>}</div>
+    <div className="ng-nav-group"><button onClick={() => flip("about")} aria-expanded={panel === "about"} aria-controls="ng-about">About Us <ChevronDown size={14} /></button>{panel === "about" && <div id="ng-about" className="ng-submenu"><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink</Link></div>}</div>
     <NavLink to="/contact" onClick={close}>Contact</NavLink>
   </>;
   const extras = [{ title: "Try Simulator", path: "/simulator", icon: Zap }, { title: "Client Login", path: "/client-login", icon: Users }, { title: "Request Demo", path: "/request-demo", icon: CalendarDays, Mail, Phone }, { title: "Blog", path: "/blog", icon: FileText }, { title: "Events & Activities", path: "/events", icon: CalendarDays }];
   return <div className="bl-header-shell"><HeaderUtility nigeria /><header ref={root} className="site-header ng-header">
     <Link to="/" className="brand-logo-wrap brand-home-link" aria-label="BlueLink Consults homepage" onClick={close}><img src="/bluelink-logo-mark.png" alt="" className="brand-logo-mark" /><span className="brand-wordmark"><strong>Blue<span>Link</span></strong><small>Consults</small></span></Link>
     <nav className="ng-primary" aria-label="Main navigation">{primary}</nav>
-    <Link to="/request-demo" onClick={close} className="bl-header-demo">Request Demo</Link>
+    <Link to="/contact" onClick={close} className="bl-header-demo">Talk to an Expert</Link>
     <button ref={toggle} type="button" className="ng-menu-toggle" onClick={() => flip("more")} aria-expanded={panel === "more"} aria-controls="ng-more" aria-label={panel === "more" ? "Close additional menu" : "Open additional menu"}>{panel === "more" ? <X size={23} /> : <Menu size={23} />}</button>
     <nav id="ng-more" className={`ng-more ${panel === "more" ? "is-open" : ""}`} aria-label="Additional navigation" hidden={panel !== "more"}>
       <div className="ng-mobile-primary">

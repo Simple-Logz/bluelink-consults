@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./styles.css";
 import "./homepage.css";
 import "./site-corrections.css";
+import "./nigeria-enterprise.css";
 document.documentElement.dataset.site = ["bluelinkconsults.ng", "www.bluelinkconsults.ng"].includes(window.location.hostname) ? "nigeria" : "international";
 import App from "./App.jsx";
 

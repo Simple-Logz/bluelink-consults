@@ -52,6 +52,7 @@ import "./styles.css";
 import { supabase } from "./supabaseClient";
 import ClientPortal from "./ClientPortal";
 import DemoRequestPage from "./DemoRequestPage";
+import { NigeriaEnterpriseHome, NigeriaEnterpriseFooter } from "./NigeriaEnterprise";
 import { NigeriaHeader, DemoBanner, OurStory, OurTeam, BlogPage, HeaderUtility, FAQsPage } from "./NigeriaPages";
 
 /* ─────────────────────────────────────────────────────────────
@@ -634,6 +635,7 @@ function EventsPage() {
 }
 
 function Footer() {
+  if (isNigeriaSite) return <NigeriaEnterpriseFooter services={services} />;
   return (
     <footer className="footer">
       <div>
@@ -1162,6 +1164,7 @@ function SimulatorTeaser() {
 
 function Home() {
   usePageTitle(null);
+  if (isNigeriaSite) return <NigeriaEnterpriseHome services={services} />;
   return <div className="bl-home-organized">
     <Hero />
     <section className="bl-home-services" aria-labelledby="home-services-title">
