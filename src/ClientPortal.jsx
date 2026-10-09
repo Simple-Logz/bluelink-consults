@@ -458,6 +458,7 @@ function PortalAuth() {
   }
   return <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:24, background:"#ffffff" }}>
     <div style={{ width:"100%", maxWidth:420 }}>
+      <a href="/" style={{ display:"inline-flex", alignItems:"center", gap:8, marginBottom:24, padding:"10px 16px", border:"1px solid #1557c0", borderRadius:8, color:"#1557c0", background:"#ffffff", textDecoration:"none", fontWeight:700, fontSize:"0.9rem" }}><span aria-hidden="true">←</span> Back to Homepage</a>
       <div style={{ textAlign:"center", marginBottom:28 }}>
         <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ width:76, height:76, objectFit:"contain", background:"#fff", padding:8, borderRadius:14, display:"block", margin:"0 auto 18px" }} />
         <h1 style={{ fontSize:"1.9rem", color:"#102c46", marginBottom:8 }}>BlueLink Portal</h1>
