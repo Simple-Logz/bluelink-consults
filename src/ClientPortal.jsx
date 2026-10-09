@@ -197,9 +197,10 @@ const css = `
       z-index:200;
       height:60px;
       align-items:stretch;
+      overflow-x:auto;
     }
     .mobile-nav-btn {
-      flex:1; display:flex; flex-direction:column; align-items:center;
+      flex:1 0 68px; display:flex; flex-direction:column; align-items:center;
       justify-content:center; gap:3px; background:transparent; border:none;
       color:${T.textLight}; font-size:0.6rem; font-weight:600;
       cursor:pointer; padding:6px 2px; transition:all 0.15s ease;
@@ -508,8 +509,8 @@ function PortalShell({ activeTab, setActiveTab }) {
   ];
   const tabs = isAdmin ? adminTabs : clientTabs;
 
-  // Mobile-visible tabs (first 5 only for bottom nav)
-  const mobileTabs = tabs.slice(0, 5);
+  // Keep all authorized sections reachable on phones.
+  const mobileTabs = tabs;
 
   return (
     <div style={{ display:"flex", flexDirection:"column", minHeight:"100vh", isolation:"isolate" }}>
@@ -589,7 +590,7 @@ function PortalShell({ activeTab, setActiveTab }) {
       </div>
 
       {/* ── MOBILE BOTTOM NAV BAR ── */}
-      <nav className="mobile-nav">
+      <nav className="mobile-nav" aria-label="Portal navigation">
         {mobileTabs.map(tab => {
           const Icon = tab.icon;
           return (
@@ -1526,7 +1527,7 @@ function AdminInbox() {
         <button className="btn-ghost" onClick={()=>setSelected(null)} style={{ marginBottom:20 }}>← Back to inbox</button>
         <div className="card">
           <span className="badge" style={{ background:c.bg, color:c.color, marginBottom:14, display:"inline-flex" }}>{labels[item.form_type]}</span>
-          <h2 style={{ color:T.text, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||item.data?.name||"Unknown"}</h2>
+          <h2 style={{ color:T.text, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||item.data?.name||"Unknown"}</h2><p style={{ color:T.textMid, fontSize:"0.8rem", marginBottom:12 }}>Reference: {item.id.slice(0,8).toUpperCase()}</p>
           <p style={{ color:T.textMid, fontSize:"0.8rem", marginBottom:20 }}>{item.profiles?.company||item.data?.company} · {item.profiles?.email||item.data?.email} · {new Date(item.submitted_at).toLocaleString()}</p>
           <div style={{ borderTop:`1px solid ${T.border}`, paddingTop:18, display:"grid", gap:14 }}>
             {Object.entries(item.data||{}).map(([key,val])=>(
@@ -1546,8 +1547,8 @@ function AdminInbox() {
       <p className="eyebrow">Admin View</p>
       <h1 className="section-title">Inbox</h1>
       <div className="gold-bar" />
-      <div style={{ display:"grid", gridTemplateColumns:"repeat(5,1fr)", gap:10, marginBottom:22 }}>
-        {[{label:"All",type:"all",value:items.length},{label:"Onboarding",type:"onboarding",value:items.filter(i=>i.form_type==="onboarding").length},{label:"Discovery",type:"discovery",value:items.filter(i=>i.form_type==="discovery").length},{label:"Sign-Off",type:"milestone_signoff",value:items.filter(i=>i.form_type==="milestone_signoff").length},{label:"Support",type:"support_request",value:items.filter(i=>i.form_type==="support_request").length}].map(s=>(
+      <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit,minmax(105px,1fr))", gap:10, marginBottom:22 }}>
+        {[{label:"All",type:"all",value:items.length},{label:"Website Inquiry",type:"website_inquiry",value:items.filter(i=>i.form_type==="website_inquiry").length},{label:"Demo Request",type:"website_demo",value:items.filter(i=>i.form_type==="website_demo").length},{label:"Onboarding",type:"onboarding",value:items.filter(i=>i.form_type==="onboarding").length},{label:"Discovery",type:"discovery",value:items.filter(i=>i.form_type==="discovery").length},{label:"Sign-Off",type:"milestone_signoff",value:items.filter(i=>i.form_type==="milestone_signoff").length},{label:"Support",type:"support_request",value:items.filter(i=>i.form_type==="support_request").length}].map(s=>(
           <div key={s.label} className="card-click" onClick={()=>setFilter(s.type)} style={{ padding:"12px 14px", border:filter===s.type?`1.5px solid ${T.goldLine}`:`1px solid ${T.border}`, background:filter===s.type?T.goldDim:T.card }}>
             <p style={{ fontSize:"1.4rem", color:filter===s.type?T.gold:T.text, fontWeight:700 }}>{s.value}</p>
             <p style={{ fontSize:"0.7rem", color:T.textMid, marginTop:3 }}>{s.label}</p>
@@ -1559,9 +1560,9 @@ function AdminInbox() {
           {filtered.map((item,i)=>{
             const c=colors[item.form_type]||colors.onboarding;
             return (
-              <div key={item.id} style={{ display:"grid", gridTemplateColumns:"110px 1fr 150px 110px auto", gap:14, padding:"14px 20px", borderBottom:i<filtered.length-1?`1px solid ${T.border}`:"none", alignItems:"center" }}>
+              <div key={item.id} style={{ display:"flex", flexWrap:"wrap", gap:14, padding:"14px 20px", borderBottom:i<filtered.length-1?`1px solid ${T.border}`:"none", alignItems:"center" }}>
                 <span className="badge" style={{ background:c.bg, color:c.color }}>{labels[item.form_type]}</span>
-                <p style={{ fontSize:"0.82rem", color:T.text, lineHeight:1.5 }}>{summary(item)}</p>
+                <div><p style={{ fontSize:"0.82rem", color:T.text, lineHeight:1.5 }}>{summary(item)}</p><p style={{ fontSize:"0.7rem", color:T.textMid }}>Ref: {item.id.slice(0,8).toUpperCase()}</p></div>
                 <div><p style={{ fontWeight:600, fontSize:"0.8rem", color:T.text }}>{item.profiles?.full_name||item.data?.name||"—"}</p><p style={{ fontSize:"0.7rem", color:T.textMid }}>{item.profiles?.company||item.data?.company}</p></div>
                 <p style={{ fontSize:"0.74rem", color:T.textMid }}>{new Date(item.submitted_at).toLocaleDateString()}</p>
                 <button onClick={()=>setSelected(item.id)} className="btn-ghost" style={{ border:`1px solid ${T.border}`, padding:"5px 10px", borderRadius:6 }}><Eye size={12}/> View</button>

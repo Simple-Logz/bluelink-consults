@@ -3760,3 +3760,7 @@ body { overflow-x:hidden; }
 /* Preserve the entire fictional portrait at every viewport size. */
 .hero-corporate-viewport { background: #edf5fb; }
 .hero-corporate-viewport img { object-fit: contain; object-position: center; }
+
+.contact-booking-button { display:inline-flex; align-items:center; justify-content:center; gap:14px; min-height:50px; padding:13px 24px; border:2px solid #195ac2; border-radius:8px; background:#195ac2; color:#fff; font-weight:700; text-decoration:none; }
+.contact-booking-button:hover { background:#12458f; border-color:#12458f; }
+.contact-booking-button:focus-visible { outline:3px solid #a52d43; outline-offset:4px; }

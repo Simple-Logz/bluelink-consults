@@ -2078,10 +2078,11 @@ function ContactPage() {
           <p className="eyebrow">Contact BlueLink Consults</p>
           <h2>{isWebDev ? "Start your website project." : "Start with a modernization conversation."}</h2>
           <p>Share your requirements and our team will review the next step with you.</p>
+          <div style={{ margin:"22px 0 26px" }}><a className="contact-booking-button" href={zoomBookingUrl}>Schedule Demo <ArrowRight size={17} /></a><p style={{ marginTop:10, fontSize:"0.9rem" }}>Book a 30-minute Zoom discussion at a time that suits you.</p></div>
           <div className="contact-details">
             <a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a>
             <a href="tel:+14014402434"><Phone size={17} /> US: +1 401-440-2434</a><a href="tel:+2348068649496"><Phone size={17} /> Nigeria: +234 806 864 9496</a>
-            <span><MapPin size={17} /> {isNigeriaSite ? "Nigeria operations · Calabar & Uyo" : "Providence, RI, 02909 United States"}</span>
+            {!isNigeriaSite && <span><MapPin size={17} /> Providence, RI, 02909 United States</span>}
             <span><Building2 size={17} /> {isNigeriaSite ? "Blue Link Consults Ltd · Financial services, healthcare, public institutions & enterprises" : "Serving growing organizations and business teams"}</span>
           </div>
         </div>
@@ -2316,7 +2317,7 @@ function PrivacyPolicyPage() {
         <p style={{ color: "var(--muted)", fontSize: "0.88rem", marginBottom: 32 }}>Last updated: 9 October 2026</p>
 
         <h2>1. Who We Are</h2>
-        <p>BlueLink Consults ("we", "us", "our") provides technology consulting services. For our Nigeria operations, the company is Blue Link Consults Ltd, with operations in Calabar and Uyo; our US contact is based in Providence, Rhode Island. We can be contacted at <strong>info@bluelinkconsults.com</strong> or by phone at <strong>401-440-2434</strong>.</p>
+        <p>BlueLink Consults ("we", "us", "our") provides technology consulting services. For our Nigeria operations, the company is Blue Link Consults Ltd, serving organizations across Nigeria; our US contact is based in Providence, Rhode Island. We can be contacted at <strong>info@bluelinkconsults.com</strong> or by phone at <strong>401-440-2434</strong>.</p>
 
         <h2>2. Information We Collect</h2>
         <p>We collect information you provide directly to us, including when you fill in our contact or consultation form (name, business email, company name, and details of your enquiry), when you create a Client Portal account (name, email, company), and when you communicate with us by email or phone. Our hosting and service providers may process technical request information, such as IP address and device or browser details, for service delivery and security.</p>
