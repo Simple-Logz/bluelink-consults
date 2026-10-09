@@ -511,3 +511,20 @@ html[data-site="nigeria"] .ng-footer-grid .bl-social-icons a { color:#fff; }
  html[data-site="nigeria"] .ng-hero-copy { padding-top:88px; padding-bottom:88px; }
  html[data-site="nigeria"] .ng-hero-media { min-height:560px; }
 }
+
+/* Consistent red editorial and section action links across the Nigeria site. */
+html[data-site="nigeria"] .ng-link,
+html[data-site="nigeria"] .ng-text-link,
+html[data-site="nigeria"] .services-section .border-card > a,
+html[data-site="nigeria"] .resource-card a:not(.ng-btn):not(.btn) {
+  color: var(--ng-crimson, #a52d43) !important;
+}
+html[data-site="nigeria"] .ng-link:hover,
+html[data-site="nigeria"] .ng-text-link:hover,
+html[data-site="nigeria"] .services-section .border-card > a:hover,
+html[data-site="nigeria"] .resource-card a:not(.ng-btn):not(.btn):hover {
+  color: #822237 !important;
+}
+/* Keep red action links readable on the dark delivery section. */
+html[data-site="nigeria"] .ng-delivery .ng-link { color: #f5bcc8 !important; }
+html[data-site="nigeria"] .ng-delivery .ng-link:hover { color: #ffe0e7 !important; }
