@@ -414,3 +414,7 @@ html[data-site="nigeria"] .ng-resource-card h3 { font-size:22px; line-height:1.4
  html[data-site="nigeria"] .ng-working-photo { aspect-ratio:3/2; }
  html[data-site="nigeria"] .ng-resource-grid { grid-template-columns:1fr; gap:34px; }
 }
+
+/* Crimson accents for selected headings on light backgrounds. */
+html[data-site="nigeria"] { --ng-crimson:#a52d43; }
+html[data-site="nigeria"] :is(.ng-services-copy,.ng-industries .ng-section-intro,.ng-resources .ng-section-intro) h2 { color:var(--ng-crimson); }
