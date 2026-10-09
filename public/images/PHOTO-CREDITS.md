@@ -1,9 +1,10 @@
-# Documentary photography
+# Real photography
 
-Real photographs, used under the Pexels License: https://www.pexels.com/license/
+Licensed under https://www.pexels.com/license/. These photographs illustrate working practices and do not depict BlueLink staff or clients.
 
-- work-from-behind.jpg — PNW Production, https://www.pexels.com/photo/a-woman-using-laptop-8091231/
-- hands-at-laptop.jpg — Laker, https://www.pexels.com/photo/black-man-using-laptop-with-bright-desktop-5792850/
-- document-review.jpg — Mikhail Nilov, https://www.pexels.com/photo/a-person-signing-a-document-8730979/
+- professional-laptop.jpg — Christina Morillo: https://www.pexels.com/photo/photography-of-woman-using-laptop-1181727/
+- team-discussion.jpg — Christina Morillo: https://www.pexels.com/photo/woman-discussing-with-her-colleagues-1181415/
+- conference-work.jpg — Christina Morillo: https://www.pexels.com/photo/group-of-people-using-laptop-computer-1181370/
+- professional-notes.jpg — https://www.pexels.com/photo/a-woman-writing-on-a-notebook-8117533/
 
-Stock photographs illustrate working practices and do not depict BlueLink staff or clients. No AI image generation or face substitution was used.
+Original stock photographs; no AI image generation or face substitution.
