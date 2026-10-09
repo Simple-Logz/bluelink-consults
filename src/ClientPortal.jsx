@@ -373,6 +373,21 @@ export default function ClientPortal() {
   const [session, setSession]     = useState(null);
   const [authLoading, setAuthLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("dashboard");
+  const [portalAccess, setPortalAccess] = useState(null);
+  useEffect(() => {
+    let cancelled = false;
+    setPortalAccess(null);
+    if (!session?.user || !supabase) return;
+    (async () => {
+      try {
+        const { data: userData, error: userError } = await supabase.auth.getUser();
+        if (userError || !userData?.user) { if (!cancelled) setPortalAccess(false); return; }
+        const { data, error } = await supabase.rpc("portal_access_allowed");
+        if (!cancelled) setPortalAccess(!error && data === true);
+      } catch { if (!cancelled) setPortalAccess(false); }
+    })();
+    return () => { cancelled = true; };
+  }, [session]);
 
   useEffect(() => {
     if (!supabase) { setAuthLoading(false); return; }
@@ -401,6 +416,9 @@ export default function ClientPortal() {
   );
   if (!session) return <div className="portal-root"><style>{css}</style><PortalAuth setSession={setSession} /></div>;
 
+  if (portalAccess === null) return <div className="portal-root" style={{ minHeight:"100vh", display:"grid", placeItems:"center" }}><style>{css}</style><p style={{ color:T.white }}>Checking authorised access…</p></div>;
+  if (!portalAccess) return <div className="portal-root" style={{ minHeight:"100vh", display:"grid", placeItems:"center", padding:24 }}><style>{css}</style><div style={{ maxWidth:420, textAlign:"center", color:T.white }}><img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ width:72, height:72, objectFit:"contain", background:"#fff", borderRadius:12, padding:8, marginBottom:24 }} /><h1 style={{ fontSize:"1.8rem", marginBottom:12 }}>Access restricted</h1><p style={{ color:"#cbd5e1", lineHeight:1.6, marginBottom:24 }}>Your account has not been authorised for this client portal. Contact BlueLink Consults to arrange access.</p><a href="mailto:info@bluelinkconsults.com" style={{ color:"#fff" }}>info@bluelinkconsults.com</a><button className="btn-gold" onClick={() => supabase.auth.signOut()} style={{ display:"block", margin:"24px auto", background:"#fff", color:T.text }}>Sign out</button></div></div>;
+
   return (
     <div className="portal-root">
       <style>{css}</style>
@@ -412,76 +430,40 @@ export default function ClientPortal() {
 }
 
 /* ─── AUTH ───────────────────────────────────────────────── */
-function PortalAuth({ setSession }) {
-  const [mode, setMode]       = useState("login");
-  const [email, setEmail]     = useState("");
+function PortalAuth() {
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName]       = useState("");
-  const [company, setCompany] = useState("");
-  const [token, setToken]     = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState("");
-  const [msg, setMsg]         = useState("");
-
+  const [error, setError] = useState("");
   async function handleSubmit(e) {
-    e.preventDefault(); setError(""); setMsg(""); setLoading(true);
+    e.preventDefault(); setError(""); setLoading(true);
     try {
-      if (mode === "login") {
-        const { data, error: err } = await supabase.auth.signInWithPassword({ email, password });
-        if (err) setError(err.message); else setSession(data.session);
-      } else {
-        const cleanToken = token.trim().toUpperCase();
-        const cleanEmail = email.toLowerCase().trim();
-        const { data: invList } = await supabase.from("invitations").select("*").eq("accepted", false);
-        const inv = invList ? invList.find(i => i.token.toUpperCase() === cleanToken) : null;
-        if (!inv) { setError("Invalid or expired invitation code. Please check the code and try again."); return; }
-        if (inv.email.toLowerCase().trim() !== cleanEmail) { setError("This invite code was sent to a different email address."); return; }
-        const { error: e2 } = await supabase.auth.signUp({ email, password, options: { data: { full_name: name, company } } });
-        if (e2) { setError(e2.message); return; }
-        await supabase.from("invitations").update({ accepted: true }).eq("id", inv.id);
-        setMsg("Account created! Check your email to confirm, then sign in."); setMode("login");
-      }
-    } finally { setLoading(false); }
+      const { error: err } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (err) setError("Unable to sign in. Check your credentials or contact BlueLink Consults.");
+    } catch { setError("Unable to connect. Please try again."); }
+    finally { setLoading(false); }
   }
-
-  return (
-    <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:24, background:`radial-gradient(ellipse at 30% 40%, ${T.bg3} 0%, ${T.bg} 65%)` }}>
-      <div style={{ width:"100%", maxWidth:420 }}>
-        <div style={{ textAlign:"center", marginBottom:36 }}>
-          <div style={{ width:52, height:52, borderRadius:"50%", background:"rgba(255,255,255,0.06)", border:"1px solid rgba(255,255,255,0.14)", display:"flex", alignItems:"center", justifyContent:"center", margin:"0 auto 14px" }}>
-            <Shield size={22} style={{ color:"#ffffff" }} />
-          </div>
-          <h1 style={{ fontSize:"1.9rem", color:T.white, marginBottom:6 }}>BlueLink Portal</h1>
-          <p style={{ color:T.textLight, fontSize:"0.875rem" }}>{mode==="login" ? "Sign in to your workspace" : "Create your account"}</p>
-          <p className="eat-badge" style={{ marginTop:8, display:"block", color:"rgba(255,255,255,0.75)" }}>Let's EAT!</p>
-        </div>
-        <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:10, padding:32 }}>
-          {error && <div style={{ background:"rgba(220,38,38,0.1)", border:"1px solid rgba(220,38,38,0.3)", borderRadius:8, padding:"10px 14px", marginBottom:16, fontSize:"0.84rem", color:"#fca5a5" }}>{error}</div>}
-          {msg   && <div style={{ background:"rgba(22,163,74,0.1)",  border:"1px solid rgba(22,163,74,0.3)",  borderRadius:8, padding:"10px 14px", marginBottom:16, fontSize:"0.84rem", color:"#86efac" }}>{msg}</div>}
-          <form onSubmit={handleSubmit} style={{ display:"grid", gap:14 }}>
-            {mode==="signup" && <>
-              <label className="lbl" style={{ color:T.textLight }}>Full Name <input className="inp" type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Your full name" required /></label>
-              <label className="lbl" style={{ color:T.textLight }}>Company <input className="inp" type="text" value={company} onChange={e=>setCompany(e.target.value)} placeholder="Company name" required /></label>
-              <label className="lbl" style={{ color:T.textLight }}>Invitation Code <input className="inp" type="text" value={token} onChange={e=>setToken(e.target.value)} placeholder="Your invite code" required /></label>
-            </>}
-            <label className="lbl" style={{ color:T.textLight }}>Email <input className="inp" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@company.com" required /></label>
-            <label className="lbl" style={{ color:T.textLight }}>Password <input className="inp" type="password" value={password} onChange={e=>setPassword(e.target.value)} placeholder="Minimum 6 characters" minLength={6} required /></label>
-            <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", marginTop:4, background:"#ffffff", color:"#18181b" }}>
-              {loading ? <Spinner size={15} /> : mode==="login" ? "Sign In" : "Create Account"}
-              {!loading && <ArrowRight size={15} />}
-            </button>
-          </form>
-          <div style={{ textAlign:"center", marginTop:18 }}>
-            <button onClick={() => { setMode(mode==="login"?"signup":"login"); setError(""); setMsg(""); }}
-              style={{ background:"none", border:"none", color:"#ffffff", fontWeight:600, cursor:"pointer", fontSize:"0.84rem", fontFamily:"inherit" }}>
-              {mode==="login" ? "Have an invite code? Create account" : "Already have an account? Sign in"}
-            </button>
-          </div>
-          {mode==="login" && <p style={{ textAlign:"center", marginTop:14, fontSize:"0.76rem", color:T.textLight }}>Access by invitation only · <span style={{ color:"#ffffff" }}>info@bluelinkconsults.com</span></p>}
-        </div>
+  return <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:24, background:`radial-gradient(ellipse at 30% 40%, ${T.bg3} 0%, ${T.bg} 65%)` }}>
+    <div style={{ width:"100%", maxWidth:420 }}>
+      <div style={{ textAlign:"center", marginBottom:28 }}>
+        <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ width:76, height:76, objectFit:"contain", background:"#fff", padding:8, borderRadius:14, display:"block", margin:"0 auto 18px" }} />
+        <h1 style={{ fontSize:"1.9rem", color:T.white, marginBottom:8 }}>BlueLink Portal</h1>
+        <p style={{ color:"#cbd5e1", fontSize:"0.9rem" }}>Authorised clients only</p>
+        <p className="eat-badge" style={{ marginTop:10, color:"#cbd5e1" }}>Let's EAT!</p>
       </div>
+      <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:10, padding:32 }}>
+        {error && <p role="alert" style={{ color:"#fca5a5", marginBottom:16, fontSize:"0.85rem" }}>{error}</p>}
+        <form onSubmit={handleSubmit} style={{ display:"grid", gap:16 }}>
+          <label className="lbl" style={{ color:"#cbd5e1" }}>Email<input className="inp" type="email" autoComplete="username" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@company.com" required /></label>
+          <label className="lbl" style={{ color:"#cbd5e1" }}>Password<input className="inp" type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} required /></label>
+          <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", background:"#fff", color:T.text }}>{loading ? "Signing in…" : "Sign In"}<ArrowRight size={15} /></button>
+        </form>
+        <p style={{ marginTop:20, color:"#cbd5e1", fontSize:"0.8rem", lineHeight:1.6, textAlign:"center" }}>Access is granted by BlueLink Consults. Public registration is unavailable.</p>
+        <a href="mailto:info@bluelinkconsults.com" style={{ display:"block", marginTop:10, textAlign:"center", fontSize:"0.8rem", color:"#fff" }}>Contact us about access</a>
+      </div>
+      <a href="/" style={{ display:"block", textAlign:"center", marginTop:20, color:"#cbd5e1", fontSize:"0.85rem" }}>Back to BlueLink Consults</a>
     </div>
-  );
+  </div>;
 }
 
 /* ─── SHELL ──────────────────────────────────────────────── */
