@@ -456,9 +456,9 @@ function PortalAuth() {
     } catch { setError("Unable to connect. Please try again."); }
     finally { setLoading(false); }
   }
-  return <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:24, background:"#ffffff" }}>
+  return <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:"88px 24px 24px", position:"relative", background:"#ffffff" }}>
     <div style={{ width:"100%", maxWidth:420 }}>
-      <a href="/" style={{ display:"inline-flex", alignItems:"center", gap:8, marginBottom:24, padding:"10px 16px", border:"1px solid #1557c0", borderRadius:8, color:"#1557c0", background:"#ffffff", textDecoration:"none", fontWeight:700, fontSize:"0.9rem" }}><span aria-hidden="true">←</span> Back to Homepage</a>
+      <a href="/" style={{ position:"absolute", top:24, right:24, display:"inline-flex", alignItems:"center", gap:8, padding:"10px 16px", border:"1px solid #a52d43", borderRadius:8, color:"#1557c0", background:"#ffffff", textDecoration:"none", fontWeight:700, fontSize:"0.9rem" }}><span aria-hidden="true">←</span> Back to Homepage</a>
       <div style={{ textAlign:"center", marginBottom:28 }}>
         <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ width:76, height:76, objectFit:"contain", background:"#fff", padding:8, borderRadius:14, display:"block", margin:"0 auto 18px" }} />
         <h1 style={{ fontSize:"1.9rem", color:"#102c46", marginBottom:8 }}>BlueLink Portal</h1>
@@ -475,7 +475,6 @@ function PortalAuth() {
         <p style={{ marginTop:20, color:"#ffffff", fontSize:"0.8rem", lineHeight:1.6, textAlign:"center" }}>Access is granted by BlueLink Consults. Public registration is unavailable.</p>
         <a href="mailto:info@bluelinkconsults.com" style={{ display:"block", marginTop:10, textAlign:"center", fontSize:"0.8rem", color:"#fff" }}>Contact us about access</a>
       </div>
-      <a href="/" style={{ display:"block", textAlign:"center", marginTop:20, color:"#a52d43", fontSize:"0.85rem" }}>Back to BlueLink Consults</a>
     </div>
   </div>;
 }
