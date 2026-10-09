@@ -265,3 +265,9 @@ html[data-site="nigeria"] #connected-architecture { scroll-margin-top:100px; }
 @keyframes bl-processor-signal { 0%,100% { opacity:.85; } 50% { opacity:1; filter:drop-shadow(0 0 7px #b5222066); } }
 @media(max-width:1023px) { html[data-site="nigeria"] .ng-architecture-layout { grid-template-columns:1fr; gap:24px; } html[data-site="nigeria"] .bl-architecture-motion { max-width:680px; width:100%; margin:auto; } }
 @media(prefers-reduced-motion:reduce) { html[data-site="nigeria"] .bl-architecture-motion * { animation:none!important; } html[data-site="nigeria"] .architecture-motion-toggle { display:none; } }
+html[data-site="nigeria"] .architecture-mobile-legend { display:none; }
+@media(max-width:600px) {
+ html[data-site="nigeria"] .architecture-label { visibility:hidden; }
+ html[data-site="nigeria"] .architecture-mobile-legend { display:grid; grid-template-columns:1fr 1fr; gap:14px 24px; margin:0 0 16px; padding-left:20px; font-size:13px; color:#10243b; line-height:1.5; }
+ html[data-site="nigeria"] .architecture-mobile-legend li::marker { color:#b52220; font-weight:700; }
+}

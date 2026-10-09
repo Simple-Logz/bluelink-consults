@@ -96,6 +96,7 @@ export default function EnterpriseArchitectureMotion() {
         {label(170,'Applications & AI','Useful capabilities, governed use','04')}
       </g>
     </svg>
+    <ol className="architecture-mobile-legend"><li>Cloud infrastructure</li><li>Security &amp; identity</li><li>APIs &amp; integration</li><li>Applications &amp; AI</li></ol>
     <button type="button" className="architecture-motion-toggle" onClick={() => setPlaying(value => !value)} aria-label={playing ? 'Pause architecture animation' : 'Play architecture animation'}>{playing ? 'Pause animation' : 'Play animation'}</button>
   </div>;
 }
