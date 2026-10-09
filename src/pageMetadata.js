@@ -1,0 +1,25 @@
+export const pageMetadata = {
+ '/': ['Technology consulting for dependable operations','Technology assessment, application modernization, cloud infrastructure, DevOps, release validation and operational support for Nigerian institutions and enterprise teams.'],
+ '/services':['Our six technology services','Explore technology assessment, application modernization, cloud infrastructure, DevOps, pre-deployment validation and operational support.'],
+ '/solutions':['Technology solutions','Practical solutions for connected systems, reliable infrastructure and controlled delivery.'],
+ '/solutions/who-we-help':['Institutions and industries we support','Technology engineering for banks, microfinance institutions, fintechs, hospitals, public institutions and enterprise teams.'],
+ '/solutions/eat-framework':['Engage. Assess. Transform.','See how BlueLink connects agreed priorities, technical evidence and controlled implementation through the EAT delivery framework.'],
+ '/solutions/data-localisation':['Data localisation and migration readiness','Review payment-data location, application dependencies, target infrastructure, cutover planning and migration validation.'],
+ '/resources/delivery-examples':['Sample assessment and delivery documents','Inspect illustrative technology assessment, migration planning and release validation documents from BlueLink Consults.'],
+ '/blog':['BlueLink Blog','Practical articles on cloud infrastructure, data governance and dependable technology delivery.'],
+ '/blog/cbn-data-localisation-migration':['CBN’s payment data localisation policy: planning a reliable migration','A practical briefing on the January 2027 payment-data requirement, migration assessment, cutover validation and operating handover.'],
+ '/insights':['Technology insights','Guidance for application modernization, cloud readiness, data governance and reliable delivery.'],
+ '/insights/cbn-data-localisation-migration':['CBN’s payment data localisation policy: planning a reliable migration','A practical briefing on payment-data localisation, migration assessment and reliable cutover.'],
+ '/events':['Events & activities','Follow BlueLink’s technology discussions, industry perspectives and team updates.'],
+ '/about':['Our story','Learn about BlueLink Consults and the approach behind our technology assessment and engineering services.'],
+ '/about/our-story':['Our story','Learn about BlueLink Consults and the approach behind our technology assessment and engineering services.'],
+ '/about/our-team':['Our team','Meet the leadership, engineering and client engagement team at BlueLink Consults.'],
+ '/about/why-bluelink':['Why BlueLink Consults','Agreed scope, connected architecture, evidence before release and a documented operational handover.'],
+ '/contact':['Contact BlueLink Consults','Discuss your application, infrastructure, cloud, DevOps or reliability requirements with our team.'],
+ '/request-demo':['Schedule a 30-minute Zoom discussion','Choose a meeting time or share your requirements with BlueLink Consults.'],
+ '/faqs':['Frequently asked questions','Services, engagement scope, scheduling and working with BlueLink Consults.'],
+ '/privacy-policy':['Privacy policy','How BlueLink Consults handles inquiries, account information, hosting and third-party services.'],
+ '/terms':['Terms of service','Terms for using the BlueLink Consults website.'],
+};
+for(const [slug,title] of Object.entries({'technology-audit-assessment':'Technology Audit & Assessment','application-modernization':'Application Modernization','cloud-infrastructure':'Cloud Infrastructure','devops-automation':'DevOps & Automation','predeployment-validation':'Pre-Deployment Validation','operational-incident-support':'Operational & Incident Support'})) pageMetadata[`/services/${slug}`]=[title,`${title} services from BlueLink Consults. Review the scope, expected deliverables and approach for your institution.`];
+export const profileLinks=['https://www.facebook.com/share/19XEu6zf1n/?mibextid=wwXIfr','https://www.instagram.com/bluelinkconsults','https://www.linkedin.com/company/bluelinkconsults/'];

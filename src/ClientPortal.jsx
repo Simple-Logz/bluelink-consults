@@ -1501,7 +1501,7 @@ function AdminInbox() {
     return () => supabase.removeChannel(ch);
   }, []);
 
-  const labels = { onboarding:"Onboarding", discovery:"Discovery", milestone_signoff:"Sign-Off", support_request:"Support" };
+  const labels = { website_inquiry:"Website Inquiry", website_demo:"Demo Request", onboarding:"Onboarding", discovery:"Discovery", milestone_signoff:"Sign-Off", support_request:"Support" };
   const colors = { onboarding:{bg:"rgba(37,99,235,0.1)",color:T.info}, discovery:{bg:T.goldDim,color:T.gold}, milestone_signoff:{bg:"rgba(22,163,74,0.1)",color:T.success}, support_request:{bg:"rgba(220,38,38,0.1)",color:T.danger} };
 
   function summary(item) {
@@ -1511,6 +1511,7 @@ function AdminInbox() {
       case "discovery":        return `${d.project_name||"—"} · ${d.service_type||"—"}`;
       case "milestone_signoff":return `${d.milestone_name||"—"} · By: ${d.approved_by||"—"}`;
       case "support_request":  return `[${d.priority||"—"}] ${d.subject||"—"}`;
+      case "website_inquiry": case "website_demo": return `${d.name||"Website visitor"} · ${d.company||d.email||""}`;
       default: return JSON.stringify(d).substring(0,80);
     }
   }
@@ -1525,8 +1526,8 @@ function AdminInbox() {
         <button className="btn-ghost" onClick={()=>setSelected(null)} style={{ marginBottom:20 }}>← Back to inbox</button>
         <div className="card">
           <span className="badge" style={{ background:c.bg, color:c.color, marginBottom:14, display:"inline-flex" }}>{labels[item.form_type]}</span>
-          <h2 style={{ color:T.text, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||"Unknown"}</h2>
-          <p style={{ color:T.textMid, fontSize:"0.8rem", marginBottom:20 }}>{item.profiles?.company} · {item.profiles?.email} · {new Date(item.submitted_at).toLocaleString()}</p>
+          <h2 style={{ color:T.text, marginBottom:6, fontSize:"1.4rem" }}>{item.profiles?.full_name||item.data?.name||"Unknown"}</h2>
+          <p style={{ color:T.textMid, fontSize:"0.8rem", marginBottom:20 }}>{item.profiles?.company||item.data?.company} · {item.profiles?.email||item.data?.email} · {new Date(item.submitted_at).toLocaleString()}</p>
           <div style={{ borderTop:`1px solid ${T.border}`, paddingTop:18, display:"grid", gap:14 }}>
             {Object.entries(item.data||{}).map(([key,val])=>(
               <div key={key} style={{ borderBottom:`1px solid ${T.border}`, paddingBottom:12 }}>
@@ -1561,7 +1562,7 @@ function AdminInbox() {
               <div key={item.id} style={{ display:"grid", gridTemplateColumns:"110px 1fr 150px 110px auto", gap:14, padding:"14px 20px", borderBottom:i<filtered.length-1?`1px solid ${T.border}`:"none", alignItems:"center" }}>
                 <span className="badge" style={{ background:c.bg, color:c.color }}>{labels[item.form_type]}</span>
                 <p style={{ fontSize:"0.82rem", color:T.text, lineHeight:1.5 }}>{summary(item)}</p>
-                <div><p style={{ fontWeight:600, fontSize:"0.8rem", color:T.text }}>{item.profiles?.full_name||"—"}</p><p style={{ fontSize:"0.7rem", color:T.textMid }}>{item.profiles?.company}</p></div>
+                <div><p style={{ fontWeight:600, fontSize:"0.8rem", color:T.text }}>{item.profiles?.full_name||item.data?.name||"—"}</p><p style={{ fontSize:"0.7rem", color:T.textMid }}>{item.profiles?.company||item.data?.company}</p></div>
                 <p style={{ fontSize:"0.74rem", color:T.textMid }}>{new Date(item.submitted_at).toLocaleDateString()}</p>
                 <button onClick={()=>setSelected(item.id)} className="btn-ghost" style={{ border:`1px solid ${T.border}`, padding:"5px 10px", borderRadius:6 }}><Eye size={12}/> View</button>
               </div>

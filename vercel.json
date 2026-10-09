@@ -14,11 +14,422 @@
       "source": "/services/application-modernisation",
       "destination": "/services/application-modernization",
       "permanent": true
+    },
+    {
+      "source": "/insights/cbn-data-localisation-migration",
+      "destination": "/blog/cbn-data-localisation-migration",
+      "permanent": true
     }
   ],
   "rewrites": [
     {
-      "source": "/(.*)",
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/home.html"
+    },
+    {
+      "source": "/",
+      "destination": "/__pages/global/home.html"
+    },
+    {
+      "source": "/services",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/services.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/__pages/global/services.html"
+    },
+    {
+      "source": "/solutions",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/solutions.html"
+    },
+    {
+      "source": "/solutions",
+      "destination": "/__pages/global/solutions.html"
+    },
+    {
+      "source": "/solutions/who-we-help",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/solutions--who-we-help.html"
+    },
+    {
+      "source": "/solutions/who-we-help",
+      "destination": "/__pages/global/solutions--who-we-help.html"
+    },
+    {
+      "source": "/solutions/eat-framework",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/solutions--eat-framework.html"
+    },
+    {
+      "source": "/solutions/eat-framework",
+      "destination": "/__pages/global/solutions--eat-framework.html"
+    },
+    {
+      "source": "/solutions/data-localisation",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/solutions--data-localisation.html"
+    },
+    {
+      "source": "/solutions/data-localisation",
+      "destination": "/__pages/global/solutions--data-localisation.html"
+    },
+    {
+      "source": "/resources/delivery-examples",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/resources--delivery-examples.html"
+    },
+    {
+      "source": "/resources/delivery-examples",
+      "destination": "/__pages/global/resources--delivery-examples.html"
+    },
+    {
+      "source": "/blog",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/blog.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/__pages/global/blog.html"
+    },
+    {
+      "source": "/blog/cbn-data-localisation-migration",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/blog--cbn-data-localisation-migration.html"
+    },
+    {
+      "source": "/blog/cbn-data-localisation-migration",
+      "destination": "/__pages/global/blog--cbn-data-localisation-migration.html"
+    },
+    {
+      "source": "/insights",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/insights.html"
+    },
+    {
+      "source": "/insights",
+      "destination": "/__pages/global/insights.html"
+    },
+    {
+      "source": "/insights/cbn-data-localisation-migration",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/insights--cbn-data-localisation-migration.html"
+    },
+    {
+      "source": "/insights/cbn-data-localisation-migration",
+      "destination": "/__pages/global/insights--cbn-data-localisation-migration.html"
+    },
+    {
+      "source": "/events",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/events.html"
+    },
+    {
+      "source": "/events",
+      "destination": "/__pages/global/events.html"
+    },
+    {
+      "source": "/about",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/about.html"
+    },
+    {
+      "source": "/about",
+      "destination": "/__pages/global/about.html"
+    },
+    {
+      "source": "/about/our-story",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/about--our-story.html"
+    },
+    {
+      "source": "/about/our-story",
+      "destination": "/__pages/global/about--our-story.html"
+    },
+    {
+      "source": "/about/our-team",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/about--our-team.html"
+    },
+    {
+      "source": "/about/our-team",
+      "destination": "/__pages/global/about--our-team.html"
+    },
+    {
+      "source": "/about/why-bluelink",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/about--why-bluelink.html"
+    },
+    {
+      "source": "/about/why-bluelink",
+      "destination": "/__pages/global/about--why-bluelink.html"
+    },
+    {
+      "source": "/contact",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/contact.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/__pages/global/contact.html"
+    },
+    {
+      "source": "/request-demo",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/request-demo.html"
+    },
+    {
+      "source": "/request-demo",
+      "destination": "/__pages/global/request-demo.html"
+    },
+    {
+      "source": "/faqs",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/faqs.html"
+    },
+    {
+      "source": "/faqs",
+      "destination": "/__pages/global/faqs.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/privacy-policy.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/__pages/global/privacy-policy.html"
+    },
+    {
+      "source": "/terms",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/terms.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/__pages/global/terms.html"
+    },
+    {
+      "source": "/services/technology-audit-assessment",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/services--technology-audit-assessment.html"
+    },
+    {
+      "source": "/services/technology-audit-assessment",
+      "destination": "/__pages/global/services--technology-audit-assessment.html"
+    },
+    {
+      "source": "/services/application-modernization",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/services--application-modernization.html"
+    },
+    {
+      "source": "/services/application-modernization",
+      "destination": "/__pages/global/services--application-modernization.html"
+    },
+    {
+      "source": "/services/cloud-infrastructure",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/services--cloud-infrastructure.html"
+    },
+    {
+      "source": "/services/cloud-infrastructure",
+      "destination": "/__pages/global/services--cloud-infrastructure.html"
+    },
+    {
+      "source": "/services/devops-automation",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/services--devops-automation.html"
+    },
+    {
+      "source": "/services/devops-automation",
+      "destination": "/__pages/global/services--devops-automation.html"
+    },
+    {
+      "source": "/services/predeployment-validation",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/services--predeployment-validation.html"
+    },
+    {
+      "source": "/services/predeployment-validation",
+      "destination": "/__pages/global/services--predeployment-validation.html"
+    },
+    {
+      "source": "/services/operational-incident-support",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/services--operational-incident-support.html"
+    },
+    {
+      "source": "/services/operational-incident-support",
+      "destination": "/__pages/global/services--operational-incident-support.html"
+    },
+    {
+      "source": "/sitemap.xml",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/sitemap.xml"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/__pages/global/sitemap.xml"
+    },
+    {
+      "source": "/robots.txt",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/robots.txt"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/__pages/global/robots.txt"
+    },
+    {
+      "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
   ]

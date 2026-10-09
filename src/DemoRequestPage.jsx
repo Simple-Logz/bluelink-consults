@@ -1,3 +1,4 @@
+import { submitInquiry } from "./submitInquiry";
 import React, { useEffect, useState } from "react";
 import { CheckCircle2, Download, Mail, Send, CalendarDays } from "lucide-react";
 
@@ -14,25 +15,15 @@ export default function DemoRequestPage() {
   useEffect(() => { document.title = `${isNigeriaSite ? "Schedule Demo" : "Request a LytHouse Demo"} | BlueLink Consults`; }, []);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
+  const [receipt,setReceipt] = useState(null);
   async function submit(event) {
     event.preventDefault();
     if (status === "sending") return;
     const form = event.currentTarget;
     setStatus("sending");
     setError("");
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
-    try {
-      const response = await fetch(`https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID || "meedwzan"}`, {
-        method: "POST", body: new FormData(form), headers: { Accept: "application/json" }, signal: controller.signal,
-      });
-      const result = await response.json();
-      if (!response.ok || !result.ok) throw new Error("Request not accepted");
-      setStatus("sent");
-    } catch {
-      setStatus("idle");
-      setError("Your request could not be confirmed. Please try again or email info@bluelinkconsults.com.");
-    } finally { clearTimeout(timeout); }
+    try { const result=await submitInquiry(form,'demo'); setReceipt(result); setStatus('sent'); }
+    catch(error) { setStatus('idle'); setError(error.message); }
   }
   return <>
     <section className="page-hero" style={{ paddingBottom: 40 }}><p className="eyebrow">BlueLink Consults</p><h1>{isNigeriaSite ? "Schedule Demo" : "Request a LytHouse Demo"}</h1><p>{isNigeriaSite ? "Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team." : "Explore release validation with your engineering team. Share your pipeline and validation priorities so we can discuss supported checks, integration requirements and release evidence."}</p><BookingButton /></section>
@@ -43,16 +34,16 @@ export default function DemoRequestPage() {
         {!isNigeriaSite && <p>For application, cloud or DevOps consulting, <a href="/contact#consultation">book a consultation</a>.</p>}
         <div className="contact-details"><a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a><a href="tel:+14014402434">US: +1 401-440-2434</a><a href="tel:+2348068649496">Nigeria: +234 806 864 9496</a></div>
       </div>
-      {status === "sent" ? <div className="success-box" role="status"><CheckCircle2 size={40} /><h3>Demo request received</h3><p>Thank you. Choose an available time below to book your demo. If you have already booked, our team will use these details to prepare your session.</p><BookingButton /><br /><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><p><a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20demo%20follow-up">Email our team</a></p><button onClick={() => setStatus("idle")}>Send another request</button></div> :
+      {status === "sent" ? <div className="success-box" role="status"><CheckCircle2 size={40} /><h3>Demo request received</h3><p>Thank you. Choose an available time below to book your demo. If you have already booked, our team will use these details to prepare your session.</p><BookingButton /><br /><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><p><a href="mailto:info@bluelinkconsults.com?subject=BlueLink%20demo%20follow-up">Email our team</a></p><p>Request reference: {receipt?.reference?.slice(0,8).toUpperCase()}</p><button onClick={() => setStatus("idle")}>Send another request</button></div> :
       <form className="contact-form" onSubmit={submit}>
-        <input type="hidden" name="_subject" value="BlueLink demo request" />
+        <input className="bl-form-trap" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true"/><input type="hidden" name="_subject" value="BlueLink demo request" />
         <input type="hidden" name="source" value="BlueLink / Request Demo" />
         <label>Full Name<input required name="name" autoComplete="name" /></label>
         <label>Work Email<input required name="email" type="email" autoComplete="email" /></label>
         <label>Organization<input required name="company" autoComplete="organization" /></label>
         <label>Phone Number (optional)<input name="phone" type="tel" autoComplete="tel" placeholder="Include your country code" /></label>
         {isNigeriaSite ? <label>Service of Interest<select name="service" required defaultValue=""><option value="" disabled>Select a service</option>{services.map(service => <option key={service}>{service}</option>)}</select></label> : <input type="hidden" name="service" value="LytHouse — Pre-Deployment Validation" />}
-        <label>What would you like to see?<textarea required name="message" rows="4" placeholder={isNigeriaSite ? "Describe your technical challenge and what your team would like to explore." : "Tell us about your CI/CD platform, environments and the checks you need before production."} /></label>
+        <label>What would you like to see?<textarea required name="message" rows="4" minLength={5} maxLength={10000} placeholder={isNigeriaSite ? "Describe your technical challenge and what your team would like to explore." : "Tell us about your CI/CD platform, environments and the checks you need before production."} /></label>
         <label>Preferred Date (optional)<input name="preferredDate" type="date" /></label>
         <small>We will confirm availability with you by email. Please do not include passwords or confidential system data.</small>
         <div className="demo-profile"><strong>Learn more about BlueLink Consults</strong><a href="/BlueLink-Company-Profile.pdf" download><Download size={18} /> Download Company Profile</a><small>Optional background information about our services.</small></div>

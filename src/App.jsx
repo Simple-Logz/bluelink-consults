@@ -1,3 +1,7 @@
+import { zoomBookingUrl } from "./siteBooking";
+import { submitInquiry } from "./submitInquiry";
+import { InstitutionalSectorsPage, ProfessionalEATPage, MigrationReadinessPage, DeliveryExamplesPage, EventsActivitiesPage } from "./InstitutionalPages";
+import { SiteMetadata } from "./SiteMetadata";
 import SocialLinks, { SocialLogo } from "./SocialLinks";
 import { CbnArticle, BlogFeature } from "./CbnBlog";
 import { serviceContent } from "./serviceContent";
@@ -631,10 +635,7 @@ function PageHero({ label, title, text }) {
 
 
 
-function EventsPage() {
-  usePageTitle("Events & Activities");
-  return <><PageHero label="Events & Activities" title="BlueLink out in the industry." text="Conferences, industry gatherings and team activities — photos, videos and highlights from the events we attend." /><section className="events-empty"><CalendarDays size={38} aria-hidden="true" /><h2>Our next highlights are on the way.</h2><p>Event photos, videos and updates from our team will appear here.</p><SocialLinks /></section></>;
-}
+function EventsPage() { usePageTitle("Events & Activities"); return <EventsActivitiesPage />; }
 
 function Footer() {
   if (isNigeriaSite) return <NigeriaEnterpriseFooter services={services} />;
@@ -1602,6 +1603,10 @@ function SolutionsPage() {
 }
 
 function WhoWeHelpPage() {
+  if (isNigeriaSite) return <InstitutionalSectorsPage />;
+  return <GlobalWhoWeHelpPage />;
+}
+function GlobalWhoWeHelpPage() {
   usePageTitle("Who We Help");
   return (
     <>
@@ -1636,132 +1641,7 @@ function WhoWeHelpPage() {
   );
 }
 
-function EATFrameworkPage() {
-  usePageTitle("EAT Framework");
-  const phases = [
-    {
-        "number": "01",
-        "letter": "E",
-        "label": "Engage",
-        "tagline": "Agree the scope and success measures.",
-        "color": "#2563eb",
-        "colorLight": "rgba(37,99,235,0.08)",
-        "colorBorder": "rgba(37,99,235,0.2)",
-        "description": "Business and technical stakeholders agree which workflows need improvement, what must remain available and how results will be judged. We establish decision owners, budget constraints and the information needed for assessment.",
-        "steps": [
-            "Identify the affected applications, teams and business workflows.",
-            "Record current performance, costs and operational pain points.",
-            "Agree measurable success criteria and service requirements.",
-            "Document scope, decision owners, milestones and communication."
-        ],
-        "outcome": "An agreed engagement brief: scope, success measures, decision owners and assessment plan."
-    },
-    {
-        "number": "02",
-        "letter": "A",
-        "label": "Assess",
-        "tagline": "Build the evidence for a decision.",
-        "color": "#1677b8",
-        "colorLight": "rgba(22,119,184,0.08)",
-        "colorBorder": "rgba(22,119,184,0.2)",
-        "description": "We review the agreed applications, infrastructure and delivery processes. Dependencies, security findings and performance constraints are validated with your team. Options are compared against cost assumptions, operational risk and implementation effort.",
-        "steps": [
-            "Map application, database and external integration dependencies.",
-            "Review access controls, infrastructure configuration and recovery arrangements.",
-            "Identify performance bottlenecks, delivery delays and avoidable costs.",
-            "Compare refactoring, migration and replacement options.",
-            "Prioritize changes and document assumptions and trade-offs."
-        ],
-        "outcome": "A findings report, dependency map, prioritized risk register and phased roadmap with cost assumptions."
-    },
-    {
-        "number": "03",
-        "letter": "T",
-        "label": "Transform",
-        "tagline": "Deliver changes with acceptance evidence.",
-        "color": "#1557c0",
-        "colorLight": "rgba(21,87,192,0.08)",
-        "colorBorder": "rgba(21,87,192,0.2)",
-        "description": "We implement the approved roadmap in manageable stages. Each stage has acceptance criteria, release checks and a rollback approach. Progress, spending and scope changes are reviewed with the agreed decision owners.",
-        "steps": [
-            "Implement agreed application, infrastructure or integration changes.",
-            "Automate builds, tests and environment provisioning where appropriate.",
-            "Record security, performance and pre-deployment validation results.",
-            "Approve releases with monitoring and rollback procedures in place.",
-            "Complete runbooks, knowledge transfer and operational handover."
-        ],
-        "outcome": "Implemented changes, test and release evidence, operational documentation and an acceptance record for each delivery stage."
-    }
-];
-
-  return (
-    <>
-      <PageHero
-        label="Our Delivery Framework"
-        title="The EAT Framework — How BlueLink Consults Delivers Results."
-        text={
-          <>
-            EAT stands for <strong>Engage</strong>, <strong>Assess</strong>, and{" "}
-            <strong>Transform</strong>. It is our delivery framework for understanding
-            your business, evaluating your technology landscape, and delivering
-            measurable transformation outcomes.
-          </>
-        }
-      />
-      <section className="section white-section">
-        <div style={{ maxWidth:760, margin:"0 auto", textAlign:"center" }}>
-          <p className="eyebrow">Why EAT?</p>
-          <h2 style={{ fontFamily:"var(--font-display)", fontSize:"clamp(1.5rem,2.5vw,2rem)", marginBottom:16 }}>Every stage should produce a reviewable result.</h2>
-          <p style={{ color:"#5d687d", lineHeight:1.8, fontSize:"1rem", marginBottom:16 }}>Engage produces an agreed brief. Assess produces findings and an investment roadmap. Transform produces implemented changes, test evidence and operational handover. These outputs give leadership a basis for approving the next stage.</p>
-          <p style={{ color:"#5d687d", lineHeight:1.8, fontSize:"1rem" }}>The depth of each stage depends on your project. A focused application change needs a different assessment from a portfolio migration. Scope, timelines and responsibilities are agreed before delivery begins.</p>
-        </div>
-      </section>
-      <section className="section" style={{ background:"#f8f7f5" }}>
-        <div style={{ maxWidth:900, margin:"0 auto", padding:"0 48px" }}>
-          {phases.map((phase, idx) => (
-            <div key={phase.letter} style={{ marginBottom: idx < phases.length - 1 ? 48 : 0 }}>
-              <div className="eat-full-phase-card" style={{ background:"white", border:`2px solid ${phase.colorBorder}`, borderRadius:16, padding:"40px 44px", position:"relative", overflow:"hidden" }}>
-                <div style={{ position:"absolute", top:16, right:32, fontFamily:"var(--font-display)", fontSize:"8rem", fontWeight:900, color:phase.color, opacity:0.05, lineHeight:1 }}>{phase.number}</div>
-                <div style={{ display:"flex", alignItems:"flex-start", gap:24, marginBottom:24 }}>
-                  <div style={{ width:60, height:60, borderRadius:"50%", background:phase.colorLight, border:`2px solid ${phase.colorBorder}`, display:"flex", alignItems:"center", justifyContent:"center", fontFamily:"var(--font-display)", fontSize:"1.5rem", fontWeight:700, color:phase.color, flexShrink:0 }}>
-                    {phase.letter}
-                  </div>
-                  <div>
-                    <p style={{ fontSize:"0.72rem", fontWeight:800, color:phase.color, textTransform:"uppercase", letterSpacing:"0.12em", marginBottom:4 }}>{phase.number} · {phase.label}</p>
-                    <h2 style={{ fontFamily:"var(--font-display)", fontSize:"clamp(1.4rem,2vw,1.8rem)", color:"#0d1b2e", marginBottom:6 }}>{phase.tagline}</h2>
-                  </div>
-                </div>
-                <p style={{ color:"#5d687d", lineHeight:1.8, fontSize:"0.95rem", marginBottom:24 }}>{phase.description}</p>
-                <div style={{ display:"grid", gap:10, marginBottom:24 }}>
-                  {phase.steps.map((step, i) => (
-                    <div key={i} style={{ display:"flex", gap:12, alignItems:"flex-start" }}>
-                      <div style={{ width:22, height:22, borderRadius:"50%", background:phase.colorLight, border:`1px solid ${phase.colorBorder}`, display:"flex", alignItems:"center", justifyContent:"center", fontSize:"0.65rem", fontWeight:800, color:phase.color, flexShrink:0, marginTop:2 }}>{i+1}</div>
-                      <p style={{ fontSize:"0.875rem", color:"#374151", lineHeight:1.6 }}>{step}</p>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ background:phase.colorLight, border:`1px solid ${phase.colorBorder}`, borderRadius:10, padding:"14px 18px", borderLeft:`4px solid ${phase.color}` }}>
-                  <p style={{ fontSize:"0.72rem", fontWeight:800, color:phase.color, textTransform:"uppercase", letterSpacing:"0.1em", marginBottom:4 }}>Outcome</p>
-                  <p style={{ fontSize:"0.875rem", color:"#5d687d", lineHeight:1.65 }}>{phase.outcome}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      <section className="section" style={{ background:"var(--navy, #050e1f)", padding:"72px 0" }}>
-        <div style={{ maxWidth:640, margin:"0 auto", padding:"0 48px", textAlign:"center" }}>
-          <p className="eyebrow" style={{ color:"var(--bronze)" }}>Ready to begin?</p>
-          <h2 style={{ fontFamily:"var(--font-display)", color:"white", marginBottom:16, fontSize:"clamp(1.6rem,2.5vw,2.2rem)" }}>Discuss your modernization priorities.</h2>
-          <p style={{ color:"rgba(255,255,255,0.6)", marginBottom:32, lineHeight:1.7 }}>Tell us which systems need to improve, your constraints and the outcomes you need. We will discuss the appropriate assessment scope and next steps.</p>
-          <Link to={isNigeriaSite ? "/request-demo" : "/contact#consultation"} style={{ display:"inline-flex", alignItems:"center", gap:10, background:"var(--bronze)", color:"white", padding:"14px 28px", fontWeight:800, textDecoration:"none" }}>
-            Schedule Your Discovery Session <ArrowRight size={17} />
-          </Link>
-        </div>
-      </section>
-    </>
-  );
-}
+function EATFrameworkPage() { return <ProfessionalEATPage />; }
 
 /* ─── INSIGHTS ───────────────────────────────────────────── */
 function InsightsPage() {
@@ -2168,6 +2048,7 @@ function ContactPage() {
   const isWebDev = new URLSearchParams(location.search).get("type") === "web-development";
   usePageTitle(isWebDev ? "Request A Quote" : "Contact");
   const [submitted, setSubmitted] = useState(false);
+  const [inquiryReceipt,setInquiryReceipt] = useState(null);
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState("");
   const formspreeEndpoint = `https://formspree.io/f/${import.meta.env.VITE_FORMSPREE_ID || "meedwzan"}`;
@@ -2177,16 +2058,12 @@ function ContactPage() {
     const form = event.currentTarget;
     setFormError("");
     setFormLoading(true);
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
     try {
-      const response = await fetch(formspreeEndpoint, { method: "POST", body: new FormData(form), headers: { Accept: "application/json" }, signal: controller.signal });
-      const result = await response.json();
-      if (!response.ok || !result.ok) throw new Error("Submission not confirmed");
+      const receipt=await submitInquiry(form,'contact');
+      setInquiryReceipt(receipt);
       setSubmitted(true);
-    } catch {
-      setFormError("We could not confirm your submission. Please try again or email info@bluelinkconsults.com.");
-    } finally { clearTimeout(timeout); setFormLoading(false); }
+    } catch(error) { setFormError(error.message); }
+    finally { setFormLoading(false); }
   }
 
   return (
@@ -2200,35 +2077,35 @@ function ContactPage() {
         <div className="contact-copy">
           <p className="eyebrow">Contact BlueLink Consults</p>
           <h2>{isWebDev ? "Start your website project." : "Start with a modernization conversation."}</h2>
-          <p>Submit your inquiry below. We will respond within one business day.</p>
+          <p>Share your requirements and our team will review the next step with you.</p>
           <div className="contact-details">
             <a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a>
             <a href="tel:+14014402434"><Phone size={17} /> US: +1 401-440-2434</a><a href="tel:+2348068649496"><Phone size={17} /> Nigeria: +234 806 864 9496</a>
-            <span><MapPin size={17} /> Providence, RI, 02909 United States</span>
-            <span><Building2 size={17} /> Serving growing organizations and business teams</span>
+            <span><MapPin size={17} /> {isNigeriaSite ? "Nigeria operations · Calabar & Uyo" : "Providence, RI, 02909 United States"}</span>
+            <span><Building2 size={17} /> {isNigeriaSite ? "Blue Link Consults Ltd · Financial services, healthcare, public institutions & enterprises" : "Serving growing organizations and business teams"}</span>
           </div>
         </div>
         {submitted ? (
           <div className="success-box">
             <CheckCircle2 size={40} />
-            <h3>Inquiry sent successfully</h3>
-            <p>Thank you. Your message was successfully delivered to BlueLink Consults.</p>
+            <h3>Inquiry received</h3>
+            <p>Thank you. Your request has been recorded for our team. Reference: {inquiryReceipt?.reference?.slice(0,8).toUpperCase()}.</p><p>We will respond using the email address you supplied. You can also book a 30-minute Zoom discussion.</p><a className="ng-link" href={zoomBookingUrl}>Choose a meeting time <ArrowRight size={17}/></a>
             <button onClick={() => { setSubmitted(false); setFormError(""); }}>Submit another inquiry</button>
           </div>
         ) : isWebDev ? (
           <form
             className="contact-form"
             id="consultation-form"
-            action={formspreeEndpoint}
+            action="/api/inquiry"
             method="POST"
             onSubmit={handleSubmit}
           >
             {formError && <div className="auth-message">{formError}</div>}
-            <input type="hidden" name="_subject" value="New Web Development inquiry from bluelinkconsults.com" />
+            <input className="bl-form-trap" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" /><input type="hidden" name="_subject" value="New Web Development inquiry from bluelinkconsults.com" />
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
             <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
             <label>Company Name<input name="company" type="text" placeholder="Company name" /></label>
-            <label>Phone Number (optional)<input name="phone" type="tel" placeholder="+1 ..." /></label>
+            <label>Phone Number (optional)<input name="phone" type="tel" placeholder={isNigeriaSite ? "+234 ..." : "+1 ..."} /></label>
             <label>
               What type of business are you in?
               <select required name="businessType" defaultValue="">
@@ -2253,16 +2130,16 @@ function ContactPage() {
           <form
             className="contact-form"
             id="consultation-form"
-            action={formspreeEndpoint}
+            action="/api/inquiry"
             method="POST"
             onSubmit={handleSubmit}
           >
             {formError && <div className="auth-message">{formError}</div>}
-            <input type="hidden" name="_subject" value="New BlueLink Consults website inquiry" />
+            <input className="bl-form-trap" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" /><input type="hidden" name="_subject" value="New BlueLink Consults website inquiry" />
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
             <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
             <label>Company<input name="company" type="text" placeholder="Company name" /></label>
-            <label>Phone Number (optional)<input name="phone" type="tel" placeholder="+1 ..." /></label>
+            <label>Phone Number (optional)<input name="phone" type="tel" placeholder={isNigeriaSite ? "+234 ..." : "+1 ..."} /></label>
             <div style={{ display: "grid", gap: 8 }}>
               <span style={{ fontWeight: 800, fontSize: "0.92rem" }}>What are your biggest pain points? <span style={{ color: "var(--bronze)" }}>(Check all that apply)</span></span>
               <p style={{ fontSize: "0.82rem", color: "var(--muted)", margin: 0 }}>This helps us come prepared with the right answers for your consultation.</p>
@@ -2288,7 +2165,7 @@ function ContactPage() {
                 ))}
               </div>
             </div>
-            <label>Message<textarea required name="message" rows="4" placeholder="Tell us a bit more about your situation..." /></label>
+            <label>Message<textarea minLength={5} maxLength={10000} required name="message" rows="4" placeholder="Tell us a bit more about your situation..." /></label>
             <button type="submit" disabled={formLoading}>
               {formLoading ? "Sending..." : "Submit Inquiry"} <Send size={18} />
             </button>
@@ -2436,28 +2313,28 @@ function PrivacyPolicyPage() {
     <>
       <PageHero label="Legal" title="Privacy Policy" text="How BlueLink Consults collects, uses, and protects your information." />
       <article className="article">
-        <p style={{ color: "var(--muted)", fontSize: "0.88rem", marginBottom: 32 }}>Last updated: June 2026</p>
+        <p style={{ color: "var(--muted)", fontSize: "0.88rem", marginBottom: 32 }}>Last updated: 9 October 2026</p>
 
         <h2>1. Who We Are</h2>
-        <p>BlueLink Consults ("we", "us", "our") is an application modernization and cloud advisory consultancy based in Providence, RI, USA. We can be contacted at <strong>info@bluelinkconsults.com</strong> or by phone at <strong>401-440-2434</strong>.</p>
+        <p>BlueLink Consults ("we", "us", "our") provides technology consulting services. For our Nigeria operations, the company is Blue Link Consults Ltd, with operations in Calabar and Uyo; our US contact is based in Providence, Rhode Island. We can be contacted at <strong>info@bluelinkconsults.com</strong> or by phone at <strong>401-440-2434</strong>.</p>
 
         <h2>2. Information We Collect</h2>
-        <p>We collect information you provide directly to us, including when you fill in our contact or consultation form (name, business email, company name, and details of your enquiry), when you create a Client Portal account (name, email, company), and when you communicate with us by email or phone. We also collect standard website analytics data (pages visited, time on site, device type) through anonymous analytics tools.</p>
+        <p>We collect information you provide directly to us, including when you fill in our contact or consultation form (name, business email, company name, and details of your enquiry), when you create a Client Portal account (name, email, company), and when you communicate with us by email or phone. Our hosting and service providers may process technical request information, such as IP address and device or browser details, for service delivery and security.</p>
 
         <h2>3. How We Use Your Information</h2>
-        <p>We use the information we collect to respond to your consultation requests and enquiries, to deliver and manage client engagements through our Client Portal, to send you updates relevant to your project, and to improve our website and services. We do not sell, rent, or share your personal information with third parties for marketing purposes.</p>
+        <p>We use the information we collect to respond to your consultation requests and enquiries, to deliver and manage client engagements through our Client Portal, to send you updates relevant to your project, and to improve our website and services. We do not sell your personal information. We share relevant information with service providers to operate the website, store requests and arrange meetings.</p>
 
         <h2>4. Data Storage & Security</h2>
-        <p>Client Portal data is stored securely using Supabase, a SOC 2 compliant cloud database platform hosted in the United States. Contact form submissions are processed through Formspree. We take reasonable technical and organizational measures to protect your data against unauthorized access, loss, or misuse.</p>
+        <p>Inquiry records and client portal data are stored using Supabase in a United States hosting region. Our website is hosted on Vercel. Formspree is used to forward inquiry notifications, and Zoom Scheduler handles meeting bookings. These providers may process information outside Nigeria. We use access controls and appropriate technical and organizational measures to protect the information we handle. Please do not submit payment transaction records, credentials or sensitive system information through these public forms.</p>
 
         <h2>5. Cookies</h2>
-        <p>Our website uses minimal cookies required for basic functionality. We do not use advertising or tracking cookies. You can disable cookies in your browser settings without affecting your ability to use the site.</p>
+        <p>The public website does not require an account to browse. Client portal and staff sign-in use browser storage to maintain authentication. External scheduling and social platforms apply their own cookie and privacy policies. Blocking authentication storage may prevent signed-in features from working.</p>
 
         <h2>6. Your Rights</h2>
-        <p>You have the right to access, correct, or request deletion of any personal data we hold about you. To exercise these rights, email us at <strong>info@bluelinkconsults.com</strong>. We will respond within 30 days.</p>
+        <p>You have the right to access, correct, or request deletion of any personal data we hold about you. To exercise these rights, email us at <strong>info@bluelinkconsults.com</strong>. We will review your request in accordance with applicable data protection requirements. Inquiry information is kept while needed to respond and manage the relationship; relevant engagement records may be retained for contractual, legal or accounting purposes. Contact us for a review or deletion request.</p>
 
         <h2>7. Third-Party Services</h2>
-        <p>Our website uses the following third-party services: Supabase (database and authentication), Formspree (contact form processing), and Unsplash (stock photography). Each of these services has their own privacy policy governing their use of data.</p>
+        <p>Our website uses the following third-party services: Vercel (hosting), Supabase (database and authentication), Formspree (inquiry notifications), and Zoom (scheduling). Social links lead to Facebook, Instagram and LinkedIn. Stock photographs are sourced from Pexels and other credited providers. Each of these services has their own privacy policy governing their use of data.</p>
 
         <h2>8. Changes to This Policy</h2>
         <p>We may update this policy from time to time. We will post the updated policy on this page with a revised date. Continued use of our website or services after any changes constitutes your acceptance of the updated policy.</p>
@@ -2476,7 +2353,7 @@ function TermsPage() {
     <>
       <PageHero label="Legal" title="Terms of Service" text="The terms and conditions governing use of BlueLink Consults services and website." />
       <article className="article">
-        <p style={{ color: "var(--muted)", fontSize: "0.88rem", marginBottom: 32 }}>Last updated: June 2026</p>
+        <p style={{ color: "var(--muted)", fontSize: "0.88rem", marginBottom: 32 }}>Last updated: 9 October 2026</p>
 
         <h2>1. Acceptance of Terms</h2>
         <p>By accessing our website at bluelinkconsults.com or using our Client Portal, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our website or services.</p>
@@ -2656,6 +2533,7 @@ function AppInner() {
     <>
       {!isPortal && !isConnectPage && !isPrivateDemo && (isNigeriaSite ? <NigeriaHeader services={services} /> : <Header />)}
       {!isPortal && !isConnectPage && !isPrivateDemo && <div className="header-spacer" aria-hidden="true" />}
+      <SiteMetadata />
       <ScrollToHash />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
@@ -2671,6 +2549,8 @@ function AppInner() {
           <Route path="/insights/:slug"          element={<InsightDetail />} />
           <Route path="/proposals"               element={<ProposalsPage />} />
           <Route path="/proposals/:slug"         element={<ProposalViewer />} />
+          <Route path="/solutions/data-localisation" element={<MigrationReadinessPage />} />
+          <Route path="/resources/delivery-examples" element={<DeliveryExamplesPage />} />
           <Route path="/solutions"               element={<SolutionsPage />} />
           <Route path="/solutions/who-we-help"   element={<WhoWeHelpPage />} />
           <Route path="/solutions/eat-framework" element={<EATFrameworkPage />} />
