@@ -1,3 +1,5 @@
+import SocialLinks, { SocialLogo } from "./SocialLinks";
+import { CbnArticle, BlogFeature } from "./CbnBlog";
 import { serviceContent } from "./serviceContent";
 import StaffWorkspace from "./StaffWorkspace";
 import WhyInstitutionsChoose from "./WhyInstitutionsChoose";
@@ -631,7 +633,7 @@ function PageHero({ label, title, text }) {
 
 function EventsPage() {
   usePageTitle("Events & Activities");
-  return <><PageHero label="Events & Activities" title="BlueLink out in the industry." text="Conferences, industry gatherings and team activities — photos, videos and highlights from the events we attend." /><section className="events-empty"><CalendarDays size={38} aria-hidden="true" /><h2>Our next highlights are on the way.</h2><p>Event photos, videos and updates from our team will appear here.</p><div><a href="https://www.facebook.com/share/19XEu6zf1n/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Follow us on Facebook <ArrowRight size={17} /></a><a href="https://www.instagram.com/bluelinkconsults" target="_blank" rel="noopener noreferrer">Follow us on Instagram <ArrowRight size={17} /></a></div></section></>;
+  return <><PageHero label="Events & Activities" title="BlueLink out in the industry." text="Conferences, industry gatherings and team activities — photos, videos and highlights from the events we attend." /><section className="events-empty"><CalendarDays size={38} aria-hidden="true" /><h2>Our next highlights are on the way.</h2><p>Event photos, videos and updates from our team will appear here.</p><SocialLinks /></section></>;
 }
 
 function Footer() {
@@ -641,7 +643,7 @@ function Footer() {
       <div>
         <strong>BlueLink Consults</strong>
         <p>{isNigeriaSite ? "Technology assessment, application modernization, cloud infrastructure, automation, release validation and operational support for Nigerian organizations." : "Technology assessment, application modernization, cloud infrastructure, DevOps automation, pre-deployment validation and operational support for growing organizations."}</p>
-        <div className="footer-socials" aria-label="Follow BlueLink"><strong>Follow BlueLink</strong><div><a href="https://www.facebook.com/share/19XEu6zf1n/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer"><Facebook size={19} aria-hidden="true" />Facebook</a><a href="https://www.instagram.com/bluelinkconsults" target="_blank" rel="noopener noreferrer"><Instagram size={19} aria-hidden="true" />Instagram</a></div></div>
+        <div className="footer-socials"><strong>Follow BlueLink</strong><SocialLinks follow={false} /></div>
       </div>
       <div>
         <strong>Our Services</strong>
@@ -1767,6 +1769,7 @@ function InsightsPage() {
   return (
     <>
       <PageHero label="Insights" title="Practical guidance for application modernization and cloud readiness." text="Short business-focused guides to help leaders think about technology improvement with clarity." />
+      <BlogFeature />
       <InsightsPreview />
     </>
   );
@@ -2520,14 +2523,14 @@ function ConnectPage() {
   const phoneDisplay = "+1 (401) 440-2434";
   const phoneLink = "+14014402434";
   const email = "info@bluelinkconsults.com";
-  const linkedIn = "https://www.linkedin.com/company/bluelink-consults";
+  const linkedIn = "https://www.linkedin.com/company/bluelinkconsults/";
 
   const actions = [
     { icon: Globe2, title: "Visit Our Website", detail: "bluelinkconsults.com", href: website },
     { icon: Phone, title: "Call Us", detail: phoneDisplay, href: `tel:${phoneLink}` },
     { icon: Mail, title: "Email Us", detail: email, href: `mailto:${email}` },
     { icon: CalendarDays, title: "Book a Consultation", detail: "Schedule a free consultation", href: "/contact" },
-    { icon: Linkedin, title: "Connect on LinkedIn", detail: "Follow us for updates and insights", href: linkedIn },
+    { icon: props => <SocialLogo name="LinkedIn" {...props} />, title: "Connect on LinkedIn", detail: "Follow us for updates and insights", href: linkedIn },
     { icon: Download, title: "Save Contact", detail: "Download BlueLink Consults vCard", href: "/BlueLink-Consults.vcf", download: true },
   ];
 
@@ -2663,6 +2666,8 @@ function AppInner() {
           <Route path="/services"                element={<ServicesPage />} />
           <Route path="/services/:slug"          element={<ServiceDetail />} />
           <Route path="/insights"                element={<InsightsPage />} />
+          <Route path="/blog/cbn-data-localisation-migration" element={<CbnArticle />} />
+          <Route path="/insights/cbn-data-localisation-migration" element={<CbnArticle />} />
           <Route path="/insights/:slug"          element={<InsightDetail />} />
           <Route path="/proposals"               element={<ProposalsPage />} />
           <Route path="/proposals/:slug"         element={<ProposalViewer />} />
