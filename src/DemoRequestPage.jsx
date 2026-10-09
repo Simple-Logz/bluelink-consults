@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { CheckCircle2, Download, Mail, Send, CalendarDays } from "lucide-react";
 
-const bookingUrl = "https://scheduler.zoom.us/bluelink-consults-fe0ra0/30-mins-with-bluelink";
+import { zoomBookingUrl as bookingUrl } from "./siteBooking";
 const isNigeriaSite = ["bluelinkconsults.ng", "www.bluelinkconsults.ng"].includes(window.location.hostname);
 const bookingButtonStyle = { display: "inline-flex", alignItems: "center", justifyContent: "center", gap: 10, background: "#1557c0", color: "#fff", padding: "14px 22px", borderRadius: 8, fontWeight: 700, textDecoration: "none", margin: "12px 0" };
 function BookingButton() {
-  return <a href={bookingUrl} target="_blank" rel="noopener noreferrer" style={bookingButtonStyle}><CalendarDays size={18} aria-hidden="true" /> {isNigeriaSite ? "Book a 30-minute demo" : "Book a LytHouse demo"}</a>;
+  return <a href={bookingUrl} target="_blank" rel="noopener noreferrer" style={bookingButtonStyle}><CalendarDays size={18} aria-hidden="true" /> {isNigeriaSite ? "Book a 30-minute Zoom demo" : "Book a LytHouse demo"}</a>;
 }
 
 const services = ["Technology Audit & Assessment", "Application Modernisation", "Cloud Infrastructure", "DevOps & Automation", "Pre-Deployment Validation", "Operational & Incident Support"];
 
 export default function DemoRequestPage() {
-  useEffect(() => { document.title = `${isNigeriaSite ? "Request Demo" : "Request a LytHouse Demo"} | BlueLink Consults`; }, []);
+  useEffect(() => { document.title = `${isNigeriaSite ? "Schedule Demo" : "Request a LytHouse Demo"} | BlueLink Consults`; }, []);
   const [status, setStatus] = useState("idle");
   const [error, setError] = useState("");
   async function submit(event) {
@@ -35,11 +35,10 @@ export default function DemoRequestPage() {
     } finally { clearTimeout(timeout); }
   }
   return <>
-    <section className="page-hero" style={{ paddingBottom: 40 }}><p className="eyebrow">BlueLink Consults</p><h1>{isNigeriaSite ? "Request Demo" : "Request a LytHouse Demo"}</h1><p>{isNigeriaSite ? "Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team." : "Explore release validation with your engineering team. Share your pipeline and validation priorities so we can discuss supported checks, integration requirements and release evidence."}</p></section>
+    <section className="page-hero" style={{ paddingBottom: 40 }}><p className="eyebrow">BlueLink Consults</p><h1>{isNigeriaSite ? "Schedule Demo" : "Request a LytHouse Demo"}</h1><p>{isNigeriaSite ? "Choose a time for a 30-minute Zoom demo, or send us your requirements so we can prepare a session for your team." : "Explore release validation with your engineering team. Share your pipeline and validation priorities so we can discuss supported checks, integration requirements and release evidence."}</p><BookingButton /></section>
     <section className="contact-section" id="consultation" style={{ paddingTop: 48 }}>
       <div className="contact-copy">
         <p className="eyebrow">Engage · Assess · Transform</p>
-        <BookingButton />
         <p>{isNigeriaSite ? "Prefer to discuss your requirements first? Select a service and send us your priorities using the form." : "During the session, we will review your release workflow, discuss the checks that matter and confirm the appropriate validation scope."}</p>
         {!isNigeriaSite && <p>For application, cloud or DevOps consulting, <a href="/contact#consultation">book a consultation</a>.</p>}
         <div className="contact-details"><a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a><a href="tel:+14014402434">US: +1 401-440-2434</a><a href="tel:+2348068649496">Nigeria: +234 806 864 9496</a></div>

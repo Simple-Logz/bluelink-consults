@@ -346,3 +346,8 @@ html[data-site="nigeria"] .ng-footer-bottom { padding:20px 0; }
 @media(prefers-reduced-motion:reduce) {
  html[data-site="nigeria"] :is(.ng-btn,.ng-link,.bl-header-demo,.ng-industry-grid a,.ng-submenu a,.ng-more a,.border-card,.solution-card,.resource-card) { transition:none; }
 }
+
+/* Abstract vector hero and documentary photographs. */
+html[data-site="nigeria"] .ng-hero-media { display:flex; align-items:center; justify-content:center; background:#f3f7fb; }
+html[data-site="nigeria"] .ng-hero-media img { object-fit:contain; object-position:center; max-height:500px; }
+html[data-site="nigeria"] .ng-services-media img { object-position:center 43%; }

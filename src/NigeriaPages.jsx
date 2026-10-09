@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
+import { zoomBookingUrl } from "./siteBooking";
 import { Menu, X, ChevronDown, ArrowRight, Zap, Users, FileText, CalendarDays, Mail, Phone } from "lucide-react";
 
 export function NigeriaHeader({ services }) {
@@ -24,11 +25,11 @@ export function NigeriaHeader({ services }) {
     <div className="ng-nav-group"><button onClick={() => flip("about")} aria-expanded={panel === "about"} aria-controls="ng-about">About Us <ChevronDown size={14} /></button>{panel === "about" && <div id="ng-about" className="ng-submenu"><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink</Link></div>}</div>
     <NavLink to="/contact" onClick={close}>Contact</NavLink>
   </>;
-  const extras = [{ title: "Try Simulator", path: "/simulator", icon: Zap }, { title: "Client Login", path: "/client-login", icon: Users }, { title: "Request Demo", path: "/request-demo", icon: CalendarDays, Mail, Phone }, { title: "Blog", path: "/blog", icon: FileText }, { title: "Events & Activities", path: "/events", icon: CalendarDays }];
+  const extras = [{ title: "Try Simulator", path: "/simulator", icon: Zap }, { title: "Client Login", path: "/client-login", icon: Users }, { title: "Schedule Demo", path: "/request-demo", icon: CalendarDays, Mail, Phone }, { title: "Blog", path: "/blog", icon: FileText }, { title: "Events & Activities", path: "/events", icon: CalendarDays }];
   return <div className="bl-header-shell"><HeaderUtility nigeria /><header ref={root} className="site-header ng-header">
     <Link to="/" className="brand-logo-wrap brand-home-link" aria-label="BlueLink Consults homepage" onClick={close}><img src="/bluelink-logo-mark.png" alt="" className="brand-logo-mark" /><span className="brand-wordmark"><strong>Blue<span>Link</span></strong><small>Consults</small></span></Link>
     <nav className="ng-primary" aria-label="Main navigation">{primary}</nav>
-    <Link to="/contact" onClick={close} className="bl-header-demo">Talk to an Expert</Link>
+    <a href={zoomBookingUrl} onClick={close} className="bl-header-demo">Schedule Demo</a>
     <button ref={toggle} type="button" className="ng-menu-toggle" onClick={() => flip("more")} aria-expanded={panel === "more"} aria-controls="ng-more" aria-label={panel === "more" ? "Close additional menu" : "Open additional menu"}>{panel === "more" ? <X size={23} /> : <Menu size={23} />}</button>
     <nav id="ng-more" className={`ng-more ${panel === "more" ? "is-open" : ""}`} aria-label="Additional navigation" hidden={panel !== "more"}>
       <div className="ng-mobile-primary">

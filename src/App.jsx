@@ -1178,7 +1178,7 @@ function Home() {
       </div>
     </section>
     <section className="bl-home-about" aria-labelledby="home-about-title"><div className="bl-home-about-inner">
-      <img src="/images/bluelink-boardroom.png" alt="Illustrative boardroom discussion" loading="lazy" width="1536" height="1024" />
+      <img src="/images/work-from-behind.jpg" alt="A professional working at a laptop, photographed from behind" loading="lazy" width="1536" height="1024" />
       <div className="bl-home-section-heading"><span>About BlueLink Consults</span><h2 id="home-about-title">A clear path to better technology.</h2><p>We help organizations understand what they have, improve what matters and support the systems their business depends on.</p><p>Engage. Assess. Transform. Our approach connects business priorities with practical technology decisions.</p><Link to="/about/why-bluelink">Why choose BlueLink <ArrowRight size={18} aria-hidden="true" /></Link></div>
     </div></section>
     <WhoWeServeStrip /><EditorialShowcase />
