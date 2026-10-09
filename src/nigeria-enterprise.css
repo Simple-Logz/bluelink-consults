@@ -528,3 +528,14 @@ html[data-site="nigeria"] .resource-card a:not(.ng-btn):not(.btn):hover {
 /* Keep red action links readable on the dark delivery section. */
 html[data-site="nigeria"] .ng-delivery .ng-link { color: #f5bcc8 !important; }
 html[data-site="nigeria"] .ng-delivery .ng-link:hover { color: #ffe0e7 !important; }
+
+/* Keep the next section's cards below the initial desktop view. */
+@media (min-width: 1024px) {
+  html[data-site="nigeria"] .ng-hero-layout,
+  html[data-site="nigeria"] .ng-hero-media {
+    min-height: max(620px, calc(100svh - 130px));
+  }
+  html[data-site="nigeria"] .ng-home-actions {
+    padding-top: 64px;
+  }
+}
