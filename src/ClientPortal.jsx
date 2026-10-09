@@ -132,6 +132,19 @@ const css = `
     font-family:inherit; font-size:0.875rem; outline:none;
     transition:border-color 0.2s ease;
   }
+  .portal-login-form .inp { background:#ffffff; color:#18181b; }
+  .portal-login-form input:-webkit-autofill,
+  .portal-login-form input:-webkit-autofill:hover,
+  .portal-login-form input:-webkit-autofill:focus {
+    -webkit-box-shadow:0 0 0 1000px #ffffff inset;
+    box-shadow:0 0 0 1000px #ffffff inset;
+    -webkit-text-fill-color:#18181b;
+    caret-color:#18181b;
+  }
+  .portal-login-form input:autofill {
+    background:#ffffff;
+    box-shadow:0 0 0 1000px #ffffff inset;
+  }
   .inp:focus { border-color:${T.gold}; }
   .inp::placeholder { color:${T.textLight}; }
 
@@ -453,10 +466,10 @@ function PortalAuth() {
       </div>
       <div style={{ background:"#1557c0", border:"1px solid #1557c0", borderRadius:10, padding:32 }}>
         {error && <p role="alert" style={{ color:"#fca5a5", marginBottom:16, fontSize:"0.85rem" }}>{error}</p>}
-        <form onSubmit={handleSubmit} style={{ display:"grid", gap:16 }}>
+        <form className="portal-login-form" onSubmit={handleSubmit} style={{ display:"grid", gap:16 }}>
           <label className="lbl" style={{ color:"#ffffff" }}>Email<input className="inp" type="email" autoComplete="username" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@company.com" required /></label>
           <label className="lbl" style={{ color:"#ffffff" }}>Password<input className="inp" type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} required /></label>
-          <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", background:"#a52d43", color:"#ffffff" }}>{loading ? "Signing in…" : "Sign In"}<ArrowRight size={15} /></button>
+          <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", background:"#ffffff", color:"#a52d43" }}>{loading ? "Signing in…" : "Sign In"}<ArrowRight size={15} /></button>
         </form>
         <p style={{ marginTop:20, color:"#ffffff", fontSize:"0.8rem", lineHeight:1.6, textAlign:"center" }}>Access is granted by BlueLink Consults. Public registration is unavailable.</p>
         <a href="mailto:info@bluelinkconsults.com" style={{ display:"block", marginTop:10, textAlign:"center", fontSize:"0.8rem", color:"#fff" }}>Contact us about access</a>
