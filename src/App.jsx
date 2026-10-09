@@ -1329,7 +1329,7 @@ function ServicesPreview() {
     <section className="section services-section">
       <div className="section-heading">
         <p className="eyebrow">What We Do</p>
-        <h2>The right modernization solution for every organization we serve</h2>
+        <h2>{isNigeriaSite ? "Expertise for your next technology priority." : "The right modernization solution for every organization we serve"}</h2>
       </div>
       <div className="card-grid">
         {services.map((s) => {
