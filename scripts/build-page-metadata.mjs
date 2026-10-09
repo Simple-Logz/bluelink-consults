@@ -1,6 +1,9 @@
 import fs from 'node:fs';
 import {pageMetadata,profileLinks} from '../src/pageMetadata.js';
 const original=fs.readFileSync('dist/index.html','utf8');
+// Domain-specific rewrites must take precedence over the legacy root files.
+fs.rmSync('dist/sitemap.xml',{force:true});
+fs.rmSync('dist/robots.txt',{force:true});
 const escape=value=>value.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
 for(const [site,host] of [['ng','https://www.bluelinkconsults.ng'],['global','https://www.bluelinkconsults.com']]) {
  fs.mkdirSync(`dist/__pages/${site}`,{recursive:true});
