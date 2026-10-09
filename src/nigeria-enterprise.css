@@ -539,3 +539,20 @@ html[data-site="nigeria"] .ng-delivery .ng-link:hover { color: #ffe0e7 !importan
     padding-top: 64px;
   }
 }
+
+/* Align insight actions at the bottom of equal-height cards. */
+html[data-site="nigeria"] .resource-grid { align-items: stretch; }
+html[data-site="nigeria"] .resource-grid .resource-card {
+  display: flex;
+  flex-direction: column;
+}
+html[data-site="nigeria"] .resource-grid .resource-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+html[data-site="nigeria"] .resource-grid .resource-content > a:last-child {
+  margin-top: auto;
+  padding-top: 20px;
+  align-self: flex-start;
+}
