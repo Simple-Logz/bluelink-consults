@@ -252,7 +252,32 @@ const nigeriaServices = [
     tools: ["Metrics, logs and alerting", "Incident diagnosis and service restoration", "Operational runbooks and incident reviews"],
     outcomes: ["Monitoring and alert configurations", "Operational response runbooks", "Incident reports and improvement actions"],
     blueLinkHelp: ["Identify critical services and monitoring gaps.", "Configure actionable alerts and response procedures.", "Investigate incidents and track corrective actions."] },
-].map(service => ({ ...service, image: globalServices.find(item => item.slug === service.slug)?.image || globalServices[2].image }));
+].map(service => ({ ...service, ...({
+  "technology-audit-assessment": {
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1600&q=85",
+    "imageAlt": "Analytics on a laptop during a technology assessment"
+  },
+  "application-modernization": {
+    "image": "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=85",
+    "imageAlt": "Software development workspace with application code"
+  },
+  "cloud-infrastructure": {
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1600&q=85",
+    "imageAlt": "Physical server infrastructure in a data centre"
+  },
+  "devops-automation": {
+    "image": "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=85",
+    "imageAlt": "Engineering team collaborating around laptops"
+  },
+  "predeployment-validation": {
+    "image": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=85",
+    "imageAlt": "Colleagues reviewing work together on a laptop"
+  },
+  "operational-incident-support": {
+    "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1600&q=85",
+    "imageAlt": "Operational analytics and performance charts on a screen"
+  }
+})[service.slug] }));
 const internationalServices = [
   ...globalServices,
   ...nigeriaServices.filter(service => !globalServices.some(item => item.slug === service.slug)),
@@ -1456,7 +1481,7 @@ function ServiceDetail() {
           <h1>{service.title}</h1>
           <p>{service.summary}</p>
         </div>
-        <div className="service-hero-image" style={{ backgroundImage: `url(${service.image})` }} />
+        <div className="service-hero-image" role="img" aria-label={service.imageAlt || service.title} style={{ backgroundImage: `url(${service.image})` }} />
       </section>
       <section className="service-detail-section">
         <div className="service-detail-main">
