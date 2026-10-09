@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import EnterpriseArchitectureMotion from './EnterpriseArchitectureMotion';
 
 const phases = [
   ['01', 'Engage', 'Agree the business priorities, scope and success measures.', 'Engagement brief and decision owners'],
@@ -35,10 +34,10 @@ export function NigeriaEnterpriseHome() {
       <div className="ng-services-media"><img src="/images/ng-engineering-collaboration.webp" alt="Illustrative engineering collaboration at a software workstation" width="1536" height="1024" loading="lazy" decoding="async" /></div>
       <div className="ng-services-copy"><p className="ng-kicker">OUR SERVICES</p><h2>The right expertise.<br />A clear path forward.</h2><p>Whether you need to improve an existing application or strengthen the technology behind it, start with a service that fits your challenge.</p><p>Explore how we assess, modernize and support your systems—and the deliverables you can expect from each engagement.</p><Link className="ng-btn" to="/services">Explore Our Services <ArrowRight size={18} /></Link><Link className="ng-link ng-assessment-link" to="/services/technology-audit-assessment">Not sure where to start? Begin with an assessment <ArrowRight size={18} /></Link></div>
     </div></section>
-    <section className="ng-outcomes ng-section" id="connected-architecture"><div className="ng-container ng-architecture-layout"><div className="ng-architecture-copy">
+    <section className="ng-outcomes ng-section" id="connected-architecture"><div className="ng-container"><div className="ng-architecture-copy">
       <div className="ng-section-intro"><p className="ng-kicker">HOW WE WORK</p><h2>Connected thinking.<br />Accountable delivery.</h2><p>Application, infrastructure and operational decisions belong in the same conversation. Our approach keeps the dependencies and delivery evidence visible.</p></div>
       <Link className="ng-link" to="/about/why-bluelink">Why BlueLink Consults <ArrowRight size={18} /></Link>
-      </div><EnterpriseArchitectureMotion />
+      </div>
     </div></section>
     <section className="ng-delivery ng-section"><div className="ng-container"><div className="ng-section-intro"><p className="ng-kicker">THE EAT FRAMEWORK</p><h2>A reviewable result at every stage.</h2></div><div className="ng-phase-grid">{phases.map(([number,title,text,result]) => <article key={number}><span className="ng-phase-number">{number}</span><h3>{title}</h3><p>{text}</p><div className="ng-phase-result"><span>{result}</span></div></article>)}</div><Link className="ng-link" to="/solutions/eat-framework">Explore our delivery framework <ArrowRight size={18} /></Link></div></section>
     <section className="ng-industries ng-section"><div className="ng-container"><div className="ng-section-intro"><p className="ng-kicker">WHO WE HELP</p><h2>Technology shaped around your operating needs.</h2><p>Explore the application, infrastructure and delivery challenges relevant to your organization.</p></div><div className="ng-industry-grid">{industries.map(name => <Link key={name} to="/solutions/who-we-help"><span>{name}</span><ArrowRight size={18} /></Link>)}</div></div></section>
