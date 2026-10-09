@@ -504,3 +504,10 @@ html[data-site="nigeria"] .ng-footer-grid .bl-social-icons a { color:#fff; }
   .bl-header-utility .bl-social-icons a { width:30px; height:30px; min-width:30px; }
   .bl-header-shortcuts .bl-social-icons svg { width:20px; height:20px; }
 }
+
+/* A little more breathing room in the desktop homepage hero. */
+@media(min-width:1024px) {
+ html[data-site="nigeria"] .ng-hero-layout { min-height:560px; }
+ html[data-site="nigeria"] .ng-hero-copy { padding-top:88px; padding-bottom:88px; }
+ html[data-site="nigeria"] .ng-hero-media { min-height:560px; }
+}
