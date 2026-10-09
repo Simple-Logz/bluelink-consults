@@ -26,7 +26,7 @@ export function NigeriaEnterpriseHome() {
         <p className="ng-hero-detail">From assessment to implementation, we help your team make practical improvements.</p>
         <div className="ng-actions"><a className="ng-btn" href={zoomBookingUrl}>Schedule Demo <ArrowRight size={18} /></a><Link className="ng-btn ng-btn-outline" to="/services">Explore Our Services <ArrowRight size={18} /></Link></div>
       </div>
-      <div className="ng-hero-media"><img src="/images/professional-laptop.jpg" alt="A technology professional working at a laptop in a modern office" width="1536" height="1024" fetchPriority="high" /></div>
+      <div className="ng-hero-media"><img src="/images/hero-professional.jpg" alt="A smiling professional working at her laptop in a modern office" width="1400" height="933" fetchPriority="high" /></div>
       </div>
     </section>
     <section className="ng-home-actions" aria-label="Explore BlueLink"><div className="ng-container ng-home-action-grid">

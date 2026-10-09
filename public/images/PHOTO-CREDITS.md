@@ -8,3 +8,5 @@ Licensed under https://www.pexels.com/license/. These photographs illustrate wor
 - professional-notes.jpg — https://www.pexels.com/photo/a-woman-writing-on-a-notebook-8117533/
 
 Original stock photographs; no AI image generation or face substitution.
+
+- hero-professional.jpg — RDNE Stock project: https://www.pexels.com/photo/woman-in-dress-sitting-in-front-of-a-laptop-10375901/ (original photograph, taken June 10, 2021).

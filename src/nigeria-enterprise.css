@@ -418,3 +418,22 @@ html[data-site="nigeria"] .ng-resource-card h3 { font-size:22px; line-height:1.4
 /* Crimson accents for selected headings on light backgrounds. */
 html[data-site="nigeria"] { --ng-crimson:#a52d43; }
 html[data-site="nigeria"] :is(.ng-services-copy,.ng-industries .ng-section-intro,.ng-resources .ng-section-intro) h2 { color:var(--ng-crimson); }
+
+/* Warm editorial accents, balanced with the existing blue navigation. */
+html[data-site="nigeria"] { --ng-rose-line:#e4bcc5; }
+html[data-site="nigeria"] .ng-enterprise-home .ng-link,
+html[data-site="nigeria"] .services-section .border-card>a { color:var(--ng-crimson)!important; }
+html[data-site="nigeria"] .ng-enterprise-home .ng-link:hover,
+html[data-site="nigeria"] .services-section .border-card>a:hover { color:#822237!important; }
+html[data-site="nigeria"] .ng-delivery .ng-link { color:#f5bcc8!important; }
+html[data-site="nigeria"] .ng-delivery .ng-link:hover { color:#ffe0e7!important; }
+html[data-site="nigeria"] :is(.ng-services-copy,.ng-architecture-copy,.ng-industries,.ng-resources) .ng-kicker { color:var(--ng-crimson); }
+html[data-site="nigeria"] .ng-home-action-grid>a { border-color:var(--ng-rose-line); }
+html[data-site="nigeria"] .ng-home-action-grid>a:hover { border-color:var(--ng-crimson); }
+html[data-site="nigeria"] .ng-home-action-grid h2 { color:var(--ng-crimson); border-bottom-color:var(--ng-rose-line); }
+html[data-site="nigeria"] .ng-home-action-grid h2 svg { color:var(--ng-crimson); }
+html[data-site="nigeria"] .ng-services-feature { border:1px solid var(--ng-rose-line); }
+html[data-site="nigeria"] .ng-industry-grid a { border-bottom-color:var(--ng-rose-line); }
+html[data-site="nigeria"] .ng-industry-grid svg { color:var(--ng-crimson); }
+html[data-site="nigeria"] .services-section .border-card { border-color:var(--ng-rose-line); }
+html[data-site="nigeria"] .ng-hero-media img { object-position:44% 38%; }
