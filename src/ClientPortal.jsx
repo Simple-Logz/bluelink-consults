@@ -443,25 +443,25 @@ function PortalAuth() {
     } catch { setError("Unable to connect. Please try again."); }
     finally { setLoading(false); }
   }
-  return <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:24, background:`radial-gradient(ellipse at 30% 40%, ${T.bg3} 0%, ${T.bg} 65%)` }}>
+  return <div style={{ minHeight:"100vh", display:"flex", alignItems:"center", justifyContent:"center", padding:24, background:"#ffffff" }}>
     <div style={{ width:"100%", maxWidth:420 }}>
       <div style={{ textAlign:"center", marginBottom:28 }}>
         <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" style={{ width:76, height:76, objectFit:"contain", background:"#fff", padding:8, borderRadius:14, display:"block", margin:"0 auto 18px" }} />
-        <h1 style={{ fontSize:"1.9rem", color:T.white, marginBottom:8 }}>BlueLink Portal</h1>
-        <p style={{ color:"#cbd5e1", fontSize:"0.9rem" }}>Authorised clients only</p>
-        <p className="eat-badge" style={{ marginTop:10, color:"#cbd5e1" }}>Let's EAT!</p>
+        <h1 style={{ fontSize:"1.9rem", color:"#102c46", marginBottom:8 }}>BlueLink Portal</h1>
+        <p style={{ color:"#526479", fontSize:"0.9rem" }}>Authorised clients only</p>
+        <p className="eat-badge" style={{ marginTop:10, color:"#a52d43" }}>Let's EAT!</p>
       </div>
-      <div style={{ background:T.bg2, border:`1px solid ${T.borderDark}`, borderRadius:10, padding:32 }}>
+      <div style={{ background:"#1557c0", border:"1px solid #1557c0", borderRadius:10, padding:32 }}>
         {error && <p role="alert" style={{ color:"#fca5a5", marginBottom:16, fontSize:"0.85rem" }}>{error}</p>}
         <form onSubmit={handleSubmit} style={{ display:"grid", gap:16 }}>
-          <label className="lbl" style={{ color:"#cbd5e1" }}>Email<input className="inp" type="email" autoComplete="username" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@company.com" required /></label>
-          <label className="lbl" style={{ color:"#cbd5e1" }}>Password<input className="inp" type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} required /></label>
-          <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", background:"#fff", color:T.text }}>{loading ? "Signing in…" : "Sign In"}<ArrowRight size={15} /></button>
+          <label className="lbl" style={{ color:"#ffffff" }}>Email<input className="inp" type="email" autoComplete="username" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@company.com" required /></label>
+          <label className="lbl" style={{ color:"#ffffff" }}>Password<input className="inp" type="password" autoComplete="current-password" value={password} onChange={e=>setPassword(e.target.value)} required /></label>
+          <button type="submit" disabled={loading} className="btn-gold" style={{ justifyContent:"center", background:"#a52d43", color:"#ffffff" }}>{loading ? "Signing in…" : "Sign In"}<ArrowRight size={15} /></button>
         </form>
-        <p style={{ marginTop:20, color:"#cbd5e1", fontSize:"0.8rem", lineHeight:1.6, textAlign:"center" }}>Access is granted by BlueLink Consults. Public registration is unavailable.</p>
+        <p style={{ marginTop:20, color:"#ffffff", fontSize:"0.8rem", lineHeight:1.6, textAlign:"center" }}>Access is granted by BlueLink Consults. Public registration is unavailable.</p>
         <a href="mailto:info@bluelinkconsults.com" style={{ display:"block", marginTop:10, textAlign:"center", fontSize:"0.8rem", color:"#fff" }}>Contact us about access</a>
       </div>
-      <a href="/" style={{ display:"block", textAlign:"center", marginTop:20, color:"#cbd5e1", fontSize:"0.85rem" }}>Back to BlueLink Consults</a>
+      <a href="/" style={{ display:"block", textAlign:"center", marginTop:20, color:"#a52d43", fontSize:"0.85rem" }}>Back to BlueLink Consults</a>
     </div>
   </div>;
 }
