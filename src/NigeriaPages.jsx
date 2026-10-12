@@ -27,11 +27,11 @@ export function NigeriaHeader({ services }) {
     <div className="ng-nav-group"><button onClick={() => flip("about")} aria-expanded={panel === "about"} aria-controls="ng-about">About Us <ChevronDown size={14} /></button>{panel === "about" && <div id="ng-about" className="ng-submenu"><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink</Link></div>}</div>
     <NavLink to="/contact" onClick={close}>Contact</NavLink>
   </>;
-  const extras = [{ title: "Try Simulator", path: "/simulator", icon: Zap }, { title: "Client Login", path: "/client-login", icon: Users }, { title: "Schedule Demo", path: "/request-demo", icon: CalendarDays, Mail, Phone }, { title: "Blog", path: "/blog", icon: FileText }, { title: "Events & Activities", path: "/events", icon: CalendarDays }];
+  const extras = [{ title: "Try Simulator", path: "/simulator", icon: Zap }, { title: "Client Login", path: "/client-login", icon: Users }, { title: "Book a Consultation", path: "/request-demo", icon: CalendarDays, Mail, Phone }, { title: "Blog", path: "/blog", icon: FileText }, { title: "Events & Activities", path: "/events", icon: CalendarDays }];
   return <div className="bl-header-shell"><HeaderUtility nigeria /><header ref={root} className="site-header ng-header">
     <Link to="/" className="brand-logo-wrap brand-home-link" aria-label="BlueLink Consults homepage" onClick={close}><img src="/bluelink-logo-mark.png" alt="" className="brand-logo-mark" /><span className="brand-wordmark"><strong>Blue<span>Link</span></strong><small>Consults</small></span></Link>
     <nav className="ng-primary" aria-label="Main navigation">{primary}</nav>
-    <a href={zoomBookingUrl} onClick={close} className="bl-header-demo">Schedule Demo</a>
+    <a href={zoomBookingUrl} onClick={close} className="bl-header-demo">Book a Consultation</a>
     <button ref={toggle} type="button" className="ng-menu-toggle" onClick={() => flip("more")} aria-expanded={panel === "more"} aria-controls="ng-more" aria-label={panel === "more" ? "Close additional menu" : "Open additional menu"}>{panel === "more" ? <X size={23} /> : <Menu size={23} />}</button>
     <nav id="ng-more" className={`ng-more ${panel === "more" ? "is-open" : ""}`} aria-label="Additional navigation" hidden={panel !== "more"}>
       <div className="ng-mobile-primary">
@@ -47,7 +47,7 @@ export function NigeriaHeader({ services }) {
 }
 
 export function DemoBanner() {
-  return <section className="ng-demo-banner" aria-label="Request a demonstration"><div className="ng-demo-glow" aria-hidden="true" /><Link to="/request-demo">Schedule Demo <ArrowRight size={20} aria-hidden="true" /></Link></section>;
+  return <section className="ng-demo-banner" aria-label="Book a consultation"><div className="ng-demo-glow" aria-hidden="true" /><Link to="/request-demo">Book a Consultation <ArrowRight size={20} aria-hidden="true" /></Link></section>;
 }
 
 function Hero({ label, title, text }) {
@@ -69,14 +69,14 @@ export function OurStory() {
 }
 
 const team = [
-  ["john-offiong", "John Offiong", "Founder & CEO", "Leads BlueLink’s strategy, technology vision, and client transformation initiatives across our markets, guiding business growth, partnerships, and service innovation."],
+  ["john-offiong", "John Offiong", "Founder & CEO", "Leads BlueLink’s strategy and client transformation initiatives, with hands-on experience working with Azure Kubernetes Service (AKS) environments."],
   ["samuel-kubiangha", "Samuel Kubiangha", "Head of Technology & Engineering", "Leads technical delivery, application modernization, and infrastructure engineering, ensuring quality, reliability, and alignment with client requirements."],
   ["efefiom-archibong", "Efefiom Archibong", "Cloud & DevOps Engineering Lead", "Leads cloud infrastructure, DevOps and automation initiatives, supporting scalable environments, reliable deployments and modern engineering practices."],
   ["nnamdi-richards", "Nnamdi Richards", "Business Development & Client Engagement Manager", "Drives client engagement, builds strategic relationships, and advances business growth through targeted outreach, partnerships, and new opportunities."],
   ["biwom-iklaki", "Biwom Iklaki", "Project Delivery Lead", "Coordinates client engagements, project execution, and successful solution delivery."],
 ];
 export function OurTeam() {
-  return <><Hero label="Our Team" title="The people behind the delivery." text="Leadership, engineering and client engagement working together to assess, modernize and support your technology." /><section className="ng-team-grid">{team.map(([slug, name, role, bio]) => <article className="ng-team-card" key={slug}><div className="ng-team-photo"><img src={`/team/${slug}.png`} alt={name} loading="lazy" /></div><div className="ng-team-info"><h2>{name}</h2><p className="ng-team-role">{role}</p><p>{bio}</p></div></article>)}</section><DemoBanner /></>;
+  return <><Hero label="Our Team" title="The people behind the delivery." text="Leadership, engineering and client engagement working together to assess, modernize and support your technology." /><section className="ng-team-grid">{team.map(([slug, name, role, bio]) => <article className="ng-team-card" key={slug}><div className="ng-team-photo"><img src={`/team/${slug}.png`} alt={name} loading="lazy" /></div><div className="ng-team-info"><h2>{name}</h2><p className="ng-team-role">{role}</p><p>{bio}</p></div></article>)}</section><section className="ng-story-layout"><div><p className="eyebrow">Delivery evidence</p><h2>Inspect the work we scope.</h2></div><div><p>Review our illustrative assessment, migration and release validation documents before discussing an engagement.</p><Link className="ng-text-link" to="/resources/delivery-examples">View sample deliverables <ArrowRight size={18}/></Link></div></section><DemoBanner /></>;
 }
 
 export function BlogPage() { return <BlogIndex />; }
@@ -94,9 +94,9 @@ export function FAQsPage() {
   const questions = [
     ["What services does BlueLink Consults provide?", "We provide technology audits and assessments, application modernization, cloud infrastructure, DevOps and automation, pre-deployment validation, and operational and incident support."],
     ["How do we begin an engagement?", "Contact us to discuss your organization’s goals and challenges. We agree the scope, deliverables and approach before work begins."],
-    ["Can we see a demonstration first?", "Yes. Select Schedule Demo to choose an available time for a 30-minute Zoom meeting. Complete the booking on our scheduling page to receive your confirmation."],
+    ["Can we discuss our requirements first?", "Yes. Select Book a Consultation to choose an available time for a 30-minute Zoom discussion. Review the time zone shown, then complete your booking to receive the Zoom invitation."],
     ["Can you work with our existing IT team and systems?", "Yes. We work with your team to assess the existing environment and plan improvements around your operational requirements."],
     ["How is project pricing determined?", "Pricing depends on the agreed scope, technical complexity and delivery requirements. Contact us for a proposal based on your needs."],
   ];
-  return <><Hero label="FAQs" title="Your questions, answered." text="A few things to know before working with BlueLink Consults." /><section className="bl-faq-list">{questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}<Link className="bl-header-demo" to="/request-demo">Schedule Demo</Link></section></>;
+  return <><Hero label="FAQs" title="Your questions, answered." text="A few things to know before working with BlueLink Consults." /><section className="bl-faq-list">{questions.map(([question, answer]) => <details key={question}><summary>{question}</summary><p>{answer}</p></details>)}<Link className="bl-header-demo" to="/request-demo">Book a Consultation</Link></section></>;
 }

@@ -16,7 +16,7 @@ export const pageMetadata = {
  '/about/our-team':['Our team','Meet the leadership, engineering and client engagement team at BlueLink Consults.'],
  '/about/why-bluelink':['Why BlueLink Consults','Agreed scope, connected architecture, evidence before release and a documented operational handover.'],
  '/contact':['Contact BlueLink Consults','Discuss your application, infrastructure, cloud, DevOps or reliability requirements with our team.'],
- '/request-demo':['Schedule a 30-minute Zoom discussion','Choose a meeting time or share your requirements with BlueLink Consults.'],
+ '/request-demo':['Book a consultation or product demo','Choose a meeting time or share your requirements with BlueLink Consults.'],
  '/faqs':['Frequently asked questions','Services, engagement scope, scheduling and working with BlueLink Consults.'],
  '/privacy-policy':['Privacy policy','How BlueLink Consults handles inquiries, account information, hosting and third-party services.'],
  '/terms':['Terms of service','Terms for using the BlueLink Consults website.'],

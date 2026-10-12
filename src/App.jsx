@@ -1,3 +1,5 @@
+import ConsultationFields from './ConsultationFields';
+import { serviceSamples } from './engagementContent';
 import { zoomBookingUrl } from "./siteBooking";
 import { submitInquiry } from "./submitInquiry";
 import { InstitutionalSectorsPage, ProfessionalEATPage, MigrationReadinessPage, DeliveryExamplesPage, EventsActivitiesPage } from "./InstitutionalPages";
@@ -621,11 +623,17 @@ function ScrollToHash() {
   useEffect(() => {
     if (!location.hash) { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); return; }
     const id = location.hash.replace("#", "");
-    const timer = window.setTimeout(() => {
+    const scrollToTarget = () => {
       const el = document.getElementById(id);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 80);
-    return () => window.clearTimeout(timer);
+      if (!el) return false;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+      return true;
+    };
+    if (scrollToTarget()) return;
+    const observer = new MutationObserver(() => { if (scrollToTarget()) observer.disconnect(); });
+    observer.observe(document.getElementById('root'), { childList: true, subtree: true });
+    const timer = window.setTimeout(() => observer.disconnect(), 2500);
+    return () => { observer.disconnect(); window.clearTimeout(timer); };
   }, [location.pathname, location.hash]);
   return null;
 }
@@ -1369,6 +1377,7 @@ function ServicesPreview() {
               <div className="rule" />
               <p>{s.summary}</p>
               <Link to={`/services/${s.slug}`}>Learn More <ArrowRight size={18} /></Link>
+              {serviceSamples[s.slug] && <a className="bl-service-sample-link" href={`/resources/${serviceSamples[s.slug].file}`} download>View illustrative sample <Download size={16}/></a>}
             </motion.article>
           );
         })}
@@ -1520,6 +1529,7 @@ function ServiceDetail() {
             </div>
           )}
           {service.deliverables && <div className="detail-card delivery-card"><h3>What you receive</h3><div className="detail-list">{service.deliverables.map(item => <span key={item}><CheckCircle2 size={17}/>{item}</span>)}</div><p className="scope-note">Final scope, integrations and acceptance criteria are agreed before implementation.</p></div>}
+          {serviceSamples[service.slug] && <div className="detail-card bl-service-sample"><p className="eyebrow">ILLUSTRATIVE DELIVERABLE</p><h3>{serviceSamples[service.slug].title}</h3><p>{serviceSamples[service.slug].detail}</p><a href={`/resources/${serviceSamples[service.slug].file}`} download>Download sample PDF <Download size={17}/></a><p className="scope-note">This sample demonstrates document structure using fictional information. Your deliverables will follow the agreed project scope.</p></div>}
           <div className="blue-help-panel">
             <h2>How BlueLink Consults can help</h2>
             <p>{service.deliveryIntro || "We agree the scope, implement and test the changes, and document the operational responsibilities with your team."}</p>
@@ -2103,7 +2113,7 @@ function ContactPage() {
           <p className="eyebrow">Contact BlueLink Consults</p>
           <h2>{isWebDev ? "Start your website project." : "Start with a modernization conversation."}</h2>
           <p>Share your requirements and our team will review the next step with you.</p>
-          <div style={{ margin:"22px 0 26px" }}><a className="contact-booking-button" href={zoomBookingUrl}>Schedule Demo <ArrowRight size={17} /></a><p style={{ marginTop:10, fontSize:"0.9rem" }}>Book a 30-minute Zoom discussion at a time that suits you.</p></div>
+          <div style={{ margin:"22px 0 26px" }}><a className="contact-booking-button" href={zoomBookingUrl}>Book a Consultation <ArrowRight size={17} /></a><p style={{ marginTop:10, fontSize:"0.9rem" }}>Book a 30-minute Zoom discussion at a time that suits you.</p></div>
           <div className="contact-details">
             <a href="mailto:info@bluelinkconsults.com"><Mail size={17} /> info@bluelinkconsults.com</a>
             <a href="tel:+14014402434"><Phone size={17} /> US: +1 401-440-2434</a><a href="tel:+2348068649496"><Phone size={17} /> Nigeria: +234 806 864 9496</a>
@@ -2112,10 +2122,10 @@ function ContactPage() {
           </div>
         </div>
         {submitted ? (
-          <div className="success-box">
+          <div className="success-box" role="status" aria-live="polite">
             <CheckCircle2 size={40} />
             <h3>Inquiry received</h3>
-            <p>Thank you. Your request has been recorded for our team. Reference: {inquiryReceipt?.reference?.slice(0,8).toUpperCase()}.</p><p>We will respond using the email address you supplied. You can also book a 30-minute Zoom discussion.</p><a className="ng-link" href={zoomBookingUrl}>Choose a meeting time <ArrowRight size={17}/></a>
+            <p>Thank you. Your request has been recorded for our team. Reference: {inquiryReceipt?.reference?.slice(0,8).toUpperCase()}.</p><p>Your inquiry is saved. Our team will follow up using the email address you supplied. To reserve a meeting now, complete a separate Zoom booking below; submitting this form does not reserve a time.</p><a className="ng-link" href={zoomBookingUrl}>Choose a meeting time <ArrowRight size={17}/></a>
             <button onClick={() => { setSubmitted(false); setFormError(""); }}>Submit another inquiry</button>
           </div>
         ) : isWebDev ? (
@@ -2126,7 +2136,7 @@ function ContactPage() {
             method="POST"
             onSubmit={handleSubmit}
           >
-            {formError && <div className="auth-message">{formError}</div>}
+            {formError && <div className="auth-message" role="alert">{formError} <a href="mailto:info@bluelinkconsults.com">Email us instead</a></div>}
             <input className="bl-form-trap" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" /><input type="hidden" name="_subject" value="New Web Development inquiry from bluelinkconsults.com" />
             <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
             <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
@@ -2160,38 +2170,10 @@ function ContactPage() {
             method="POST"
             onSubmit={handleSubmit}
           >
-            {formError && <div className="auth-message">{formError}</div>}
+            {formError && <div className="auth-message" role="alert">{formError} <a href="mailto:info@bluelinkconsults.com">Email us instead</a></div>}
             <input className="bl-form-trap" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" /><input type="hidden" name="_subject" value="New BlueLink Consults website inquiry" />
-            <label>Full Name<input required name="name" type="text" placeholder="Your name" /></label>
-            <label>Business Email<input required name="email" type="email" placeholder="you@company.com" /></label>
-            <label>Company<input name="company" type="text" placeholder="Company name" /></label>
-            <label>Phone Number (optional)<input name="phone" type="tel" placeholder={isNigeriaSite ? "+234 ..." : "+1 ..."} /></label>
-            <div style={{ display: "grid", gap: 8 }}>
-              <span style={{ fontWeight: 800, fontSize: "0.92rem" }}>What are your biggest pain points? <span style={{ color: "var(--bronze)" }}>(Check all that apply)</span></span>
-              <p style={{ fontSize: "0.82rem", color: "var(--muted)", margin: 0 }}>This helps us come prepared with the right answers for your consultation.</p>
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: "8px 16px", marginTop: 6 }}>
-                {[
-                  "Application modernization",
-                  "Cloud migration & infrastructure",
-                  "DevOps & CI/CD automation",
-                  "Security & identity (IAM / SSO)",
-                  "Monitoring & observability",
-                  "AI & machine learning adoption",
-                  "Application performance & scaling",
-                  "Storage & database optimization",
-                  "Infrastructure as Code (Terraform)",
-                  "Data integration & reporting",
-                  "Compliance & audit readiness",
-                  "Legacy system replacement",
-                ].map((item) => (
-                  <label key={item} className="pain-chip">
-                    <input type="checkbox" name="painPoints" value={item} />
-                    {item}
-                  </label>
-                ))}
-              </div>
-            </div>
-            <label>Message<textarea minLength={5} maxLength={10000} required name="message" rows="4" placeholder="Tell us a bit more about your situation..." /></label>
+            <ConsultationFields />
+            <input type="hidden" name="sector" value={new URLSearchParams(location.search).get("sector") || ""} />
             <button type="submit" disabled={formLoading}>
               {formLoading ? "Sending..." : "Submit Inquiry"} <Send size={18} />
             </button>
