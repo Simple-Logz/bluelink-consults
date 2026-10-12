@@ -27,7 +27,7 @@ export default function DemoRequestPage() {
     catch(error) { setStatus('idle'); setError(error.message); }
   }
   return <>
-    <section className="page-hero" style={{ paddingBottom: 40 }}><p className="eyebrow">BlueLink Consults</p><h1>{isNigeriaSite ? "Book a Consultation" : "Request a LytHouse Demo"}</h1><p>{isNigeriaSite ? "Choose a time for a 30-minute Zoom consultation, or send a short inquiry so we can review your requirements." : "Explore release validation with your engineering team. Share your pipeline and validation priorities so we can discuss supported checks, integration requirements and release evidence."}</p><BookingButton /></section>
+    <section className="page-hero" style={{ paddingBottom: 40 }}><p className="eyebrow">BlueLink Consults</p><h1>{isNigeriaSite ? "Book a Consultation" : "Request a LytHouse Demo"}</h1><p>{isNigeriaSite ? "Choose a time for a 30-minute Zoom consultation, or send a short inquiry so we can review your requirements. Check the time zone displayed by Zoom before confirming; your meeting invitation is issued after you complete the booking." : "Explore release validation with your engineering team. Share your pipeline and validation priorities so we can discuss supported checks, integration requirements and release evidence."}</p><BookingButton /></section>
     <section className="contact-section" id="consultation" style={{ paddingTop: 48 }}>
       <div className="contact-copy">
         <p className="eyebrow">Engage · Assess · Transform</p>
