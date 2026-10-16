@@ -1243,19 +1243,22 @@ function EditorialShowcase() {
       to: "/solutions/eat-framework",
     },
     {
-      image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?q=80&w=900&auto=format&fit=crop",
+      image: "/images/services/cloud-real-photo.webp",
+      imageAlt: "Black woman working on a laptop in a modern technology workspace",
       eyebrow: "Cloud",
       title: "Cloud infrastructure with clear costs and tested recovery.",
       to: "/services/cloud-infrastructure",
     },
     {
-      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=900&auto=format&fit=crop",
+      image: "/images/services/automation-real-photo.webp",
+      imageAlt: "Software engineer working at a computer workstation",
       eyebrow: "Automation",
       title: "Automate builds, tests and deployments.",
       to: "/services/devops-automation",
     },
     {
-      image: "https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?q=80&w=900&auto=format&fit=crop",
+      image: "/images/services/validation-real-photo.webp",
+      imageAlt: "Real software debugging session with code and diagnostic tools",
       eyebrow: "Validation",
       title: "Validate your release before production.",
       to: "/services/predeployment-validation",
@@ -1279,7 +1282,7 @@ function EditorialShowcase() {
       </div>
       <div className="editorial-row">
         {stories.slice(1).map((story)=><Link className="editorial-card" to={story.to} key={story.title}>
-          <img src={story.image} alt="" loading="lazy"/>
+          <img src={story.image} alt={story.imageAlt} loading="lazy"/>
           <div><span>{story.eyebrow}</span><h3>{story.title}</h3><small>Explore <ArrowRight size={13}/></small></div>
         </Link>)}
       </div>
