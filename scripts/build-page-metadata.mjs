@@ -27,3 +27,6 @@ for(const [site,host] of [['ng','https://www.bluelinkconsults.ng'],['global','ht
  fs.writeFileSync(`dist/__pages/${site}/robots.txt`,`User-agent: *\nAllow: /\nDisallow: /client-login\nDisallow: /simulator\nDisallow: /connect\nDisallow: /preview/\nDisallow: /api/\nDisallow: /__pages/\nSitemap: ${host}/sitemap.xml\n`);
 }
 console.log('Built domain-aware metadata for',Object.keys(pageMetadata).length,'public routes.');
+
+// Avoid filesystem index precedence bypassing the domain-aware homepage rewrite.
+fs.renameSync('dist/index.html','dist/app-shell.html');
