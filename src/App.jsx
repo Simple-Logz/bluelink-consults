@@ -1,3 +1,4 @@
+import { LearningIndex, LearningArticle } from './Learning';
 import ConsultationFields from './ConsultationFields';
 import { serviceSamples } from './engagementContent';
 import { zoomBookingUrl } from "./siteBooking";
@@ -2545,6 +2546,8 @@ function AppInner() {
       <ScrollToHash />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
+          <Route path="/learning" element={<LearningIndex />} />
+          <Route path="/learning/:slug" element={<LearningArticle />} />
           <Route path="/client-login"            element={<ClientPortal />} />
           <Route path="/connect"                 element={<ConnectPage />} />
           <Route path="/preview/roofing/:demoKey" element={<RoofingOutreachDemo />} />

@@ -1,0 +1,19 @@
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { socialProfiles } from './SocialLinks';
+import { learningGuides } from './learningContent';
+import './learning.css';
+
+export function LearningIndex() {
+ useEffect(()=>{document.title='Learning | BlueLink Consults';},[]);
+ return <main className="bl-learning"><header className="bl-learn-intro"><p className="bl-learn-label">BLUELINK LEARNING</p><h1>Practical guides for technology teams.</h1><p>Work through a real decision, try a concrete task and use the linked references to go deeper. Start with the problem your team needs to solve.</p></header><section className="bl-learn-grid" aria-label="Learning topics">{learningGuides.map(g=><article key={g.slug}><Link to={'/learning/'+g.slug} tabIndex={-1} aria-hidden="true"><img src={'https://images.unsplash.com/'+g.image+'?auto=format&fit=crop&w=1000&q=80'} alt="" width="1000" height="650" loading="lazy" /></Link><div><p className="bl-learn-label">{g.category}</p><h2><Link to={'/learning/'+g.slug}>{g.title}</Link></h2><p>{g.intro}</p><Link className="bl-learn-link" to={'/learning/'+g.slug}>Read the guide <span aria-hidden="true">→</span></Link></div></article>)}</section></main>;
+}
+function AuthorFooter() {
+ return <footer className="bl-learn-author"><p><strong>Written by BlueLink Consults</strong></p><p><a href="https://www.bluelinkconsults.ng">www.bluelinkconsults.ng</a></p><p className="bl-learn-phones"><a href="tel:+2348068649496">+234 806 864 9496</a><span aria-hidden="true"> | </span><a href="tel:+2347030176676">+234 703 017 6676</a><span aria-hidden="true"> | </span><a href="tel:+14014402434">+1401 440 2434</a></p><nav aria-label="BlueLink social media">{socialProfiles.map(s=><a key={s.name} href={s.href} target="_blank" rel="noopener noreferrer">{s.name}</a>)}</nav></footer>;
+}
+export function LearningArticle() {
+ const {slug}=useParams();const g=learningGuides.find(g=>g.slug===slug);
+ useEffect(()=>{document.title=g?g.title+' | BlueLink Consults':'Guide not found | BlueLink Consults';},[g]);
+ if(!g)return <main className="bl-learning"><h1>Guide not found</h1><Link to="/learning">Browse the learning guides</Link></main>;
+ return <main className="bl-learning"><article className="bl-learn-article"><header><Link className="bl-learn-link" to="/learning">← All learning guides</Link><p className="bl-learn-label">{g.category}</p><h1>{g.title}</h1><p className="bl-learn-deck">{g.intro}</p><p className="bl-learn-byline">BlueLink Consults · Practical learning guide</p><img className="bl-learn-cover" src={'https://images.unsplash.com/'+g.image+'?auto=format&fit=crop&w=1600&q=85'} alt={g.alt} width="1600" height="900" /></header><nav className="bl-learn-contents" aria-label="In this guide"><strong>In this guide</strong><ol>{g.sections.map(([h],i)=><li key={h}><a href={'#section-'+(i+1)}>{h}</a></li>)}</ol></nav>{g.sections.map(([heading,body],i)=><section id={'section-'+(i+1)} key={heading}><h2>{heading}</h2><p>{body}</p></section>)}<section><h2>What to produce</h2><p>{g.takeaway}</p></section>{g.quote&&<blockquote><p>“{g.quote}”</p><cite><a href={g.url} target="_blank" rel="noopener noreferrer">{g.source}</a></cite></blockquote>}<section className="bl-learn-sources"><h2>Sources and further learning</h2><p>The practical examples and tasks are BlueLink guidance. The references below explain the underlying practices; they do not endorse BlueLink or describe client results.</p><ul>{[[g.source,g.url],...(g.extra||[])].map(([label,url])=><li key={url}><a href={url} target="_blank" rel="noopener noreferrer">{label} ↗</a></li>)}</ul></section><AuthorFooter /></article><aside className="bl-learn-next"><h2>Continue learning</h2>{learningGuides.filter(x=>x.slug!==slug).map(x=><Link key={x.slug} to={'/learning/'+x.slug}>{x.title} →</Link>)}</aside></main>;
+}

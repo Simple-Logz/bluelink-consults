@@ -429,6 +429,104 @@
       "destination": "/__pages/global/robots.txt"
     },
     {
+      "source": "/learning",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/learning.html"
+    },
+    {
+      "source": "/learning",
+      "destination": "/__pages/global/learning.html"
+    },
+    {
+      "source": "/learning/devops-delivery",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/learning--devops-delivery.html"
+    },
+    {
+      "source": "/learning/devops-delivery",
+      "destination": "/__pages/global/learning--devops-delivery.html"
+    },
+    {
+      "source": "/learning/choosing-cloud-vendors",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/learning--choosing-cloud-vendors.html"
+    },
+    {
+      "source": "/learning/choosing-cloud-vendors",
+      "destination": "/__pages/global/learning--choosing-cloud-vendors.html"
+    },
+    {
+      "source": "/learning/modernise-an-application",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/learning--modernise-an-application.html"
+    },
+    {
+      "source": "/learning/modernise-an-application",
+      "destination": "/__pages/global/learning--modernise-an-application.html"
+    },
+    {
+      "source": "/learning/productive-tech-meetings",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/learning--productive-tech-meetings.html"
+    },
+    {
+      "source": "/learning/productive-tech-meetings",
+      "destination": "/__pages/global/learning--productive-tech-meetings.html"
+    },
+    {
+      "source": "/learning/pre-deployment-validation",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/learning--pre-deployment-validation.html"
+    },
+    {
+      "source": "/learning/pre-deployment-validation",
+      "destination": "/__pages/global/learning--pre-deployment-validation.html"
+    },
+    {
+      "source": "/learning/incident-response",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.ng"
+        }
+      ],
+      "destination": "/__pages/ng/learning--incident-response.html"
+    },
+    {
+      "source": "/learning/incident-response",
+      "destination": "/__pages/global/learning--incident-response.html"
+    },
+    {
       "source": "/((?!api/).*)",
       "destination": "/app-shell.html"
     }
