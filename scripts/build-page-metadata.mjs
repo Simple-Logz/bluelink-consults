@@ -9,11 +9,15 @@ for(const [site,host] of [['ng','https://www.bluelinkconsults.ng'],['global','ht
  fs.mkdirSync(`dist/__pages/${site}`,{recursive:true});
  for(const [path,[title,description]] of Object.entries(pageMetadata)) {
   const url=host+path;let html=original;
+  const socialTitle = site==='ng' && path==='/' ? 'BlueLink Consults | Technology Consulting' : title+' | BlueLink Consults';
+  const socialDescription = site==='ng' && path==='/' ? 'Modernise applications, strengthen cloud infrastructure and improve software delivery.' : description;
+  const socialImage = site==='ng' ? host+'/bluelink-share-v2.jpg' : host+'/og-image.png';
   html=html.replace(/<title>.*?<\/title>/,`<title>${escape(title)} | BlueLink Consults</title>`);
   html=html.replace(/(<meta name="description" content=")[^"]*/,`$1${escape(description)}`);
   html=html.replace(/(<link rel="canonical" href=")[^"]*/,`$1${url}`);
-  for(const [name,value] of Object.entries({'og:title':title+' | BlueLink Consults','og:description':description,'og:url':url,'og:image':host+'/og-image.png','og:type':path.includes('cbn-data-localisation')?'article':'website'})) html=html.replace(new RegExp(`(<meta property="${name}" content=")[^"]*`),`$1${escape(value)}`);
-  for(const [name,value] of Object.entries({'twitter:title':title+' | BlueLink Consults','twitter:description':description,'twitter:image':host+'/og-image.png'})) html=html.replace(new RegExp(`(<meta name="${name}" content=")[^"]*`),`$1${escape(value)}`);
+  for(const [name,value] of Object.entries({'og:title':socialTitle,'og:description':socialDescription,'og:url':url,'og:image':socialImage,'og:type':path.includes('cbn-data-localisation')?'article':'website'})) html=html.replace(new RegExp(`(<meta property="${name}" content=")[^"]*`),`$1${escape(value)}`);
+  for(const [name,value] of Object.entries({'twitter:title':socialTitle,'twitter:description':socialDescription,'twitter:image':socialImage})) html=html.replace(new RegExp(`(<meta name="${name}" content=")[^"]*`),`$1${escape(value)}`);
+  if(site==='ng') html=html.replace('</head>',`<meta property="og:site_name" content="BlueLink Consults" /><meta property="og:image:secure_url" content="${socialImage}" /><meta property="og:image:type" content="image/jpeg" /><meta property="og:image:width" content="1200" /><meta property="og:image:height" content="630" /><meta property="og:image:alt" content="BlueLink Consults logo" /><meta name="twitter:image:alt" content="BlueLink Consults logo" /></head>`);
   const schema={'@context':'https://schema.org','@graph':[{'@type':'Organization',name:'BlueLink Consults',...(site==='ng'?{legalName:'Blue Link Consults Ltd'}:{}),url:host,logo:host+'/bluelink-logo.png',sameAs:profileLinks}]};
   if(path.includes('cbn-data-localisation')) schema['@graph'].push({'@type':'BlogPosting',headline:title,description,datePublished:'2026-10-09',dateModified:'2026-10-09',author:{'@type':'Organization',name:'BlueLink Consults'},publisher:{'@type':'Organization',name:'BlueLink Consults'},mainEntityOfPage:url,image:host+'/images/conference-work.jpg'});
   html=html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/,`<script type="application/ld+json">${JSON.stringify(schema)}</script>`);
