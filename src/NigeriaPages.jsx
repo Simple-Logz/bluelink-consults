@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import SocialLinks from "./SocialLinks";
-import { learningGuides } from "./learningContent";
 import { BlogIndex } from "./CbnBlog";
 import { zoomBookingUrl } from "./siteBooking";
 import { Menu, X, ChevronDown, ArrowRight, Zap, Users, FileText, CalendarDays, Mail, Phone } from "lucide-react";
@@ -42,7 +41,7 @@ export function NigeriaHeader({ services }) {
         <details><summary><span>About Us</span><span className="ng-dropdown-caret" aria-hidden="true" /></summary><Link to="/about/our-story" onClick={close}>Our Story</Link><Link to="/about/our-team" onClick={close}>Our Team</Link><Link to="/about/why-bluelink" onClick={close}>Why BlueLink</Link></details>
         <Link to="/contact" onClick={close}>Contact</Link>
       </div>
-      <details className="ng-learning-menu"><summary><span>Learning</span><span className="ng-dropdown-caret" aria-hidden="true" /></summary><Link to="/learning" onClick={close}>All learning guides</Link>{learningGuides.map(g=><Link key={g.slug} to={'/learning/'+g.slug} onClick={close}>{g.title}</Link>)}</details>
+      <Link to="/learning" onClick={close}><FileText size={18} /> Learning<ArrowRight size={15} /></Link>
       {extras.map(({ title, path, icon: Icon }) => <Link key={path} to={path} onClick={close}><Icon size={18} /> {title}<ArrowRight size={15} /></Link>)}
     </nav>
   </header></div>;
