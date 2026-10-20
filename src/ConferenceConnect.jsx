@@ -22,11 +22,11 @@ export default function ConferenceConnect(){
   </div></header>
   <section className="blc-hero" id="company-profile" aria-labelledby="blc-title"><div className="blc-container blc-hero-grid">
    <div className="blc-hero-copy"><div className="blc-kicker"><span/> MEET BLUELINK CONSULTS</div><h1 id="blc-title">Technology built<br/>for <span>your business.</span></h1><p>We help organisations build, modernise and strengthen the technology that powers their business.</p>
-    <div className="blc-hero-actions"><a className="blc-button blc-button-white" href={profile} download><Download size={22}/> Download company profile</a><a className="blc-online" href={profile} target="_blank" rel="noopener noreferrer">View online <ArrowUpRight size={21}/></a></div>
+    <div className="blc-hero-actions"><a className="blc-button blc-button-white" href={profile} download><Download size={26} strokeWidth={2.4}/><span>Download Profile</span></a><a className="blc-online" href={profile} target="_blank" rel="noopener noreferrer">View online <ArrowUpRight size={21}/></a></div>
     <div className="blc-file-info"><FileText size={18}/><span>Company profile</span><i/><span>12 pages</span><i/><span>PDF · 6.5 MB</span></div>
     <div className="blc-approach"><span>Engage</span><i/><span>Assess</span><i/><span>Transform</span></div>
    </div>
-   <a className="blc-publication" href={profile} target="_blank" rel="noopener noreferrer" aria-label="View the BlueLink Consults company profile"><div className="blc-publication-image"><img src="/images/company-profile-cover.svg" alt="BlueLink Consults business profile cover"/></div><div className="blc-publication-footer"><span>Our company. Our capabilities.</span><span className="blc-publication-arrow"><ArrowUpRight size={26}/></span></div></a>
+   <a className="blc-publication" href={profile} target="_blank" rel="noopener noreferrer" aria-label="View the BlueLink Consults company profile"><div className="blc-publication-image"><img src="/images/company-profile-cover.svg" alt="BlueLink Consults business profile cover"/></div><div className="blc-publication-footer"><span>View company profile</span><span className="blc-publication-arrow"><ArrowUpRight size={26}/></span></div></a>
   </div></section>
   <div className="blc-container blc-body"><section className="blc-connect" aria-labelledby="blc-contact-title">
    <p className="blc-eyebrow">KEEP THE CONVERSATION GOING</p><h2 id="blc-contact-title">Connect with BlueLink.</h2><p className="blc-section-intro">Tell us what your business needs. Let’s explore how we can help.</p>
