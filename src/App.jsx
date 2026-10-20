@@ -1,3 +1,4 @@
+import ConferenceConnect from "./ConferenceConnect";
 import { LearningIndex, LearningArticle } from './Learning';
 import ConsultationFields from './ConsultationFields';
 import { serviceSamples } from './engagementContent';
@@ -2403,73 +2404,7 @@ function TermsPage() {
 function SimulatorPage() { return <StaffWorkspace />; }
 
 
-function ConnectPage() {
-  const connectUrl = "https://www.bluelinkconsults.com/connect";
-  const website = "https://www.bluelinkconsults.com";
-  const phoneDisplay = "+1 (401) 440-2434";
-  const phoneLink = "+14014402434";
-  const email = "info@bluelinkconsults.com";
-  const linkedIn = "https://www.linkedin.com/company/bluelinkconsults/";
-
-  const actions = [
-    { icon: Globe2, title: "Visit Our Website", detail: "bluelinkconsults.com", href: website },
-    { icon: Phone, title: "Call Us", detail: phoneDisplay, href: `tel:${phoneLink}` },
-    { icon: Mail, title: "Email Us", detail: email, href: `mailto:${email}` },
-    { icon: CalendarDays, title: "Book a Consultation", detail: "Schedule a free consultation", href: "/contact" },
-    { icon: props => <SocialLogo name="LinkedIn" {...props} />, title: "Connect on LinkedIn", detail: "Follow us for updates and insights", href: linkedIn },
-    { icon: Download, title: "Save Contact", detail: "Download BlueLink Consults vCard", href: "/BlueLink-Consults.vcf", download: true },
-  ];
-
-  return (
-    <main className="connect-shell">
-      <section className="connect-panel" id="top">
-        <div className="connect-hero">
-          <div className="connect-copy">
-            <Link to="/" aria-label="Go to BlueLink Consults homepage" className="connect-logo-link">
-              <img src="/bluelink-logo-mark.png" alt="BlueLink Consults" className="connect-logo" />
-            </Link>
-            <p className="connect-kicker">BlueLink Consults</p>
-            <h1>Let’s Modernize <span>Your Business.</span></h1>
-            <p className="connect-intro">
-              We build modern websites, upgrade legacy applications, and deliver smart IT solutions that drive growth and efficiency.
-            </p>
-            <div className="connect-service-row" aria-label="Services">
-              <span>Website Development</span>
-              <span>App Modernization</span>
-              <span>IT Consultation</span>
-            </div>
-          </div>
-
-          <div className="connect-qr-card" aria-label="QR code to this page">
-            <p>Scan to Connect</p>
-            <img src="/bluelink-connect-qr.png" alt={`QR code for ${connectUrl}`} />
-            <small>Open your camera and scan to connect instantly.</small>
-          </div>
-        </div>
-
-        <div className="connect-actions" aria-label="Quick actions">
-          {actions.map(({ icon: Icon, title, detail, href, download }) => (
-            <a key={title} href={href} className="connect-action" {...(download ? { download: true } : {})}>
-              <span className="connect-action-icon"><Icon size={24} strokeWidth={2.3} /></span>
-              <span>
-                <strong>{title}</strong>
-                <em>{detail}</em>
-              </span>
-              <ArrowRight className="connect-arrow" size={22} aria-hidden="true" />
-            </a>
-          ))}
-        </div>
-
-        <div className="connect-footer-note">
-          <MapPin size={19} />
-          <span>Providence, RI 02909</span>
-        </div>
-        <p className="connect-signature">Building Solutions. Strengthening Connections.</p>
-      </section>
-    </main>
-  );
-}
-
+function ConnectPage() { return <ConferenceConnect />; }
 
 /* ─── PRIVATE ROOFING OUTREACH DEMOS ────────────────────── */
 const roofingOutreachCompanies = {
