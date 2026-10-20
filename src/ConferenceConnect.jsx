@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
-import { Download, ArrowUpRight, ArrowRight, Phone, Mail, Globe2, Share2, UserPlus, FileText, ChevronDown, ShieldCheck, Cloud, Workflow, Layers, Activity, CheckCircle2 } from 'lucide-react';
-import SocialLinks from './SocialLinks';
+import React, { useEffect, useState } from 'react';
+import { Download, ArrowUpRight, ArrowRight, Phone, Mail, Globe2, Share2, UserPlus, FileText } from 'lucide-react';
+import { SocialLogo, socialProfiles } from './SocialLinks';
 import './conference-connect.css';
-const services=[
- ['Technology Audit & Assessment','Understand your technology risks, costs and improvement priorities.','technology-audit-assessment',ShieldCheck],
- ['Application Modernisation','Improve application performance, maintainability and user experience.','application-modernization',Layers],
- ['Cloud Infrastructure','Build secure, scalable public, private and hybrid environments.','cloud-infrastructure',Cloud],
- ['DevOps & Automation','Make builds, testing and deployments repeatable and reliable.','devops-automation',Workflow],
- ['Pre-Deployment Validation','Validate your application and infrastructure before going live.','predeployment-validation',CheckCircle2],
- ['Operational & Incident Support','Monitor critical services, resolve incidents and strengthen operations.','operational-incident-support',Activity]
+const profile='/BlueLink-Company-Profile.pdf';
+const services=[['Technology Audit & Assessment','technology-audit-assessment'],['Application Modernisation','application-modernization'],['Cloud Infrastructure','cloud-infrastructure'],['DevOps & Automation','devops-automation'],['Pre-Deployment Validation','predeployment-validation'],['Operational & Incident Support','operational-incident-support']];
+const contacts=[
+ {label:'Nigeria',value:'+234 806 864 9496',href:'tel:+2348068649496',Icon:Phone},
+ {label:'United States',value:'+1 401-440-2434',href:'tel:+14014402434',Icon:Phone},
+ {label:'Email us',value:'info@bluelinkconsults.com',href:'mailto:info@bluelinkconsults.com',Icon:Mail},
+ {label:'Visit our website',value:'bluelinkconsults.ng',href:'https://www.bluelinkconsults.ng',Icon:Globe2},
 ];
 export default function ConferenceConnect(){
  const [notice,setNotice]=useState('');
- async function share(){try{const url=window.location.origin+'/connect';if(navigator.share)await navigator.share({title:'BlueLink Consults | Company Profile',url});else {await navigator.clipboard.writeText(url);setNotice('Profile link copied to clipboard.');}}catch(e){if(e.name!=='AbortError')setNotice('Copy this page’s address from your browser to share.');}}
- return <main className="bc-page"><a className="bc-skip" href="#bc-content">Skip to company profile</a><header className="bc-header"><div className="bc-header-inner"><a href="/" aria-label="BlueLink Consults home"><img src="/bluelink-logo.png" alt="BlueLink Consults"/></a><div className="bc-header-right"><a href="/">Visit our website <ArrowUpRight size={15}/></a><button onClick={share}><Share2 size={16}/> Share profile</button></div></div></header>
- <div className="bc-wrap"><div className="bc-breadcrumb">BLUELINK CONSULTS <span>/</span> COMPANY PROFILE</div><section className="bc-banner"><div className="bc-banner-copy"><p className="bc-eyebrow">ENGAGE. ASSESS. TRANSFORM.</p><h1>Technology built<br/>for your business.</h1><p>Practical expertise.<br/>Lasting business value.</p></div><div className="bc-banner-image"><img src="/images/bluelink-boardroom.png" alt="Corporate boardroom"/><div/></div></section>
- <div className="bc-main" id="bc-content"><div className="bc-content"><section className="bc-intro"><p className="bc-eyebrow">YOUR TECHNOLOGY PARTNER</p><h2>Let’s move your business forward.</h2><p>We help organisations modernise applications, strengthen cloud infrastructure and improve the way technology supports their business.</p></section>
- <section className="bc-profile" aria-labelledby="bc-profile-title"><a className="bc-cover" href="/BlueLink-Company-Profile.pdf" target="_blank" rel="noopener noreferrer" aria-label="Open BlueLink company profile"><img src="/images/company-profile-cover.svg" alt="Cover of the BlueLink Consults business profile"/></a><div className="bc-profile-copy"><div className="bc-document-label"><FileText size={14}/> COMPANY OVERVIEW</div><h3 id="bc-profile-title">BlueLink Company Profile</h3><p>Discover our capabilities, meet our team and explore how we deliver.</p><span className="bc-file-meta">PDF document <i/> 12 pages <i/> 6.5 MB</span><div className="bc-profile-buttons"><a className="bc-primary" href="/BlueLink-Company-Profile.pdf" download><Download size={16}/> Download profile</a><a className="bc-view" href="/BlueLink-Company-Profile.pdf" target="_blank" rel="noopener noreferrer">View online <ArrowUpRight size={16}/></a></div></div></section>
- <section className="bc-services"><div className="bc-section-heading"><h3>Our expertise</h3><span>Explore our six services</span></div><div className="bc-service-list">{services.map(([name,desc,slug,Icon])=><details key={slug}><summary><Icon size={19}/><span>{name}</span><ChevronDown size={16}/></summary><div><p>{desc}</p><a href={'/services/'+slug}>Explore service <ArrowRight size={15}/></a></div></details>)}</div></section></div>
- <aside className="bc-contact" aria-labelledby="bc-contact-title"><div className="bc-contact-head"><span className="bc-eyebrow">STAY CONNECTED</span><h2 id="bc-contact-title">Talk to BlueLink.</h2><p>Start a conversation about your next technology project.</p></div><div className="bc-contact-links"><a href="tel:+2348068649496"><span className="bc-contact-icon"><Phone size={18}/></span><span><small>Nigeria</small><strong>+234 806 864 9496</strong></span><ArrowUpRight size={15}/></a><a href="tel:+14014402434"><span className="bc-contact-icon"><Phone size={18}/></span><span><small>United States</small><strong>+1 401-440-2434</strong></span><ArrowUpRight size={15}/></a><a href="mailto:info@bluelinkconsults.com"><span className="bc-contact-icon"><Mail size={18}/></span><span><small>Email</small><strong>info@bluelinkconsults.com</strong></span><ArrowUpRight size={15}/></a><a href="https://www.bluelinkconsults.ng"><span className="bc-contact-icon"><Globe2 size={18}/></span><span><small>Website</small><strong>www.bluelinkconsults.ng</strong></span><ArrowUpRight size={15}/></a></div><a className="bc-save" href="/BlueLink-Conference.vcf" download><UserPlus size={17}/> Save contact details</a><div className="bc-social"><span>Follow BlueLink</span><SocialLinks/></div><a className="bc-start" href="/contact">Discuss your project <ArrowRight size={17}/></a></aside></div>
- <footer className="bc-footer"><span>© {new Date().getFullYear()} BlueLink Consults Ltd.</span><span>Engage <i/> Assess <i/> Transform</span><a href="/privacy-policy">Privacy policy</a></footer><div role="status" className="bc-notice">{notice}</div></div></main>;
+ useEffect(()=>{document.title='Company Profile & Contact | BlueLink Consults';},[]);
+ async function share(){try{const url=window.location.origin+'/connect';if(navigator.share)await navigator.share({title:'BlueLink Consults | Company Profile',url});else{await navigator.clipboard.writeText(url);setNotice('Link copied. You can now share our company profile.');}}catch(e){if(e.name!=='AbortError')setNotice('To share our profile, copy the page address from your browser.');}}
+ return <main className="blc-page">
+  <a className="blc-skip" href="#company-profile">Skip to company profile</a>
+  <header className="blc-header"><div className="blc-container blc-header-inner">
+   <a className="blc-brand" href="/" aria-label="BlueLink Consults homepage"><img src="/bluelink-logo.png" alt=""/><span>BlueLink<span>Consults</span></span></a>
+   <div className="blc-header-actions"><a href="https://www.bluelinkconsults.ng">Our website <ArrowUpRight size={20}/></a><button onClick={share}><Share2 size={20}/><span>Share profile</span></button></div>
+  </div></header>
+  <section className="blc-hero" id="company-profile" aria-labelledby="blc-title"><div className="blc-container blc-hero-grid">
+   <div className="blc-hero-copy"><div className="blc-kicker"><span/> MEET BLUELINK CONSULTS</div><h1 id="blc-title">Technology built<br/>for <span>your business.</span></h1><p>We help organisations build, modernise and strengthen the technology that powers their business.</p>
+    <div className="blc-hero-actions"><a className="blc-button blc-button-white" href={profile} download><Download size={22}/> Download company profile</a><a className="blc-online" href={profile} target="_blank" rel="noopener noreferrer">View online <ArrowUpRight size={21}/></a></div>
+    <div className="blc-file-info"><FileText size={18}/><span>Company profile</span><i/><span>12 pages</span><i/><span>PDF · 6.5 MB</span></div>
+    <div className="blc-approach"><span>Engage</span><i/><span>Assess</span><i/><span>Transform</span></div>
+   </div>
+   <a className="blc-publication" href={profile} target="_blank" rel="noopener noreferrer" aria-label="View the BlueLink Consults company profile"><div className="blc-publication-image"><img src="/images/company-profile-cover.svg" alt="BlueLink Consults business profile cover"/></div><div className="blc-publication-footer"><span>Our company. Our capabilities.</span><span className="blc-publication-arrow"><ArrowUpRight size={26}/></span></div></a>
+  </div></section>
+  <div className="blc-container blc-body"><section className="blc-connect" aria-labelledby="blc-contact-title">
+   <p className="blc-eyebrow">KEEP THE CONVERSATION GOING</p><h2 id="blc-contact-title">Connect with BlueLink.</h2><p className="blc-section-intro">Tell us what your business needs. Let’s explore how we can help.</p>
+   <div className="blc-contacts">{contacts.map(({label,value,href,Icon})=><a className="blc-contact" href={href} key={label}><span className="blc-contact-top"><Icon size={23}/><ArrowUpRight size={20}/></span><span className="blc-contact-label">{label}</span><strong>{value}</strong></a>)}</div>
+   <div className="blc-save-row"><a className="blc-button blc-button-navy" href="/BlueLink-Conference.vcf" download><UserPlus size={21}/> Save our contact details</a><span>Keep BlueLink in your contacts.</span></div>
+   <div className="blc-social"><h3>Follow our work</h3><div>{socialProfiles.map(({name,href})=><a key={name} href={href} target="_blank" rel="noopener noreferrer"><SocialLogo name={name} size={22}/><span>{name}</span><ArrowUpRight size={17}/></a>)}</div></div>
+  </section>
+  <aside className="blc-services" aria-labelledby="blc-expertise-title"><p className="blc-eyebrow">OUR EXPERTISE</p><h2 id="blc-expertise-title">From assessment<br/>to transformation.</h2><p>Six connected services. Built around your business.</p><div className="blc-service-list">{services.map(([name,slug],i)=><a href={'/services/'+slug} key={slug}><span className="blc-service-number">0{i+1}</span><span>{name}</span><ArrowUpRight size={21}/></a>)}</div><a className="blc-project-link" href="/contact">Discuss your project <ArrowRight size={23}/></a></aside>
+  </div>
+  <footer className="blc-footer"><div className="blc-container blc-footer-inner"><a className="blc-footer-brand" href="/">BlueLink Consults<span>Engage | Assess | Transform</span></a><span>© {new Date().getFullYear()} BlueLink Consults Ltd.</span><a href="/privacy-policy">Privacy policy</a></div></footer>
+  <div className="blc-toast" role="status">{notice}</div>
+ </main>;
 }
