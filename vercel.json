@@ -23,6 +23,16 @@
   ],
   "rewrites": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "(www\\.)?bluelinkconsults\\.com"
+        }
+      ],
+      "destination": "/com-notice.html"
+    },
+    {
       "source": "/:path*",
       "has": [
         {
