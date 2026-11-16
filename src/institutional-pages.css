@@ -64,7 +64,13 @@
 
 .bl-events-hub { display:grid; gap:42px; }
 .bl-events-hub h2 { margin:0 0 18px; color:#102c46!important; font-size:clamp(24px,3vw,34px); }
-.bl-conference-links { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
+.bl-conference-links {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  max-width:1040px;
+  margin-inline:auto;
+}
 .bl-conference-link {
   display:flex;
   flex-direction:column;
