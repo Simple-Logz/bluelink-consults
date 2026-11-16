@@ -2,7 +2,7 @@ import React from 'react';
 import { sectorIds } from './engagementContent';
 import DeliveryEvidence from './DeliveryEvidence';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Download, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, ChevronDown, Download, CheckCircle2 } from 'lucide-react';
 import { zoomBookingUrl } from './siteBooking';
 import SocialLinks from './SocialLinks';
 import './institutional-pages.css';
@@ -49,4 +49,71 @@ export function MigrationReadinessPage() {return <main><InstitutionHero label="D
 
 export function DeliveryExamplesPage() {return <main><InstitutionHero label="DELIVERY EXAMPLES" title="See the work behind the recommendations." text="Sample documents and illustrative scenarios show the level of clarity to agree before an engagement begins." image="/images/team-discussion.jpg"/><section className="ng-container bl-content-section"><div className="bl-section-heading"><h2>Documents your team can inspect.</h2><p>These samples use fictional information to demonstrate structure. They are not completed client audits, certifications or client results.</p></div><div className="bl-sector-grid bl-document-grid">{sampleDocuments.map(d=><article key={d.file}><p className="ng-kicker">PDF · ILLUSTRATIVE SAMPLE</p><h3>{d.title}</h3><p>{d.detail}</p><a className="ng-link" href={`/resources/${d.file}`} download><Download size={18}/>Download sample</a></article>)}</div><div className="bl-section-heading"><h2>How the approach applies.</h2><p>Illustrative engagement scenarios, rather than claims of past client work.</p></div><div className="bl-sector-grid">{[['Payment-data migration','A payment operator needs to review an offshore transaction database.','Map the data and dependencies, compare target hosting, rehearse replication and cutover, and retain reconciliation evidence.','Data inventory, migration runbook and acceptance record.'],['Hospital service reliability','A diagnostic centre needs to understand recurring application interruptions.','Assess service dependencies, monitor failure signals, test restore procedures and agree recovery responsibilities.','Findings register, monitoring plan and operating runbooks.'],['Safer application releases','An engineering team wants consistent release checks.','Agree acceptance criteria, automate repeatable checks and track unresolved exceptions before approval.','Validation report, exception register and release decision.']].map(([name,problem,approach,output])=><article key={name}><p className="ng-kicker">ILLUSTRATIVE SCENARIO</p><h3>{name}</h3><p>{problem}</p><p>{approach}</p><strong>Expected deliverables</strong><p className="bl-small-copy">{output}</p></article>)}</div></section><DeliveryEvidence/><NextStep/></main>;}
 
-export function EventsActivitiesPage() {return <main><InstitutionHero label="EVENTS & ACTIVITIES" title="Conversations that inform our work." text="Follow BlueLink’s participation in technology discussions, professional gatherings and team activities."/><section className="ng-container bl-content-section bl-events-follow"><div><p className="ng-kicker">KEEP IN TOUCH</p><h2>Our latest updates, where you follow us.</h2><p>Explore our social channels for team updates and industry conversations. Event reports will be published here as verified dates, photographs and highlights become available.</p><SocialLinks/></div><aside><h3>Explore our latest thinking</h3><Link to="/blog/cbn-data-localisation-migration">CBN’s payment data localisation policy <ArrowRight size={18}/></Link><Link to="/solutions/eat-framework">How our EAT framework guides delivery <ArrowRight size={18}/></Link></aside></section></main>;}
+const conferenceGalleries = [
+  { id: 'moonshot-2026', title: 'MOONSHOT 2026', photos: [], videos: [] },
+  { id: 'afsnet-2026', title: 'Afsnet 2026', photos: [], videos: [] },
+];
+
+function ConferenceGallery({ conference }) {
+  const { id, title, photos, videos } = conference;
+  const hasMedia = photos.length > 0 || videos.length > 0;
+
+  return (
+    <details className="bl-conference-card" id={id}>
+      <summary>
+        <span>{title}</span>
+        <ChevronDown size={20} aria-hidden="true" />
+      </summary>
+      <div className="bl-conference-gallery">
+        {hasMedia ? (
+          <div className="bl-conference-media">
+            {photos.map(({ src, alt, caption }) => (
+              <figure key={src}>
+                <a href={src} aria-label={`Open full-size photo: ${alt}`}>
+                  <img src={src} alt={alt} loading="lazy" decoding="async" />
+                </a>
+                {caption && <figcaption>{caption}</figcaption>}
+              </figure>
+            ))}
+            {videos.map(({ src, caption, poster, captions }) => (
+              <figure key={src}>
+                <video controls playsInline preload="metadata" src={src} poster={poster} aria-label={caption || title}>
+                  {captions && <track kind="captions" src={captions} srcLang="en" label="English" default />}
+                </video>
+                {caption && <figcaption>{caption}</figcaption>}
+              </figure>
+            ))}
+          </div>
+        ) : (
+          <p>Event photos and videos will appear here when available.</p>
+        )}
+      </div>
+    </details>
+  );
+}
+
+export function EventsActivitiesPage() {
+  return (
+    <main>
+      <InstitutionHero
+        label="EVENTS & ACTIVITIES"
+        title="Conversations that inform our work."
+        text="Follow BlueLink’s participation in technology discussions, professional gatherings and team activities."
+      />
+      <section className="ng-container bl-content-section bl-events-follow">
+        <div>
+          <p className="ng-kicker">KEEP IN TOUCH</p>
+          <h2>Our latest updates, where you follow us.</h2>
+          <p>Explore our social channels for team updates and industry conversations.</p>
+          <SocialLinks />
+        </div>
+        <section className="bl-conferences" aria-labelledby="bl-conferences-heading">
+          <h2 id="bl-conferences-heading">Conference galleries</h2>
+          {conferenceGalleries.map((conference) => (
+            <ConferenceGallery key={conference.id} conference={conference} />
+          ))}
+        </section>
+      </section>
+    </main>
+  );
+}
