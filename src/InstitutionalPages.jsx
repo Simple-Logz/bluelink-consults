@@ -50,8 +50,8 @@ export function MigrationReadinessPage() {return <main><InstitutionHero label="D
 export function DeliveryExamplesPage() {return <main><InstitutionHero label="DELIVERY EXAMPLES" title="See the work behind the recommendations." text="Sample documents and illustrative scenarios show the level of clarity to agree before an engagement begins." image="/images/team-discussion.jpg"/><section className="ng-container bl-content-section"><div className="bl-section-heading"><h2>Documents your team can inspect.</h2><p>These samples use fictional information to demonstrate structure. They are not completed client audits, certifications or client results.</p></div><div className="bl-sector-grid bl-document-grid">{sampleDocuments.map(d=><article key={d.file}><p className="ng-kicker">PDF · ILLUSTRATIVE SAMPLE</p><h3>{d.title}</h3><p>{d.detail}</p><a className="ng-link" href={`/resources/${d.file}`} download><Download size={18}/>Download sample</a></article>)}</div><div className="bl-section-heading"><h2>How the approach applies.</h2><p>Illustrative engagement scenarios, rather than claims of past client work.</p></div><div className="bl-sector-grid">{[['Payment-data migration','A payment operator needs to review an offshore transaction database.','Map the data and dependencies, compare target hosting, rehearse replication and cutover, and retain reconciliation evidence.','Data inventory, migration runbook and acceptance record.'],['Hospital service reliability','A diagnostic centre needs to understand recurring application interruptions.','Assess service dependencies, monitor failure signals, test restore procedures and agree recovery responsibilities.','Findings register, monitoring plan and operating runbooks.'],['Safer application releases','An engineering team wants consistent release checks.','Agree acceptance criteria, automate repeatable checks and track unresolved exceptions before approval.','Validation report, exception register and release decision.']].map(([name,problem,approach,output])=><article key={name}><p className="ng-kicker">ILLUSTRATIVE SCENARIO</p><h3>{name}</h3><p>{problem}</p><p>{approach}</p><strong>Expected deliverables</strong><p className="bl-small-copy">{output}</p></article>)}</div></section><DeliveryEvidence/><NextStep/></main>;}
 
 const conferenceGalleries = [
-  { id: 'moonshot-2026', title: 'MOONSHOT 2026', photos: [], videos: [] },
-  { id: 'afsnet-2026', title: 'Afsnet 2026', photos: [], videos: [] },
+  { id: 'moonshot-2026', title: 'MOONSHOT 2026', artwork: '/images/events/moonshot-2026-artwork.jpg', photos: [], videos: [] },
+  { id: 'afsnet-2026', title: 'AfSNET 2026', artwork: '/images/events/afsnet-2026-artwork.jpg', photos: [], videos: [] },
 ];
 
 function GalleryCarousel({ photos, label, start = 0, onOpen }) {
@@ -166,9 +166,11 @@ export function EventsActivitiesPage() {
         <div>
           <h2 id="bl-conferences-heading">Conference galleries</h2>
           <div className="bl-conference-links">
-            {conferenceGalleries.map(({ id, title, photos }) => (
+            {conferenceGalleries.map(({ id, title, artwork, photos }) => (
               <Link className="bl-conference-link" data-conference={id} key={id} to={`/events/${id}`}>
-                {photos[0] && <img src={photos[0].src} alt="" loading="lazy" />}
+                {(artwork || photos[0]) && (
+                  <img src={artwork || photos[0].src} alt="" loading="lazy" />
+                )}
                 <span className="bl-conference-link-content">
                   <span>{title}</span>
                   <span className="bl-conference-link-action">View gallery <ArrowRight aria-hidden="true" size={18} /></span>
