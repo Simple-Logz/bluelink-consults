@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { sectorIds } from './engagementContent';
 import DeliveryEvidence from './DeliveryEvidence';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown, Download, CheckCircle2 } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight, Download, CheckCircle2, Image, X } from 'lucide-react';
 import { zoomBookingUrl } from './siteBooking';
 import SocialLinks from './SocialLinks';
 import './institutional-pages.css';
@@ -54,45 +54,101 @@ const conferenceGalleries = [
   { id: 'afsnet-2026', title: 'Afsnet 2026', photos: [], videos: [] },
 ];
 
-function ConferenceGallery({ conference }) {
-  const { id, title, photos, videos } = conference;
-  const hasMedia = photos.length > 0 || videos.length > 0;
+function GalleryCarousel({ photos, label, start = 0, onOpen }) {
+  const track = useRef(null);
+  const [index, setIndex] = useState(start);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      if (track.current) track.current.scrollLeft = track.current.clientWidth * start;
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [start]);
+
+  function goTo(next) {
+    const slide = track.current.children[next];
+    if (slide) {
+      track.current.scrollTo({
+        left: slide.offsetLeft,
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth',
+      });
+    }
+  }
+
+  function syncIndex() {
+    const { children, scrollLeft, clientWidth } = track.current;
+    if (clientWidth && children.length) {
+      setIndex(Math.min(children.length - 1, Math.round(scrollLeft / clientWidth)));
+    }
+  }
 
   return (
-    <details className="bl-conference-card" id={id}>
-      <summary>
-        <span>{title}</span>
-        <ChevronDown size={20} aria-hidden="true" />
-      </summary>
-      <div className="bl-conference-gallery">
-        {hasMedia ? (
-          <div className="bl-conference-media">
-            {photos.map(({ src, alt, caption }) => (
-              <figure key={src}>
-                <a href={src} aria-label={`Open full-size photo: ${alt}`}>
-                  <img src={src} alt={alt} loading="lazy" decoding="async" />
-                </a>
-                {caption && <figcaption>{caption}</figcaption>}
-              </figure>
-            ))}
-            {videos.map(({ src, caption, poster, captions }) => (
-              <figure key={src}>
-                <video controls playsInline preload="metadata" src={src} poster={poster} aria-label={caption || title}>
-                  {captions && <track kind="captions" src={captions} srcLang="en" label="English" default />}
-                </video>
-                {caption && <figcaption>{caption}</figcaption>}
-              </figure>
-            ))}
-          </div>
-        ) : (
-          <p>Event photos and videos will appear here when available.</p>
-        )}
+    <div className="bl-gallery-carousel" role="region" aria-label={label}>
+      <div
+        className="bl-gallery-track"
+        ref={track}
+        onScroll={syncIndex}
+        onKeyDown={(event) => {
+          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+          event.preventDefault();
+          goTo(index + (event.key === 'ArrowRight' ? 1 : -1));
+        }}
+        tabIndex={photos.length > 1 ? 0 : undefined}
+      >
+        {photos.map(({ src, alt, caption, conference }, position) => (
+          <figure className="bl-gallery-slide" key={`${conference || ''}-${src}`}>
+            {onOpen ? (
+              <button className="bl-photo-button" type="button" onClick={() => onOpen(position)} aria-label={`Enlarge photo: ${alt}`}>
+                <img src={src} alt={alt} loading={position === start ? 'eager' : 'lazy'} decoding="async" />
+              </button>
+            ) : (
+              <img src={src} alt={alt} loading={position === start ? 'eager' : 'lazy'} decoding="async" />
+            )}
+            {(conference || caption) && (
+              <figcaption>{conference && <strong>{conference}</strong>}{caption && <span>{caption}</span>}</figcaption>
+            )}
+          </figure>
+        ))}
       </div>
-    </details>
+      {photos.length > 1 && (
+        <div className="bl-gallery-controls">
+          <button type="button" onClick={() => goTo(index - 1)} disabled={index === 0} aria-label="Previous photo">
+            <ChevronLeft aria-hidden="true" size={20} />
+          </button>
+          <span aria-live="polite">{index + 1} / {photos.length}</span>
+          <button type="button" onClick={() => goTo(index + 1)} disabled={index === photos.length - 1} aria-label="Next photo">
+            <ChevronRight aria-hidden="true" size={20} />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PhotoViewer({ photos, start, onClose }) {
+  return (
+    <dialog
+      className="bl-photo-viewer"
+      aria-label="Enlarged conference photos"
+      ref={(node) => {
+        if (node && !node.open) node.showModal();
+      }}
+      onClose={onClose}
+    >
+      <form method="dialog" className="bl-photo-viewer-close">
+        <button aria-label="Close photo viewer"><X aria-hidden="true" size={22} /></button>
+      </form>
+      <GalleryCarousel photos={photos} label="Enlarged photos" start={start} />
+    </dialog>
   );
 }
 
 export function EventsActivitiesPage() {
+  const [viewerIndex, setViewerIndex] = useState(null);
+  const photos = conferenceGalleries.flatMap(({ title, photos }) =>
+    photos.map((photo) => ({ ...photo, conference: title })),
+  );
+
   return (
     <main>
       <InstitutionHero
@@ -100,20 +156,89 @@ export function EventsActivitiesPage() {
         title="Conversations that inform our work."
         text="Follow BlueLink’s participation in technology discussions, professional gatherings and team activities."
       />
-      <section className="ng-container bl-content-section bl-events-follow">
+      <section className="ng-container bl-content-section bl-events-hub" aria-labelledby="bl-conferences-heading">
+        {photos.length > 0 && (
+          <section aria-labelledby="bl-event-highlights">
+            <h2 id="bl-event-highlights">Conference highlights</h2>
+            <GalleryCarousel photos={photos} label="Photos from all conferences" onOpen={setViewerIndex} />
+          </section>
+        )}
         <div>
-          <p className="ng-kicker">KEEP IN TOUCH</p>
-          <h2>Our latest updates, where you follow us.</h2>
-          <p>Explore our social channels for team updates and industry conversations.</p>
+          <h2 id="bl-conferences-heading">Conference galleries</h2>
+          <div className="bl-conference-links">
+            {conferenceGalleries.map(({ id, title, photos }) => (
+              <Link className="bl-conference-link" key={id} to={`/events/${id}`}>
+                {photos[0] && <img src={photos[0].src} alt="" loading="lazy" />}
+                <span className="bl-conference-link-content">
+                  <span>{title}</span>
+                  <span className="bl-conference-link-action">View gallery <ArrowRight aria-hidden="true" size={18} /></span>
+                </span>
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="bl-events-social">
+          <h2>Follow BlueLink</h2>
           <SocialLinks />
         </div>
-        <section className="bl-conferences" aria-labelledby="bl-conferences-heading">
-          <h2 id="bl-conferences-heading">Conference galleries</h2>
-          {conferenceGalleries.map((conference) => (
-            <ConferenceGallery key={conference.id} conference={conference} />
-          ))}
-        </section>
       </section>
+      {viewerIndex !== null && <PhotoViewer photos={photos} start={viewerIndex} onClose={() => setViewerIndex(null)} />}
+    </main>
+  );
+}
+
+export function ConferenceGalleryPage() {
+  const { conferenceId } = useParams();
+  const conference = conferenceGalleries.find(({ id }) => id === conferenceId);
+  return <ConferenceGallery key={conferenceId} conference={conference} />;
+}
+
+function ConferenceGallery({ conference }) {
+  const [viewerIndex, setViewerIndex] = useState(null);
+
+  return (
+    <main>
+      <header className="bl-gallery-header">
+        <div className="ng-container">
+          <Link to="/events"><ArrowLeft aria-hidden="true" size={18} /> Events &amp; Activities</Link>
+          <h1>{conference?.title ?? 'Conference gallery unavailable'}</h1>
+        </div>
+      </header>
+      {conference && (
+        <section className="ng-container bl-content-section bl-event-media" aria-label={`${conference.title} gallery`}>
+          {conference.photos.length === 0 && conference.videos.length === 0 && (
+            <div className="bl-gallery-empty">
+              <Image aria-hidden="true" size={28} />
+              <p>Photos and videos will be posted here when available.</p>
+            </div>
+          )}
+          {conference.photos.length > 0 && (
+            <div className="bl-photo-grid">
+              {conference.photos.map(({ src, alt, caption }, index) => (
+                <figure key={src}>
+                  <button className="bl-photo-button" type="button" onClick={() => setViewerIndex(index)} aria-label={`Enlarge photo: ${alt}`}>
+                    <img src={src} alt={alt} loading="lazy" decoding="async" />
+                  </button>
+                  {caption && <figcaption>{caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
+          {conference.videos.length > 0 && (
+            <div className="bl-photo-grid">
+              {conference.videos.map(({ src, caption, poster, captions }) => (
+                <figure key={src}>
+                  <video controls playsInline preload="metadata" src={src} poster={poster} aria-label={caption || conference.title}>
+                    {captions && <track kind="captions" src={captions} srcLang="en" label="English" default />}
+                  </video>
+                  {caption && <figcaption>{caption}</figcaption>}
+                </figure>
+              ))}
+            </div>
+          )}
+          {viewerIndex !== null && <PhotoViewer photos={conference.photos} start={viewerIndex} onClose={() => setViewerIndex(null)} />}
+        </section>
+      )}
     </main>
   );
 }

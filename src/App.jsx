@@ -4,7 +4,7 @@ import ConsultationFields from './ConsultationFields';
 import { serviceSamples } from './engagementContent';
 import { zoomBookingUrl } from "./siteBooking";
 import { submitInquiry } from "./submitInquiry";
-import { InstitutionalSectorsPage, ProfessionalEATPage, MigrationReadinessPage, DeliveryExamplesPage, EventsActivitiesPage } from "./InstitutionalPages";
+import { InstitutionalSectorsPage, ProfessionalEATPage, MigrationReadinessPage, DeliveryExamplesPage, EventsActivitiesPage, ConferenceGalleryPage } from "./InstitutionalPages";
 import { SiteMetadata } from "./SiteMetadata";
 import SocialLinks, { SocialLogo } from "./SocialLinks";
 import { CbnArticle, BlogFeature } from "./CbnBlog";
@@ -2505,6 +2505,7 @@ function AppInner() {
           <Route path="/about/our-story"         element={isNigeriaSite ? <OurStory /> : <AboutPage />} />
           <Route path="/about/our-team"          element={<OurTeam />} />
           <Route path="/events" element={<EventsPage />} />
+          <Route path="/events/:conferenceId" element={<ConferenceGalleryPage />} />
           <Route path="/blog"                    element={isNigeriaSite ? <BlogPage /> : <InsightsPage />} />
           <Route path="/contact"                 element={<ContactPage />} />
           <Route path="/request-demo"            element={<DemoRequestPage />} />

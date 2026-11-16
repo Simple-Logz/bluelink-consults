@@ -11,6 +11,8 @@ export const pageMetadata = {
  '/insights':['Technology insights','Guidance for application modernization, cloud readiness, data governance and reliable delivery.'],
  '/insights/cbn-data-localisation-migration':['CBN’s payment data localisation policy: planning a reliable migration','A practical briefing on payment-data localisation, migration assessment and reliable cutover.'],
  '/events':['Events & activities','Follow BlueLink’s technology discussions, industry perspectives and team updates.'],
+ '/events/moonshot-2026':['MOONSHOT 2026','Browse photos and videos from MOONSHOT 2026.'],
+ '/events/afsnet-2026':['Afsnet 2026','Browse photos and videos from Afsnet 2026.'],
  '/about':['Our story','Learn about BlueLink Consults and the approach behind our technology assessment and engineering services.'],
  '/about/our-story':['Our story','Learn about BlueLink Consults and the approach behind our technology assessment and engineering services.'],
  '/about/our-team':['Our team','Meet the leadership, engineering and client engagement team at BlueLink Consults.'],
