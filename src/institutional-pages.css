@@ -75,14 +75,34 @@
   color:#102c46!important;
   text-decoration:none;
 }
-.bl-conference-link>img {
+.bl-conference-artwork {
   display:block;
+  position:relative;
   width:100%;
-  aspect-ratio:16 / 9;
-  object-fit:contain;
-  background:#9548dd;
+  container-type:inline-size;
 }
-.bl-conference-link[data-conference="afsnet-2026"]>img { background:#05716b; }
+.bl-conference-artwork img { display:block; width:100%; height:auto; }
+.bl-conference-link[data-conference="afsnet-2026"] .bl-conference-artwork::after {
+  content:"";
+  position:absolute;
+  inset:72.5% auto auto 3.4%;
+  width:16.2%;
+  height:8.2%;
+  background:#00736e;
+}
+.bl-conference-artwork-date {
+  position:absolute;
+  inset:48.7% auto auto 6.6%;
+  display:flex;
+  align-items:center;
+  width:36%;
+  height:6.5%;
+  background:#9a4de7;
+  color:#000;
+  font-size:2.55cqw;
+  line-height:1;
+  white-space:nowrap;
+}
 .bl-conference-link-content {
   display:flex;
   flex:1;

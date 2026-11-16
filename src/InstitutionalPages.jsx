@@ -169,7 +169,12 @@ export function EventsActivitiesPage() {
             {conferenceGalleries.map(({ id, title, artwork, photos }) => (
               <Link className="bl-conference-link" data-conference={id} key={id} to={`/events/${id}`}>
                 {(artwork || photos[0]) && (
-                  <img src={artwork || photos[0].src} alt="" loading="lazy" />
+                  <span className="bl-conference-artwork">
+                    <img src={artwork || photos[0].src} alt="" loading="lazy" />
+                    {id === 'moonshot-2026' && (
+                      <span className="bl-conference-artwork-date">October 28–29, 2026</span>
+                    )}
+                  </span>
                 )}
                 <span className="bl-conference-link-content">
                   <span>{title}</span>
