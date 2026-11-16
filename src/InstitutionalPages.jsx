@@ -167,7 +167,7 @@ export function EventsActivitiesPage() {
           <h2 id="bl-conferences-heading">Conference galleries</h2>
           <div className="bl-conference-links">
             {conferenceGalleries.map(({ id, title, photos }) => (
-              <Link className="bl-conference-link" key={id} to={`/events/${id}`}>
+              <Link className="bl-conference-link" data-conference={id} key={id} to={`/events/${id}`}>
                 {photos[0] && <img src={photos[0].src} alt="" loading="lazy" />}
                 <span className="bl-conference-link-content">
                   <span>{title}</span>
