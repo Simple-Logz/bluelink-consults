@@ -50,7 +50,21 @@ export function MigrationReadinessPage() {return <main><InstitutionHero label="D
 export function DeliveryExamplesPage() {return <main><InstitutionHero label="DELIVERY EXAMPLES" title="See the work behind the recommendations." text="Sample documents and illustrative scenarios show the level of clarity to agree before an engagement begins." image="/images/team-discussion.jpg"/><section className="ng-container bl-content-section"><div className="bl-section-heading"><h2>Documents your team can inspect.</h2><p>These samples use fictional information to demonstrate structure. They are not completed client audits, certifications or client results.</p></div><div className="bl-sector-grid bl-document-grid">{sampleDocuments.map(d=><article key={d.file}><p className="ng-kicker">PDF · ILLUSTRATIVE SAMPLE</p><h3>{d.title}</h3><p>{d.detail}</p><a className="ng-link" href={`/resources/${d.file}`} download><Download size={18}/>Download sample</a></article>)}</div><div className="bl-section-heading"><h2>How the approach applies.</h2><p>Illustrative engagement scenarios, rather than claims of past client work.</p></div><div className="bl-sector-grid">{[['Payment-data migration','A payment operator needs to review an offshore transaction database.','Map the data and dependencies, compare target hosting, rehearse replication and cutover, and retain reconciliation evidence.','Data inventory, migration runbook and acceptance record.'],['Hospital service reliability','A diagnostic centre needs to understand recurring application interruptions.','Assess service dependencies, monitor failure signals, test restore procedures and agree recovery responsibilities.','Findings register, monitoring plan and operating runbooks.'],['Safer application releases','An engineering team wants consistent release checks.','Agree acceptance criteria, automate repeatable checks and track unresolved exceptions before approval.','Validation report, exception register and release decision.']].map(([name,problem,approach,output])=><article key={name}><p className="ng-kicker">ILLUSTRATIVE SCENARIO</p><h3>{name}</h3><p>{problem}</p><p>{approach}</p><strong>Expected deliverables</strong><p className="bl-small-copy">{output}</p></article>)}</div></section><DeliveryEvidence/><NextStep/></main>;}
 
 const conferenceGalleries = [
-  { id: 'moonshot-2026', title: 'MOONSHOT 2026', artwork: '/images/events/moonshot-2026-artwork.jpg', photos: [], videos: [] },
+  { id: 'moonshot-2026', title: 'MOONSHOT 2026', artwork: '/images/events/moonshot-2026-artwork.jpg',
+    photos: [
+      { src: '/images/events/moonshot-2026/photo-01.jpg', alt: 'Moonshot 2026 conference photo 1' },
+      { src: '/images/events/moonshot-2026/photo-02.jpg', alt: 'Moonshot 2026 conference photo 2' },
+      { src: '/images/events/moonshot-2026/photo-03.jpg', alt: 'Moonshot 2026 conference photo 3' },
+      { src: '/images/events/moonshot-2026/photo-04.jpg', alt: 'Moonshot 2026 conference photo 4' },
+      { src: '/images/events/moonshot-2026/photo-05.jpg', alt: 'Moonshot 2026 conference photo 5' },
+      { src: '/images/events/moonshot-2026/photo-06.jpg', alt: 'Moonshot 2026 conference photo 6' },
+      { src: '/images/events/moonshot-2026/photo-07.jpg', alt: 'Moonshot 2026 conference photo 7' },
+      { src: '/images/events/moonshot-2026/photo-08.jpg', alt: 'Moonshot 2026 conference photo 8' },
+      { src: '/images/events/moonshot-2026/photo-09.jpg', alt: 'Moonshot 2026 conference photo 9' },
+      { src: '/images/events/moonshot-2026/photo-10.jpg', alt: 'Moonshot 2026 conference photo 10' },
+      { src: '/images/events/moonshot-2026/photo-11.jpg', alt: 'Moonshot 2026 conference photo 11' },
+      { src: '/images/events/moonshot-2026/photo-12.jpg', alt: 'Moonshot 2026 conference photo 12' },
+    ], videos: [] },
   { id: 'afsnet-2026', title: 'AfSNET 2026', artwork: '/images/events/afsnet-2026-artwork.jpg', photos: [], videos: [] },
 ];
 
