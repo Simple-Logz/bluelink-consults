@@ -190,12 +190,22 @@ function PhotoViewer({ photos, start, onClose }) {
         </form>
       </div>
       <div className="bl-viewer-stage">
-        <img src={photo.src} alt={photo.alt} decoding="async" />
+        {photos.map((item, position) => (
+          <img
+            key={item.src}
+            className={position === index ? 'is-active' : ''}
+            src={item.src}
+            alt={position === index ? item.alt : ''}
+            aria-hidden={position !== index}
+            decoding="async"
+            loading="eager"
+          />
+        ))}
         {photos.length > 1 && <>
-          <button className="bl-viewer-previous" aria-label="Previous photo" onClick={() => setIndex((index + photos.length - 1) % photos.length)}>
+          <button className="bl-viewer-previous" aria-label="Previous photo" onClick={() => setIndex((current) => (current + photos.length - 1) % photos.length)}>
             <ChevronLeft aria-hidden="true" size={28} />
           </button>
-          <button className="bl-viewer-next" aria-label="Next photo" onClick={() => setIndex((index + 1) % photos.length)}>
+          <button className="bl-viewer-next" aria-label="Next photo" onClick={() => setIndex((current) => (current + 1) % photos.length)}>
             <ChevronRight aria-hidden="true" size={28} />
           </button>
         </>}
