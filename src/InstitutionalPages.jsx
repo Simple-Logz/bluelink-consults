@@ -161,6 +161,9 @@ function GalleryCarousel({ photos, label, start = 0, onOpen }) {
 }
 
 function PhotoViewer({ photos, start, onClose }) {
+  const [index, setIndex] = useState(start);
+  const photo = photos[index];
+
   return (
     <dialog
       className="bl-photo-viewer"
@@ -169,11 +172,35 @@ function PhotoViewer({ photos, start, onClose }) {
         if (node && !node.open) node.showModal();
       }}
       onClose={onClose}
+      onKeyDown={(event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          setIndex((current) => (current + photos.length - 1) % photos.length);
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          setIndex((current) => (current + 1) % photos.length);
+        }
+      }}
     >
-      <form method="dialog" className="bl-photo-viewer-close">
-        <button aria-label="Close photo viewer"><X aria-hidden="true" size={22} /></button>
-      </form>
-      <GalleryCarousel photos={photos} label="Enlarged photos" start={start} />
+      <div className="bl-viewer-toolbar">
+        <span aria-live="polite">{index + 1} / {photos.length}</span>
+        <form method="dialog">
+          <button aria-label="Close photo viewer"><X aria-hidden="true" size={24} /></button>
+        </form>
+      </div>
+      <div className="bl-viewer-stage">
+        <img src={photo.src} alt={photo.alt} decoding="async" />
+        {photos.length > 1 && <>
+          <button className="bl-viewer-previous" aria-label="Previous photo" onClick={() => setIndex((index + photos.length - 1) % photos.length)}>
+            <ChevronLeft aria-hidden="true" size={28} />
+          </button>
+          <button className="bl-viewer-next" aria-label="Next photo" onClick={() => setIndex((index + 1) % photos.length)}>
+            <ChevronRight aria-hidden="true" size={28} />
+          </button>
+        </>}
+      </div>
+      {photo.caption && <p className="bl-viewer-caption">{photo.caption}</p>}
     </dialog>
   );
 }

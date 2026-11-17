@@ -154,10 +154,54 @@
 .bl-photo-grid img,.bl-photo-grid video { display:block; width:100%; aspect-ratio:4 / 3; object-fit:cover; border-radius:12px; }
 .bl-photo-grid video { object-fit:contain; background:#102c46; }
 .bl-photo-grid figcaption { margin-top:8px; color:#52657a; }
-.bl-photo-viewer { width:min(960px,calc(100% - 24px)); max-height:calc(100dvh - 24px); border:0; border-radius:16px; padding:12px; background:#102c46; color:white; }
-.bl-photo-viewer::backdrop { background:rgba(7,19,33,.84); }
-.bl-photo-viewer-close { display:flex; justify-content:flex-end; margin-bottom:8px; }
-.bl-photo-viewer .bl-gallery-slide img { height:min(61dvh,520px); }
+.bl-photo-viewer {
+  width:100vw;
+  max-width:none;
+  height:100dvh;
+  max-height:none;
+  margin:0;
+  padding:0;
+  border:0;
+  border-radius:0;
+  background:#101113;
+  color:#fff;
+  overflow:hidden;
+}
+.bl-photo-viewer::backdrop { background:rgba(0,0,0,.9); }
+.bl-viewer-toolbar {
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 24px;
+  font-size:14px;
+  color:#d5d7da;
+}
+.bl-viewer-toolbar form { margin:0; }
+.bl-photo-viewer button {
+  display:grid;
+  place-items:center;
+  width:44px;
+  height:44px;
+  border:0;
+  border-radius:50%;
+  background:rgba(255,255,255,.1);
+  color:white;
+  cursor:pointer;
+}
+.bl-photo-viewer button:hover { background:rgba(255,255,255,.22); }
+.bl-viewer-stage { position:relative; height:calc(100dvh - 112px); padding:0 76px; }
+.bl-viewer-stage>img { display:block; width:100%; height:100%; object-fit:contain; }
+.bl-viewer-stage>button { position:absolute; top:50%; transform:translateY(-50%); }
+.bl-viewer-previous { left:16px; }
+.bl-viewer-next { right:16px; }
+.bl-viewer-caption { margin:0; padding:12px 24px; text-align:center; font-size:14px; }
+@media(max-width:600px) {
+  .bl-viewer-toolbar { height:56px; padding:0 12px; }
+  .bl-viewer-stage { height:calc(100dvh - 104px); padding:0 8px; }
+  .bl-viewer-previous { left:8px; }
+  .bl-viewer-next { right:8px; }
+}
 .bl-events-hub :focus-visible,.bl-event-media :focus-visible,.bl-photo-viewer :focus-visible { outline:3px solid #528de0; outline-offset:3px; }
 @media(max-width:560px) {
   .bl-conference-links { grid-template-columns:1fr; }
