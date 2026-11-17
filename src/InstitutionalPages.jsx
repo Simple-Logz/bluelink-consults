@@ -65,7 +65,28 @@ const conferenceGalleries = [
       { src: '/images/events/moonshot-2026/photo-11.jpg?v=2', alt: 'Moonshot 2026 conference photo 11' },
       { src: '/images/events/moonshot-2026/photo-12.jpg?v=2', alt: 'Moonshot 2026 conference photo 12' },
     ], videos: [] },
-  { id: 'afsnet-2026', title: 'AfSNET 2026', artwork: '/images/events/afsnet-2026-artwork.jpg', photos: [], videos: [] },
+  { id: 'afsnet-2026', title: 'AfSNET 2026', artwork: '/images/events/afsnet-2026-artwork.jpg',
+    photos: [
+      { src: '/images/events/afsnet-2026/photo-01.jpg', alt: 'AfSNET 2026 conference photo 1' },
+      { src: '/images/events/afsnet-2026/photo-02.jpg', alt: 'AfSNET 2026 conference photo 2' },
+      { src: '/images/events/afsnet-2026/photo-03.jpg', alt: 'AfSNET 2026 conference photo 3' },
+      { src: '/images/events/afsnet-2026/photo-04.jpg', alt: 'AfSNET 2026 conference photo 4' },
+      { src: '/images/events/afsnet-2026/photo-05.jpg', alt: 'AfSNET 2026 conference photo 5' },
+      { src: '/images/events/afsnet-2026/photo-06.jpg', alt: 'AfSNET 2026 conference photo 6' },
+      { src: '/images/events/afsnet-2026/photo-07.jpg', alt: 'AfSNET 2026 conference photo 7' },
+      { src: '/images/events/afsnet-2026/photo-08.jpg', alt: 'AfSNET 2026 conference photo 8' },
+      { src: '/images/events/afsnet-2026/photo-09.jpg', alt: 'AfSNET 2026 conference photo 9' },
+      { src: '/images/events/afsnet-2026/photo-10.jpg', alt: 'AfSNET 2026 conference photo 10' },
+      { src: '/images/events/afsnet-2026/photo-11.jpg', alt: 'AfSNET 2026 conference photo 11' },
+      { src: '/images/events/afsnet-2026/photo-12.jpg', alt: 'AfSNET 2026 conference photo 12' },
+      { src: '/images/events/afsnet-2026/photo-13.jpg', alt: 'AfSNET 2026 conference photo 13' },
+      { src: '/images/events/afsnet-2026/photo-14.jpg', alt: 'AfSNET 2026 conference photo 14' },
+      { src: '/images/events/afsnet-2026/photo-15.jpg', alt: 'AfSNET 2026 conference photo 15' },
+      { src: '/images/events/afsnet-2026/photo-16.jpg', alt: 'AfSNET 2026 conference photo 16' },
+      { src: '/images/events/afsnet-2026/photo-17.jpg', alt: 'AfSNET 2026 conference photo 17' },
+      { src: '/images/events/afsnet-2026/photo-18.jpg', alt: 'AfSNET 2026 conference photo 18' },
+      { src: '/images/events/afsnet-2026/photo-19.jpg', alt: 'AfSNET 2026 conference photo 19' },
+    ], videos: [] },
 ];
 
 function GalleryCarousel({ photos, label, start = 0, onOpen }) {
@@ -158,11 +179,6 @@ function PhotoViewer({ photos, start, onClose }) {
 }
 
 export function EventsActivitiesPage() {
-  const [viewerIndex, setViewerIndex] = useState(null);
-  const photos = conferenceGalleries.flatMap(({ title, photos }) =>
-    photos.map((photo) => ({ ...photo, conference: title })),
-  );
-
   return (
     <main>
       <InstitutionHero
@@ -171,12 +187,6 @@ export function EventsActivitiesPage() {
         text="Follow BlueLink’s participation in technology discussions, professional gatherings and team activities."
       />
       <section className="ng-container bl-content-section bl-events-hub" aria-labelledby="bl-conferences-heading">
-        {photos.length > 0 && (
-          <section aria-labelledby="bl-event-highlights">
-            <h2 id="bl-event-highlights">Conference highlights</h2>
-            <GalleryCarousel photos={photos} label="Photos from all conferences" onOpen={setViewerIndex} />
-          </section>
-        )}
         <div>
           <h2 id="bl-conferences-heading">Conference galleries</h2>
           <div className="bl-conference-links">
@@ -203,7 +213,6 @@ export function EventsActivitiesPage() {
           <SocialLinks />
         </div>
       </section>
-      {viewerIndex !== null && <PhotoViewer photos={photos} start={viewerIndex} onClose={() => setViewerIndex(null)} />}
     </main>
   );
 }
